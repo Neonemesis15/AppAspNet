@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<data transition="CrossFadeTransition">
+	<album>
+		<slide title="BRUCE SPRINGSTEEN" image="Foto/imgXplora_1.jpg" />
+    <slide title="BRUCE SPRINGSTEEN" image="Foto/imgXplora_2.jpg" />
+    <slide title="BRUCE SPRINGSTEEN" image="Foto/imgXplora_3.jpg" />
+    <slide title="BRUCE SPRINGSTEEN" image="Foto/imgXplora_4.jpg" />
+    <slide title="BRUCE SPRINGSTEEN" image="Foto/imgXplora_5.jpg" />
+    <slide title="BRUCE SPRINGSTEEN" image="Foto/imgXplora_6.jpg" />
+    <slide title="BRUCE SPRINGSTEEN" image="Foto/imgXplora_7.jpg" />
+	</album>
+</data>
