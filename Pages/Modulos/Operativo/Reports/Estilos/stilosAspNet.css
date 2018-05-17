@@ -1,0 +1,93 @@
+div.RadComboBoxDropDown .rcbScroll
+{
+    overflow-x: hidden;
+}
+
+/* <fields list styling> */
+
+.fields
+{
+	float: left;
+	width: 323px;
+	padding-bottom: 16px;
+	margin-top:170px;
+	padding-left: 40px;
+}
+
+.fields .validator
+{
+	font-size: 15px;
+	padding-left: 3px;
+	vertical-align: middle;
+}
+
+.fields ul
+{
+	list-style-type: none;
+	margin: 0;
+	padding: 0 0 8px;
+}
+
+.fields li
+{
+	padding-bottom: 8px;
+}
+
+.fields label
+{
+	font: 12px 'Segoe UI', Arial, sans-serif;
+	color: #000;
+	display: inline-block;
+	width: 110px;
+	vertical-align: middle;
+}
+
+.fields .button
+{
+	display: block;
+	float:right;
+	margin-right:10px;
+	padding: 0 10px;
+}
+
+/* </fields list styling> */
+
+
+/* <results table styling> */
+
+.your-order
+{
+	width: 230px;
+	float: right;
+	margin-top:180px;
+	margin-right: 110px;
+}
+
+.your-order tbody th
+{
+	text-align: right;
+	width: 100px;
+	color:#5a5a5a;
+}
+
+.your-order tbody td
+{
+	text-align: left;
+	width: 120px;
+	padding-left: 10px;
+}
+
+.your-order .price-row th,
+.your-order .price-row td
+{
+	color: #f00;
+}
+
+
+.example-panel
+{
+	width: 725px;
+	height:456px;
+	background: transparent url("Images/background.jpg") no-repeat 0 0;
+}
+/* </results table styling> */

@@ -1,0 +1,87 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Report_Principal.master.cs"
+    Inherits="SIGE.Pages.Modulos.Operativo.Reports.Report_Principal" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <%--    <style type="text/css">
+        .style1
+        {
+            text-align: center;
+        }
+        .style2
+        {
+            width: 25px;
+        }
+        .style3
+        {
+            width: 641px;
+        }
+    </style>--%>
+    <style type="text/css">
+        body
+        {
+            padding-left: 11em;
+            font-family: Georgia, "Times New Roman" , serif;
+            color: #006666;
+        }
+        h1
+        {
+            font-family: Helvetica, Geneva, Arial, sans-serif;
+        }
+    </style>
+    <link href="../../../css/backstilo.css" rel="stylesheet" type="text/css" />
+    <link href="../../../css/luckysige.css" rel="stylesheet" type="text/css" />
+    <link href="../../../css/StyleModCliente.css" rel="stylesheet" type="text/css" />
+    <link href="../../../css/stilo.css" rel="stylesheet" type="text/css" />
+    <link href="../../../css/StiloAdministrativo.css" rel="stylesheet" type="text/css" />
+    <link href="../../../css/style.css" rel="stylesheet" type="text/css" />
+    <link href="../../../css/stilosAspNet.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <form id="form1" runat="server">
+    <table style="width: 80%; height: 80%; vertical-align: middle;">
+        <tr>
+            <td>
+                <asp:Panel ID="Panelheader" runat="server" align="center" Height="151px">
+                    <div class="Header">
+                        <center>
+                            <asp:Image ID="Image3" runat="server" ImageUrl="~/Pages/ImgBooom/logotipo.png" Height="87px"
+                                Width="312px"></asp:Image></center>
+                    </div>
+                </asp:Panel>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <asp:Panel ID="cuerpo" runat="server">
+                    <div>
+                        <asp:LinkButton ID="ir_inicioplan" runat="server" OnClick="ir_inicioplan_Click">Ir a Menu Inicial</asp:LinkButton>
+                    </div>
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+                    </asp:ContentPlaceHolder>
+                </asp:Panel>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <asp:LinkButton ID="link_btn_atras" runat="server" OnClick="link_btn_atras_Click">Atras</asp:LinkButton>
+                <%-- <div class="footer" align="center">
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <asp:Image ID="Image1" runat="server" ImageUrl="~/Pages/ImgBooom/logo_lucky.png"
+                            Height="55px" Width="150px"></asp:Image>
+                        <div class="Franjafinal">
+                        </div>
+                    </div>--%>
+            </td>
+        </tr>
+    </table>
+    </form>
+</body>
+</html>

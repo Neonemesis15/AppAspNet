@@ -1,0 +1,118 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage2.master.cs"
+    Inherits="MasterPage2" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head runat="server">
+    <!--
+    Created by Artisteer v2.5.0.31067
+    Base template (without user's data) checked by http://validator.w3.org : "This page is valid XHTML 1.0 Transitional"
+  -->
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>
+        <asp:ContentPlaceHolder ID="TitleContentPlaceHolder" runat="server">
+        </asp:ContentPlaceHolder>
+    </title>
+    <link href="../style.css" rel="stylesheet" type="text/css" />
+    <!--[if IE 6]><link rel="stylesheet" href="~/style.ie6.css" type="text/Css" media="screen" /><![endif]-->
+    <!--[if IE 7]><link rel="stylesheet" href="~/style.ie7.css" type="text/Css" media="screen" /><![endif]-->
+    <%--mis estilos y referencias--%>
+    <link href="../../../../../css/style.css" rel="stylesheet" type="text/css" />
+    <link href="../../../../../css/backstilo.css" rel="stylesheet" type="text/css" />
+    <link href="../../../../../css/layout.css" rel="stylesheet" type="text/css" /> <!-- Agregado css para posicionamiento y demas funciones - Angel Ortiz - 30/09/2011 -->
+    <%--referencias para el multiselectDropdown--%>
+    <link href="../../../../../css/multiSelectDropDown/CustomDDStyles.css" rel="stylesheet"
+        type="text/css" />
+    <link href="../../../../../css/multiSelectDropDown/Site.css" rel="stylesheet" type="text/css" />
+    <%--fin mis estilos y referencias--%>
+    <asp:ContentPlaceHolder ID="ScriptIncludePlaceHolder" runat="server">
+        <script type="text/javascript" src="<%= ResolveUrl("~/script.js") %>"></script>
+    </asp:ContentPlaceHolder>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <cc1:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" EnableScriptGlobalization="True">
+    </cc1:ToolkitScriptManager>
+    <div id="art-page-background-simple-gradient">
+        <div id="art-page-background-gradient">
+        </div>
+    </div>
+    <div id="art-main">
+        <div class="art-sheet">
+            <div class="art-sheet-tl">
+            </div>
+            <div class="art-sheet-tr">
+            </div>
+            <div class="art-sheet-bl">
+            </div>
+            <div class="art-sheet-br">
+            </div>
+            <div class="art-sheet-tc">
+            </div>
+            <div class="art-sheet-bc">
+            </div>
+            <div class="art-sheet-cl">
+            </div>
+            <div class="art-sheet-cr">
+            </div>
+            <div class="art-sheet-cc">
+            </div>
+            <div class="art-sheet-body">
+                <div class="art-header">
+                    <div class="art-header-jpeg">
+                    </div>
+                    <asp:ContentPlaceHolder ID="HeaderContentPlaceHolder" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+                <div class="art-nav">
+                    <div class="l">
+                    </div>
+                    <div class="r">
+                    </div>
+                    <asp:ContentPlaceHolder ID="MenuContentPlaceHolder" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+                <div class="art-content-layout">
+                    <div class="art-content-layout-row">
+                        <%--<div class="art-layout-cell art-sidebar1">--%>
+                        <asp:ContentPlaceHolder ID="Sidebar1ContentPlaceHolder" runat="server">
+                        </asp:ContentPlaceHolder>
+                        <%--</div>--%>
+                        <div class="art-layout-cell art-content">
+                            <asp:ContentPlaceHolder ID="SheetContentPlaceHolder" runat="server">
+                            </asp:ContentPlaceHolder>
+                        </div>
+                    </div>
+                </div>
+                <div class="cleared">
+                </div>
+                <div class="art-footer">
+                    <div class="art-footer-t">
+                    </div>
+                    <div class="art-footer-b">
+                    </div>
+                    <div class="art-footer-body">
+                        <a href="#" class="art-rss-tag-icon" title="RSS"></a>
+                        <div class="art-footer-text">
+                            <% string año = DateTime.Now.Year.ToString(); %>
+                            <p>
+                                <a id="linkContactenos" runat="server" href="#">Contactenos</a> | <a href="#">Términos
+                                    de uso</a> Lucky SAC &copy;
+                                <% Response.Write(año); %>
+                                . Equipo de Tecnologia.</p>
+                        </div>
+                        <div class="cleared">
+                        </div>
+                    </div>
+                </div>
+                <div class="cleared">
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
+</body>
+</html>
