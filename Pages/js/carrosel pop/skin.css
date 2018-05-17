@@ -1,0 +1,80 @@
+.jcarousel-skin-tango .jcarousel-container {
+    -moz-border-radius: 10px;
+    
+}
+.jcarousel-skin-tango .jcarousel-container-vertical {
+    width: 145px;
+    height: 275px;   
+    padding: 68px 5px;
+    
+    /*top: 90px;*/
+    /*border:solid 1px green;*/
+}
+.jcarousel-skin-tango .jcarousel-clip-vertical {
+    width:  149px;
+    height: 270px;
+    /*border:solid 1px red;*/
+}
+.jcarousel-skin-tango .jcarousel-item {
+    width: 144px;
+    height: 130px;
+}
+.jcarousel-skin-tango .jcarousel-item-vertical {
+    margin-bottom: 0px;
+}
+.jcarousel-skin-tango .jcarousel-item-placeholder {
+    /**background: #fff;
+    color: #000; */
+}
+
+/**
+ *  Vertical Buttons
+ */
+.jcarousel-skin-tango .jcarousel-next-vertical {
+    position: absolute;
+    bottom: 0px;
+    left: 22%;
+    width: 86px;
+    height: 52px;
+    cursor: pointer;
+    z-index:6;
+    background: transparent url('../../ImgBooom/flecha2.png') no-repeat 0 0;
+}
+
+.jcarousel-skin-tango .jcarousel-next-vertical:hover {
+    /*background-position: 0 -32px;*/
+}
+
+.jcarousel-skin-tango .jcarousel-next-vertical:active {
+    /*background-position: 0 -64px;*/
+}
+
+.jcarousel-skin-tango .jcarousel-next-disabled-vertical,
+.jcarousel-skin-tango .jcarousel-next-disabled-vertical:hover,
+.jcarousel-skin-tango .jcarousel-next-disabled-vertical:active {
+   /* cursor: defau background-position: 0 -144px;144px; -*/
+}
+
+.jcarousel-skin-tango .jcarousel-prev-vertical {
+    position: absolute;
+    top: 0px;
+    left: 22%;
+    width: 86px;
+    height: 52px;
+    cursor: pointer;
+    background: transparent url('../../ImgBooom/flecha1.png') no-repeat 0 0;
+}
+
+.jcarousel-skin-tango .jcarousel-prev-vertical:hover {
+    /*background-position: 0 -32px;*/
+}
+
+.jcarousel-skin-tango .jcarousel-prev-vertical:active {
+    /*background-position: 0 -64px;*/
+}
+
+.jcarousel-skin-tango .jcarousel-prev-disabled-vertical,
+.jcarousel-skin-tango .jcarousel-prev-disabled-vertical:hover,
+.jcarousel-skin-tango .jcarousel-prev-di cursor: default;{
+   /* background-position: 0 -96px; background-position: 0 -96px;*/ 
+}
