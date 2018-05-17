@@ -1,0 +1,246 @@
+﻿* {
+	margin: 0;
+}
+
+body
+{
+    margin: 0px 0px 0px 0px;
+    background-image: url('../ImgBooom/relleno_del_fondo_general.png');
+     height: 100%;
+}
+html
+{
+    height: 100%;    
+}
+
+
+* html img,* html .png
+{      
+    behavior: expression((this.runtimeStyle.behavior="none")&&(this.pngSet?this.pngSet=true:(this.nodeName == "IMG" && this.src.toLowerCase().indexOf('.png')>-1?(this.runtimeStyle.backgroundImage = "none",       this.runtimeStyle.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + this.src + "', sizingMethod='image')",       this.src = "Pages/ImgBooom/Transparente.gif"):(this.origBg = this.origBg? this.origBg :this.currentStyle.backgroundImage.toString().replace('url("','').replace('")',''),       this.runtimeStyle.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + this.origBg + "', sizingMethod='crop')",       this.runtimeStyle.backgroundImage = "none")),this.pngSet=true)   );
+}
+
+
+.wrapper {
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	margin: 0 auto -142px; /* the bottom margin is the negative value of the footer's height */
+}
+
+
+
+.Header
+{   
+   background-position: center top;
+    background-repeat: no-repeat;
+    background-image: url('../ImgBooom/trama_gris_superior.png');
+    margin-bottom: 0px;    
+    width:100%;
+    height:150px;   
+   
+	behavior: expression((this.runtimeStyle.behavior="none")&&(this.pngSet?this.pngSet=true:(this.nodeName == "IMG" && this.src.toLowerCase().indexOf('.png')>-1?(this.runtimeStyle.backgroundImage = "none",       this.runtimeStyle.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + this.src + "', sizingMethod='image')",       this.src = "Pages/ImgBooom/Transparente.gif"):(this.origBg = this.origBg? this.origBg :this.currentStyle.backgroundImage.toString().replace('url("','').replace('")',''),       this.runtimeStyle.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + this.origBg + "', sizingMethod='crop')",       this.runtimeStyle.backgroundImage = "none")),this.pngSet=true));
+} 
+
+
+
+
+
+
+
+
+.footer
+{
+    height: 142px; /* .push must be the same height as .footer */
+    background-image: url('../ImgBooom/trama_gris_inferior.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    bottom:0px;
+    position:absolute;
+      width:100%;
+    height:150px;
+   
+}
+
+
+.push
+{
+    height: 142px; /* .push must be the same height as .footer */
+    
+}
+
+divLogoXplora
+{
+    
+    background-image: url('../ImgBooom/logotipo_xplora.png');
+}
+
+.TextArea
+{
+	background-color: transparent;
+	border: 0px none #000000;
+    width: 100%;
+    height:30px;
+    text-align:center;
+} 
+
+.btIngresar
+{
+    background-color: Transparent;
+    border: solid 0px #001577;
+    background-image: url('../ImgBooom/botoningresar.png');
+    
+    cursor: hand;
+    
+    background-position: center;
+    background-repeat: no-repeat;
+  position:relative;  
+	/*behavior: expression((this.runtimeStyle.behavior="none")&&(this.pngSet?this.pngSet=true:(this.nodeName == "IMG" && this.src.toLowerCase().indexOf('.png')>-1?(this.runtimeStyle.backgroundImage = "none",       this.runtimeStyle.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + this.src + "', sizingMethod='image')",       this.src = "Pages/ImgBooom/Transparente.gif"):(this.origBg = this.origBg? this.origBg :this.currentStyle.backgroundImage.toString().replace('url("','').replace('")',''),       this.runtimeStyle.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + this.origBg + "', sizingMethod='crop')",       this.runtimeStyle.backgroundImage = "none")),this.pngSet=true));
+	*/
+ }
+
+.alertas {
+	 background-color:Transparent;
+	 display:none;
+	 
+}
+
+.fondopanel
+{
+    margin-left: 0%;
+
+    width: 74%;
+    clear: right;
+    min-height: 700px;
+    background-image: url('../images/FondoPsw.png');
+    background-repeat: no-repeat;
+    color: White;
+    font-size: 11px;
+   
+}
+
+.labels
+{
+    font-family: Verdana;
+    font-size: 12px;
+    color: #FFFFFF;
+    font-weight: bold;
+    text-align: center;
+}
+
+.buttonPlan{
+	border: 0px none Transparent;
+	background-color: Transparent;
+	background-image: url('../images/BtnMenFond.gif' );
+	cursor: hand;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #FFFFFF;
+}
+.buttonPlan:hover {background-image: url('../images/BtnMenSupini.gif'); }
+
+
+.MensajesSupervisor
+{
+    background-image: url('../ImgBooom/MensajeSup.png');
+}
+
+.MensajesSupConfirm
+{
+	background-image: url('../images/MensajeSupConfirm.jpg');    
+}
+
+.modalBackground
+{
+	background-color: #C0C0C0;
+	filter: alpha(opacity=50);
+	opacity: 0.5;
+}
+
+
+.fondoOlvContrs
+{
+    background-image: url('../ImgBooom/Fondo2_OlvidoContraseña.png');
+    width: 395px;
+    height: 206px;
+}
+
+.Franjafinal
+{
+    background-image: url('../ImgBooom/barraazul.png');
+    background-repeat: repeat;
+    height:13px;
+   
+     bottom:0px;
+   
+      width:100%;
+   
+}
+
+
+
+
+
+.LuckyIluminado
+{
+    background-position: center center;
+    background-image: url('../ImgBooom/tramadecirculos.png');
+    background-repeat: no-repeat;
+    clear:both;    
+    background-color:Transparent;
+	
+/*	behavior: expression((this.runtimeStyle.behavior="none")&&(this.pngSet?this.pngSet=true:(this.nodeName == "IMG" && this.src.toLowerCase().indexOf('.png')>-1?(this.runtimeStyle.backgroundImage = "none",       this.runtimeStyle.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + this.src + "', sizingMethod='image')",       this.src = "Pages/ImgBooom/Transparente.gif"):(this.origBg = this.origBg? this.origBg :this.currentStyle.backgroundImage.toString().replace('url("','').replace('")',''),       this.runtimeStyle.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + this.origBg + "', sizingMethod='crop')",       this.runtimeStyle.backgroundImage = "none")),this.pngSet=true));*/
+} 
+
+
+    
+
+
+.loginCiculo
+{ 
+    
+     background-position: center center;
+     background-repeat: no-repeat;
+    background-image: url('../ImgBooom/circuloazulsintexto.png');
+   
+    
+}
+
+
+
+
+.textbox
+{   
+    background-color: Transparent;
+    margin-left: 15px;
+}
+
+.fondotextbox
+{
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-image: url('../ImgBooom/vacio_login.png');
+    vertical-align: middle;
+    height: 36px;
+    margin-left: 30px;
+    width: 152px;
+   
+  /*behavior: 
+	expression(	(this.runtimeStyle.behavior="none")	&&
+			(this.pngSet?this.pngSet=true:(this.nodeName == "IMG" && 
+			this.src.toLowerCase().indexOf('.png')>-1?(this.runtimeStyle.backgroundImage = "none",       this.runtimeStyle.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + this.src + "', sizingMethod='image')",       this.src = "Pages/ImgBooom/Transparente.gif"):(this.origBg = this.origBg? this.origBg :this.currentStyle.backgroundImage.toString().replace('url("','').replace('")',''),       this.runtimeStyle.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + this.origBg + "', sizingMethod='crop')",       this.runtimeStyle.backgroundImage = "none")),this.pngSet=true));*/
+    left: 64px;
+}
+
+  
+ 
+.mailSend
+{
+    border: 0px none Transparent;
+    background-color: Transparent;
+    cursor: hand;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #FFFFFF;
+    background-image: url('../images/BtnEnviarMail.png');
+}
+.mailSend:hover {background-image: url('../images/BtnEnviarMailDown.png'); }

@@ -1,0 +1,105 @@
+﻿.red .ajax__tab_header 
+{
+    background:url(../img/red_bg.gif) repeat-x;
+}
+.red .ajax__tab_hover .ajax__tab_outer,
+.red .ajax__tab_active .ajax__tab_outer 
+{
+    background:url(../img/red_left.gif) no-repeat left top;
+}
+.red .ajax__tab_hover .ajax__tab_inner,
+.red .ajax__tab_active .ajax__tab_inner 
+{
+    background:url(../img/red_right.gif) no-repeat right top;
+}
+
+.blue .ajax__tab_header 
+{
+    background:url(../img/blue_bg.gif) repeat-x;
+}
+.blue .ajax__tab_hover .ajax__tab_outer,
+.blue .ajax__tab_active .ajax__tab_outer 
+{
+    background:url(../img/blue_left.gif) no-repeat left top;
+}
+.blue .ajax__tab_hover .ajax__tab_inner,
+.blue .ajax__tab_active .ajax__tab_inner 
+{
+    background:url(../img/blue_right.gif) no-repeat right top;
+}
+
+.green .ajax__tab_header 
+{
+    background:url(../img/green_bg.gif) repeat-x;
+}
+.green .ajax__tab_hover .ajax__tab_outer,
+.green .ajax__tab_active .ajax__tab_outer 
+{
+    background:url(../img/green_left.gif) no-repeat left top;
+}
+.green .ajax__tab_hover .ajax__tab_inner,
+.green .ajax__tab_active .ajax__tab_inner 
+{
+    background:url(../img/green_right.gif) no-repeat right top;
+}
+
+.orange .ajax__tab_header 
+{
+    background:url(../img/orange_bg.gif) repeat-x;
+}
+.orange .ajax__tab_hover .ajax__tab_outer,
+.orange .ajax__tab_active .ajax__tab_outer 
+{
+    background:url(../img/orange_left.gif) no-repeat left top;
+}
+.orange .ajax__tab_hover .ajax__tab_inner,
+.orange .ajax__tab_active .ajax__tab_inner 
+{
+    background:url(../img/orange_right.gif) no-repeat right top;
+}
+
+.purple .ajax__tab_header 
+{
+    background:url(../img/purple_bg.gif) repeat-x;
+}
+.purple .ajax__tab_hover .ajax__tab_outer,
+.purple .ajax__tab_active .ajax__tab_outer 
+{
+    background:url(../img/purple_left.gif) no-repeat left top;
+}
+.purple .ajax__tab_hover .ajax__tab_inner,
+.purple .ajax__tab_active .ajax__tab_inner 
+{
+    background:url(../img/purple_right.gif) no-repeat right top;
+}
+
+
+.magenta .ajax__tab_header 
+{
+    background:url(../img/magenta_bg.gif) repeat-x;
+}
+.magenta .ajax__tab_hover .ajax__tab_outer,
+.magenta .ajax__tab_active .ajax__tab_outer 
+{
+    background:url(../img/magenta_left.gif) no-repeat left top;
+}
+.magenta .ajax__tab_hover .ajax__tab_inner,
+.magenta .ajax__tab_active .ajax__tab_inner 
+{
+    background:url(../img/magenta_right.gif) no-repeat right top;
+}
+
+.cyan .ajax__tab_header 
+{
+    background:url(../img/cyan_bg.gif) repeat-x;
+}
+.cyan .ajax__tab_hover .ajax__tab_outer,
+.cyan .ajax__tab_active .ajax__tab_outer 
+{
+    background:url(../img/cyan_left.gif) no-repeat left top;
+}
+.cyan .ajax__tab_hover .ajax__tab_inner,
+.cyan .ajax__tab_active .ajax__tab_inner 
+{
+    background:url(../img/cyan_right.gif) no-repeat right top;
+}

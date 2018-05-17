@@ -1,0 +1,552 @@
+﻿ body{
+    margin:  0px 0px 0px 0px;
+    background-image: url('../ImgBooom/relleno_del_fondo_general.png');
+    height: 100%;
+    width:100%;
+    font-family: Verdana;
+}
+
+
+.imagenXplora
+{
+    margin-left:30px;
+}
+.imagenBiblioteca
+{
+    margin-right:30px;
+    }
+.listviewpop
+{
+    color: #FFF;
+    background-image: url( '../img/biblioteca1.png' );
+    background-repeat: no-repeat;
+    text-align: center;
+    font-family: Verdana;
+    font-size: 12px;
+}
+.listviewpop:hover
+{
+	 text-align: center;
+      vertical-align:sub;
+      color:Fuchsia;
+	background-image: url( '../img/biblioteca2.png' );
+}
+
+.listviewcateg
+{
+    border-style:none;
+    background-position:center;
+    background-color:Transparent;
+    color:White;
+    background-image: url('../ImgBooom/botonazulCat.png');
+    background-repeat: no-repeat;
+    text-align: center;
+    font-family: Verdana;
+    font-size: 9px;
+    
+    vertical-align: middle;
+    margin:auto;
+    width:144px;
+    
+    
+    
+}
+.listviewcateg:hover
+{
+     border-style:none;
+	 text-align: center;
+      text-align: center;
+      color:Fuchsia;
+      background-color:Transparent;
+       background-position:center;
+	background-image: url( '../ImgBooom/botonazulCat.png' );
+	 
+	vertical-align:middle
+}
+
+  .centradotext
+{
+   
+    padding-top:37%;
+    text-align:center;
+    vertical-align:middle;
+    font-family: verdana;
+    color: #FFFFFF;    
+    vertical-align: middle;
+    
+   
+}
+
+.centradotext:hover
+{
+     text-align: center;
+    font-family: verdana;
+    color:Fuchsia;
+    cursor:pointer;
+    }
+    
+    
+.TxtBoton
+{    
+    text-align: center;    
+    font-family: Verdana;
+    font-size: 10px;
+    position:absolute;
+    top:10%;
+    
+   
+}
+.TxtBoton:hover
+{
+	text-align: center;      
+    color:Fuchsia;	
+}
+
+
+.Header
+{
+    clear:both;    
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-image: url('../ImgBooom/trama_gris_superior.png');
+    margin-bottom: 0px;
+    position:absolute;
+    z-index:0;
+    width:100%;
+    text-align:center;
+    vertical-align:middle;
+    top: 0px;
+    left: 0px;
+}
+
+.Categorias
+{
+    left:5%;
+    position:absolute;    
+    z-index:3;
+    top:8%;
+    margin-top:-10px; /*el negativo de la mitad de la altura del div*/
+}
+
+.push
+{
+    height: 142px; /* .push must be the same height as .footer */
+    bottom:0%;
+}
+
+.footer{
+    height: 142px; /* .push must be the same height as .footer */
+    background-image: url('../ImgBooom/trama_gris_inferior.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    
+    position:absolute;
+    bottom:0%;
+    clear: both;
+    width:100%;
+    z-index:1;
+    left: 0px;   
+}
+
+.Franjafinal
+{
+    background-image: url('../ImgBooom/barraazul.png');
+    background-repeat: repeat;
+    height:13px;
+     
+     
+}
+
+/* Carousel */
+
+#carousel  {
+    margin-top:0px;
+    /*overflow: hidden;*/
+	position: relative; /* Necesario */
+	overflow: hidden; /* Necesario */
+	height: 400px;  /* tamaño dependiendo alto de la imagen */
+	margin-left:0px;
+	font-size:13px;
+	font-family:Verdana, Geneva, sans-serif;
+	text-align:center;
+	top: 7px;
+	left:  -1px;
+    width: 880px;
+}
+
+#carousel .belt {
+	position: absolute; /* Necesario */
+	left: 0px;
+	top: 4px;
+	margin:0 0px 0px 0;
+	width: 200px;
+	height: 355px;
+}
+
+#carousel .panel {
+	min-width:200px;
+	float: left; /* Necesario */
+	overflow: hidden;
+	min-height:400px;
+	margin-top:10px;
+	margin-left: 15px;
+	margin-right: 15px;
+}
+#carousel .panel a {
+    text-decoration:none;
+}
+#carousel .panel .panel-text {
+	padding-top:5px;
+	font-size:10px;
+	font-family:Verdana, Geneva, sans-serif;
+	color:#CCC;
+}
+#carousel .panel .panel-text a {
+	color:#CCC;
+	text-decoration:none;
+}
+#carousel .panel .panel-text a:hover {
+	color:#FFF;
+	text-decoration:underline;
+}
+/* Botones del carousel */			
+.button-prev {
+	height: 75px;
+	width:30px;
+	float:left;
+	-moz-border-radius:10px 0 0 10px;
+}
+.button-prev a {
+	display:block;
+	margin-top:130px;
+}
+.button-next {
+	height: 75px;
+	width:30px;
+	float:right;
+	-moz-border-radius:0 10px 10px 0;
+	padding-left:5px;
+}
+.button-next a {
+	display:block;
+	margin-top:130px;
+	text-align:right;
+}
+a img {
+	border:none;
+}
+.tabla {
+    max-width: 650px;
+    border: solid 1px #ccc;
+}
+.tabla th {
+    font-weight:bold;
+    border: solid 1px #ccc;
+}
+.tabla th td {
+    border: solid 1px #ccc;
+}
+.tabla tr td{
+    border: solid 1px #ccc;
+}
+.tabla tr:hover {
+    background-color: #4c76be;
+}
+
+td.tdchart
+{
+	width:500px;
+}
+
+.select 
+{
+	font-family: Verdana, 'Trebuchet MS' , Arial;
+	font-size: 9pt;
+	color: black;
+}
+
+
+
+.tamañocarrusel
+{
+	width:200px;
+	height:310px;
+	}
+
+.posicionmenu
+{    
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 460px;
+    max-height :460px;
+    width: 1000px;
+    margin-top: -215px;
+    margin-left: -460px;    
+    z-index: 7;
+}
+.tituloBiblioteca
+{
+    position:absolute;
+    top:110px;
+    left : 370px;
+    z-index:8;
+    
+   
+}
+
+.posicionalbum
+{
+    z-index: 1;
+    width: 80%;
+    height: 430px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -215px;
+    margin-left: -35%;
+   
+    
+   
+}
+
+.labelBiblioteca
+{
+    font-size: 14px;
+    background-image: url('../ImgBooom/labelbiblioteca.png');
+    background-position: left top;
+    background-repeat:repeat-y;
+    text-align: center;
+     
+     min-height:23px;
+    color: Black;
+     padding-left:5px;
+     padding-right:5px;
+     min-width:200px;
+     width:200px;
+}
+.labelBiblioteca:hover
+{
+     font-size: 14px;
+    background-image: url('../ImgBooom/labelbiblioteca2.png');
+    background-position: left  top;
+    background-repeat:repeat-y;
+    text-align: center;
+     
+      font-weight:bold;
+    color: White;
+     padding-left:5px;
+     padding-right:5px;
+     min-width:200px;
+     width:200px;
+     min-height:23px;
+}
+
+
+.FotoPOP
+{
+
+    
+    background-color: Transparent;
+    opacity: 0.1;
+     
+    filter: alpha(opacity=80);
+   
+    background-image: url('../ImgBooom/imgnodisponible.jpg');
+    background-repeat:no-repeat;
+    background-position:center;
+    cursor:pointer;
+    
+}
+.FotoPOP:hover
+{
+    
+   opacity: 100;
+    -moz-opacity: 100;
+    -khtml-opacity: 100;
+    filter: alpha(opacity=100);
+     background-image: url('../ImgBooom/imgnodisponible.jpg');
+    background-repeat:no-repeat;
+    background-position:center;
+   cursor:pointer;
+   border:none;
+    
+}
+
+.tamañonavegadores
+{
+    width:35px;
+    height:50px
+    }
+    
+    .tamañonavegadores:hover
+{
+    width:45px;
+    height:60px;
+      
+    }
+    
+    
+.LblDetalle
+{
+    background-image: url('../ImgBooom/bloquedetexto.png');
+    background-repeat:no-repeat;
+    text-align: center;
+    font-family: Verdana;
+    font-size: 12px;
+    color: #0000CC;
+     padding-top:10px;
+     padding-left:10px;
+      padding-right:10px;     
+      max-width:500px;
+       text-align:center;
+}
+
+.Regresar
+{
+    background-color: Transparent;
+    width: 142px;
+    height: 63px;
+    background-image: url('../img/Regresar_hover.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    border: none;
+}
+.Regresar:hover
+{
+    width: 142px;
+    height:63px;
+   background-image: url('../img/Regresar.png');
+    background-repeat:no-repeat;
+    background-position:center;
+   cursor:pointer;
+   border:none;
+    
+}
+
+.Regresa{
+  
+    
+    position: absolute;
+    bottom:5px;
+    
+    z-index:8;
+     top: 80px; 
+       right:0px;
+    
+}
+
+.DetalleCategorias
+{
+    position: absolute;
+    top: 50%;
+    height: 560px;
+    margin-top: -280px;
+    /*border: 1px solid red;*/
+}
+
+.marcaagua
+{
+    position: absolute;
+    top: 50%;
+    left:50%;
+    height: 390px;
+    width:520px;
+    margin-top: -165px;
+    margin-left: -180px;
+    z-index: 2;    
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-image: url('../ImgBooom/tramabolas.png');
+    
+    
+}
+
+
+.FotoPOPDetalle
+{
+    background-color: Transparent;
+    opacity: 0.1;
+    filter: alpha(opacity=80);
+    background-image: url('../ImgBooom/imgnodisponible.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: default;
+    min-height: 330px;
+    min-width: 100px;
+    max-width: 500px;
+    max-height: 330px;
+    height:330px;
+}
+.FotoPOPDetalle:hover
+{
+    
+   opacity: 100;
+    -moz-opacity: 100;
+    -khtml-opacity: 100;
+    filter: alpha(opacity=100);
+     background-image: url('../ImgBooom/imgnodisponible.jpg');
+    background-repeat:no-repeat;
+    background-position:center;
+    cursor: default;
+    min-height: 330px;
+    min-width: 100px;
+    max-width: 500px;
+    max-height: 330px;
+    
+}
+
+.LogoLeft{
+   /* height: 142px; /* .push must be the same height as .footer */
+   
+    background-repeat: no-repeat;
+    
+    position:absolute;
+    bottom:5px;
+    clear: both;    
+    z-index:5;
+     left: 0px;   
+}
+
+.go
+{
+    font-family:Verdana;
+    cursor:hand;
+    Font-Size:"9px";
+    background-color:#C2D3FC;
+    border-color:White; 
+    border-style:outset; 
+    border-width:1px;
+    font-weight:bold;     
+}
+
+.go:hover
+{
+   
+    background-color: #D5E0FD;
+   
+}
+
+.infGerecial
+{
+    background-image: url('../ImgBooom/infGerencial.png');
+    
+    background-repeat: repeat-x;
+    background-color: Transparent;
+    border-style: none;    
+    cursor: hand;
+}
+.infGerecial:hover {background-image: url('../ImgBooom/infGerencial_g.png'); }
+
+
+.btnActivapromo
+{
+    background-image: url('../ImgBooom/infactivaciones.png');
+    
+    background-repeat: repeat-x;
+    background-color: Transparent;
+    border-style: none;    
+    cursor: hand;
+}
+.btnActivapromo:hover {background-image: url('../ImgBooom/infactivaciones_g.png'); }

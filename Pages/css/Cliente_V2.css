@@ -1,0 +1,198 @@
+﻿*{
+    margin: 0;
+}
+ body{
+    margin: 0px 0px 0px 0px;
+    background-image: url('../ImgBooom/relleno_del_fondo_general.png');
+    height: 100%;
+}
+html{
+    height: 100%;
+}
+
+
+
+/*Este calse aplica para el master_page de v 2 de Xplora Ing. Carlols Hernandez*/
+.Header
+{
+    clear:both;    
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-image: url('../ImgBooom/trama_gris_superior_master.png');
+    margin-bottom: 0px;
+    position:absolute;
+    z-index:0;
+    width:100%;
+    text-align:center;
+    vertical-align:middle;
+    top: 0px;
+    left: 0px;
+}
+
+.footer{
+    height: 142px; /* .push must be the same height as .footer */
+    background-image: url('../ImgBooom/trama_gris_inferior_master.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    position:absolute;
+    bottom:0%;
+    clear: both;
+    width:100%;
+    z-index:1;
+    left: 0px;   
+}
+/* stilo panel */
+.FontdoPanel
+{
+    background-color:#E3E9F5;
+    padding: 2px 2px;
+}
+/* stilo panel */
+.buttonEditPlan{
+	border: 0px none Transparent;
+	background-color: Transparent;
+	background-image: url('../images/BtnEditPlan_a.png' );
+	cursor: hand;
+	font-family:Verdana;
+	font-size: 12px;
+	color: White;
+}
+.buttonOcultar{
+	border: 0px none Transparent;
+	background-color: Transparent;
+	background-image: url('../images/btninfocomun_ahover.png' );
+	cursor:pointer; cursor: hand;
+	font-family:Verdana;
+	font-size: 12px;
+	color: White;
+}
+
+.buttonGuardar{
+	border: 0px none Transparent;
+	background-color: Transparent;
+	background-image: url('../images/BtnSavePlan_a.png' );
+	cursor:pointer; cursor: hand;
+	font-family:Verdana;
+	font-size: 12px;
+	color: White;
+}
+.buttonCancelar{
+	border: 0px none Transparent;
+	background-color: Transparent;
+	background-image: url('../images/BtnClearPlan_a.png' );
+	cursor:pointer; cursor: hand;
+	font-family:Verdana;
+	font-size: 12px;
+	color: White;
+}
+.buttonSearch{
+	border: 0px none Transparent;
+	background-color: Transparent;
+	background-image: url('../images/BtnSearch.png' );
+	cursor: hand;
+	font-family:Verdana;
+	font-size: 12px;
+	color: White;
+}
+.buttonNew{
+	border: 0px none Transparent;
+	background-color: Transparent;
+	background-image: url('../images/BtnNewPlan_a.png' );
+	cursor: hand;
+	font-family:Verdana;
+	font-size: 12px;
+	color: White;
+}
+.Regresar
+{
+    background-color: Transparent;
+    width: 142px;
+    height: 63px;
+    background-image: url('../img/Regresar_hover.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    border: none;
+}
+.alertas {
+	 background-color:Transparent;
+	 display:none;
+	 
+}
+.modalBackground
+{
+	background-color: #C0C0C0;
+	filter: alpha(opacity=50);
+	opacity: 0.5;
+}
+.class_div
+{
+overflow-x: scroll;
+background-color:white;
+}
+
+
+.AjaxToolkitStyle .ajax__combobox_inputcontainer .ajax__combobox_textboxcontainer input
+{
+    background-image: url('../images/comboBox/toolkit-bg.gif');
+    background-position: top left;
+    border: 0px none;
+    color: #FFFFFF;
+    padding: 4px 0px 3px 5px;
+    font-size: 13px;
+    height: 16px;
+    width: 240px;
+}
+.AjaxToolkitStyle .ajax__combobox_inputcontainer .ajax__combobox_buttoncontainer button
+{
+    background-image: url('../images/comboBox/toolkit-arrow.gif');
+    background-position: top left;
+    border: 0px none;
+    height: 23px;
+    width: 23px;
+}
+.AjaxToolkitStyle .ajax__combobox_itemlist
+{
+    border-color: #0F2543;
+    background-color: #EFEFEF;
+}
+
+.modalProgressGreyBackground 
+{
+    background:#CCCCCC;
+	filter:alpha(opacity=60);
+	opacity:0.6;
+}
+
+.modalProgressRedBackground 
+{
+    background:Red;
+	filter:alpha(opacity=60);
+	opacity:0.6;
+}
+
+.modalPopup
+{
+    text-align:center;
+    padding-top: 30px; 
+    border-style:solid; 
+    border-width:1px; 
+    background-color:White; 
+    width:300px; 
+    height:100px;
+}
+
+.cmbcheckboxes
+{
+    position: absolute
+    }
+    
+.alinearizquierda
+{
+    text-align:left;
+    }
+    
+div#checks
+{
+    text-align:left;
+    }

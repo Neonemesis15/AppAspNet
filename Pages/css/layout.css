@@ -1,0 +1,162 @@
+﻿.panel_vista
+{
+    border-width: 1px;
+    border: 1px;
+    border-color: Black;
+    width: 150px
+    }
+    
+#panel_contenedor
+{
+    margin:auto;
+    width:auto;
+    height:auto
+    }
+    
+div.autosize { display: table; width: 1px; }
+div.autosize > div { display: table-cell; }
+
+.centrar
+{
+    width: auto;
+    margin: auto
+    }
+    
+.centrarcontenido
+{
+    text-align:center
+    }
+    
+.labelsTit2
+{
+	font-family: Verdana;
+	font-size: 14px;
+	font-weight: normal;
+	font-style: normal;
+	font-variant: small-caps;
+	color: #000000;
+}
+
+.tabla{ display: table; border:none}
+.fila{ display: table-row; border:none}
+.celda{ display: table-cell; border:none}
+
+.clear { /* generic container (i.e. div) for floating buttons */
+    overflow: hidden;
+    width: 100%;
+}
+
+a.button {
+    background: transparent url('../images/bg_button_a.jpg') no-repeat scroll top right;
+    color: #444;
+    display: block;
+    float: left;
+    font: normal 12px arial, sans-serif;
+    height: 24px;
+    margin-right: 6px;
+    padding-right: 18px; /* sliding doors padding */
+    text-decoration: none;
+}
+
+a.button span {
+    background: transparent url('../images/bg_button_span.jpg') no-repeat;
+    display: block;
+    line-height: 14px;
+    padding: 5px 0 5px 18px;
+}
+
+a.button:active {
+    background-position: bottom right;
+    color: #000;
+    outline: none; /* hide dotted outline in Firefox */
+}
+
+a.button:active span {
+    background-position: bottom left;
+    padding: 6px 0 4px 18px; /* push text down 1px */
+}
+
+.borde_panel
+{
+border:double 5px #615b61;
+-moz-border-radius: 11px;
+-webkit-border-radius: 11px;
+border-radius: 11px;
+}
+
+.scroll
+{
+    overflow-x:auto;
+}
+
+.etiqueta
+{
+    text-align:left
+    }
+    
+.botonBlue
+{
+    	font-family:"Segoe UI", Arial, Helvetica, sans-serif;
+  font-size:12px;
+	height:26px;
+	color:White;
+   background-color  : Transparent;
+	background-image: url('../images/BotonColor/nav-bg.png');
+	background-position:center;
+	width:80%;
+  position:relative;
+    top: 4px;
+}
+
+.bonBlue:hover 
+{
+    	height:29px;
+	background-image:url(../images/BotonColor/blue.png) ;
+	background-position:center;
+	background-repeat:no-repeat; 
+	color:White;
+	width:100%;
+	cursor: hand;
+ }
+ 
+ 
+ /**Angel Ortiz
+    Css para:
+    - fullscreen 
+    - overscroll
+**/
+
+#floatbutton {
+	position: relative;	
+	text-align:left;
+	vertical-align:middle;
+	margin:0;
+	margin-top: 8px;
+	padding:0;
+	font-size:11px;
+	height:34px;
+	width:170px;
+	float:left;
+}
+
+#floatbutton div
+{
+    float:left;
+    margin-top: 10px;
+    }
+    
+#floatbutton img
+{
+    float:right;
+    }
+
+    
+.overlay {  
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:1000;
+    background-color: #FFFFFF;
+  } 

@@ -1,0 +1,12 @@
+/*IE 6 y anteriores*/
+    * html {}
+/*IE 7 y anteriores*/
+    *:first-child+html {} * html {}
+/*Solor IE 7*/
+    *:first-child+html {}
+/*IE 7 y navegadores modernos*/
+    html>body {}
+/*Navegadores modernos (IE 7 no)
+    html>/**/body {}
+/*Ultimas versiones de Opera 9 y anteriores*/
+    html:first-child {}

@@ -1,0 +1,103 @@
+#carousel{overflow: hidden;}
+/* Carousel */
+#carousel {
+	position: relative; /* Necesario */
+	overflow: hidden; /* Necesario */
+	height: 155px;
+	margin-left:35px;
+	font-size:13px;
+	font-family:Verdana, Geneva, sans-serif;
+	text-align:center;
+}
+#carousel .belt {
+	position: absolute; /* Necesario */
+	left: 0;
+	top: 0;
+	margin:0 10px 10px 0;
+}
+#carousel .panel {
+	min-width:120px;
+	float: left; /* Necesario */
+	overflow: hidden;
+	min-height:120px;
+	margin-top:10px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+#carousel .panel .panel-text {
+	padding-top:5px;
+	font-size:13px;
+	font-family:Verdana, Geneva, sans-serif;
+	color:#CCC;
+}
+#carousel .panel .panel-text a {
+	color:#CCC;
+	text-decoration:none;
+}
+#carousel .panel .panel-text a:hover {
+	color:#FFF;
+	text-decoration:underline;
+}
+/* Botones del carousel */			
+.button-prev {
+	height: 150px;
+	width:65px;
+	float:left;
+	-moz-border-radius:10px 0 0 10px;
+}
+.button-prev a {
+	display:block;
+	margin-top:25px;
+}
+.button-next {
+	height: 150px;
+	width:65px;
+	float:right;
+	/*background:#fff url(carousel-bg.png) bottom left repeat-x;*/
+	-moz-border-radius:0 10px 10px 0;
+	padding-left:5px;
+}
+.button-next a {
+	display:block;
+	margin-top:25px;
+}
+a img {
+	border:none;
+}
+
+/*¨stylos para gridview*/
+.GridHeader	
+{
+	color:  #5371A6;
+		position: relative;
+		top: expression(this.offsetParent.scrollTop-2);
+		background-color: #D0E7F3;	
+		/*font-weight: bold;	*/
+		font-size: 12px ;
+}
+
+.GridRow
+{
+	color: #6676D0;
+	background-color: #FFFFFF;
+	font-weight: normal;	
+	font-size: 10px;
+}
+	
+.GridAlternateRow
+{
+	color: #000000;	
+	background-color: #F7F7F7;	
+	font-weight: normal;	
+	font-size: 10px;
+}
+	
+.Marco	
+{
+	overflow: auto;
+	
+} 
+
+.Marco .Grid
+
+ {width: 95%;}

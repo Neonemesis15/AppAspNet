@@ -1,0 +1,1191 @@
+﻿body 
+{
+     margin: 0px 0px 0px 0px;
+    background-image: url('../ImgBooom/relleno_del_fondo_general.png');
+    height: 100%; 
+} 
+.IndexF
+{	
+	background-repeat: no-repeat;
+	background-position: center top;
+	font-size: 12px;
+	font-family: Verdana, Geneva, sans-serif;	
+	stress:100;
+	
+	
+	background-image: url( '../images/FondoGris.jpg' );
+}
+.button
+{
+    border-left: 1px none;
+    border-right: 1px none;
+    color: white;
+    cursor: pointer;
+    background-repeat: repeat-x;
+    background-image: url('../images/Fbotones.gif');
+    font-weight:bold;
+    }
+
+.buttonsinfondo{
+    background-color: Transparent;
+    border: none;
+    text-decoration: underline;
+    color: #0000FF;
+    cursor:default;}
+
+.boton{
+border-style: none;
+	border-color: inherit;
+	border-width: 0px;
+	font-size:10px;
+	font-family:Verdana,Helvetica;
+	font-weight:bold;
+	color:white;
+	background:#638cb5;
+	}
+.boton2{
+border-style: none;
+	border-color: inherit;
+	border-width: 0px;
+	font-size:10px;
+	font-family:Verdana,Helvetica;
+	font-weight:bold;
+	color:white;
+	background:#638cb5;
+	width:70px;
+    height: 16px;
+}
+
+
+.button1
+{
+	
+	
+	
+position:absolute;
+	width: 112px;
+	height: 23px;
+	top: 253px;
+	left: 128px;
+	right: 555px;
+}
+.modalBackground
+{
+	background-color: #C0C0C0;
+	filter: alpha(opacity=50);
+	opacity: 0.5;
+}
+.menuList {
+  display:list-item;
+  background-color: #99CCCC;
+  border: 1px solid #0000FF;
+  margin:1;
+  text-decoration:mone;
+  color: #000;
+  font-family: Verdana,Arial,Helvetica; 
+  font-size: 12px;
+  font-weight:bold;
+  padding: 1px;/* Cuanto mayor sea el espaciado, mas grande será el area del botón. */
+}
+
+
+.divipol{
+	background-color:Gray;
+	
+}
+.updateProgress     
+{
+	 border-width: 1px;    
+	  border-style: solid;     
+	  background-color: #FFFFFF;     
+	  position: absolute;     
+	  width: 180px;     
+	  height: 65px; 
+	  } 
+.backcolor
+{
+	background-image: url('../images/silverlight_dusk1_wide_1600x1050.jpg');
+	background-attachment: fixed;
+	
+	
+}
+.backcolor1
+{
+	background-image: url('../images/Fondo1.gif');
+	background-position:center;
+	background-repeat:repeat;
+	padding:2px 2px;
+}
+
+.backcolorxplora
+{
+	background-image: url('../images/FondoGris.jpg');
+	background-position:center;
+	
+	padding:2px 2px;
+}
+.backcolor2
+{
+	background-image: url('../images/Fondo2.gif');
+	background-attachment: fixed;
+}
+.rpopup
+{
+	background-image: url('../images/Frol.gif');
+	background-color:Maroon;
+	width:505px;
+	Height:344px;
+}
+ 
+  .poslistbox
+{
+	
+ position: absolute;
+ top:95px;
+	left: 165px;
+	
+	margin-top: 0px;
+	right: 411px;
+	height: 147px;
+	width: 115px;
+}
+  .poslistbox1
+{
+	
+ position: absolute;
+  top :90px;
+	left: 409px;
+	
+	margin-top: 0px;
+	height: 37px;
+	width: 236px;
+}
+  .contenedor
+{
+	border-right: 3px solid #000000;
+	border-bottom: 3px solid #000000;
+	position: absolute;
+	left: 273px;
+	top: 820px;
+		margin-top: 0px;
+		background-color: #FFFFCC;
+		width: 805px;
+	height: 316px;
+}
+
+ .contenedorimagen
+{
+	border-right: 3px solid #000000;
+	border-bottom: 3px solid #000000;
+	position: absolute;
+	left: 275px;
+	top: 827px;
+		margin-top: 0px;
+		background-color: #FFFFCC;
+		width: 826px;
+			height: 1221px;
+}
+
+
+
+nedor
+{
+ top:87px;	
+ position: absolute;
+left: 144px;
+ height: 288px;
+ width: 1023px;
+ background-color:Silver
+}
+
+
+
+.CajaDialogo
+    {
+        background-color:fuchsia;
+        border-width: 0px;
+        border-style: outset;
+        border-color:Red;
+        padding: 0px;
+        width: 200px;
+        font-weight: bold;
+        font-style: normal;
+        
+        
+    }
+    ialogo div
+    {
+        margin: 5px;
+        text-align: center;
+    }
+.Ubicacion
+{
+	top: 217px;
+	position: absolute;
+	left: 809px;
+    margin-top: 0px;
+}
+
+.Ubicacion1
+{
+	top: 552px;
+	position: absolute;
+	left: 603px;
+	height: 39px;
+	width: 344px;
+	right: 86px;
+}
+
+.Radio
+{
+	top: 422px;
+	position: absolute;
+	left: 446px;
+	height: 21px;
+	width: 24px;
+	right: 646px;
+	cursor: crosshair;
+}
+
+.Radio
+{
+	top: 425px;
+	position: absolute;
+	left: 439px;
+	height: 21px;
+	width: 24px;
+	right: 498px;
+	cursor: crosshair;
+}
+
+.Radio1
+{
+	top: 467px;
+	position: absolute;
+	left: 427px;
+	height: 21px;
+	width: 24px;
+	right: 510px;
+	cursor: crosshair;
+}
+.tamaño
+{
+}
+
+.TextArea
+{
+	background-color: transparent;
+	border: 0px none #000000;
+	color: Black;
+	font-size: 16px;
+	font-weight: normal;
+	font-family: Arial, Helvetica, sans-serif;
+    width: 1000px;
+    height:41px;
+    text-align:center;
+} 
+
+.mensajes
+{
+	top: 543px;
+	left: 701px;
+	width: 498px;
+	height: 52px;
+	
+} 
+
+.Ubicacioninformes
+{
+	top: 165px;
+	position: absolute;
+	left: 287px;
+    height: 163px;
+    width: 1000px;
+}
+
+.logoSIGE
+{
+	top: 72px;
+	position: absolute;
+	left: 736px;
+	height: 238px;
+	width: 239px;
+}
+.labels
+{
+	font-family: Arial;
+	font-size: 12px;
+	color: #FFFFFF;
+	font-weight: bold;
+	text-align: center;
+}
+
+.labelsN
+{
+	font-family: Arial;
+	font-size: 12px;
+	color:Black;
+	font-weight: bold;
+    }
+.labelsTit
+
+{
+	font-family: Verdana;
+	font-size: 18px;
+	color: #FFFFFF;
+	font-weight: bold;
+}
+.labelsTitN
+
+{
+	font-family: Verdana;
+	font-size: 18px;
+	color:Black;
+	font-weight: bold;
+}
+
+.busqueda
+{
+    background-color: #006699;
+    padding: 2px 2px;
+}
+
+.combolist
+{
+	background-color: #FFFFFF;
+}
+ .p
+{
+	overflow: auto;
+	width: 60px;
+	height: 60px;
+	background-color: #FFFFFF;
+	padding: 2px 2px;
+	font-size: 10pt;
+	font-family: arial, Helvetica, sans-serif;
+}
+
+.alertas {
+	 background-color:Transparent;
+	 display:none;
+	 
+}
+
+.CargaArchivos
+{
+    background-color:#E3E9F5;
+    padding: 2px 2px;
+}
+
+.modalBack
+{
+	background-color: #C0C0C0;
+	filter: alpha(opacity=80);
+	opacity: 0.1;
+}
+.buscarplanning
+{
+	background-image: url('../images/BPlanning.gif');
+}
+.modalBackPlanning 
+{	
+	background-color:white;
+	filter:alpha(opacity=50);
+	opacity:0.5;
+}
+
+.MenuInicialSupervisor
+{	text-align: left ;				
+	border:solid 1px black;      
+	padding: 2px 2px;	
+	font-size: 10px;
+	font-family: Verdana,Helvetica;     
+    color: #FFFFFF;
+    background-image: url('../images/BtnMenSupini.gif');
+    background-repeat:repeat;
+    overflow: scroll;
+   
+}
+ .MenuFinalSupervisor
+{    
+    border:solid 2px black;           
+    padding:2px 2px;
+    text-align:center;            
+    font-size:10px;
+    font-family:Verdana,Helvetica;
+    font-weight:bold;
+    color:white;
+    background-image: url('../images/BtnMenSupfin.gif'); 
+    background-repeat:repeat;   
+    overflow: scroll;
+}
+.MenuFondoSupervisor
+{	text-align: center;				
+	border:solid 1px black;      
+	padding: 2px 2px;	
+	font-size: 10px;
+	font-family: Verdana,Helvetica;     
+    color: #FFFFFF;
+    background-image: url('../images/BtnMenFond.gif');
+    background-repeat:repeat;
+    overflow: scroll;
+   
+}
+.MensajesSupervisor
+{
+	background-image: url('../images/MensajeSup.jpg'); 
+   
+}
+
+.MensajesSupConfirm
+{
+	background-image: url('../images/MensajeSupConfirm.jpg'); 
+   
+}
+
+.MensajesFotosConfirm
+{
+	background-image: url('../images/MensajefotosConfirm.jpg'); 
+   
+}
+
+.MensajesformatoFotos
+{
+	background-image: url('../images/Mensajefotos.jpg'); 
+   
+}
+
+.MensajeSavePlanning
+{
+    
+    background-image: url('../images/MensajePlaConfirm.jpg'); 
+    
+  }
+
+  .ScrollMenu
+{
+	overflow: auto;
+	height: 550px;
+	width: 211px;
+	background-color: Transparent;
+	border-right-style: solid;
+	border-right-width: 3px;
+	border-right-color: #000080;
+	border-bottom-style: solid;
+	border-bottom-width: 3px;
+	border-bottom-color: #000080;	
+	clear:both;
+}
+
+ .ScrollEmpaquetamiento
+{
+	overflow:auto;
+	height: 112px;
+	width: 275px;
+	background-color: Transparent;
+	border-right-style: solid;
+	border-right-width: 3px;
+	border-right-color: #000080;
+	border-bottom-style: solid;
+	border-bottom-width: 3px;
+	border-bottom-color: #000080;	
+}
+ .ScrollSegmento
+{
+	border: 1px solid #C0C0C0;	
+	overflow:auto;
+	height: 115px;                                               
+	width: 290px;
+	background-color: Transparent;
+}
+
+ .ScrollFotos
+{
+	border: 1px solid #C0C0C0;	
+	overflow:auto;
+	height: 185px;   
+	                                            	
+	background-color: Transparent;
+	width: 292px;
+}
+
+ .ScrollClientes
+{
+	border: 1px solid #C0C0C0;
+	overflow: auto;
+	height: 100px;
+	width: 400px;
+	background-color: Transparent;
+}
+.ScrollOperativos
+{
+	border: 1px solid #C0C0C0;
+	overflow: auto;
+	height: 100px;
+	width: 437px;
+	background-color:White;
+}
+
+.ScrollOpeAnalisis
+{
+	border: 1px solid #C0C0C0;
+	overflow: auto;
+	height: 100px;
+	width: 228px;
+	background-color:White;
+}
+.ScrollpdvAnalisis
+{
+	border: 1px solid #C0C0C0;
+	overflow: auto;
+	height: 100px;
+	width: 213px;
+	background-color:White;
+}
+.ScrollprodAnalisis
+{
+	border: 1px solid #C0C0C0;
+	overflow: auto;
+	height: 100px;
+	width: 285px;
+	background-color:White;
+}
+
+.ScrollActividades
+{
+	border: 1px solid #C0C0C0;
+	overflow: auto;
+	height: 426px;
+	width: 481px;
+	background-color:White;
+}
+
+.ScrollActividadesphoto
+{
+	border: 1px solid #C0C0C0;
+	overflow: auto;
+	height: 426px;
+	width: 807px;
+	background-color:White;
+}
+
+.ScrollActividadesphotoSupervisor
+{
+	border: 1px solid #C0C0C0;
+	overflow: auto;
+	height: 400px;
+	width: 426px;
+	background-color:White;
+}
+
+.ScrollActividadesphotopropSupervisor
+{
+	border: 1px solid #C0C0C0;
+	overflow: auto;
+	height: 427px;
+	width: 430px;
+	background-color: White;
+	
+}
+
+.ScrollPersonalPlanning
+{
+	border: 1px solid #C0C0C0;
+	overflow: auto;
+	height: 212px;
+	width: 437px;
+	background-color:White;
+	font-family:Verdana;
+	font-size:12px;
+}
+
+.buttoncambia
+{
+    background-image: url('../images/bg_btn_a.png');
+    font-size:10px;
+   font-family :Verdana,Helvetica;
+   font-weight :bold;
+   color:white;
+    
+}
+
+.StiloCombo
+{
+	font-family: Verdana,Helvetica;
+	font-size: 10px;
+	font-weight: normal;
+	color: #000000;	
+}
+
+.StiloComboScrool
+{
+	font-family: Verdana,Helvetica;
+	font-size: 10px;
+	font-weight: normal;
+	color: #000000;
+	margin-left: 5px;
+	overflow: auto;	
+	height: 85px;
+	width: 205px;
+	background-color:Transparent;
+	 
+}
+
+
+
+.letranormal {color:#000000;font-size: 8pt;font-style:normal;font-weight:normal}
+
+.gridcontainer  
+{
+    border: solid 1px #99BBE8;
+    border-top-width:0px;
+    width: 30%;
+}
+.grid {border-width:0px;}
+
+.grid1 {
+	background:#f9f9f9 url(../images/captionbckg.gif) repeat-x;
+    color:#15428B;
+	text-align:left;
+	line-height:22px;
+	font-size:11px;
+	font-weight:bold;
+	padding-top:4px;
+	padding-left:4px;
+	font-family:tahoma,arial,verdana,sans-serif;
+}
+
+.grid table 
+{
+	border-color:#99BBE8;
+	border-width:1px;
+}
+	
+.grid td, .grid th
+{
+    height:18px;
+    vertical-align:middle;
+}
+
+.grid th
+{
+	background:transparent url(../images/thbackground.gif) repeat-x;
+    height:19px;
+    border:solid 1px #99BBE8;
+    font-weight:normal;
+}
+
+.grid td
+{
+	border:1px solid #ededed;
+    border-top-color:#fff;
+    width:100%;
+    cursor:default;
+}
+
+.selectedrow 
+{
+	background: #DFE8F6;
+	border:1px dotted #A3BAE9;
+}
+
+.altrow 
+{
+	background-color:#f2f2f2;
+}
+
+.altoverow
+{
+	border:10px solid #99BBE8;
+    background: #ffffff ;
+}
+
+.pagerstyle 
+{
+	font-size:x-small;
+	text-align:right;
+    background-position: bottom left;
+    background: #D0DEF0 url(../images/toolbarbck.gif) repeat-x scroll left top;
+}
+
+.gopag {
+    font-size:x-small;
+    width:20px;
+}
+
+.pagprev{
+    background:transparent url(../images/previous.png) no-repeat scroll center;
+    height:1.3em;
+    width:16px;
+    cursor:pointer;
+    border:0px;
+}
+.pagnext{
+    background:transparent url(../images/next.png) no-repeat scroll center;
+    height:1.3em;
+    width:16px;
+    cursor:pointer;
+    border:0px;
+}
+
+.pagfirst{
+    background:transparent url(../images/first.png) no-repeat scroll center;
+    height:1.3em;
+    width:16px;
+    cursor:pointer;
+    border:0px;
+}
+.paglast{
+    background:transparent url(../images/last.png) no-repeat scroll center;
+    height:1.3em;
+    width:16px;
+    cursor:pointer;
+    border:0px;
+}
+
+
+.imagenstrech {
+width:100%;
+height:100%;
+}
+
+
+div.AspNet-TreeView
+{
+    margin: 0;
+    padding: 0;
+}
+
+div.AspNet-TreeView ul
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.AspNet-TreeView-Show
+{
+}
+
+.AspNet-TreeView-Hide
+{
+    display:none;
+}
+
+.StiloScroolLista
+{
+	font-family: Verdana,Helvetica;
+	font-size: 10px;
+	font-weight: normal;
+	color: #000000;
+	margin-left: 5px;
+	overflow: auto;	
+	height: 130px;
+	width: 314px;
+	background-color:Transparent;
+	 
+}
+
+.tamañocarrusel
+{
+	width:1000px;
+	height:244px;
+	}
+	
+.fondopanel
+{
+    margin-left: 0%;
+
+    width: 74%;
+    clear: right;
+    min-height: 700px;
+    background-image: url('../images/FondoPsw.png');
+    background-repeat: no-repeat;
+    color: White;
+    font-size: 11px;
+   
+}
+
+.buttonPlan{
+	border: 0px none Transparent;
+	background-color: Transparent;
+	background-image: url('../images/bg_btn_a.png' );
+	cursor: hand;
+	font-family: Verdana;
+	font-size: 12px;
+	color: #FFFFFF;
+}
+.buttonPlan:hover {background-image: url('../images/bg_btn_ahover.png'); }
+
+.fondo
+{
+background-image: url( '../img/fondo.png' );
+	background-repeat: no-repeat;
+	background-position: center top;	
+}
+
+.buttonIndexF
+{
+	border: 0px none Transparent;
+	background-color: Transparent;
+	background-image: url( '../images/tablas_genericas/btn_tabla_ahover.png' );
+	cursor: hand;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #FFFFFF;
+	height:21px;
+	width:70px;
+	
+}
+
+
+.buttonIndexF:hover
+{
+	background-image: url( '../images/tablas_genericas/btn_tabla_a.png' );
+	background-color: Transparent;
+	border: 0px none Transparent;
+	cursor: hand;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #FFFFFF;
+	height:21px;
+	width:70px;
+}
+
+
+.cbtnIAnfitrion
+{
+    background-position: center;
+    border: 0px none Transparent;
+    background-color: Transparent;
+    background-image: url('../img/Anfitrionaje.png');
+    
+    cursor: hand;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #FFFFFF;
+   width:25%;
+height:25%;
+
+}
+.cbtnIAnfitrion:hover
+{
+    background-image: url('../img/Anfitrionaje_g.png');
+    width:25%;
+height:25%;
+}
+
+.FondoHeaderGrid
+{
+      background-position: center center;
+        background-repeat: repeat-x;
+        background-image: url('../ImgBooom/interiorblancoHeaderGRid.png');       
+        height: 36px;        
+        width: 550px;
+        padding-left:13px;
+       
+    
+}
+
+.buttonPlanSolicitud{
+	border: 0px none Transparent;
+	background-color: Transparent;
+	background-image: url('../images/btnsolicitd_a.png' );
+	cursor: hand;
+	font-family:Verdana;
+	font-size: 12px;
+	color: Black;
+}
+.buttonPlanSolicitud:hover {background-image: url('../images/btnsolicitd_ahover.png'); color: White; }
+
+.buttonPlanInfocomun{
+	border: 0px none Transparent;
+	background-color: Transparent;
+	background-image: url('../images/btninfocomun_a.png' );
+	cursor: hand;
+	font-family:Verdana;
+	font-size: 12px;
+	color: Black;
+}
+.buttonPlanInfocomun:hover {background-image: url('../images/btninfocomun_ahover.png'); color: White; }
+
+.buttonPlanNuevaCam{
+	border: 0px none Transparent;
+	background-color: Transparent;
+	background-image: url('../images/btnnuevacamp_a.png' );
+	cursor: hand;
+	font-family:Verdana;
+	font-size: 12px;
+	color: Black;
+}
+.buttonPlanNuevaCam:hover {background-image: url('../images/btnnuevacamp_ahover.png'); color: White; }
+
+.buttonNewPlan{
+	border: 0px none Transparent;
+	background-color: Transparent;
+	background-image: url('../images/BtnNewPlan_a.png' );
+	cursor: hand;
+	font-family:Verdana;
+	font-size: 12px;
+	color: White;
+}
+.buttonNewPlan:hover {background-image: url('../images/BtnNewPlan_ahover.png'); color: White; }
+
+.buttonNewPlanSel{
+	border: 0px none Transparent;
+	background-color: Transparent;
+	background-image: url('../images/BtnNewPlan_ahover.png' );
+	cursor: hand;
+	font-family:Verdana;
+	font-size: 12px;
+	color: White;
+}
+    
+.buttonPlanConsultaCam{
+	border: 0px none Transparent;
+	background-color: Transparent;
+	background-image: url('../images/btnconsultacamp_a.png' );
+	cursor: hand;
+	font-family:Verdana;
+	font-size: 12px;
+	color: Black;
+}
+.buttonPlanConsultaCam:hover {background-image: url('../images/btnconsultacamp_ahover.png'); color: White; }
+
+.buttonPlanBreafCam{
+	border: 0px none Transparent;
+	background-color: Transparent;
+	background-image: url('../images/BtnBreaf_a.png' );
+	cursor: hand;
+	font-family:Verdana;
+	font-size: 12px;
+	color: Black;
+}
+.buttonPlanBreafCam:hover {background-image: url('../images/BtnBreaf_ahover.png'); color: White; }
+
+.buttonSavePlan{
+	border: 0px none Transparent;
+	background-color: Transparent;
+	background-image: url('../images/BtnSavePlan_a.png' );
+	cursor: hand;
+	font-family:Verdana;
+	font-size: 12px;
+	color: White;
+}
+.buttonSavePlan:hover {background-image: url('../images/BtnSavePlan_ahover.png'); color: White; }
+
+.buttonClearPlan{
+	border: 0px none Transparent;
+	background-color: Transparent;
+	background-image: url('../images/BtnClearPlan_a.png' );
+	cursor: hand;
+	font-family:Verdana;
+	font-size: 12px;
+	color: White;
+}
+.buttonClearPlan:hover {background-image: url('../images/BtnClearPlan_ahover.png'); color: White; }
+
+.buttonEditPlan{
+	border: 0px none Transparent;
+	background-color: Transparent;
+	background-image: url('../images/BtnEditPlan_a.png' );
+	cursor: hand;
+	font-family:Verdana;
+	font-size: 12px;
+	color: White;
+}
+.buttonEditPlan:hover {background-image: url('../images/BtnEditPlan_ahover.png'); color: White; }
+
+.buttonFilePlan{
+	border: 0px none Transparent;
+	background-color: Transparent;
+	background-image: url('../images/BtnFilePlan_a.png' );
+	cursor: hand;
+	font-family:Verdana;
+	font-size: 12px;
+	color: White;
+}
+.buttonFilePlan:hover {background-image: url('../images/BtnFilePlan_ahover.png'); color: White; }
+
+.buttonAddPersonal{
+	border: 0px none Transparent;
+	background-color: Transparent;
+	background-image: url('../images/BtnAddP_a.png' );
+	cursor: hand;
+	font-family:Verdana;
+	font-size: 12px;
+	color: Black;
+	
+	 
+}
+.buttonAddPersonal:hover {background-image: url('../images/BtnAddP_ahover.png'); color: Black; }
+
+.Regresa{
+    height: 142px; /* .push must be the same height as .footer */         
+     
+    position:absolute;    
+    bottom:0%;   
+    z-index:8;    
+}
+
+.RegresaTop{
+    height: 142px; /* .push must be the same height as .footer */         
+     
+    position:absolute;    
+    top:2%;  
+    z-index:8;    
+}
+
+.Regresar
+{
+    background-color: Transparent;
+    width: 142px;
+    height: 63px;
+    background-image: url('../img/Regresar_hover.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    border: none;
+}
+.Regresar:hover
+{
+    width: 142px;
+    height:63px;
+   background-image: url('../img/Regresar.png');
+    background-repeat:no-repeat;
+    background-position:center;
+   cursor:pointer;
+   border:none;
+    
+}
+.modalProgressGreyBackground 
+{
+    background:#CCCCCC;
+	filter:alpha(opacity=60);
+	opacity:0.6;
+}
+
+.modalProgressRedBackground 
+{
+    background:Red;
+	filter:alpha(opacity=60);
+	opacity:0.6;
+}
+
+.modalPopup
+{
+    text-align:center;
+    padding-top: 30px; 
+    border-style:solid; 
+    border-width:1px; 
+    background-color:White; 
+    width:300px; 
+    height:100px;
+}
+
+
+/*****************Color para los botones*******************/
+.buttonBlue
+{
+    font-family:"Segoe UI", Arial, Helvetica, sans-serif;
+    font-size:12px;
+    height:26px;
+    color:White;
+    background-color  : Transparent;
+    background-image: url('../images/BotonColor/nav-bg.png');
+    background-position:center;
+    width:80%;
+    position:relative;
+}
+
+.buttonBlue:hover 
+{
+    height:29px;
+    background-image:url(../images/BotonColor/blue.png) ;
+    background-position:center;
+    background-repeat:no-repeat; 
+    color:White;
+    width:100%;
+    cursor:pointer;
+ }
+
+
+.buttonYelow
+{
+    	font-family:"Segoe UI", Arial, Helvetica, sans-serif;
+  font-size:12px;
+	height:29px;
+	color:White;
+   background-color  : Transparent;
+	background-image: url(../images/BotonColor/nav-bg.png);
+	background-position:center;
+	width:100%;
+  position:relative;
+}
+
+.buttonYelow:hover 
+{
+    	height:29px;
+	background-image:url(../images/BotonColor/yelow.png) ;
+	background-position:center;
+	background-repeat:no-repeat; 
+	color:White;
+	width:100%;
+	cursor:pointer;
+ }
+
+
+.buttonGreen
+{
+    font-family:"Segoe UI", Arial, Helvetica, sans-serif;
+    font-size:12px;
+    height:29px;
+    color:White;
+    background-color  : Transparent;
+    background-image: url(../images/BotonColor/nav-bg.png);
+    background-position:center;
+    width:100%;
+    position:relative;
+}
+
+.buttonGreen:hover 
+{
+    height:29px;
+    background-image:url(../images/BotonColor/green.png) ;
+    background-position:center;
+    background-repeat:no-repeat; 
+    color:White;
+    width:100%;
+    cursor:pointer;
+ }
+
+.buttonRed
+{
+    font-family:"Segoe UI", Arial, Helvetica, sans-serif;
+    font-size:12px;
+    height:29px;
+    color:White;
+    background-position:center;
+    background-color  : Transparent;
+    background-image: url('../images/BotonColor/nav-bg.png');
+    width:100%;
+    position:relative;
+    top: 0px;
+    left: 0px;
+}
+
+.buttonRed:hover 
+{
+    height:29px;
+	background-image:url(../images/BotonColor/red.png) ;
+	background-position:center;
+	background-repeat:no-repeat; 
+	color:White;
+	width:100%;
+	cursor:pointer;
+ }
+ 
+ #evolucionPreciosAASS table
+ {
+     margin:auto;
+     }

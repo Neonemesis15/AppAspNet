@@ -1,0 +1,136 @@
+@media screen
+{	
+	.ob_cbContainer
+	{
+		text-align:left;
+		border: 1px solid #9AC5D1;
+		background:url(bg_box.gif) repeat-x bottom;
+		background-color: #FFFFFF;
+		padding: 0px;
+		overflow: hidden;
+		overflow: auto;
+	}
+	
+	.ob_cbTopContainer
+	{
+		border:1px solid #9AC5D1;
+		padding: 0px;	
+		height: 20px;			
+	}
+	
+	.ob_cbButtonContainer
+	{
+		width: 20px;		
+		float:right;
+	}
+	
+	.ob_cbColumnContainer
+	{
+		overflow-y: auto;
+		overflow-x: hidden;
+	}	
+		
+	.ob_cbTextbox
+	{
+		padding-left:2px;
+		padding-right:2px;
+		border: 0px;
+		padding-bottom: 0px;
+		padding-top: 2px;			
+								
+		font:12px Verdana, Arial, Helvetica,Tahoma;
+		font-weight:normal;
+		color:#000000;
+		text-decoration:none;
+		height: 18px;
+		width: 100%;
+	}
+		
+	.ob_cbOption
+	{
+		border-top:1px solid transparent;
+		border-bottom:1px solid #EBF3F6;
+		font:12px Verdana, Arial, Helvetica,Tahoma;
+		font-weight:normal;
+		color:#7F969C;
+		text-decoration:none;
+		padding: 2px;
+		padding-left: 3px;
+		vertical-align: middle;	
+		height: 17px;
+		width: 100%;
+	}
+	
+	.ob_cbOptionOver
+	{
+		border-top:1px solid #9AC5D1;
+		border-bottom:1px solid #9AC5D1;
+		font:12px Verdana, Arial, Helvetica,Tahoma;
+		font-weight:normal;
+		color:#000000;
+		text-decoration:none;
+		padding: 2px;
+		padding-left: 3px;
+		vertical-align: middle;	
+		height: 17px;
+		width: 100%;
+		z-index: 10001;
+		background:url(bg_hover.gif) repeat-x;
+		cursor: pointer;
+	}		
+	
+	.ob_cbOptionIcon
+	{		
+		width: 16px;
+		height: 16px;
+		border: 0px;
+	}
+	
+	.ob_cbOptionIconContainer
+	{
+		vertical-align: middle;
+		width: 16px;	
+		padding: 3px;
+		cursor: pointer;
+	}
+	
+	.ob_cbButton
+	{
+		border: 0px;
+		cursor: pointer;		
+	}			
+	
+	.ob_cbButtonOver
+	{
+		border: 0px;
+		cursor: pointer;
+	}
+	
+	.ob_cbTables
+	{
+		border-collapse: separate;		
+		border-spacing: 0px;
+		padding: 0px;		
+	}
+	
+	.ob_cbTables td
+	{
+		/*padding: 0px;*/
+	}
+	
+	.ob_cbInvisible
+	{
+		display: none;
+	}
+	
+	.ob_cbColumnTitle
+	{
+		font:11px Verdana, Arial, Helvetica,Tahoma;
+		padding: 2px;
+		padding-left: 3px;
+		vertical-align: middle;
+		background:url(bgtop.gif) repeat-x;
+		height:19px;
+		border-left:1px solid #9AC5D1;
+	}
+}

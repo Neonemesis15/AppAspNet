@@ -1,0 +1,305 @@
+/********** Generales ***************/
+
+body {
+	background-color:#c6c6c6;
+	background-image:url(../images/bg.jpg);
+	background-repeat:no-repeat;
+	background-attachment: fixed;
+	margin: 0;
+}
+
+.logo_lucky {
+	background-image: url(../images/logo_lucky.png);
+	background-repeat: no-repeat;
+	float: left;
+	height: 32px;
+	width: 92px;
+}
+
+.logo_sige {
+	background-image: url(../images/logo_sige.png);
+	background-repeat: no-repeat;
+	float: left;
+	height: 54px;
+	width: 144px;
+}
+
+.clear { clear:none;
+}
+
+.texto {
+	color: #000;
+	display: block;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	text-transform: uppercase;
+}
+
+.titulos {
+	color: #2d1587;
+	display: block;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	font-weight: bold;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+/********** HOME ************/
+
+.botones_home {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	float: left;
+	heig_t: 27px;
+	width:82px;
+	_width:82px;
+}
+
+.botones_home A {
+	background-image:url(~/Pages/images/bg_btn_a.png);
+	background-repeat:no-repeat;
+	color: #fff;
+	display:block;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	font-weight: bold;
+	float:left;
+	height:21px;
+	padding: 6px 0 0 0;
+	_padding: 6px 0 0 0;
+	text-align: center;
+	text-decoration:none;
+	width:82px;
+	outline-color:-moz-use-text-color;
+	outline-style:none;
+	outline-width:medium;
+}
+
+.botones_home A:hover {
+	background-image:url(~/Pages/images/bg_btn_ahover.png);
+	background-repeat:no-repeat;
+	color: #fff;
+	text-decoration: underline;
+}
+
+.tit_act_home {
+	background-image: url(../images/home/titulo_actividades.png);
+	background-repeat: no-repeat;
+	color: #2d1587;
+	display: block;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	font-weight: bold;
+	float: left;
+	height: 16px;
+	padding: 30px 0 0 0;
+	_padding: 30px 0 0 0;
+	text-align: center;
+	text-transform: uppercase;
+	width: 570px;
+}
+
+.barra_inf_home {
+	background-image: url(../images/home/barra_inferior_home.png);
+	background-repeat: no-repeat;
+	color: #2d1587;
+	display: block;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 7px;
+	font-weight: bold;
+	float: left;
+	height: 37px;
+	padding: 38px 53px 0 12px;
+	_padding: 38px 53px 0 12px;
+	text-align: center;
+	text-transform: uppercase;
+	width: 464px;
+}
+
+/********** HOME ************/
+
+/********** INTERNAS ************/
+
+.cont_menu {
+	float: left;
+	width: 140px;
+	_width: 140px;
+}
+
+.borde_menulat {
+	float: left;
+	height: 13px;
+	width: 140px;
+	_width: 140px;
+}
+
+.cont_botones {
+	background-color: #130a4a;
+	background-image: url(../images/tablas_genericas/bg_menulat.jpg);
+	background-repeat: repeat-x;
+	float: left;
+	width: 140px;
+	_width: 140px;
+}
+
+.boton_menulat {
+	float: left;
+	height: 16px;
+	margin: 1px 9px 1px 9px;
+	_margin: 1px 0 1px 5px;
+	width: 122px;
+	_width: 122px;
+}
+
+.boton_menulat A {
+	background-image: url(../images/tablas_genericas/btn_menulat_a.png);
+	background-repeat: no-repeat;
+	color: #fff;
+	display:block;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 7px;
+	float: left;
+	height: 13px;
+	padding: 3px 0 0 0;
+	text-align: center;
+	text-decoration:none;
+	width: 122px;
+	_width: 122px;
+	outline-color:-moz-use-text-color;
+	outline-style:none;
+	outline-width:medium;
+}
+
+.boton_menulat A:hover {
+	background-image: url(../images/tablas_genericas/btn_menulat_ahover.png);
+	background-repeat: no-repeat;
+	color: #fff;
+	text-decoration:underline;
+}
+
+/******************* TABLA ********************/
+
+.cont_tabla {
+	float: left;
+	width: 432px;
+}
+
+.borde_tablagenerica {
+	float: left;
+	height: 40px;
+	width: 432px;
+	_width: 432px;
+}
+
+.borde_tablagenerica_sup {
+	background-image: url(../images/tablas_genericas/borde_tabgenerica_sup.png);
+	background-repeat: no-repeat;
+	color: #fff;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	float: left;
+	height: 20px;
+	padding: 20px 0 0 0;
+	text-align: center;
+	text-transform:uppercase;
+	width: 432px;
+	_width: 432px;
+}
+
+.conte_tablagenerica {
+	background-color: #130a4a;
+	background-image: url(../images/tablas_genericas/bg_tabgenerica.jpg);
+	background-repeat: repeat;
+	float: left;
+	height: 235px;
+	width: 432px;
+	_width: 432px;
+}
+
+.tabla {
+	float: none;
+	margin: 10px 0 0 0;
+	vertical-align:middle;
+	width: 432px;
+}
+
+.caja_gestionciudades{
+	background-color:#fff;
+	border:1px solid #afafaf;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color:#ff007b;
+	margin:0;
+	width:150px;
+}
+
+.cont_boton_tabla {
+	float: left;
+	margin: 10px 0;
+	padding: 0 0 0 95px;
+	width: 367px;
+	_width: 367px;
+}
+
+.botones_tabla {
+	float: left;
+	height: 22px;
+	margin: 0 15px 0 0;
+	width: 70px;
+	_width: 70px;
+}
+
+.botones_tabla A {
+	background-image: url(../Pages/images/tablas_genericas/btn_tabla_a.png);
+	background-repeat:no-repeat;
+	color: #fff;
+	display:block;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	font-weight: bold;
+	float:left;
+	height:18px;
+	padding: 4px 0 0 0;
+	_padding: 4px 0 0 0;
+	text-align: center;
+	text-decoration: none;
+	text-transform: uppercase;
+	width:70px;
+	outline-color:-moz-use-text-color;
+	outline-style:none;
+	outline-width:medium;
+}
+
+.botones_tabla A:hover {
+	background-image: url(../images/tablas_genericas/btn_tabla_ahover.png);
+	background-repeat:no-repeat;
+	color: #fff;
+	display:block;
+}
+
+.menulat {
+	background-image: url(../images/tablas_genericas/btn_menulat_a.png);
+	background-repeat: no-repeat;
+	color: #fff;
+	display:block;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 7px;
+	float: left;	
+	padding: 3px 0 0 0;
+	text-align: center;
+	text-decoration:none;
+	width: 122px;
+	_width: 122px;
+	outline-color:-moz-use-text-color;
+	outline-style:none;
+	outline-width:medium;
+}
+
+.menulateral {
+	background-color: #130a4a;
+	background-image: url(../images/tablas_genericas/menulat.jpg);
+	background-repeat: repeat;
+	float: left;		
+}

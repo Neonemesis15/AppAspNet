@@ -1,0 +1,1480 @@
+﻿*{
+    margin: 0 0 0px 0;
+}
+ body{
+    margin: 0px 0px 0px 0px;
+    background-image: url('../ImgBooom/relleno_del_fondo_general.png');
+    height: 100%;
+}
+html{
+    height: 100%;
+}
+
+
+
+.alertas{
+    background-color: Transparent;
+    display: none;
+}
+.wrapper{
+    min-height: 400px;
+    height: auto !important;
+    height: 400px;
+    margin: 0 auto -142px; /* the bottom margin is the negative value of the footer's height */
+    z-index: 2;
+}
+.footer{
+    /*height: 142px; /* .push must be the same height as .footer */
+    background-image: url('../ImgBooom/trama_gris_inferior.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    position:absolute;
+    bottom:38px;
+    clear: both;
+    
+    z-index:0;
+      
+    
+    
+    
+  
+    
+}
+.push
+{
+    height: 142px; /* .push must be the same height as .footer */
+    bottom:0%;
+}
+
+
+.Header
+{
+    clear:both;    
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-image: url('../ImgBooom/trama_gris_superior.png');
+    margin-bottom: 0px;
+    position:absolute;
+    z-index:1;
+    width:100%;
+    text-align:center;
+    vertical-align:middle;
+    
+}
+.Detalle
+{    
+    /*position:absolute; 
+    top:100px; left:0; 
+    z-index:2;
+    width:80%;
+    min-width:99%;
+    text-align:center;
+    vertical-align:middle;*/
+
+    position: absolute;
+    height: 280px;
+    width: 342px;
+    z-index: 2;
+    top: 50%;
+    margin-top: -190px; /*el negativo de la mitad de la altura del div*/
+    min-width: 99%;
+    max-width: 99%;
+    vertical-align: middle;
+    left: 0px;
+}
+.DetalleCanales
+{
+   left:5%;
+    position:absolute;
+    height:200px;
+    width:56px;
+       z-index:3;
+    top:50%;
+    margin-top:-80px; /*el negativo de la mitad de la altura del div*/
+
+    
+    
+}
+
+.DetalleInformes
+{
+    background-position: center center;
+    background-image: url('../ImgBooom/tramabolas.png');
+    background-repeat: no-repeat;
+    clear: both;
+    background-color: Transparent;
+    z-index: 1;
+    position: absolute;
+    vertical-align: middle;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.central
+{
+    position: absolute;
+    height: 280px;
+    width: 342px;
+    z-index: 2;
+    top: 50%;
+    margin-top: -75px; /*el negativo de la mitad de la altura del div*/
+    min-width: 99%;
+    max-width: 99%;
+    vertical-align: middle;
+    left: 0px;
+    background-image: url('../ImgBooom/tablaazul.png');
+        background-position: center top;
+    background-repeat: no-repeat;
+} 
+
+
+
+
+.HeaderRight
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    font-family: verdana;
+    font-size: 9px;
+    text-align:right;
+    vertical-align:middle;
+}
+
+
+.Franjafinal
+{
+    background-image: url('../ImgBooom/barraazul.png');
+    background-repeat: repeat;
+    height:13px;
+     
+     
+}
+
+.LuckyIluminado
+{
+    background-position: center center;
+    background-image: url('../ImgBooom/tramadecirculos.png');
+    background-repeat: no-repeat;
+    clear:both;    
+    background-color:Transparent;
+     z-index:1;
+      position:absolute;
+         
+ width:100%;
+  height:100%;
+
+    
+}
+
+.loginCiculo
+{ 
+    
+        background-position: center center;
+     background-repeat: no-repeat;
+    background-image: url('../ImgBooom/circuloazulsintexto.png');
+   
+    
+}
+
+.POP{
+   /* height: 142px; /* .push must be the same height as .footer */
+   
+    background-repeat: no-repeat;
+    
+    position:absolute;
+    bottom:0%;
+    clear: both;    
+    z-index:5;
+    left: 0px;   
+}
+
+.LogoRight{
+   /* height: 142px; /* .push must be the same height as .footer */
+   
+    background-repeat: no-repeat;
+    
+    position:absolute;
+    bottom:5px;
+    clear: both;    
+    z-index:5;
+    right: 0px;   
+}
+
+.LIBRERIAS
+{
+    background-image: url('../ImgBooom/btnlibreriasazul.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.LIBRERIAS:hover { background-image:url('../ImgBooom/btnlibreriasmagenta.png'); }
+
+.MAYORISTA     
+{
+    background-image: url('../ImgBooom/botonmayoristaazul.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.MAYORISTA:hover { background-image:url('../ImgBooom/botonmayoristamagenta.png'); }
+
+
+.MINORISTA
+{
+    background-image: url('../ImgBooom/botonminoristaazul.png');
+    background-repeat: repeat-x;
+    background-color: Transparent;
+    border-style: none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.MINORISTA:hover { background-image:url('../ImgBooom/botonminoristamagenta.png'); }
+
+
+.AUTOSERVICIO
+{
+    background-image: url('../ImgBooom/botonaassazul.png');
+    background-repeat: repeat-x;
+    background-color: Transparent;
+    border-style: none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.AUTOSERVICIO:hover { background-image:url('../ImgBooom/botonaassmagenta.png'); }
+
+
+
+
+.FOODSERVICE
+{
+    background-image: url('../ImgBooom/btnfonddaiscurim.png');
+    background-repeat: repeat-x;
+    background-color: Transparent;
+    border-style: none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.FOODSERVICE:hover { background-image:url('../ImgBooom/botonfoodsermagentam.png'); }
+
+
+
+.PROMOCIONES
+{
+    background-image: url('../ImgBooom/botonpromocionesazul.png');
+    background-repeat: repeat-x;
+    background-color: Transparent;
+    border-style: none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.PROMOCIONES:hover { background-image:url('../ImgBooom/botonpromocionesmagenta.png'); }
+
+
+.MODERNO
+{
+    background-image: url('../ImgBooom/botonmodernoazul.png');
+    background-repeat: repeat-x;
+    background-color: Transparent;
+    border-style: none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.MODERNO:hover { background-image:url('../ImgBooom/botonmodernomagenta.png'); }
+
+.FARMACIAS_IT
+{
+    background-image: url('../ImgBooom/botonfarmaciaazul.png');
+    background-repeat: repeat-x;
+    background-color: Transparent;
+    border-style: none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.FARMACIAS_IT:hover { background-image:url('../ImgBooom/botonfarmaciamagenta.png'); }
+
+.FARMACIAS_DT
+{
+    background-image: url('../ImgBooom/botonfarmaciadtazul.png');
+    background-repeat: repeat-x;
+    background-color: Transparent;
+    border-style: none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.FARMACIAS_DT:hover { background-image:url('../ImgBooom/botonfarmaciadtmagenta.png'); }
+
+
+
+.HATUNSOL     
+{
+    background-image: url('../ImgBooom/botonhatunsolazul.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.HATUNSOL:hover { background-image:url('../ImgBooom/botonhatunsolmagenta.png'); }
+
+.PROGRESOL     
+{
+    background-image: url('../ImgBooom/botonprogresolazul.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.PROGRESOL:hover { background-image:url('../ImgBooom/botonprogresolmagenta.png'); }
+
+
+.TRADICIONAL  
+{
+    background-image: url('../ImgBooom/botontradicionalazul.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.TRADICIONAL:hover  { background-image:url('../ImgBooom/botontradicionalmagenta.png'); }
+
+.TRADICIONAL_3M
+{
+    background-image: url('../ImgBooom/botontradicionalazul.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.TRADICIONAL_3M:hover { background-image:url('../ImgBooom/botontradicionalmagenta.png'); }
+
+.HOME_CENTER
+{
+    background-image: url('../ImgBooom/btnhomecentergris.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.HOME_CENTER:hover { background-image:url('../ImgBooom/btnhomecentecolor.png'); }
+
+.ET_GOBIERNO
+{
+    background-image: url('../ImgBooom/btnetgobiernoazul.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.ET_GOBIERNO:hover { background-image:url('../ImgBooom/btnetgobiernomagenta.png'); }
+
+.LICORERIAS
+{
+    background-image: url('../ImgBooom/botonlicoreriasazul.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.LICORERIAS:hover { background-image:url('../ImgBooom/botonlicoreriasmagenta.png'); }
+
+.AA_VV
+{
+    background-image: url('../ImgBooom/botonaavvazul.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.AA_VV:hover { background-image:url('../ImgBooom/botonaavvmagenta.png'); }
+
+.BODEGAS
+{
+    background-image: url('../ImgBooom/botonbodegaazul.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.BODEGAS:hover { background-image:url('../ImgBooom/botonbodegasmagenta.png'); }
+
+
+/*.panel {
+	min-width:120px;
+	float: left; /* Necesario 
+	overflow: hidden;
+	min-height:120px;
+	margin-top:10px;
+	margin-left: 10px;
+	margin-right: 10px;
+}*/
+
+.panelreports {
+	min-width:120px;
+	float: left; /* Necesario */
+	overflow: hidden;
+	min-height:120px;
+	margin-top:10px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+
+
+.pMAYORISTA     
+{
+    background-image: url('../ImgBooom/botonmayoristaazulchico.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.pMAYORISTA:hover { background-image:url('../ImgBooom/botonmayoristamagentachico.png'); }
+
+.pLICORERIAS   
+{
+    background-image: url('../ImgBooom/botonlicoreriasazulchico.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.pLICORERIAS:hover { background-image:url('../ImgBooom/botonlicoreriasmagentachico.png'); }
+
+.pFOODSERVICE    
+{
+    background-image: url('../ImgBooom/btnfonddamgchicom.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.pFOODSERVICEL:hover { background-image:url('../ImgBooom/btnfonddamgchicomn.png'); }
+
+
+
+.pMINORISTA
+{
+    background-image: url('../ImgBooom/botonminoristaazulchico.png');
+    background-repeat: repeat-x;
+    background-color: Transparent;
+    border-style: none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.pMINORISTA:hover { background-image:url('../ImgBooom/botonminoristamagentachico.png'); }
+
+
+.pAUTOSERVICIO
+{
+    background-image: url('../ImgBooom/botonaassazulchico.png');
+    background-repeat: repeat-x;
+    background-color: Transparent;
+    border-style: none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.pAUTOSERVICIO:hover { background-image:url('../ImgBooom/botonaassmagentachico.png'); }
+
+.pPROMOCIONES
+{
+    background-image: url('../ImgBooom/botonpromocionesazulchico.png');
+    background-repeat: repeat-x;
+    background-color: Transparent;
+    border-style: none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.pPROMOCIONES:hover { background-image:url('../ImgBooom/botonpromocionesmagentachico.png'); }
+
+
+.pMODERNO
+{
+    background-image: url('../ImgBooom/botonmodernoazulchico.png');
+    background-repeat: repeat-x;
+    background-color: Transparent;
+    border-style: none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.pMODERNO:hover { background-image:url('../ImgBooom/botonmodernomagentachico.png'); }
+
+
+
+.pFARMACIAS_IT
+{
+    background-image: url('../ImgBooom/botonfarmaciaazulchico.png');
+    background-repeat: repeat-x;
+    background-color: Transparent;
+    border-style: none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.pFARMACIAS_IT:hover { background-image:url('../ImgBooom/botonfarmaciamagentachico.png'); }
+
+
+
+.pFARMACIAS_DT
+{
+    background-image: url('../ImgBooom/botonfarmachico.png');
+    background-repeat: repeat-x;
+    background-color: Transparent;
+    border-style: none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.pFARMACIAS_DT:hover { background-image:url('../ImgBooom/botonfarmaciadtmagentachico.png'); }
+
+
+.pHATUNSOL     
+{
+    background-image: url('../ImgBooom/botonhatunsolazulchico.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.pHATUNSOL:hover { background-image:url('../ImgBooom/botonhatunsolmagentachico.png'); }
+
+.pET_GOBIERNO
+{
+    background-image: url('../ImgBooom/btnetgobiernoazulchico.png');
+    background-repeat: repeat-x;
+    background-color: Transparent;
+    border-style: none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.pET_GOBIERNO:hover { background-image:url('../ImgBooom/btnetgobiernomagentachico.png'); }
+
+
+
+
+.pPROGRESOL    
+{
+    background-image: url('../ImgBooom/botonprogresolazulchico.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.pPROGRESOL:hover { background-image:url('../ImgBooom/botonprogresolmagentachico.png'); }
+
+
+
+.pTRADICIONAL
+{
+    background-image: url('../ImgBooom/botontradicionalazulchico.png');
+    background-repeat: repeat-x;
+    background-color: Transparent;
+    border-style: none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.pTRADICIONAL:hover { background-image:url('../ImgBooom/botontradicionalmagentachico.png'); }
+
+.pTRADICIONAL_3M
+{
+    background-image: url('../ImgBooom/botontradicionalazulchico.png');
+    background-repeat: repeat-x;
+    background-color: Transparent;
+    border-style: none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.pTRADICIONAL_3M:hover { background-image:url('../ImgBooom/botontradicionalmagentachico.png'); }
+
+.pLIBRERIAS
+{
+    background-image: url('../ImgBooom/btnlibreriasazulchico.png');
+    background-repeat: repeat-x;
+    background-color: Transparent;
+    border-style: none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.pLIBRERIAS:hover { background-image:url('../ImgBooom/btnlibreriasmagentachico.png'); }
+
+.pHOME_CENTER
+{
+    background-image: url('../ImgBooom/btnhomecentergrischico.png');
+    background-repeat: repeat-x;
+    background-color: Transparent;
+    border-style: none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.pHOME_CENTER:hover { background-image:url('../ImgBooom/btnhomecentecolorchico.png'); }
+
+
+.pAA_VV
+{
+    background-image: url('../ImgBooom/botonaavvazulchico.png');
+    background-repeat: repeat-x;
+    background-color: Transparent;
+    border-style: none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.pAA_VV:hover { background-image:url('../ImgBooom/botonaavvmagentachico.png'); }
+
+
+.pBODEGAS
+{
+    background-image: url('../ImgBooom/botonbodegaazulchico.png');
+    background-repeat: repeat-x;
+    background-color: Transparent;
+    border-style: none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.pBODEGAS:hover { background-image:url('../ImgBooom/botonbodegasmagentachico.png'); }
+
+
+.pFOODSERVICESeleccionado    
+{
+    background-image: url('../ImgBooom/btnfonddamgchico.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+
+.pLICORERIASSeleccionado     
+{
+    background-image: url('../ImgBooom/botonlicoreriasmagentachico.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+
+.pMAYORISTASeleccionado     
+{
+    background-image: url('../ImgBooom/botonmayoristamagentachico.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.pMINORISTASeleccionado     
+{
+    background-image: url('../ImgBooom/botonminoristamagentachico.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.pAUTOSERVICIOSeleccionado
+{
+    background-image: url('../ImgBooom/botonaassmagentachico.png');
+    background-repeat: repeat-x;
+    background-color: Transparent;
+    border-style: none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+
+.pPROMOCIONESSeleccionado
+{
+    background-image: url('../ImgBooom/botonpromocionesmagentachico.png');
+    background-repeat: repeat-x;
+    background-color: Transparent;
+    border-style: none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.pMODERNOSeleccionado
+{
+    background-image: url('../ImgBooom/botonmodernomagentachico.png');
+    background-repeat: repeat-x;
+    background-color: Transparent;
+    border-style: none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.pFARMACIAS_ITSeleccionado
+{
+    background-image: url('../ImgBooom/botonfarmaciamagentachico.png');
+    background-repeat: repeat-x;
+    background-color: Transparent;
+    border-style: none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.pFARMACIAS_DTSeleccionado
+{
+    background-image: url('../ImgBooom/botonfarmaciadtmagentachico.png');
+    background-repeat: repeat-x;
+    background-color: Transparent;
+    border-style: none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.pHATUNSOLSeleccionado     
+{
+    background-image: url('../ImgBooom/botonhatunsolmagentachico.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.pPROGRESOLSeleccionado     
+{
+    background-image: url('../ImgBooom/botonprogresolmagentachico.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+
+.pAA_VVSeleccionado     
+{
+    background-image: url('../ImgBooom/botonaavvmagentachico.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.pBODEGASSeleccionado     
+{
+    background-image: url('../ImgBooom/botonbodegasmagentachico.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+
+.pTRADICIONALSeleccionado     
+{
+    background-image: url('../ImgBooom/botontradicionalmagentachico.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.pTRADICIONAL_3MSeleccionado     
+{
+    background-image: url('../ImgBooom/botontradicionalmagentachico.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.pLIBRERIASSeleccionado     
+{
+    background-image: url('../ImgBooom/btnlibreriasmagentachico.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.pHOME_CENTERSeleccionado     
+{
+    background-image: url('../ImgBooom/btnhomecentecolorchico.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.pET_GOBIERNOSeleccionado     
+{
+    background-image: url('../ImgBooom/btnetgobiernomagentachico.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.pVENTAS
+{
+    background-image: url('../ImgBooom/Ventasce.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.pVENTAS:hover { background-image:url('../ImgBooom/Ventasce_g.png'); }
+
+.pPRECIOS
+{
+    background-image: url('../ImgBooom/Precios.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.pPRECIOS:hover { background-image:url('../ImgBooom/Precios_g.png'); }
+
+.pBBDD
+{
+    background-image: url('../ImgBooom/bbdd_azul.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.pBBDD:hover { background-image:url('../ImgBooom/bbdd_g.png'); }
+
+
+.pSOD
+{
+    background-image: url('../ImgBooom/SOD.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.pSOD:hover { background-image:url('../ImgBooom/SOD_g.png'); }
+
+
+.pCash
+{
+    background-image: url('../ImgBooom/Cash&Carry.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.pCash:hover { background-image:url('../ImgBooom/Cash&Carry_g.png'); }
+
+.pDISPONIBILIDAD
+{
+    background-image: url('../ImgBooom/dispnibilidad.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.pDISPONIBILIDAD:hover { background-image:url('../ImgBooom/dispnibilidad_g.png'); }
+
+.pLAYOUT
+{
+    background-image: url('../ImgBooom/layout.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.pLAYOUT:hover { background-image:url('../ImgBooom/layout_g.png'); }
+
+.pManuales
+{
+    background-image: url('../ImgBooom/manuales.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.pManuales:hover { background-image:url('../ImgBooom/manuales_g.png'); }
+
+.pEvaluaciones_Indicadores
+{
+    background-image: url('../ImgBooom/Eval_indicadores.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.pEvaluaciones_Indicadores:hover { background-image:url('../ImgBooom/Eval_indicadores_g.png'); }
+
+.pFOTOGRAFICO
+{
+    background-image: url('../ImgBooom/ReporteFotografico.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.pFOTOGRAFICO:hover { background-image:url('../ImgBooom/ReporteFotografico_g.png'); }
+
+.pCOMPETENCIA
+{
+    background-image: url('../ImgBooom/Competencia.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.pCOMPETENCIA:hover { background-image:url('../ImgBooom/Competencia_g.png'); }
+
+.pSTOCK
+{
+    background-image: url('../ImgBooom/Stocks.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.pSTOCK:hover { background-image:url('../ImgBooom/Stocks_g.png'); }
+
+.pDISTRIBUCION
+{
+    background-image: url('../ImgBooom/Distribucion_plomo.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.pDISTRIBUCION:hover { background-image:url('../ImgBooom/Distribucion_magen.png'); }
+
+.pCANJE
+{
+    background-image: url('../ImgBooom/Caje_Plomo.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.pCANJE:hover { background-image:url('../ImgBooom/Caje_Magenta.png'); }
+
+.pEFECTIVIDAD
+{
+    background-image: url('../ImgBooom/Efectividad.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.pEFECTIVIDAD:hover { background-image:url('../ImgBooom/Efectividad_g.png'); }
+
+.pACTIVIDADES
+{
+    background-image: url('../ImgBooom/Control-de-Actividades.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.pACTIVIDADES:hover { background-image:url('../ImgBooom/Control-de-Actividades_g.png'); }
+
+.pEXHIBICIONES
+{
+    background-image: url('../ImgBooom/Exhibiciones.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.pEXHIBICIONES:hover { background-image:url('../ImgBooom/Exhibiciones_g.png'); }
+
+.pDETALLEXZONA
+{
+    background-image: url('../ImgBooom/DetallexZona.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+
+.pDETALLEXZONA:hover { background-image:url('../ImgBooom/DetallexZona_g.png'); }
+
+
+
+.pBlitz
+{
+    background-image: url('../ImgBooom/Blitz_g.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+.pBlitz:hover { background-image:url('../ImgBooom/Blitz.png'); }
+
+.pCanjes_Masivos
+{
+    background-image: url('../ImgBooom/btncanjeplo.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+.pCanjes_Masivos:hover { background-image:url('../ImgBooom/btncanjemag.png'); }
+
+
+.pSampling 
+{
+    background-image: url('../ImgBooom/btnsamplipgris.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+.pSampling:hover { background-image:url('../ImgBooom/btnsamplipmg_g.png'); }
+
+
+
+
+.pimpulso_AASS
+{
+    background-image: url('../ImgBooom/impulso_AASS.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+.pimpulso_AASS:hover { background-image:url('../ImgBooom/impulso_AASS_g.png'); }
+
+
+.impulso_May
+{
+    background-image: url('../ImgBooom/impulso_May.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+.impulso_May:hover { background-image:url('../ImgBooom/impulso_May_g.png'); }
+
+
+
+.Mercaderismo_Lamborgini
+{
+    background-image: url('../ImgBooom/Mercaderismo_Lamborgini.png');
+    background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 150px;
+    height: 210px;
+    cursor: hand;
+}
+.Mercaderismo_Lamborgini:hover { background-image:url('../ImgBooom/Mercaderismo_Lamborgini_g.png'); }
+
+
+
+
+.FondoHeaderGrid
+{
+      background-position: center center;
+        background-repeat: repeat-x;
+        background-image: url('../ImgBooom/interiorblancoHeaderGRid.png');       
+        height: 36px;        
+        width: 550px;
+        padding-left:13px;
+       
+    
+}
+
+.cuadroinformes
+{
+    
+    width: 466px;
+    height: 288px;    
+    background-image: url('../ImgBooom/tablaazul.png');
+}
+
+
+
+
+.modalBackgroundCliente
+{
+    position: absolute;
+    z-index: 100;
+    top: 0px;
+    left: 0px;
+    background-color: #000;
+    filter: alpha(opacity=60);
+    -moz-opacity: 0.6;
+    opacity: 0.6;
+}
+
+
+
+.FondoLuckyMarca
+{
+    background-position: center center;
+    background-image: url('../ImgBooom/tramabolas.png');
+    background-repeat: no-repeat;
+    clear: both;
+    background-color: Transparent;
+    position:absolute;
+    z-index:0;    
+    width: 700px;
+    height: 400px;
+    top:50%;
+    left:50%;
+    margin-top:-200px;
+    margin-left:-350px;    
+}
+
+.ContendorPlanning
+{
+  
+    position:relative;
+    z-index:1;    
+      
+    
+}
+
+
+
+
+
+
+
+
+
+/* Carousel */
+
+#carousel  {
+    margin-top:0px;
+    /*overflow: hidden;*/
+	position: relative; /* Necesario */
+	overflow: hidden; /* Necesario */
+	height: 250px;  /* tamaño dependiendo alto de la imagen */
+	margin-left:0px;
+	font-size:13px;
+	font-family:Verdana, Geneva, sans-serif;
+	text-align:center;
+	top: 9px;
+	left:  0px;
+    width: 613px;
+}
+
+#carousel .belt {
+	position: absolute; /* Necesario */
+	left: 0px;
+	top: 4px;
+	margin:0 0px 0px 0;
+	width: 1001px;
+	height: 357px;
+}
+
+#carousel .panel {
+	min-width:120px;
+	float: left; /* Necesario */
+	overflow: hidden;
+	min-height:220px;
+	margin-top:10px;
+	margin-left: 15px;
+	margin-right: 15px;
+}
+#carousel .panel a {
+    text-decoration:none;
+}
+#carousel .panel .panel-text {
+	padding-top:5px;
+	font-size:10px;
+	font-family:Verdana, Geneva, sans-serif;
+	color:#CCC;
+}
+#carousel .panel .panel-text a {
+	color:#CCC;
+	text-decoration:none;
+}
+#carousel .panel .panel-text a:hover {
+	color:#FFF;
+	text-decoration:underline;
+}
+/* Botones del carousel */			
+.button-prev {
+	height: 75px;
+	width:30px;
+	float:left;
+	-moz-border-radius:10px 0 0 10px;
+}
+.button-prev a {
+	display:block;
+	margin-top:100px;
+}
+.button-next {
+	height: 75px;
+	width:30px;
+	float:right;
+	-moz-border-radius:0 10px 10px 0;
+	padding-left:5px;
+}
+.button-next a {
+	display:block;
+	margin-top:100px;
+	text-align:right;
+}
+a img {
+	border:none;
+}
+.tabla {
+    max-width: 650px;
+    border: solid 1px #ccc;
+}
+.tabla th {
+    font-weight:bold;
+    border: solid 1px #ccc;
+}
+.tabla th td {
+    border: solid 1px #ccc;
+}
+.tabla tr td{
+    border: solid 1px #ccc;
+}
+.tabla tr:hover {
+    background-color: #4c76be;
+}
+
+td.tdchart
+{
+	width:500px;
+}
+
+.select 
+{
+	font-family: Verdana, 'Trebuchet MS' , Arial;
+	font-size: 9pt;
+	color: black;
+}
+
+
+
+.tamañocarrusel
+{
+	width:892px;
+	height:276px;
+	}
+
+.menuplanning
+{
+    z-index: 1;
+    width: 600px;
+    height: 242px;
+    position: absolute;
+    top: 50%;
+    margin-top: -121px;
+    left: 50%;
+    margin-left: -300px;
+}
+
+.infGerecial
+{
+    background-image: url('../ImgBooom/infGerencial.png');
+    
+    background-repeat: repeat-x;
+    background-color: Transparent;
+    border-style: none;    
+    cursor: hand;
+}
+.infGerecial:hover {background-image: url('../ImgBooom/infGerencial_g.png'); }
+
+.ResEjecutivo
+{
+    background-image: url('../ImgBooom/ResEjecutivo.png');
+    
+    background-repeat: repeat-x;
+    background-color: Transparent;
+    border-style: none;    
+    cursor: hand;
+}
+.ResEjecutivo:hover {background-image: url('../ImgBooom/ResEjecutivo_g.png'); }
+
+
+.pResEjecutivo
+{
+    background-image: url('../ImgBooom/ResEjecutivo.png');
+    
+    background-repeat: repeat-x;
+    background-color: Transparent;
+    border-style: none;    
+    cursor: hand;
+}
+.pResEjecutivo:hover {background-image: url('../ImgBooom/ResEjecutivo_g.png'); }
+

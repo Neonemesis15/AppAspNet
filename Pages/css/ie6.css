@@ -1,0 +1,5 @@
+/* CSS Document */
+
+img, div { behavior: url(iepngfix.htc);
+    height: 34px;
+}

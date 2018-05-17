@@ -1,0 +1,91 @@
+﻿.menu ul.AspNet-Menu /* Tier 1 */ {
+    list-style-type:none;
+    padding: 0;
+    margin: 0;
+}
+.menu ul.AspNet-Menu ul  /* Tier 2 */
+{
+    width: 6em;
+    top: 100%;
+    left: 0;
+    color:#fff;
+}
+.menu ul.AspNet-Menu ul ul  /* Tier 3+ */
+{
+    top: -0.5em;
+    left: 6em;
+}
+.menu li
+{
+	color: #FFF;
+	background-image: url(  '../img/boton1.png' );
+	background-repeat: no-repeat;
+	height: 41px;
+	text-align: left;
+	vertical-align: middle;
+	font-family: Verdana;
+	font-size: 12px;
+}
+.menu li:hover, .menu li.AspNet-Menu-Hover
+{
+	/*background: Black;*/
+	background-image: url( '../img/boton2.png' );
+}
+.menu a, /* all anchors and spans (nodes with no link) */
+.menu span
+{
+    color: #fff;
+    text-align:left;
+    padding: 4px 2px 4px 8px;
+}
+.menu li.AspNet-Menu-Leaf a, /* leaves */
+.menu li.AspNet-Menu-Leaf span
+{
+    background-image: none !important;
+}
+.menu li:hover a, /* hovered text */
+.menu li:hover span,
+.menu li.AspNet-Menu-Hover a,
+.menu li.AspNet-Menu-Hover span,
+.menu li:hover li:hover a,
+.menu li:hover li:hover span,
+.menu li.AspNet-Menu-Hover li.AspNet-Menu-Hover a,
+.menu li.AspNet-Menu-Hover li.AspNet-Menu-Hover span,
+.menu li:hover li:hover li:hover a,
+.menu li:hover li:hover li:hover span,
+.menu li.AspNet-Menu-Hover li.AspNet-Menu-Hover li.AspNet-Menu-Hover a,
+.menu li.AspNet-Menu-Hover li.AspNet-Menu-Hover li.AspNet-Menu-Hover span
+{
+    color: White;
+}
+.menu li:hover li a, /* the tier above this one is hovered */
+.menu li:hover li span,
+.menu li.AspNet-Menu-Hover li a,
+.menu li.AspNet-Menu-Hover li span,
+.menu li:hover li:hover li a,
+.menu li:hover li:hover li span,
+.menu li.AspNet-Menu-Hover li.AspNet-Menu-Hover li a,
+.menu li.AspNet-Menu-Hover li.AspNet-Menu-Hover li span
+{
+    color: Black;
+}
+.menu .AspNet-Menu-Selected
+{
+	border: solid 0px #003464 !important;
+}
+
+.menu .AspNet-Menu-ChildSelected /* a tier below this one is selected */
+{
+    border: solid 1px #ff0000 !important;
+}
+
+.menu .AspNet-Menu-ParentSelected /* a tier above this one is selected */
+{
+    border: solid 1px #0000ff !important;
+}
+
+#EntertainmentMessage
+{
+    padding-top: 2em;
+    clear: both;
+}
