@@ -1,0 +1,258 @@
+﻿body
+{margin: 0px 0px 0px 0px;
+    background-image: url('../ImgBooom/relleno_del_fondo_general.png');
+    height: 100%;
+}
+.stilo_titulo
+{
+	font-family: Verdana;
+	font-size: 40px;
+	font-weight: normal;
+	font-style: normal;
+	font-variant: small-caps;
+	color: #FFFFDD;
+}
+.Header
+{
+    clear:both;    
+    background-position: left top;
+    background-repeat: no-repeat;
+    background-image: url('../ImgBooom/trama_gris_superior.png');
+    margin-bottom: 0px;
+    position:absolute;
+    z-index:1;
+    width:100%;
+    text-align:center;
+    vertical-align:middle;
+    top: 0px;
+       
+} 
+.footer{
+    height: 142px; /* .push must be the same height as .footer */
+    background-image: url('../ImgBooom/trama_gris_inferior.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    position:absolute;
+    bottom:0%;
+    clear: both;
+    width:100%;
+    z-index:1;
+    left: 0px;   
+}
+.anchotabla
+{
+	
+	z-index: 2;
+	position: absolute;
+	 text-align:left; 
+	top:65px;
+	
+	left: 75px;
+}
+
+.MarcaAgua
+{
+    background-position: center center;
+    background-image: url('../ImgBooom/tramabolas.png');
+    background-repeat: no-repeat;
+    clear: both;
+    background-color: Transparent;
+    z-index: 0;
+    position: absolute;
+    vertical-align: middle;
+    width: 100%;
+    height:100%;
+    text-align: center;
+    
+}
+	
+.push
+{
+    height: 142px; /* .push must be the same height as .footer */
+    bottom:0%;
+}
+.HeaderRight
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    font-family: verdana;
+    font-size: 9px;
+    text-align:right;
+    vertical-align:middle;
+}
+
+  .labelsTit2
+{
+	font-family: Verdana;
+	font-size: 14px;
+	font-weight: normal;
+	font-style: normal;
+	font-variant: small-caps;
+	color: #000000;
+}
+.labels
+{
+	font-family: Verdana;
+	font-size: 12px;
+	color: #000000;
+	text-align: center;
+}
+.labelsMensaje
+{
+	font-family: Verdana;
+	font-size: 12px;
+	color: #FFFFFF;
+	text-align: center;
+}
+.buttonPlan{
+	border: 0px none Transparent;
+	background-color: Transparent;
+	background-image: url('../images/bg_btn_a.png');
+	cursor: hand;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #FFFFFF;
+	height: 21px;
+}
+.buttonPlan:hover {background-image: url('../images/bg_btn_ahover.png'); }
+
+.MensajesError
+{
+	background-image: url('../images/MensajeSup.jpg'); 
+   
+}
+
+.MensajesCorrecto
+{
+	background-image: url('../images/MensajeSupConfirm.jpg'); 
+   
+}
+.modalBackground
+{
+	background-color: #C0C0C0;
+	filter: alpha(opacity=50);
+	opacity: 0.5;
+}
+.busqueda
+{
+	background-color: #B3CBFF;
+	padding: 2px 2px;
+}
+
+
+.alertas {
+	 background-color:Transparent;
+	 display:none;
+	 
+}
+
+ .ScrollInforme
+{
+ overflow:auto;
+ height: 114px;
+ width:150px;
+ 
+ background-color: Transparent;
+ 
+}
+.FondoHeaderGrid
+{
+      background-position: center center;
+        background-repeat: repeat-x;
+        background-image: url('../ImgBooom/interiorblancoHeaderGRid.png');       
+        height: 36px;        
+        width: 550px;
+        padding-left:13px;
+       
+    
+}
+/*SE AGREGA STILO PARA SCROLL DE INFORME SE COPIA DE BACKSTYLE
+ 02/09/2010 Magaly jiménez*/
+.p
+{
+	overflow: auto;
+	width: 213px;
+	height: 185px;
+	background-color: #FFFFFF;
+	padding: 2px 2px;
+	font-size: 10pt;
+	font-family: arial, Helvetica, sans-serif;
+}
+
+
+.buttonAdmPais{
+	
+	background-image: url('../images/divipol.png' );
+	 background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 90px;
+    height: 85px;
+    cursor: hand;
+}
+.buttonAdmPais:hover {background-image: url('../images/divipol_g.png'); }
+
+
+
+
+.buttonAdmUsuario{
+	
+	background-image: url('../images/usuarios.png' );
+	 background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 90px;
+    height: 85px;
+    cursor: hand;
+}
+.buttonAdmUsuario:hover {background-image: url('../images/usuarios_g.png'); }
+
+.buttonAdmProducto{
+	
+	background-image: url('../images/producto.png' );
+	 background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 90px;
+    height: 85px;
+    cursor: hand;
+}
+.buttonAdmProducto:hover {background-image: url('../images/producto_g.png'); }
+
+.buttonAdmPDV{
+	
+	background-image: url('../images/pdeventa.png' );
+	 background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 90px;
+    height: 85px;
+    cursor: hand;
+}
+.buttonAdmPDV:hover {background-image: url('../images/pdeventa_g.png'); }
+
+.buttonAdmInformes{
+	
+	background-image: url('../images/informes.png' );
+	 background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 90px;
+    height: 85px;
+    cursor: hand;
+}
+.buttonAdmInformes:hover {background-image: url('../images/informes_g.png'); }
+
+.buttonAdmGeneral{
+	
+	background-image: url('../images/general.png' );
+	 background-repeat: repeat-x;    
+    background-color:Transparent;
+    border-style:none;
+    width: 90px;
+    height: 85px;
+    cursor: hand;
+}
+.buttonAdmGeneral:hover {background-image: url('../images/general_g.png'); }

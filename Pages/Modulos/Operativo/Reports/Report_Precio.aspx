@@ -13,8 +13,7 @@
 <%@ Register Src="MasterPage/DefaultMenu.ascx" TagName="DefaultMenu" TagPrefix="uc1" %>
 <%@ Register Src="MasterPage/DefaultSidebar2.ascx" TagName="DefaultSidebar2" TagPrefix="uc1" %>
 <%--end al usercontrol--%>
-<asp:Content ID="PageTitle" ContentPlaceHolderID="TitleContentPlaceHolder" runat="Server">
-    Data Mercaderistas</asp:Content>
+<asp:Content ID="PageTitle" ContentPlaceHolderID="TitleContentPlaceHolder" runat="Server">Data Mercaderistas</asp:Content>
 <asp:Content ID="HeaderContent" ContentPlaceHolderID="HeaderContentPlaceHolder" runat="Server">
     <uc1:DefaultHeader ID="DefaultHeader" runat="server" />
 </asp:Content>
@@ -37,83 +36,82 @@
                     <div class="centrarcontenido" style="margin: auto; align-content: center; border: 1px; width: 630px;">
                     <fieldset style="width: 600px">
                     <legend>Fecha</legend>
-                    <table style="width: 580px; height: auto; margin:auto;">
-                    <tr>
-                    <td class="style17">Fecha de Inicio:</td>
-                    <td><telerik:RadDateTimePicker ID="txt_fecha_inicio" runat="server" Culture="es-PE" Skin="Web20">
-                            <TimeView CellSpacing="-1" Culture="es-PE" HeaderText="Hora"></TimeView> <TimePopupButton HoverImageUrl="" ImageUrl="" />
-                            <Calendar Skin="Web20" UseColumnHeadersAsSelectors="False" UseRowHeadersAsSelectors="False" ViewSelectorText="x"></Calendar><DatePopupButton HoverImageUrl="" ImageUrl="" />
-                        </telerik:RadDateTimePicker>
-                    </td>
-                    <td class="style17">Fecha de Fin:</td>
-                    <td><telerik:RadDateTimePicker ID="txt_fecha_fin" runat="server" Culture="es-PE" Skin="Web20">
-                            <TimeView CellSpacing="-1" Culture="es-PE" HeaderText="Hora"></TimeView><TimePopupButton HoverImageUrl="" ImageUrl="" />
-                            <Calendar Skin="Web20" UseColumnHeadersAsSelectors="False" UseRowHeadersAsSelectors="False" ViewSelectorText="x"></Calendar><DatePopupButton HoverImageUrl="" ImageUrl="" />
-                        </telerik:RadDateTimePicker>
-                    </td>
-                    </tr>
-                    </table>
+                        <table style="width: 580px; height: auto; margin:auto;">
+                            <tr>
+                            <td class="style17">Fecha de Inicio:</td>
+                            <td><telerik:RadDateTimePicker ID="txt_fecha_inicio" runat="server" Culture="es-PE" Skin="Web20">
+                                    <TimeView CellSpacing="-1" Culture="es-PE" HeaderText="Hora"></TimeView> <TimePopupButton HoverImageUrl="" ImageUrl="" />
+                                    <Calendar Skin="Web20" UseColumnHeadersAsSelectors="False" UseRowHeadersAsSelectors="False" ViewSelectorText="x"></Calendar><DatePopupButton HoverImageUrl="" ImageUrl="" />
+                                </telerik:RadDateTimePicker>
+                            </td>
+                            <td class="style17">Fecha de Fin:</td>
+                            <td><telerik:RadDateTimePicker ID="txt_fecha_fin" runat="server" Culture="es-PE" Skin="Web20">
+                                    <TimeView CellSpacing="-1" Culture="es-PE" HeaderText="Hora"></TimeView><TimePopupButton HoverImageUrl="" ImageUrl="" />
+                                    <Calendar Skin="Web20" UseColumnHeadersAsSelectors="False" UseRowHeadersAsSelectors="False" ViewSelectorText="x"></Calendar><DatePopupButton HoverImageUrl="" ImageUrl="" />
+                                </telerik:RadDateTimePicker>
+                            </td>
+                            </tr>
+                        </table>
                     </fieldset>
                     
                     <fieldset style="width: 600px">
                     <legend>Cliente</legend>
-                    <table style="width: 580px; height: auto; margin:auto;">
-                    <tr>
-                    <td class="style17">Canal :</td>
-                        <td class="style12"><asp:DropDownList ID="cmbcanal" runat="server" AutoPostBack="True" Font-Bold="False" Font-Italic="False" Height="25px" OnSelectedIndexChanged="cmbcanal_SelectedIndexChanged" Width="150px"></asp:DropDownList></td>
-                    <td class="style17">Campaña :</td>
-                        <td class="style12"><asp:DropDownList ID="cmbplanning" runat="server" AutoPostBack="True" Enabled="False" Height="25px" OnSelectedIndexChanged="cmbplanning_SelectedIndexChanged" Width="150px"></asp:DropDownList></td>
-                    </tr>
-                    </table>
+                        <table style="width: 580px; height: auto; margin:auto;">
+                        <tr>
+                            <td class="style17">Canal :</td>
+                            <td class="style12"><asp:DropDownList ID="cmbcanal" runat="server" AutoPostBack="True" Font-Bold="False" Font-Italic="False" Height="25px" OnSelectedIndexChanged="cmbcanal_SelectedIndexChanged" Width="150px"></asp:DropDownList></td>
+                            <td class="style17">Campaña :</td>
+                            <td class="style12"><asp:DropDownList ID="cmbplanning" runat="server" AutoPostBack="True" Enabled="False" Height="25px" OnSelectedIndexChanged="cmbplanning_SelectedIndexChanged" Width="150px"></asp:DropDownList></td>
+                        </tr>
+                        </table>
                     </fieldset>
 
                     <fieldset style="width: 600px">
-                    <legend>Mercaderista</legend>
-                    <table style="width: 580px; height: auto; margin:auto;">
-                    <tr>
-                    <td class="style17">Mercaderista :</td>
-                        <td class="style12"><asp:DropDownList ID="cmbperson" runat="server" Enabled="False" Height="25px" Width="150px"></asp:DropDownList></td>
-                    </tr>
-                    </table>
+                        <legend>Mercaderista</legend>
+                        <table style="width: 580px; height: auto; margin:auto;">
+                        <tr>
+                        <td class="style17">Mercaderista :</td>
+                            <td class="style12"><asp:DropDownList ID="cmbperson" runat="server" Enabled="False" Height="25px" Width="150px"></asp:DropDownList></td>
+                        </tr>
+                        </table>
                     </fieldset>
 
                     <fieldset style="width: 600px">
-                    <legend>Ubigeo</legend>
-                    <table style="width: 580px; height: auto; margin:auto;">
-                    <tr>
-                    <td class="style17">Oficina :</td>
-                        <td class="style12"><asp:DropDownList ID="cmbOficina" runat="server" AutoPostBack="true" Enabled="False" Height="25px" OnSelectedIndexChanged="cmbOficina_SelectedIndexChanged" Width="150px"></asp:DropDownList></td>
-                    <td class="style17">Zona :</td>
-                        <td class="style12"><asp:DropDownList ID="cmbNodeComercial" runat="server" AutoPostBack="true" Enabled="False" Height="25px" OnSelectedIndexChanged="cmbNodeComercial_SelectedIndexChanged" Width="150px"></asp:DropDownList></td>
-                    </tr>
-                    <tr>
-                    <td class="style17">Punto de venta :</td>
-                        <td class="style12"><asp:DropDownList ID="cmbPuntoDeVenta" runat="server" Enabled="False" Height="25px" Width="150px"></asp:DropDownList></td>
-                    </tr>
-                    </table>
+                        <legend>Ubigeo</legend>
+                        <table style="width: 580px; height: auto; margin:auto;">
+                        <tr>
+                        <td class="style17">Oficina :</td>
+                            <td class="style12"><asp:DropDownList ID="cmbOficina" runat="server" AutoPostBack="true" Enabled="False" Height="25px" OnSelectedIndexChanged="cmbOficina_SelectedIndexChanged" Width="150px"></asp:DropDownList></td>
+                        <td class="style17">Zona :</td>
+                            <td class="style12"><asp:DropDownList ID="cmbNodeComercial" runat="server" AutoPostBack="true" Enabled="False" Height="25px" OnSelectedIndexChanged="cmbNodeComercial_SelectedIndexChanged" Width="150px"></asp:DropDownList></td>
+                        </tr>
+                        <tr>
+                        <td class="style17">Punto de venta :</td>
+                            <td class="style12"><asp:DropDownList ID="cmbPuntoDeVenta" runat="server" Enabled="False" Height="25px" Width="150px"></asp:DropDownList></td>
+                        </tr>
+                        </table>
                     </fieldset>
 
                     <fieldset style="width: 600px">
-                    <legend>Item</legend>
-                    <table style="width: 580px; height: auto; margin:auto;">
-                    <tr>
-                        <td class="style17">Categoria :</td>
-                        <td class="style12"><asp:DropDownList ID="cmbcategoria_producto" runat="server" AutoPostBack="True" CssClass="RadComboBoxDropDown" Enabled="False" Height="25px" OnSelectedIndexChanged="cmbcategoria_producto_SelectedIndexChanged" Width="150px"></asp:DropDownList></td>
-                        <td class="style17">Subcategoria :</td>
-                        <td class="style12"><asp:DropDownList ID="cmbsubcategoria" runat="server" AutoPostBack="True" Enabled="False" Height="25px" Width="150px"></asp:DropDownList></td>
-                    </tr>
-                    <tr>
-                        <td class="style17"><asp:Label ID="lbl_marca" runat="server" Text="Marca : "></asp:Label></td>
-                            <td class="style12"><asp:DropDownList ID="cmbmarca" runat="server" AutoPostBack="True" Enabled="False" Height="25px" OnSelectedIndexChanged="cmbmarca_SelectedIndexChanged" Width="150px"></asp:DropDownList></td>
-                        <td class="style17">SKU :</td>
-                            <td class="style12"><asp:DropDownList ID="cmbsku" runat="server" Enabled="False" Height="25px" Width="150px"></asp:DropDownList></td>
-                    </tr>
-                    </table>
+                        <legend>Item</legend>
+                        <table style="width: 580px; height: auto; margin:auto;">
+                        <tr>
+                            <td class="style17">Categoria :</td>
+                            <td class="style12"><asp:DropDownList ID="cmbcategoria_producto" runat="server" AutoPostBack="True" CssClass="RadComboBoxDropDown" Enabled="False" Height="25px" OnSelectedIndexChanged="cmbcategoria_producto_SelectedIndexChanged" Width="150px"></asp:DropDownList></td>
+                            <td class="style17">Subcategoria :</td>
+                            <td class="style12"><asp:DropDownList ID="cmbsubcategoria" runat="server" AutoPostBack="True" Enabled="False" Height="25px" Width="150px"></asp:DropDownList></td>
+                        </tr>
+                        <tr>
+                            <td class="style17"><asp:Label ID="lbl_marca" runat="server" Text="Marca : "></asp:Label></td>
+                                <td class="style12"><asp:DropDownList ID="cmbmarca" runat="server" AutoPostBack="True" Enabled="False" Height="25px" OnSelectedIndexChanged="cmbmarca_SelectedIndexChanged" Width="150px"></asp:DropDownList></td>
+                            <td class="style17">SKU :</td>
+                                <td class="style12"><asp:DropDownList ID="cmbsku" runat="server" Enabled="False" Height="25px" Width="150px"></asp:DropDownList></td>
+                        </tr>
+                        </table>
                     </fieldset>
                     </div>
                     <%--<table style="width: 580px; height: auto; margin: auto;">--%>
                     <div class="centrarcontenido" style="margin-bottom:10px; margin-top:10px">
-                        
                             <p>
                                 <asp:Button ID="BtnCrear" runat="server" CssClass="buttonGreen" Height="25px" OnClick="BtnCrear_Click" Text="Crear" Width="100px" />
                                 <asp:Button ID="BtnCrearMasivo" runat="server" CssClass="buttonGreen" Height="25px" Text="Carga Masiva" Width="100px" />
@@ -542,15 +540,20 @@
                         <br />
                         <tr>
                             <td>
-                                <asp:Button ID="btnCargaMasiva" runat="server" CssClass="buttonPlan" Text="Cargar" Width="80px" onclick="btnCargaMasiva_Click"  />
-                                <asp:Button ID="btnCancelarCargaMasiva" runat="server" CssClass="buttonPlan" Text="Cancelar" Width="80px" />
+                                <asp:Button ID="btnCargaMasiva" runat="server" CssClass="buttonPlan" Text="Cargar" 
+                                Width="80px" onclick="btnCargaMasiva_Click"  />
+                                <asp:Button ID="btnCancelarCargaMasiva" runat="server" CssClass="buttonPlan" 
+                                Text="Cancelar" Width="80px" />
                             </td>
                         </tr>
                     </caption>
                 </table>
             </asp:Panel>
 
-            <cc1:ModalPopupExtender ID="MopoReporPrecioMasiva" runat="server" BackgroundCssClass="modalBackground" DropShadow="True" Enabled="True" OkControlID="btnCancelarCargaMasiva" PopupControlID="CrearReporPrecioMasiva" TargetControlID="BtnCrearMasivo" DynamicServicePath=""> </cc1:ModalPopupExtender>
+            <cc1:ModalPopupExtender ID="MopoReporPrecioMasiva" runat="server" BackgroundCssClass="modalBackground" 
+            DropShadow="True" Enabled="True" OkControlID="btnCancelarCargaMasiva" PopupControlID="CrearReporPrecioMasiva" 
+            TargetControlID="BtnCrearMasivo" DynamicServicePath=""> 
+            </cc1:ModalPopupExtender>
 
         </ContentTemplate>
         <Triggers>

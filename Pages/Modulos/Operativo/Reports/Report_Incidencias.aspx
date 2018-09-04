@@ -201,7 +201,7 @@
 
 
                                                    }
-</script>
+                                                </script>
                         </div>
                         <div>
                             <asp:Label ID="lblmensaje" runat="server"></asp:Label>
@@ -238,7 +238,7 @@
                             <telerik:GridBoundColumn DataField="ClientPDV_Code" HeaderText="Cod Pdv" UniqueName="ClientPDV_Code"
                                 ReadOnly="true" Visible="false">
                             </telerik:GridBoundColumn>
-                                                        <telerik:GridTemplateColumn HeaderText="Foto" UniqueName="TemplateColumn" ReadOnly="true">
+                                <telerik:GridTemplateColumn HeaderText="Foto" UniqueName="TemplateColumn" ReadOnly="true">
                                 <ItemTemplate>
                                     <table>
                                         <tr>
@@ -369,18 +369,15 @@
                                 GenerateEmptyAlternateText="true" />
                         </div>
                         <div align="center"  >
-                        <asp:CheckBox runat="server" ID="chkValidar" Text="Validar" />
-                                    <asp:imagebutton id="ImageButton3"
-				runat="server" Width="50px" Height="50px" 
-                onclick="ImageButton3_Click" ImageUrl="~/Pages/images/sub_black_rotate_ccw.ico"
-                ></asp:imagebutton>
-                            <asp:imagebutton id="ImageButton4" 
-				runat="server" Width="50px" Height="50px" ImageUrl="~/Pages/images/sub_black_rotate_cw.ico" onclick="ImageButton4_Click" 
-                ></asp:imagebutton>
-                                     Guardar<asp:ImageButton 
-                                        ID="ibtnGuardarImagen" runat="server" 
-                                ImageUrl="~/Pages/images/save_icon.png" onclick="ibtnGuardarImagen_Click" style="height: 24px"
-                       />
+                            <asp:CheckBox runat="server" ID="chkValidar" Text="Validar" />
+                            <asp:imagebutton id="ImageButton3" runat="server" Width="50px" Height="50px" onclick="ImageButton3_Click" 
+                            ImageUrl="~/Pages/images/sub_black_rotate_ccw.ico">
+                            </asp:imagebutton>
+                            <asp:imagebutton id="ImageButton4" runat="server" Width="50px" Height="50px" 
+                            ImageUrl="~/Pages/images/sub_black_rotate_cw.ico" onclick="ImageButton4_Click">
+                            </asp:imagebutton>Guardar
+                            <asp:ImageButton ID="ibtnGuardarImagen" runat="server" ImageUrl="~/Pages/images/save_icon.png" 
+                            onclick="ibtnGuardarImagen_Click" style="height: 24px"/>
                         </div>
                     </div>
                 </asp:Panel>

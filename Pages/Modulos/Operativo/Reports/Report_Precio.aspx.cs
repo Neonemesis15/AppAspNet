@@ -989,21 +989,16 @@ namespace SIGE.Pages.Modulos.Operativo.Reports
                                     string tipocanal = dtl.Rows[0]["CAN_TIPO"].ToString();
 
 
-                                    Lucky.Entity.Common.Application.EOPE_REPORTE_PRECIO oEOPE_REPORTE_PRECIO = oOPE_REPORTE_PRECIO.RegistrarReportePrecio(Convert.ToInt32(this.Session["personid"].ToString()),
-                                                                                idperfil, ddlCampañaCargaMasiva.SelectedValue, this.Session["companyid"].ToString(),
-                                                                                id_ClientPDV, id_Categoria, id_Marca, "0",
-                                                                                "", tipocanal, Fecha, "0", "0", Convert.ToChar("0"), Observacion);
+                                    Lucky.Entity.Common.Application.EOPE_REPORTE_PRECIO oEOPE_REPORTE_PRECIO = 
+                                    oOPE_REPORTE_PRECIO.RegistrarReportePrecio(Convert.ToInt32(this.Session["personid"].ToString()),
+                                    idperfil, ddlCampañaCargaMasiva.SelectedValue, this.Session["companyid"].ToString(),
+                                    id_ClientPDV, id_Categoria, id_Marca, "0",
+                                    "", tipocanal, Fecha, "0", "0", Convert.ToChar("0"), Observacion);
 
-
-
-
-                                    oOPE_REPORTE_PRECIO.RegistrarReportePrecio_Detalle(Convert.ToInt32(oEOPE_REPORTE_PRECIO.ID), cod_Producto, Precio_Lista, Precio_Reventa, Precio_Oferta, PVP, Precio_Costo,
-                                                                                        Precio_Min, Precio_max, Precio_Regular, Convert.ToChar("0"));
-
-
-
-
-
+                                    oOPE_REPORTE_PRECIO.RegistrarReportePrecio_Detalle(
+                                        Convert.ToInt32(oEOPE_REPORTE_PRECIO.ID), cod_Producto, Precio_Lista, 
+                                        Precio_Reventa, Precio_Oferta, PVP, Precio_Costo,
+                                        Precio_Min, Precio_max, Precio_Regular, Convert.ToChar("0"));
                                 }
 
                                 LimpiarControles();

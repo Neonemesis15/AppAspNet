@@ -1,0 +1,459 @@
+﻿<%@ Master Language="C#"  AutoEventWireup="true" Inherits="Principal" Codebehind="Principal.master.cs" %>
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Xplora - Cliente</title>
+    <script type="text/javascript" language="javascript" src="../../js/jquery.js"></script>
+    <script type="text/javascript" language="javascript" src="../../js/carousel.js"></script>
+    <script type="text/javascript" language="javascript" src="../../js/json-minified.js"></script>
+    <script type="text/javascript" language="javascript">
+        /*
+        * Función para inicializar el carusel
+        * se parametrizan todas las opciones del carusel.
+        */
+        stepcarousel.setup(
+            {
+                galleryid: 'carousel',
+                beltclass: 'belt',
+                panelclass: 'panel',
+                autostep: { enable: false, moveby: 1, pause: 3000 },
+                panelbehavior: { speed: 500, wraparound: true, persist: true },
+                statusvars: ['statusA', 'statusB', 'statusC'],
+                contenttype: ['external']
+            }
+        );
+        /*
+        *   Función para mostar los canales de cada servicio selecionado
+        *   @param: objetivo String
+        */
+        function mostrar(objetivo) {
+            htmlObjetivo = "#" + objetivo;
+            if ($(htmlObjetivo).css('display') == "block") {
+                $(htmlObjetivo).slideToggle("slow");
+            }
+            else {
+                $(htmlObjetivo).slideDown("slow");
+            }
+        }
+        
+        /*
+        *   Función para realziar los llamados http a las páginas, y recibe por parametro:
+        *   @param: url            String Dirección de la página que retorna el contenido a cargar.
+        *   @param: objetivoHtml   String El elemento html que contendrá el resultado de la carga.
+        *   @param: parametros     JSON {par1: 'a',par2: 'b'}
+        *   @param: mensaje        1,0 Si es 1 entonces mostrará una animación de cargando.
+        */
+        function AjaxConsulta(url, objetivoHtml, parametros, mensaje) {
+            var objHtml = "#" + objetivoHtml;
+            if (mensaje != 1) {
+                $(objHtml).html('<span>Cargando...<br /><img src="../img/ajax-loader.gif" alt="Cargando..." /></span>');
+            }
+            $(objHtml).load(url, parametros);
+        }
+        
+    </script>
+    <link href="../../css/stilo.css" rel="stylesheet" type="text/css" />    
+    <link href="../../css/Menu.css" rel="stylesheet" type="text/css" />
+    <link href="../../css/backstilo.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+       
+        .style4
+        {
+            width: 226px;
+        }
+       
+       
+       
+    </style>
+    </head>
+<body>
+    <form id="form1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server" EnableScriptGlobalization="true" EnableScriptLocalization="true"   />             
+    <table width="90%" align="center" >
+        <tr>            
+            <td align="right">
+                <asp:Label ID="lblUsuario" runat="server" Text="" CssClass="texto" ></asp:Label>
+                <br />
+                <asp:ImageButton ID="btncloseseccion" runat="server" Height="16px" 
+                ImageUrl="~/Pages/images/SesionClose.png" Width="84px" 
+                    onclick="btncloseseccion_Click" />
+            </td>
+            
+        </tr>
+    </table>    
+    <%--<br style="clear:both"  />    --%> 
+        <table align="center" class="tamañocarrusel">
+            <tr align="center">
+                <td>
+                    <asp:Label ID="LblNivelClie" runat="server" Text="Nivel"></asp:Label>
+                    <asp:DropDownList ID="DropDownList1" runat="server">
+                        <asp:ListItem Text="--Seleccione--" Value="0"></asp:ListItem>
+                        <asp:ListItem Text="General" Value="1"></asp:ListItem>
+                        <asp:ListItem Text="Detallado" Value="2"></asp:ListItem>
+                    </asp:DropDownList>
+                </td>
+            </tr>
+            <tr>
+                <td>            
+                    <div class="button-next">
+                        <a href="javascript:stepcarousel.stepBy('carousel', 1)">
+                            <img src="../../img/derecha.png" alt="Siguiente" style="height:50px;" />
+                        </a>
+                    </div>
+                    <div class="button-prev">
+                        <a href="javascript:stepcarousel.stepBy('carousel', -1)">
+                            <img src="../../img/izquierda.png" alt="Atras" style="height:50px;"/>
+                        </a>
+                    </div>
+                    <div id="carousel" class="stepcarousel" >
+                        <div class="belt">
+                            <asp:ListView ID="lvCarrusel" runat="server" DataKeyNames="Codigo" 
+                                onselectedindexchanged="lvCarrusel_SelectedIndexChanged">
+                                <LayoutTemplate>
+                                    <asp:PlaceHolder ID="itemPlaceholder" runat="server"/>
+                                </LayoutTemplate>
+                                <ItemTemplate>
+                                    <div class="panel">
+                                        <div id='<%#Eval("Codigo") %>' style="display: none;">
+                                            <ul class="canal">
+                                                <asp:Label ID="lbl" runat="server" Text='<%#Eval("Canales") %>'></asp:Label>
+                                            </ul>
+                                        </div>
+                                        <a href="#" onclick='<%# Eval("Codigo","mostrar({0});") %>' runat="server">
+                                            <asp:Image ID="img" runat="server" ImageUrl='<%#Eval("Imagen") %>' AlternateText='<%#Eval("Nombre")%>' ToolTip='<%#Eval("Nombre")%>' Width="130px" Height="93px" />
+                                            <br /><%#Eval("Nombre")%>
+                                        </a>
+                                    </div>
+                                    
+                                </ItemTemplate>
+                            </asp:ListView>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    <asp:UpdatePanel ID="updatepanel1" runat="server" >
+        <ContentTemplate>
+            <table align="center" >
+                <tr>
+                    <td>
+                        <div id="mainContent" >
+                            <!-- Contenido de pagina -->
+                            
+                            <div id="leftSide" >
+                                <p class="tituloAzul" >
+                                    Administraci&oacute;n</p>
+                                <p class="altrow">
+                                    &nbsp;</p>
+                                <asp:Label ID="LblTip" runat="server" Text="Informes Tipo" 
+                               CssClass="selectedrow"></asp:Label>
+                                <asp:ImageButton ID="BtnAdd" runat="server" ImageUrl="~/Pages/images/add.png" 
+                                onclick="BtnAdd_Click" />
+                                <asp:ImageButton ID="BtnRest" runat="server" ImageUrl="~/Pages/images/delete.png" 
+                                onclick="BtnRest_Click" Visible="False" />
+                                <br />
+                                <asp:Menu ID="MenuEmpresarial" runat="server" Orientation="Vertical" 
+                                CssSelectorClass="menu"   Visible="False" 
+                                onmenuitemclick="MenuEmpresarial_MenuItemClick" Width="221px">
+                                    
+                                </asp:Menu>
+                                <p class="altrow">
+                                    &nbsp;</p>
+                                <asp:Label ID="LblDinam" runat="server" Text="Informes Dinámicos" 
+                                CssClass="selectedrow"></asp:Label>
+                                <asp:ImageButton ID="BtnAddDina" runat="server" 
+                                ImageUrl="~/Pages/images/add.png" onclick="BtnAddDina_Click" />
+                                <asp:ImageButton ID="BtnRestDina" runat="server" ImageUrl="~/Pages/images/delete.png" 
+                                Visible="False" onclick="BtnRestDina_Click" />
+                                <br />
+                                <asp:Menu ID="MenuDinamico" runat="server" Orientation="Vertical"                 
+                                CssSelectorClass="menu" Visible="False" 
+                                onmenuitemclick="MenuDinamico_MenuItemClick">
+                                    
+                                </asp:Menu>
+                                <p class="altrow">
+                                    &nbsp;</p>
+                                <asp:Label ID="LblFavoritos" runat="server" Text="Mis Favoritos" 
+                                CssClass="selectedrow"></asp:Label>
+                                <asp:ImageButton ID="BtnAddFav" runat="server" 
+                                ImageUrl="~/Pages/images/add.png" onclick="BtnAddFav_Click" />
+                                <asp:ImageButton ID="BtnRestFav" runat="server" ImageUrl="~/Pages/images/delete.png" 
+                                Visible="False" onclick="BtnRestFav_Click" />
+                                <br />
+                                <asp:Menu ID="MenuFavoritos" runat="server" Orientation="Vertical"                 
+                                CssSelectorClass="menu" Visible="False" >
+                                    <Items>
+                                        <asp:MenuItem Text="Mi favorito 1"></asp:MenuItem>
+                                        <asp:MenuItem Text="Mi favorito 2"></asp:MenuItem>
+                                        <asp:MenuItem Text="Mi favorito 3"></asp:MenuItem>
+                                        <asp:MenuItem Text="Mi favorito 4"></asp:MenuItem>
+                                        <asp:MenuItem Text="Nuevo Favorito..."></asp:MenuItem>
+                                    </Items>
+                                </asp:Menu>
+                                <p class="altrow">
+                                    &nbsp;</p>
+                                <asp:Label ID="LblSolicitudes" runat="server" Text="Solicitudes" 
+                                 CssClass="selectedrow"></asp:Label>
+                                <br />
+                                <asp:ImageButton ID="ImageButton1" runat="server" 
+                                ImageUrl="~/Pages/images/mailreminder.png" Height="58px" 
+                                Width="83px"  />
+                            </div>
+                            <!-- Contenedor principal -->
+                            <div id="contenido" class="divcontenido" >
+                                <div class="titulo" >
+                                    <asp:Label ID="Lbltitulo" runat="server" Text="Informes"></asp:Label>
+                                </div>
+                                <table align="center" >
+                                    <tr>
+                                        <td valign="top">
+                                            <fieldset style="height: 287px;">
+                                                <legend>Filtros Generales</legend>
+                                                <br />
+                                                <table>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:Label ID="LblFecha" runat="server" Text="Fecha"></asp:Label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:Button ID="BtnFechaDesde" runat="server" CssClass="button" Text="Desde" />
+                                                            &nbsp;
+                                                            <asp:Button ID="BtnFechaHasta0" runat="server" CssClass="button" Text="Hasta" />
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:Label ID="LblUnidadMedida" runat="server" Text="Unidad de medida"></asp:Label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:RadioButtonList ID="RadioButtonList1" runat="server" 
+                                                                RepeatDirection="Horizontal">
+                                                                <asp:ListItem Text="TM" Value="TM"></asp:ListItem>
+                                                                <asp:ListItem Text="S/." Value="$"></asp:ListItem>
+                                                            </asp:RadioButtonList>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:Label ID="LblActividadPComercio" runat="server" 
+                                                                Text="Actividad del Comercio"></asp:Label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:DropDownList ID="CmbActividadPComercio" runat="server" Width="150px" 
+                                                                AutoPostBack="True">
+                                                            </asp:DropDownList>                                                            
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <%-- <table>
+                                <tr>
+                                    <td>Primer</td>
+                                    <td>
+                                        <select>
+                                        <option>Seleccione</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Segundo</td>
+                                    <td>
+                                        <input type="text" name="segundo" value="texto" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="button" name="boton1" value="Acción" class="button"  />
+                                    </td>
+                                    <td>
+                                        <input type="button" name="boton2" value="Acción 2" class="button" />
+                                        <asp:Button ID="Button1" runat="server" CssClass="button" Text="Button" />
+                                    </td>
+                                </tr>
+                            </table> --%>
+                                            </fieldset>
+                                        </td>
+                                        <td valign="top">
+                                            <fieldset style="height: 287px;">
+                                                <legend>Filtros de Ubicación</legend>
+                                                <br />
+                                                <table>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:Label ID="LblPais" runat="server" Text="País"></asp:Label>
+                                                        </td>
+                                                        <td>
+                                                            <asp:Label ID="LblDistrito" runat="server" Text="Distrito"></asp:Label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:DropDownList ID="CmbPais" runat="server" Width="150px" AutoPostBack="True" 
+                                                                onselectedindexchanged="CmbPais_SelectedIndexChanged">
+                                                            </asp:DropDownList>
+                                                        </td>
+                                                        <td>
+                                                            <asp:DropDownList ID="cmbDistrito" runat="server" Width="150px" 
+                                                                ontextchanged="cmbcity_SelectedIndexChanged">
+                                                            </asp:DropDownList>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:Label ID="LblDepartamento" runat="server" Text="Departamento"></asp:Label>
+                                                        </td>
+                                                        <td>
+                                                            <asp:Label ID="LblSegmento" runat="server" Text="Segmento"></asp:Label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:DropDownList ID="CmbDepartamento" runat="server" Width="150px" 
+                                                                AutoPostBack="True" 
+                                                                onselectedindexchanged="CmbDepartamento_SelectedIndexChanged">
+                                                            </asp:DropDownList>
+                                                        </td>
+                                                        <td>
+                                                            <asp:DropDownList ID="CmbSegmento" runat="server" Width="150px" 
+                                                                AutoPostBack="True" onselectedindexchanged="CmbSegmento_SelectedIndexChanged">
+                                                            </asp:DropDownList>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:Label ID="LblCiudad" runat="server" Text="Ciudad"></asp:Label>
+                                                        </td>
+                                                        <td>
+                                                            <asp:Label ID="LblPuntoVenta" runat="server" Text="Punto de Venta"></asp:Label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:DropDownList ID="cmbcity" runat="server" Width="150px" AutoPostBack="True" 
+                                                                onselectedindexchanged="cmbcity_SelectedIndexChanged">
+                                                            </asp:DropDownList>
+                                                        </td>
+                                                        <td>
+                                                            <asp:DropDownList ID="cmbpdv" runat="server" Width="300px">
+                                                            </asp:DropDownList>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                                <br />
+                                            </fieldset>
+                                        </td>
+                                        <td valign="top" class="style4">
+                                            <fieldset style="height: 287px;" >
+                                                <legend>Filtros Particulares</legend>
+                                                <table>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:Label ID="LblTipoAgrupacion" runat="server" Text="Tipo de Agrupación Comercial"></asp:Label>
+                                                        </td>                                                       
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:DropDownList ID="cmbTipoAgrupacion" runat="server" Width="150px" 
+                                                                AutoPostBack="True" 
+                                                                onselectedindexchanged="cmbTipoAgrupacion_SelectedIndexChanged">
+                                                            </asp:DropDownList>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:Label ID="LblAgrupacion" runat="server" Text="Agrupación Comercial"></asp:Label>
+                                                        </td>                                                       
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:DropDownList ID="CmbAgrupacion" runat="server" Width="150px">
+                                                            </asp:DropDownList>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:Label ID="LblCategoria" runat="server" Text="Categoría"></asp:Label>
+                                                        </td>                                                       
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:DropDownList ID="CmbCategoria" runat="server" Width="150px" 
+                                                                AutoPostBack="True" onselectedindexchanged="CmbCategoria_SelectedIndexChanged">
+                                                            </asp:DropDownList>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:Label ID="LblMarca" runat="server" Text="Marca"></asp:Label>
+                                                        </td>                                                       
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:DropDownList ID="CmbMarca" runat="server" Width="150px" 
+                                                                AutoPostBack="True">
+                                                            </asp:DropDownList>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:Label ID="LblSubMarca" runat="server" Text="SubMarca"></asp:Label>
+                                                        </td>                                                       
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:DropDownList ID="CmbSubMarca" runat="server" Width="150px" 
+                                                                AutoPostBack="True">
+                                                            </asp:DropDownList>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:Label ID="LblPresentacion" runat="server" Text="Presentación"></asp:Label>
+                                                        </td>                                                       
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:DropDownList ID="CmbPresentacion" runat="server" Width="150px" 
+                                                                AutoPostBack="True">
+                                                            </asp:DropDownList>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </fieldset>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <!-- Opción para el placeHolder -->
+                                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                                
+                                    <p>
+                                    
+                                    
+                                    </p>
+                                    
+                                        
+                                    
+                                </asp:ContentPlaceHolder>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <div id="footer" align="center" >
+            </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+    
+    </form>
+    </body>
+</html>

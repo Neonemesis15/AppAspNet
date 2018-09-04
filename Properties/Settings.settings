@@ -1,0 +1,39 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="SIGE.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="SIGE_Facades_Interface_Easywin_Facade_Info_EasyWin_for_SIGE" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://localhost:4112/Facade_Info_EasyWin_for_SIGE.asmx</Value>
+    </Setting>
+    <Setting Name="SIGE_PgeLoad_PgeLoad" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:4351/Pages/Modulos/Planning/PgeLoad.asmx</Value>
+    </Setting>
+    <Setting Name="SIGE_Facade_Procesos_Administrativos_Facade_Procesos_Administrativos" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:14000/Facade_Procesos_Administrativos.asmx</Value>
+    </Setting>
+    <Setting Name="SIGE_Facade_Gestion_Informacion_Facade_Gestion_Informacion" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:14000/Facade_Gestion_Informacion.asmx</Value>
+    </Setting>
+    <Setting Name="SIGE_Facade_Interface_EasyWin_Facade_Info_EasyWin_for_SIGE" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:14000/Facade_Info_EasyWin_for_SIGE.asmx</Value>
+    </Setting>
+    <Setting Name="SIGE_Facade_Menu_strategy_Facade_MPlanning" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:14000/Facade_MPlanning.asmx</Value>
+    </Setting>
+    <Setting Name="SIGE_Facade_Proceso_Cliente_Facade_Proceso_Cliente" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:14000/Facade_Proceso_Cliente.asmx</Value>
+    </Setting>
+    <Setting Name="SIGE_Facade_Proceso_Supervisor_Facade_Proceso_Supervisor" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:14000/Facade_Proceso_Supervisor.asmx</Value>
+    </Setting>
+    <Setting Name="SIGE_Facade_Search_Facade_Search" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:14000/Facade_Search.asmx</Value>
+    </Setting>
+    <Setting Name="SIGE_Facade_Proceso_Operativo_Facade_Proceso_Operativo" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:14000/Facade_Proceso_Operativo.asmx</Value>
+    </Setting>
+    <Setting Name="SIGE_Facade_Proceso_Planning_Facade_Proceso_Planning" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:14000/Facade_Proceso_Planning.asmx</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

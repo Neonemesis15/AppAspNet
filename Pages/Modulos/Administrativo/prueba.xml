@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+- <DataSet xmlns="http://tempuri.org/">
+  - <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    - <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+      - <xs:complexType>
+        - <xs:choice minOccurs="0" maxOccurs="unbounded">
+          - <xs:element name="Table">
+            - <xs:complexType>
+              - <xs:sequence>
+                <xs:element name="Strategy_Name" type="xs:string" minOccurs="0" />
+                <xs:element name="cod_Strategy" type="xs:int" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  - <diffgr:diffgram xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:diffgr="urn:schemas-microsoft-com:xml-diffgram-v1">
+    - <NewDataSet xmlns="">
+      - <Table diffgr:id="Table1" msdata:rowOrder="0">
+        <Strategy_Name>ANFITRIONAJE</Strategy_Name>
+        <cod_Strategy>2</cod_Strategy>
+      </Table>
+      - <Table diffgr:id="Table2" msdata:rowOrder="1">
+        <Strategy_Name>ANFITRIONAJE</Strategy_Name>
+        <cod_Strategy>2</cod_Strategy>
+      </Table>
+      - <Table diffgr:id="Table3" msdata:rowOrder="2">
+        <Strategy_Name>ANFITRIONAJE</Strategy_Name>
+        <cod_Strategy>2</cod_Strategy>
+      </Table>
+      - <Table diffgr:id="Table4" msdata:rowOrder="3">
+        <Strategy_Name>ANFITRIONAJE</Strategy_Name>
+        <cod_Strategy>2</cod_Strategy>
+      </Table>
+      - <Table diffgr:id="Table5" msdata:rowOrder="4">
+        <Strategy_Name>ANFITRIONAJE</Strategy_Name>
+        <cod_Strategy>2</cod_Strategy>
+      </Table>
+      - <Table diffgr:id="Table6" msdata:rowOrder="5">
+        <Strategy_Name>ANFITRIONAJE</Strategy_Name>
+        <cod_Strategy>2</cod_Strategy>
+      </Table>
+      - <Table diffgr:id="Table7" msdata:rowOrder="6">
+        <Strategy_Name>ANFITRIONAJE</Strategy_Name>
+        <cod_Strategy>2</cod_Strategy>
+      </Table>
+    </NewDataSet>
+  </diffgr:diffgram>
+</DataSet>

@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<configuration width="1000" height="400">
+  <scripts>
+    <script key="AlbumButton" url="Debug/AlbumButton.js" extendsClass="Button" />
+    <script key="AlbumNavigation" url="Debug/AlbumNavigation.js" extendsClass="PageNavigation" />
+    <script key="AlbumViewer" url="Debug/AlbumViewer.js" extendsClass ="UserControl"/>
+    <script key="Button" url="Debug/Button.js" extendsClass="UserControl" />
+    <script key="DataProvider" url="Debug/DataProvider.js" extendsClass="Object" />
+    <script key="FadeTransition" url="Debug/FadeTransition.js" extendsClass="Transition" />
+    <script key="FlickrDataProvider" url="Debug/FlickrDataProvider.js" extendsClass="DataProvider" />
+    <script key="NavigationTray" url="Debug/NavigationTray.js" extendsClass="UserControl" />
+    <script key="NoTransition" url="Debug/NoTransition.js" extendsClass="Transition" />
+    <script key="PageContainer" url="Debug/PageContainer.js" extendsClass="UserControl" />
+    <script key="PageNavigation" url="Debug/PageNavigation.js" extendsClass="SlideNavigation" />
+    <script key="PathButton" url="Debug/PathButton.js" extendsClass="Button" />
+    <script key="ProgressBar" url="Debug/ProgressBar.js" extendsClass="ProgressIndicator" />
+    <script key="ProgressIndicator" url="Debug/ProgressIndicator.js" extendsClass="UserControl"/>
+    <script key="ProgressPie" url="Debug/ProgressPie.js" extendsClass="ProgressIndicator" />
+    <script key="ShapeTransition" url="Debug/ShapeTransition.js" extendsClass="Transition" />
+    <script key="SlideDescription" url="Debug/SlideDescription.js" extendsClass="UserControl" />
+    <script key="SlideImage" url="Debug/SlideImage.js" extendsClass="UserControl" />
+    <script key="SlideNavigation" url="Debug/SlideNavigation.js" extendsClass="UserControl" />
+    <script key="SlideShowNavigation" url="Debug/SlideShowNavigation.js" extendsClass="SlideNavigation" />
+    <script key="SlideTransition" url="Debug/SlideTransition.js" extendsClass="Transition" />
+    <script key="SlideViewer" url="Debug/SlideViewer.js" extendsClass="UserControl" />
+    <script key="ThumbnailButton" url="Debug/ThumbnailButton.js" extendsClass="Button" />
+    <script key="ThumbnailNavigation" url="Debug/ThumbnailNavigation.js" extendsClass="PageNavigation" />
+    <script key="ThumbnailPreview" url="Debug/ThumbnailPreview.js" extendsClass="UserControl" />
+    <script key="ThumbnailViewer" url="Debug/ThumbnailViewer.js" extendsClass="UserControl" />
+    <script key="ThumbnailViewerBackground" url="Debug/ThumbnailViewerBackground.js" extendsClass="UserControl" />
+    <script key="Transition" url="Debug/Transition.js" extendsClass="Object" />
+    <script key="WipeTransition" url="Debug/WipeTransition.js" extendsClass="Transition" />
+    <script key="XmlDataProvider" url="Debug/XmlDataProvider.js" extendsClass="DataProvider" />
+
+
+  </scripts>
+  <modules>
+    <module type="SlideViewer" />
+    <module type="ProgressBar" />
+    <module type="SlideDescription" />
+    <module type="NavigationTray">
+      <option name="initialAlbumView" value="true" />
+    </module>
+  </modules>
+  <transitions>
+    <transition type="FadeTransition" name="CrossFadeTransition" />
+    <transition type="ShapeTransition" name="CircleOutTransition" />
+    <transition type="SlideTransition" name="SlideLeftTransition" />
+    <transition type="SlideTransition" name="SlideDownTransition">
+      <option name="direction" value="Down" />
+    </transition>
+    <transition type="WipeTransition" name="WipeRightTransition">
+      <option name="direction" value="Right" />
+    </transition>
+  </transitions>
+  <dataProvider type="XmlDataProvider">
+    <option name="url" value="Galeria_fotografica/Data_Exibicion.xml"></option>
+  </dataProvider>
+</configuration>
+
+
+
+
