@@ -6,6 +6,8 @@ ClientBin
 *.xsc
 *.xsd
 *.xss
+*.suo
+*.user
 Pages/Modulos/Cliente/GaleryofBooksOnline/*
 Service References/*
 Web References/*
