@@ -370,8 +370,8 @@
                         </div>
                         <div align="center"  >
                             <asp:CheckBox runat="server" ID="chkValidar" Text="Validar" />
-                            <asp:imagebutton id="ImageButton3" runat="server" Width="50px" Height="50px" onclick="ImageButton3_Click" 
-                            ImageUrl="~/Pages/images/sub_black_rotate_ccw.ico">
+                            <asp:imagebutton id="ImageButton3" runat="server" Width="50px" Height="50px" 
+                            onclick="ImageButton3_Click" ImageUrl="~/Pages/images/sub_black_rotate_ccw.ico">
                             </asp:imagebutton>
                             <asp:imagebutton id="ImageButton4" runat="server" Width="50px" Height="50px" 
                             ImageUrl="~/Pages/images/sub_black_rotate_cw.ico" onclick="ImageButton4_Click">
@@ -382,29 +382,29 @@
                     </div>
                 </asp:Panel>
             </div>
-                        <asp:Panel ID="Pmensaje" style="display:none"  runat="server" Height="169px"  Width="332px" >
-            <div runat="server" id="divMensaje"   >
-                <table align="center" width="332px" >
-                    <tr >
-                        <td align="center"  valign="top">
-                            <br />
-                           <asp:Image runat="server" ID="ImgMensaje" />
-                        </td>
-                        <td style="width: 238px; height: 119px;" valign="top">
-                            <br />
-                            <asp:Label ID="lblencabezado" runat="server" CssClass="labels"></asp:Label>
-                            <br />
-                            <br />
-                            <asp:Label ID="lblmensajegeneral" runat="server" CssClass="labels"></asp:Label>
-                            <br />
-                            <br />
-                            <div align="center">
-                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Button  runat="server" ID="btnMensaje" Text="Aceptar" CssClass="buttonBlue" Width="100px"  />
-                            </div>
-                        </td>
+            <asp:Panel ID="Pmensaje" style="display:none"  runat="server" Height="169px"  Width="332px" >
+                <div runat="server" id="divMensaje"   >
+                    <table align="center" width="332px" >
+                        <tr >
+                            <td align="center"  valign="top">
+                                <br />
+                               <asp:Image runat="server" ID="ImgMensaje" />
+                            </td>
+                            <td style="width: 238px; height: 119px;" valign="top">
+                                <br />
+                                <asp:Label ID="lblencabezado" runat="server" CssClass="labels"></asp:Label>
+                                <br />
+                                <br />
+                                <asp:Label ID="lblmensajegeneral" runat="server" CssClass="labels"></asp:Label>
+                                <br />
+                                <br />
+                                <div align="center">
+                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Button  runat="server" ID="btnMensaje" Text="Aceptar" CssClass="buttonBlue" Width="100px"  />
+                                </div>
+                            </td>
 
-                    </tr>
-                </table>
+                        </tr>
+                    </table>
                 </div>
             </asp:Panel>
             <cc1:ModalPopupExtender ID="ModalPopupMensaje" runat="server" Enabled="True" TargetControlID="btndipararalerta"

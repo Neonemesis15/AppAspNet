@@ -42,7 +42,7 @@ namespace SIGE
         #endregion
 
         #region Mensajes
-
+        
         private void Mensajes_Usuario()
         {
             //imagenalert.Src = "../../images/save_file.jpg";
@@ -225,7 +225,7 @@ namespace SIGE
         {
             if (!IsPostBack)
             {
-                txtuser.Focus();          
+                txtuser.Focus();
                 this.Session.RemoveAll();
                 //Definir tipo de aplicación
                 AppDomain.CurrentDomain.SetData("ApplicationType", "Web");
@@ -248,49 +248,51 @@ namespace SIGE
         protected void btningreso_Click(object sender, EventArgs e)
         {
             string sPagina = "~/";
-
-            try
-            {
-
-                sUser = txtuser.Text.ToLower();
-                sPassw = txtpassw.Text;
-                txtuser.Enabled = false;
-
-                this.Session["sUser"] = sUser;
-                this.Session["sPassw"] = sPassw;
-
-                DataTable dt = oCoon.ejecutarDataTable("PA_WEB_ACCEDER", sUser, sPassw);
-                if (dt != null)
+            try{
+                if (UserNameRequired.IsValid)
                 {
-                    if (dt.Rows.Count > 0)
+                    sUser = txtuser.Text.ToLower();
+                    sPassw = txtpassw.Text;
+                    txtuser.Enabled = false;
+
+                    this.Session["sUser"] = sUser;
+                    this.Session["sPassw"] = sPassw;
+
+                    DataTable dt = oCoon.ejecutarDataTable("PA_WEB_ACCEDER", sUser, sPassw);
+                    if (dt != null && dt.Rows.Count > 0)
                     {
                         this.Session["codUsuario"] = Convert.ToInt32(dt.Rows[0]["CODIGO"].ToString().Trim());
                         this.Session["nameuser"] = dt.Rows[0]["NOMBRE"].ToString().Trim();
                         this.Session["Perfilid"] = dt.Rows[0]["COD_PERFIL"].ToString().Trim();
+                        if (this.Session["codUsuario"] != null)
+                        {
+                            /*AplicacionWeb oAplicacionWeb = new AplicacionWeb();
+                            EAplicacionWeb oeAplicacionWeb = oAplicacionWeb.obtenerAplicacion(sCoutry, smodul);
+                            this.Session["oeAplicacionWeb"] = oeAplicacionWeb;
+                            this.Session["cod_applucky"] = oeAplicacionWeb.codapplucky;
+                            this.Session["abr_app"] = oeAplicacionWeb.abrapp;
+                            this.Session["app_url"] = oeAplicacionWeb.appurl;
+                            sPagina = oeAplicacionWeb.HomePage;
+                            oeAplicacionWeb = null;
+                            oAplicacionWeb = null;*/
+                            sPagina = "Pages/Modulos/Planning/Menu_Planning.aspx";
+                            this.Response.Redirect("~/" + sPagina, true);
+                        }
                     }
-
-                }
-
-                if (this.Session["codUsuario"] != null)
-                {
-                    /*AplicacionWeb oAplicacionWeb = new AplicacionWeb();
-                    EAplicacionWeb oeAplicacionWeb = oAplicacionWeb.obtenerAplicacion(sCoutry, smodul);
-                    this.Session["oeAplicacionWeb"] = oeAplicacionWeb;
-                    this.Session["cod_applucky"] = oeAplicacionWeb.codapplucky;
-                    this.Session["abr_app"] = oeAplicacionWeb.abrapp;
-                    this.Session["app_url"] = oeAplicacionWeb.appurl;
-                    sPagina = oeAplicacionWeb.HomePage;
-                    oeAplicacionWeb = null;
-                    oAplicacionWeb = null;*/
-                    sPagina = "Pages/Modulos/Planning/Menu_Planning.aspx";
+                    else {
+                        this.Session["encabemensa"] = "Error de Autenticación";
+                        this.Session["mensaje"] = "Usuario y/o Clave Erradas";
+                        this.Session["cssclass"] = "MensajesSupervisor";
+                        Mensajes_Usuario();
+                        return;
+                    }
                 }
             }
             catch (Exception ex){
                 Lucky.CFG.Exceptions.Exceptions exs = new Lucky.CFG.Exceptions.Exceptions(ex);
                 string errMessage = "";
                 if (ex.Message.Substring(0, 20) == "Error en la Autenticación de Usuario" ||
-                    ex.Message.Substring(0, 20) == "La Clave es Errrada o Usuario no Existe")
-                {
+                    ex.Message.Substring(0, 20) == "La Clave es Errrada o Usuario no Existe"){
                     errMessage = new Lucky.CFG.Util.Functions().preparaMsgError(ex.Message);
                     this.Session["encabemensa"] = "Error de Autenticación";
                     this.Session["mensaje"] = "Usuario y/o Clave Erradas";
@@ -298,8 +300,7 @@ namespace SIGE
                     Mensajes_Usuario();
                     return;
                 }
-                else
-                {
+                else{
                     exs.Country = "SIGE(" + ConfigurationManager.AppSettings["COUNTRY"] + ") - Usuario " + this.Session["sUser"].ToString();
                     string sCountry = ConfigurationManager.AppSettings["COUNTRY"];
                     errMessage = "Error de Autenticacion para " + ' ' + sUser + ' ' + "Clave errada o Usuario Inactivo";
@@ -307,13 +308,13 @@ namespace SIGE
                     this.Session["encabemensa"] = "Error de Autenticacion";
                     this.Session["mensaje"] = "Usuario y/o Clave Erradas";
                     this.Session["cssclass"] = "MensajesSupervisor";
-                    ProcesoAdmin.Get_Delete_Sesion_User(sUser);
+                    //ProcesoAdmin.Get_Delete_Sesion_User(sUser);
                     Mensajes_Usuario();
                     return;
                 }
             }
 
-            this.Response.Redirect("~/" + sPagina, true);
+            
         }
 
         protected void SetAppSession(EUsuario oeUsuario)
