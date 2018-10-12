@@ -314,6 +314,7 @@ namespace SIGE.Pages.Modulos.Administrativo
 
         private void llenaComboPaisBuscarDpto() 
         {
+            /*
             DataSet ds3 = new DataSet();
             ds3 = oConn.ejecutarDataSet("UP_WEB_LLENACOMBOS", 37);
             //se llena Paises en departamento en buscar deptos
@@ -321,6 +322,7 @@ namespace SIGE.Pages.Modulos.Administrativo
             CmbSelPaisDept.DataTextField = "Name_Country";
             CmbSelPaisDept.DataValueField = "cod_Country";
             CmbSelPaisDept.DataBind();
+            */
         }
 
         private void activarControlesCdad()
@@ -442,11 +444,9 @@ namespace SIGE.Pages.Modulos.Administrativo
         }
 
         private void llenar_comboPaísBuscarCiudad()
-        {
-            DataSet dscomboPais = new DataSet();
-            dscomboPais = get_Administrativo.Get_Llenar_Combos("57");
+        { 
             //se llena Paises en buscar ciudades
-            CmbSelPaisCiudad.DataSource = dscomboPais;
+            CmbSelPaisCiudad.DataSource = get_Administrativo.Get_Llenar_Combos("57");
             CmbSelPaisCiudad.DataTextField = "Name_Country";
             CmbSelPaisCiudad.DataValueField = "cod_Country";
             CmbSelPaisCiudad.DataBind();
@@ -631,6 +631,7 @@ namespace SIGE.Pages.Modulos.Administrativo
 
         private void llenar_combopaísDistrito()
         {
+            /*
             DataSet ds5 = new DataSet();
             ds5 = oConn.ejecutarDataSet("UP_WEB_LLENACOMBOS", 39);
             //se llena Paises distritos            
@@ -638,18 +639,18 @@ namespace SIGE.Pages.Modulos.Administrativo
             CmbSDDivPais.DataTextField = "Name_Country";
             CmbSDDivPais.DataValueField = "cod_Country";
             CmbSDDivPais.DataBind();
+            */
         }
 
         private void llenar_comboPaísbuscarDistrito()
         {
-            DataSet ds5 = new DataSet();
-            ds5 = oConn.ejecutarDataSet("UP_WEB_LLENACOMBOS", 55);
-
+            /*
             //se llena Paises distritos search 
-            CmbSelPaisDistrito.DataSource = ds5;
+            CmbSelPaisDistrito.DataSource = oConn.ejecutarDataSet("UP_WEB_LLENACOMBOS", 55);
             CmbSelPaisDistrito.DataTextField = "Name_Country";
             CmbSelPaisDistrito.DataValueField = "cod_Country";
             CmbSelPaisDistrito.DataBind();
+            */
         }
 
         private void activarControlesBarrio()
@@ -772,25 +773,25 @@ namespace SIGE.Pages.Modulos.Administrativo
 
         private void llenar_CombopaisBarrio()
         {
-            DataSet ds2 = new DataSet();
+            /*DataSet ds2 = new DataSet();
             ds2 = oConn.ejecutarDataSet("UP_WEB_LLENACOMBOS", 29);
             //se llena Paises en barrios
             CmbSBpais.DataSource = ds2;
             CmbSBpais.DataTextField = "Name_Country";
             CmbSBpais.DataValueField = "cod_Country";
             CmbSBpais.DataBind();
+            */
         }
 
         private void llenar_combopaísBuscarBarrio() 
         {
-            DataSet ds2 = new DataSet();
-            ds2 = oConn.ejecutarDataSet("UP_WEB_LLENACOMBOS", 56);
-            
+            /*
             //se llena Paises en buscar barrios
-            CmbSelPaisBarrio.DataSource = ds2;
+            CmbSelPaisBarrio.DataSource = oConn.ejecutarDataSet("UP_WEB_LLENACOMBOS", 56);
             CmbSelPaisBarrio.DataTextField = "Name_Country";
             CmbSelPaisBarrio.DataValueField = "cod_Country";
             CmbSelPaisBarrio.DataBind();
+            */
         }
 
         private void MensajeAlerta()

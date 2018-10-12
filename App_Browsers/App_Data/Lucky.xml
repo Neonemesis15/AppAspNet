@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Lucky>
+
+  <Person>
+    <Name>Prueba</Name>
+    <CompanyId>1474</CompanyId>
+    <Service>
+      <Codigo>1</Codigo>
+      <Nombre>Servicio 1</Nombre>
+      <Imagen>../img/img1.png</Imagen>
+      <Canal>
+        <Id>1</Id>
+        <Nombre>Canal 1</Nombre>
+        <Url>#</Url>
+      </Canal>
+      <Canal>
+        <Id>2</Id>
+        <Nombre>Canal 2</Nombre>
+        <Url>#</Url>
+      </Canal>
+    </Service>
+    <Service>
+      <Codigo>2</Codigo>
+      <Nombre>Servicio 2</Nombre>
+      <Imagen>../img/img2.png</Imagen>
+      <Canal>
+        <Id>1</Id>
+        <Nombre>Canal 1</Nombre>
+        <Url>#</Url>
+      </Canal>
+      <Canal>
+        <Id>2</Id>
+        <Nombre>Canal 2</Nombre>
+        <Url>#</Url>
+      </Canal>
+    </Service>
+    <Service>
+      <Codigo>3</Codigo>
+      <Nombre>Servicio 3</Nombre>
+      <Imagen>../img/img3.png</Imagen>
+      <Canal>
+        <Id>1</Id>
+        <Nombre>Canal 1</Nombre>
+        <Url>#</Url>
+      </Canal>
+      <Canal>
+        <Id>2</Id>
+        <Nombre>Canal 2</Nombre>
+        <Url>#</Url>
+      </Canal>
+    </Service>
+    <Service>
+      <Codigo>4</Codigo>
+      <Nombre>Servicio 4</Nombre>
+      <Imagen>~/img/img4.png</Imagen>
+      <Canal>
+        <Id>1</Id>
+        <Nombre>Canal 1</Nombre>
+        <Url>#</Url>
+      </Canal>
+      <Canal>
+        <Id>2</Id>
+        <Nombre>Canal 2</Nombre>
+        <Url>#</Url>
+      </Canal>
+    </Service>
+  </Person>
+  <Person>
+    <Name>Prueba2</Name>
+    <CompanyId>1475</CompanyId>
+    <Service>
+      <Codigo>2</Codigo>
+      <Nombre>Servicio 2</Nombre>
+      <Imagen>../img/img2.png</Imagen>
+      <Canal>
+        <Id>1</Id>
+        <Nombre>Canal 1</Nombre>
+        <Url>#</Url>
+      </Canal>
+      <Canal>
+        <Id>2</Id>
+        <Nombre>Canal 2</Nombre>
+        <Url>#</Url>
+      </Canal>
+    </Service>
+  </Person>
+
+</Lucky>

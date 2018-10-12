@@ -10,16 +10,10 @@
 </head>
 <body>
     <form id="form1" runat="server">
-
-        <cc1:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" ScriptMode="Release">
-        </cc1:ToolkitScriptManager>
-        
-        <div class="MarcaAgua"></div>
-        
+        <cc1:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" ScriptMode="Release"></cc1:ToolkitScriptManager>
         <div class="Header" align="center" style="height:140px;">
             <asp:Image ID="Image1" runat="server" ImageUrl="~/Pages/ImgBooom/logotipo.png" ImageAlign="Left" Width="280px"  />
         </div>
-        
         <div class="HeaderRight">
             <table width="100%" align="center">
                 <tr>
@@ -32,7 +26,7 @@
                 </tr>
             </table>
         </div>
-        
+        <div class="MarcaAgua"></div>
         <asp:UpdatePanel ID="Uppanel" runat="server">
             <ContentTemplate>
                 <%--   

@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="Presupuesto">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="scountry" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="iCompany_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PresupuestoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PresupuestoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Presupuesto_Search">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iCompany_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Presupuesto_SearchResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Presupuesto_SearchResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_Obtener_Presupuestos_Update">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="snamepresu" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_Obtener_Presupuestos_UpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_Obtener_Presupuestos_UpdateResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_NamePlanning">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="snumbrerpresupuesto" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_NamePlanningResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_NamePlanningResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_OtenerFechasPlanning">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="snumberpresupuesto" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ivalor" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_OtenerFechasPlanningResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_OtenerFechasPlanningResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerClientes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="snumberpresupuesto" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ivalor" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerClientesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ObtenerClientesResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerPersonalcalle">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="snumberpresupuesto" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ivalor" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerPersonalcalleResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ObtenerPersonalcalleResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerSupervisores">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="snumberpresupuesto" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ivalor" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerSupervisoresResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ObtenerSupervisoresResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="PresupuestoSoapIn">
+    <wsdl:part name="parameters" element="tns:Presupuesto" />
+  </wsdl:message>
+  <wsdl:message name="PresupuestoSoapOut">
+    <wsdl:part name="parameters" element="tns:PresupuestoResponse" />
+  </wsdl:message>
+  <wsdl:message name="Presupuesto_SearchSoapIn">
+    <wsdl:part name="parameters" element="tns:Presupuesto_Search" />
+  </wsdl:message>
+  <wsdl:message name="Presupuesto_SearchSoapOut">
+    <wsdl:part name="parameters" element="tns:Presupuesto_SearchResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_Obtener_Presupuestos_UpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_Obtener_Presupuestos_Update" />
+  </wsdl:message>
+  <wsdl:message name="Get_Obtener_Presupuestos_UpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_Obtener_Presupuestos_UpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_NamePlanningSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_NamePlanning" />
+  </wsdl:message>
+  <wsdl:message name="Get_NamePlanningSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_NamePlanningResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_OtenerFechasPlanningSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_OtenerFechasPlanning" />
+  </wsdl:message>
+  <wsdl:message name="Get_OtenerFechasPlanningSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_OtenerFechasPlanningResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerClientesSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerClientes" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerClientesSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerClientesResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerPersonalcalleSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerPersonalcalle" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerPersonalcalleSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerPersonalcalleResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerSupervisoresSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerSupervisores" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerSupervisoresSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerSupervisoresResponse" />
+  </wsdl:message>
+  <wsdl:portType name="Facade_Info_EasyWin_for_SIGESoap">
+    <wsdl:operation name="Presupuesto">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo Para Obtener los Presupuesto sin Asignar</wsdl:documentation>
+      <wsdl:input message="tns:PresupuestoSoapIn" />
+      <wsdl:output message="tns:PresupuestoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Presupuesto_Search">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para Obtener los Presupustos Asignados</wsdl:documentation>
+      <wsdl:input message="tns:Presupuesto_SearchSoapIn" />
+      <wsdl:output message="tns:Presupuesto_SearchSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_Obtener_Presupuestos_Update">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para obtener Presupuestos para Actualizar</wsdl:documentation>
+      <wsdl:input message="tns:Get_Obtener_Presupuestos_UpdateSoapIn" />
+      <wsdl:output message="tns:Get_Obtener_Presupuestos_UpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_NamePlanning">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Obtine el Nombre del Planning</wsdl:documentation>
+      <wsdl:input message="tns:Get_NamePlanningSoapIn" />
+      <wsdl:output message="tns:Get_NamePlanningSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_OtenerFechasPlanning">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para Obtener Fechas Planning</wsdl:documentation>
+      <wsdl:input message="tns:Get_OtenerFechasPlanningSoapIn" />
+      <wsdl:output message="tns:Get_OtenerFechasPlanningSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerClientes">
+      <wsdl:input message="tns:Get_ObtenerClientesSoapIn" />
+      <wsdl:output message="tns:Get_ObtenerClientesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerPersonalcalle">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para generar listado de Personal de calle asignado a una campaña</wsdl:documentation>
+      <wsdl:input message="tns:Get_ObtenerPersonalcalleSoapIn" />
+      <wsdl:output message="tns:Get_ObtenerPersonalcalleSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerSupervisores">
+      <wsdl:input message="tns:Get_ObtenerSupervisoresSoapIn" />
+      <wsdl:output message="tns:Get_ObtenerSupervisoresSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Facade_Info_EasyWin_for_SIGESoap" type="tns:Facade_Info_EasyWin_for_SIGESoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Presupuesto">
+      <soap:operation soapAction="http://tempuri.org/Presupuesto" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Presupuesto_Search">
+      <soap:operation soapAction="http://tempuri.org/Presupuesto_Search" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_Obtener_Presupuestos_Update">
+      <soap:operation soapAction="http://tempuri.org/Get_Obtener_Presupuestos_Update" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_NamePlanning">
+      <soap:operation soapAction="http://tempuri.org/Get_NamePlanning" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_OtenerFechasPlanning">
+      <soap:operation soapAction="http://tempuri.org/Get_OtenerFechasPlanning" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerClientes">
+      <soap:operation soapAction="http://tempuri.org/Get_ObtenerClientes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerPersonalcalle">
+      <soap:operation soapAction="http://tempuri.org/Get_ObtenerPersonalcalle" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerSupervisores">
+      <soap:operation soapAction="http://tempuri.org/Get_ObtenerSupervisores" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="Facade_Info_EasyWin_for_SIGESoap12" type="tns:Facade_Info_EasyWin_for_SIGESoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Presupuesto">
+      <soap12:operation soapAction="http://tempuri.org/Presupuesto" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Presupuesto_Search">
+      <soap12:operation soapAction="http://tempuri.org/Presupuesto_Search" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_Obtener_Presupuestos_Update">
+      <soap12:operation soapAction="http://tempuri.org/Get_Obtener_Presupuestos_Update" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_NamePlanning">
+      <soap12:operation soapAction="http://tempuri.org/Get_NamePlanning" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_OtenerFechasPlanning">
+      <soap12:operation soapAction="http://tempuri.org/Get_OtenerFechasPlanning" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerClientes">
+      <soap12:operation soapAction="http://tempuri.org/Get_ObtenerClientes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerPersonalcalle">
+      <soap12:operation soapAction="http://tempuri.org/Get_ObtenerPersonalcalle" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerSupervisores">
+      <soap12:operation soapAction="http://tempuri.org/Get_ObtenerSupervisores" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Facade_Info_EasyWin_for_SIGE">
+    <wsdl:port name="Facade_Info_EasyWin_for_SIGESoap" binding="tns:Facade_Info_EasyWin_for_SIGESoap">
+      <soap:address location="http://localhost:14000/Facade_Info_EasyWin_for_SIGE.asmx" />
+    </wsdl:port>
+    <wsdl:port name="Facade_Info_EasyWin_for_SIGESoap12" binding="tns:Facade_Info_EasyWin_for_SIGESoap12">
+      <soap12:address location="http://localhost:14000/Facade_Info_EasyWin_for_SIGE.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

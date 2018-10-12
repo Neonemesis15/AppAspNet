@@ -249,8 +249,7 @@ namespace SIGE
         {
             string sPagina = "~/";
             try{
-                if (UserNameRequired.IsValid)
-                {
+                if (Page.IsValid){
                     sUser = txtuser.Text.ToLower();
                     sPassw = txtpassw.Text;
                     txtuser.Enabled = false;

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="Get_Obtener_Niveles_Cliente">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="snameuser" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="icompany_id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="sperfilname" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_Obtener_Niveles_ClienteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_Obtener_Niveles_ClienteResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_Obtener_Tipo_Informes">
+        <s:complexType />
+      </s:element>
+      <s:element name="Get_Obtener_Tipo_InformesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_Obtener_Tipo_InformesResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_obtener_Informes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="itypeinforme" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="icompanyid" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_obtener_InformesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_obtener_InformesResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="Get_Obtener_Niveles_ClienteSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_Obtener_Niveles_Cliente" />
+  </wsdl:message>
+  <wsdl:message name="Get_Obtener_Niveles_ClienteSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_Obtener_Niveles_ClienteResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_Obtener_Tipo_InformesSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_Obtener_Tipo_Informes" />
+  </wsdl:message>
+  <wsdl:message name="Get_Obtener_Tipo_InformesSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_Obtener_Tipo_InformesResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_obtener_InformesSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_obtener_Informes" />
+  </wsdl:message>
+  <wsdl:message name="Get_obtener_InformesSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_obtener_InformesResponse" />
+  </wsdl:message>
+  <wsdl:portType name="Facade_Gestion_InformacionSoap">
+    <wsdl:operation name="Get_Obtener_Niveles_Cliente">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para obtener Nivelss de Cliente Lucky</wsdl:documentation>
+      <wsdl:input message="tns:Get_Obtener_Niveles_ClienteSoapIn" />
+      <wsdl:output message="tns:Get_Obtener_Niveles_ClienteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_Obtener_Tipo_Informes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo  para Obtener lo tipos de informes</wsdl:documentation>
+      <wsdl:input message="tns:Get_Obtener_Tipo_InformesSoapIn" />
+      <wsdl:output message="tns:Get_Obtener_Tipo_InformesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_obtener_Informes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para Obtener loa Informes Asociados a los Tipos de Informes</wsdl:documentation>
+      <wsdl:input message="tns:Get_obtener_InformesSoapIn" />
+      <wsdl:output message="tns:Get_obtener_InformesSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Facade_Gestion_InformacionSoap" type="tns:Facade_Gestion_InformacionSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Get_Obtener_Niveles_Cliente">
+      <soap:operation soapAction="http://tempuri.org/Get_Obtener_Niveles_Cliente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_Obtener_Tipo_Informes">
+      <soap:operation soapAction="http://tempuri.org/Get_Obtener_Tipo_Informes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_obtener_Informes">
+      <soap:operation soapAction="http://tempuri.org/Get_obtener_Informes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="Facade_Gestion_InformacionSoap12" type="tns:Facade_Gestion_InformacionSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Get_Obtener_Niveles_Cliente">
+      <soap12:operation soapAction="http://tempuri.org/Get_Obtener_Niveles_Cliente" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_Obtener_Tipo_Informes">
+      <soap12:operation soapAction="http://tempuri.org/Get_Obtener_Tipo_Informes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_obtener_Informes">
+      <soap12:operation soapAction="http://tempuri.org/Get_obtener_Informes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Facade_Gestion_Informacion">
+    <wsdl:port name="Facade_Gestion_InformacionSoap" binding="tns:Facade_Gestion_InformacionSoap">
+      <soap:address location="http://localhost:14000/Facade_Gestion_Informacion.asmx" />
+    </wsdl:port>
+    <wsdl:port name="Facade_Gestion_InformacionSoap12" binding="tns:Facade_Gestion_InformacionSoap12">
+      <soap12:address location="http://localhost:14000/Facade_Gestion_Informacion.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

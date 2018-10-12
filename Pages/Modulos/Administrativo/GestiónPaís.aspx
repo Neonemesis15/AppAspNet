@@ -67,12 +67,8 @@
                         </HeaderTemplate>
                         <ContentTemplate>
                             <table align="center">
-                                <tr>
-                                    <td>
-                                        <br />
-                                        <asp:Label ID="LblTitAdminPaises" runat="server" Class="labelsTit2" Text="Gestión de Países"></asp:Label>
-                                    </td>
-                                </tr>
+                                <tr><td><br /><asp:Label ID="LblTitAdminPaises" runat="server" 
+                                    Class="labelsTit2" Text="Gestión de Países"></asp:Label></td></tr>
                             </table>
                             <table align="center">
                                 <tr>
@@ -81,11 +77,9 @@
                                             <legend style="">Información Básica</legend>
                                             <table width="500px">
                                                 <tr>
+                                                    <td><asp:Label ID="LblCodPais" runat="server" CssClass="labels" Text="Código de país*"></asp:Label></td>
                                                     <td>
-                                                        <asp:Label ID="LblCodPais" runat="server" CssClass="labels" Text="Código de país*"></asp:Label>
-                                                    </td>
-                                                    <td>
-                                                        <asp:TextBox ID="TxtCodPais" runat="server" BackColor="#DDDDDD" MaxLength="3" ReadOnly="True"
+                                                        <asp:TextBox ID="TxtCodPais" runat="server" BackColor="#DDDDDD" MaxLength="3" ReadOnly="True" 
                                                             Width="80px" Enabled="False"></asp:TextBox>
                                                         <asp:RegularExpressionValidator ID="ReqCodPais" runat="server" ControlToValidate="TxtCodPais"
                                                             Display="None" ErrorMessage="Requiere que el código contenga mínimo 3 números"
@@ -94,55 +88,43 @@
                                                             TargetControlID="ReqCodPais">
                                                         </cc1:ValidatorCalloutExtender>
                                                     </td>
-                                                    <tr>
-                                                        <td>
-                                                            <asp:Label ID="LblNomPais" runat="server" CssClass="labels" Text="Nombre del País*"></asp:Label>
-                                                        </td>
-                                                        <td>
-                                                            <asp:TextBox ID="TxtNomPais" runat="server" MaxLength="50" Width="166px" Enabled="False"></asp:TextBox>
-                                                            <asp:RegularExpressionValidator ID="ReqNomPais" runat="server" ControlToValidate="TxtNomPais"
-                                                                Display="None" ErrorMessage="No ingrese caracteres especiales ni números &lt;br /&gt; No inicie con espacio en blanco "
-                                                                ValidationExpression="([a-zA-Z][a-zA-ZñÑáéíóúÁÉÍÓÚ\s]{0,50})"></asp:RegularExpressionValidator>
-                                                            <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender33" runat="server" Enabled="True"
-                                                                TargetControlID="ReqNomPais">
-                                                            </cc1:ValidatorCalloutExtender>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <asp:Label ID="Lblidioma" runat="server" Text="Idioma*"></asp:Label>
-                                                        </td>
-                                                        <td>
-                                                            <asp:DropDownList ID="cmbidioma" runat="server" Height="21px" Width="170px" Enabled="False">
-                                                            </asp:DropDownList>
-                                                        </td>
-                                                    </tr>
+                                                <tr>
+                                                    <td><asp:Label ID="LblNomPais" runat="server" CssClass="labels" Text="Nombre del País*"></asp:Label></td>
+                                                    <td>
+                                                        <asp:TextBox ID="TxtNomPais" runat="server" MaxLength="50" Width="166px" Enabled="False"></asp:TextBox>
+                                                        <asp:RegularExpressionValidator ID="ReqNomPais" runat="server" ControlToValidate="TxtNomPais"
+                                                            Display="None" ErrorMessage="No ingrese caracteres especiales ni números &lt;br /&gt; No inicie con espacio en blanco "
+                                                            ValidationExpression="([a-zA-Z][a-zA-ZñÑáéíóúÁÉÍÓÚ\s]{0,50})"></asp:RegularExpressionValidator>
+                                                        <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender33" runat="server" Enabled="True"
+                                                            TargetControlID="ReqNomPais"></cc1:ValidatorCalloutExtender>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><asp:Label ID="Lblidioma" runat="server" Text="Idioma*"></asp:Label></td>
+                                                    <td><asp:DropDownList ID="cmbidioma" runat="server" Height="21px" Width="170px" 
+                                                        Enabled="False"></asp:DropDownList></td>
+                                                </tr>
                                                 </tr>
                                             </table>
                                         </fieldset>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        <br />
+                                    <td><br />
                                         <fieldset id="Fieldset5" runat="server">
                                             <legend style="">Jeraquía División Política</legend>
                                             <table align="center">
                                                 <tr>
-                                                    <td>
-                                                        <asp:CheckBox ID="chkDepto" runat="server" ForeColor="Black" Text="Departamento" Enabled="False" />
-                                                    </td>
-                                                    <td>
-                                                        <asp:CheckBox ID="chkciudad" runat="server" ForeColor="Black" Text="Ciudad / Provincia" Enabled="False" />
-                                                    </td>
+                                                    <td><asp:CheckBox ID="chkDepto" runat="server" ForeColor="Black" Text="Departamento" 
+                                                        Enabled="False" /></td>
+                                                    <td><asp:CheckBox ID="chkciudad" runat="server" ForeColor="Black" Text="Ciudad / Provincia" 
+                                                        Enabled="False" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>
-                                                        <asp:CheckBox ID="chkdistrito" runat="server" ForeColor="Black" Text="Distrito" Enabled="False" />
-                                                    </td>
-                                                    <td>
-                                                        <asp:CheckBox ID="chkbarrio" runat="server" ForeColor="Black" Text="Barrio" Enabled="False" />
-                                                    </td>
+                                                    <td><asp:CheckBox ID="chkdistrito" runat="server" ForeColor="Black" 
+                                                        Text="Distrito" Enabled="False" /></td>
+                                                    <td><asp:CheckBox ID="chkbarrio" runat="server" ForeColor="Black" Text="Barrio" 
+                                                        Enabled="False" /></td>
                                                 </tr>
                                             </table>
                                         </fieldset>
@@ -153,22 +135,18 @@
                             <br />
                             <table align="center">
                                 <tr>
-                                    <td>
-                                        <asp:Label ID="StatusPais" runat="server" CssClass="labels" Text="Estado"></asp:Label>
-                                    </td>
-                                    <td>
-                                        <asp:RadioButtonList ID="RBtnListStatusPais" runat="server" Font-Bold="True" Font-Names="Arial" Font-Size="10pt" ForeColor="Black" RepeatDirection="Horizontal" Enabled="False">
+                                    <td><asp:Label ID="StatusPais" runat="server" CssClass="labels" Text="Estado"></asp:Label></td>
+                                    <td><asp:RadioButtonList ID="RBtnListStatusPais" runat="server" Font-Bold="True" Font-Names="Arial" 
+                                        Font-Size="10pt" ForeColor="Black" RepeatDirection="Horizontal" Enabled="False">
                                             <asp:ListItem Selected="True">Habilitado</asp:ListItem>
                                             <asp:ListItem>Deshabilitado</asp:ListItem>
-                                        </asp:RadioButtonList>
-                                    </td>
+                                        </asp:RadioButtonList></td>
                                 </tr>
                             </table>
                             <br />
                             <br />
                             <table align="center">
-                                <tr>
-                                    <td>
+                                <tr><td>
                                         <asp:Button ID="btnCrearPais" runat="server" CssClass="buttonPlan" Text="Crear" Width="95px"
                                             OnClick="btnCrearPais_Click" />
                                         <asp:Button ID="btnsavePais" runat="server" CssClass="buttonPlan" Text="Guardar"
@@ -188,26 +166,17 @@
                                         <asp:Button ID="btnSreg19" runat="server" CssClass="buttonPlan" Text="&gt;&gt;" 
                                             Visible="False" onclick="btnSreg19_Click" />
                                         <asp:Button ID="btnUreg19" runat="server" CssClass="buttonPlan" Text="&gt;&gt;|"
-                                            Visible="False" onclick="btnUreg19_Click" />
-                                    </td>
+                                            Visible="False" onclick="btnUreg19_Click" /></td>
                                 </tr>
                             </table>
                             <asp:Panel ID="BuscarDivPol" runat="server" CssClass="busqueda" DefaultButton="btnBuscarDivPol"
-                                Style="display: none;" Height="202px" Width="343px">
-                                <br />
+                                Style="display: none;" Height="202px" Width="343px"><br />
+                                <table align="center">
+                                    <tr><td><asp:Label ID="LblTitBDivPol" runat="server" CssClass="labelsTit2" Text="Buscar País" /></td></tr>
+                                </table><br />
                                 <table align="center">
                                     <tr>
-                                        <td>
-                                            <asp:Label ID="LblTitBDivPol" runat="server" CssClass="labelsTit2" Text="Buscar País" />
-                                        </td>
-                                    </tr>
-                                </table>
-                                <br />
-                                <table align="center">
-                                    <tr>
-                                        <td>
-                                            <asp:Label ID="LblbCodPais" runat="server" CssClass="labels" Text="Código País:" />
-                                        </td>
+                                        <td><asp:Label ID="LblbCodPais" runat="server" CssClass="labels" Text="Código País:" /></td>
                                         <td>
                                             <asp:TextBox ID="TxtBcodPais" runat="server" MaxLength="3" Width="80px"></asp:TextBox>
                                             <asp:RegularExpressionValidator ID="Reqbcodpais" runat="server" ControlToValidate="TxtBcodPais"
@@ -218,9 +187,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <asp:Label ID="LblBNomPais" runat="server" CssClass="labels" Text="Nombre País:" />
-                                        </td>
+                                        <td><asp:Label ID="LblBNomPais" runat="server" CssClass="labels" Text="Nombre País:" /></td>
                                         <td>
                                             <asp:TextBox ID="TxtBNomPais" runat="server" MaxLength="50" Width="190px"></asp:TextBox>
                                             <asp:RegularExpressionValidator ID="ReqBnompais" runat="server" ControlToValidate="TxtBNomPais"
@@ -230,17 +197,13 @@
                                             </cc1:ValidatorCalloutExtender>
                                         </td>
                                     </tr>
-                                </table>
-                                <br />
+                                </table><br />
                                 <table align="center">
-                                    <tr>
-                                        <td>
+                                    <tr><td>
                                             <asp:Button ID="btnBuscarDivPol" runat="server" CssClass="buttonPlan" OnClick="btnBuscarDivPol_Click"
                                                 Text="Buscar" Width="80px" />
                                             <asp:Button ID="btnCancelarDivPol" runat="server" CssClass="buttonPlan" Text="Cancelar"
-                                                Width="80px" />
-                                        </td>
-                                    </tr>
+                                                Width="80px" /></td></tr>
                                 </table>
                             </asp:Panel>
                             <cc1:ModalPopupExtender ID="IbtnDivPol_ModalPopupExtender" runat="server" BackgroundCssClass="modalBackground"

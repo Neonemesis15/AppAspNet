@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Lucky"
+    targetNamespace="http://tempuri.org/Lucky.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://tempuri.org/Lucky.xsd"
+    xmlns:mstns="http://tempuri.org/Lucky.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  <xs:element name="Lucky">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Person">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Name" type="xs:string"/>
+              <xs:element name="CompanyId" type="xs:int"/>
+              <!--<xs:element name="Service">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="ServicioId" type="xs:int"/>
+                    <xs:element name="ServicioNombre" type="xs:string"/>
+                    <xs:element name="ServicioImagen" type="xs:string"/>
+                    <xs:element name="Channel">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="ChannelId" type="xs:int"/>
+                          <xs:element name="ChannelNombre" type="xs:string"/>
+                          <xs:element name="ChannelImagen" type="xs:string"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>-->
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

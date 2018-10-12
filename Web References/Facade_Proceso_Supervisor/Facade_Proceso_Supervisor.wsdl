@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="Get_ProductoDuplicado">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iid_ProductsPlanning" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="iPerson_id" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="iid_Planning" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ProductoDuplicadoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ProductoDuplicadoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ConsultarAsignacionPDV">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iid_Planning" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="iPerson_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ConsultarAsignacionPDVResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ConsultarAsignacionPDVResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ConsultarAsignacionPRODUCTO">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iid_Planning" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="iPerson_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ConsultarAsignacionPRODUCTOResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ConsultarAsignacionPRODUCTOResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ConsultarAsignacionPRODUCTOPDV_XINFORME">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iid_Report" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="iid_Planning" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="iPerson_id" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="iid_MPOSPlanning" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ConsultarAsignacionPRODUCTOPDV_XINFORMEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ConsultarAsignacionPRODUCTOPDV_XINFORMEResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ConsultarInfoActividadComercio">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iid_Planning" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ConsultarInfoActividadComercioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ConsultarInfoActividadComercioResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ConsultarInfoActividadPropia">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iid_Planning" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ConsultarInfoActividadPropiaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ConsultarInfoActividadPropiaResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_PuntoVentaAsignado">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iid_MPOSPlanning" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="iid_Planning" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_PuntoVentaAsignadoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_PuntoVentaAsignadoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="Get_ProductoDuplicadoSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ProductoDuplicado" />
+  </wsdl:message>
+  <wsdl:message name="Get_ProductoDuplicadoSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ProductoDuplicadoResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ConsultarAsignacionPDVSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ConsultarAsignacionPDV" />
+  </wsdl:message>
+  <wsdl:message name="Get_ConsultarAsignacionPDVSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ConsultarAsignacionPDVResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ConsultarAsignacionPRODUCTOSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ConsultarAsignacionPRODUCTO" />
+  </wsdl:message>
+  <wsdl:message name="Get_ConsultarAsignacionPRODUCTOSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ConsultarAsignacionPRODUCTOResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ConsultarAsignacionPRODUCTOPDV_XINFORMESoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ConsultarAsignacionPRODUCTOPDV_XINFORME" />
+  </wsdl:message>
+  <wsdl:message name="Get_ConsultarAsignacionPRODUCTOPDV_XINFORMESoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ConsultarAsignacionPRODUCTOPDV_XINFORMEResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ConsultarInfoActividadComercioSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ConsultarInfoActividadComercio" />
+  </wsdl:message>
+  <wsdl:message name="Get_ConsultarInfoActividadComercioSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ConsultarInfoActividadComercioResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ConsultarInfoActividadPropiaSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ConsultarInfoActividadPropia" />
+  </wsdl:message>
+  <wsdl:message name="Get_ConsultarInfoActividadPropiaSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ConsultarInfoActividadPropiaResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_PuntoVentaAsignadoSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_PuntoVentaAsignado" />
+  </wsdl:message>
+  <wsdl:message name="Get_PuntoVentaAsignadoSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_PuntoVentaAsignadoResponse" />
+  </wsdl:message>
+  <wsdl:portType name="Facade_Proceso_SupervisorSoap">
+    <wsdl:operation name="Get_ProductoDuplicado">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para verificar duplicidad de información en asignación de productos a operativo</wsdl:documentation>
+      <wsdl:input message="tns:Get_ProductoDuplicadoSoapIn" />
+      <wsdl:output message="tns:Get_ProductoDuplicadoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ConsultarAsignacionPDV">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para consultar información en asignación de puntos de venta a operativo</wsdl:documentation>
+      <wsdl:input message="tns:Get_ConsultarAsignacionPDVSoapIn" />
+      <wsdl:output message="tns:Get_ConsultarAsignacionPDVSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ConsultarAsignacionPRODUCTO">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para consultar información en asignación de productos a operativo</wsdl:documentation>
+      <wsdl:input message="tns:Get_ConsultarAsignacionPRODUCTOSoapIn" />
+      <wsdl:output message="tns:Get_ConsultarAsignacionPRODUCTOSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ConsultarAsignacionPRODUCTOPDV_XINFORME">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método Consultar registro de asignación de productos a personal operativo que tengan resultado en punto de venta para ventas</wsdl:documentation>
+      <wsdl:input message="tns:Get_ConsultarAsignacionPRODUCTOPDV_XINFORMESoapIn" />
+      <wsdl:output message="tns:Get_ConsultarAsignacionPRODUCTOPDV_XINFORMESoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ConsultarInfoActividadComercio">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método Consultar la información de la actividad de comercio de un planning</wsdl:documentation>
+      <wsdl:input message="tns:Get_ConsultarInfoActividadComercioSoapIn" />
+      <wsdl:output message="tns:Get_ConsultarInfoActividadComercioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ConsultarInfoActividadPropia">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método Consultar la fotos propias de un planning</wsdl:documentation>
+      <wsdl:input message="tns:Get_ConsultarInfoActividadPropiaSoapIn" />
+      <wsdl:output message="tns:Get_ConsultarInfoActividadPropiaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_PuntoVentaAsignado">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para verificar si un punto de venta esta asignado al menos una vez en un planning</wsdl:documentation>
+      <wsdl:input message="tns:Get_PuntoVentaAsignadoSoapIn" />
+      <wsdl:output message="tns:Get_PuntoVentaAsignadoSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Facade_Proceso_SupervisorSoap" type="tns:Facade_Proceso_SupervisorSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Get_ProductoDuplicado">
+      <soap:operation soapAction="http://tempuri.org/Get_ProductoDuplicado" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ConsultarAsignacionPDV">
+      <soap:operation soapAction="http://tempuri.org/Get_ConsultarAsignacionPDV" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ConsultarAsignacionPRODUCTO">
+      <soap:operation soapAction="http://tempuri.org/Get_ConsultarAsignacionPRODUCTO" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ConsultarAsignacionPRODUCTOPDV_XINFORME">
+      <soap:operation soapAction="http://tempuri.org/Get_ConsultarAsignacionPRODUCTOPDV_XINFORME" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ConsultarInfoActividadComercio">
+      <soap:operation soapAction="http://tempuri.org/Get_ConsultarInfoActividadComercio" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ConsultarInfoActividadPropia">
+      <soap:operation soapAction="http://tempuri.org/Get_ConsultarInfoActividadPropia" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_PuntoVentaAsignado">
+      <soap:operation soapAction="http://tempuri.org/Get_PuntoVentaAsignado" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="Facade_Proceso_SupervisorSoap12" type="tns:Facade_Proceso_SupervisorSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Get_ProductoDuplicado">
+      <soap12:operation soapAction="http://tempuri.org/Get_ProductoDuplicado" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ConsultarAsignacionPDV">
+      <soap12:operation soapAction="http://tempuri.org/Get_ConsultarAsignacionPDV" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ConsultarAsignacionPRODUCTO">
+      <soap12:operation soapAction="http://tempuri.org/Get_ConsultarAsignacionPRODUCTO" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ConsultarAsignacionPRODUCTOPDV_XINFORME">
+      <soap12:operation soapAction="http://tempuri.org/Get_ConsultarAsignacionPRODUCTOPDV_XINFORME" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ConsultarInfoActividadComercio">
+      <soap12:operation soapAction="http://tempuri.org/Get_ConsultarInfoActividadComercio" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ConsultarInfoActividadPropia">
+      <soap12:operation soapAction="http://tempuri.org/Get_ConsultarInfoActividadPropia" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_PuntoVentaAsignado">
+      <soap12:operation soapAction="http://tempuri.org/Get_PuntoVentaAsignado" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Facade_Proceso_Supervisor">
+    <wsdl:port name="Facade_Proceso_SupervisorSoap" binding="tns:Facade_Proceso_SupervisorSoap">
+      <soap:address location="http://localhost:14000/Facade_Proceso_Supervisor.asmx" />
+    </wsdl:port>
+    <wsdl:port name="Facade_Proceso_SupervisorSoap12" binding="tns:Facade_Proceso_SupervisorSoap12">
+      <soap12:address location="http://localhost:14000/Facade_Proceso_Supervisor.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

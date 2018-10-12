@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="Menu">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="spresupuesto" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MenuResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MenuResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Menu2">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="icodStrategy" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Menu2Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Menu2Result">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Menu3">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="icodStrategy" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Menu3Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Menu3Result">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Menu4">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idcodpoint" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Menu4Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Menu4Result">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="MenuSoapIn">
+    <wsdl:part name="parameters" element="tns:Menu" />
+  </wsdl:message>
+  <wsdl:message name="MenuSoapOut">
+    <wsdl:part name="parameters" element="tns:MenuResponse" />
+  </wsdl:message>
+  <wsdl:message name="Menu2SoapIn">
+    <wsdl:part name="parameters" element="tns:Menu2" />
+  </wsdl:message>
+  <wsdl:message name="Menu2SoapOut">
+    <wsdl:part name="parameters" element="tns:Menu2Response" />
+  </wsdl:message>
+  <wsdl:message name="Menu3SoapIn">
+    <wsdl:part name="parameters" element="tns:Menu3" />
+  </wsdl:message>
+  <wsdl:message name="Menu3SoapOut">
+    <wsdl:part name="parameters" element="tns:Menu3Response" />
+  </wsdl:message>
+  <wsdl:message name="Menu4SoapIn">
+    <wsdl:part name="parameters" element="tns:Menu4" />
+  </wsdl:message>
+  <wsdl:message name="Menu4SoapOut">
+    <wsdl:part name="parameters" element="tns:Menu4Response" />
+  </wsdl:message>
+  <wsdl:portType name="Facade_MPlanningSoap">
+    <wsdl:operation name="Menu">
+      <wsdl:input message="tns:MenuSoapIn" />
+      <wsdl:output message="tns:MenuSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Menu2">
+      <wsdl:input message="tns:Menu2SoapIn" />
+      <wsdl:output message="tns:Menu2SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Menu3">
+      <wsdl:input message="tns:Menu3SoapIn" />
+      <wsdl:output message="tns:Menu3SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Menu4">
+      <wsdl:input message="tns:Menu4SoapIn" />
+      <wsdl:output message="tns:Menu4SoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Facade_MPlanningSoap" type="tns:Facade_MPlanningSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Menu">
+      <soap:operation soapAction="http://tempuri.org/Menu" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Menu2">
+      <soap:operation soapAction="http://tempuri.org/Menu2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Menu3">
+      <soap:operation soapAction="http://tempuri.org/Menu3" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Menu4">
+      <soap:operation soapAction="http://tempuri.org/Menu4" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="Facade_MPlanningSoap12" type="tns:Facade_MPlanningSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Menu">
+      <soap12:operation soapAction="http://tempuri.org/Menu" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Menu2">
+      <soap12:operation soapAction="http://tempuri.org/Menu2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Menu3">
+      <soap12:operation soapAction="http://tempuri.org/Menu3" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Menu4">
+      <soap12:operation soapAction="http://tempuri.org/Menu4" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Facade_MPlanning">
+    <wsdl:port name="Facade_MPlanningSoap" binding="tns:Facade_MPlanningSoap">
+      <soap:address location="http://localhost:14000/Facade_MPlanning.asmx" />
+    </wsdl:port>
+    <wsdl:port name="Facade_MPlanningSoap12" binding="tns:Facade_MPlanningSoap12">
+      <soap12:address location="http://localhost:14000/Facade_MPlanning.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

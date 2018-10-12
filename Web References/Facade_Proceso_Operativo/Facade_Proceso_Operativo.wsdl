@@ -1,0 +1,2116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="Get_Planning">
+        <s:complexType />
+      </s:element>
+      <s:element name="Get_PlanningResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_PlanningResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_FormatosPlanning">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iid_Planning" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_FormatosPlanningResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_FormatosPlanningResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_StaffPlanning">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iid_Planning" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_StaffPlanningResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_StaffPlanningResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ActivComercio">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iid_Planning" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ActivComercioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ActivComercioResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_FormatoActivComercio">
+        <s:complexType />
+      </s:element>
+      <s:element name="Get_FormatoActivComercioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_FormatoActivComercioResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_idCompetition_Information">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="scinfo_CreateBy" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_idCompetition_InformationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_idCompetition_InformationResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_FotosCompetition_Information">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iid_cinfo" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_FotosCompetition_InformationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_FotosCompetition_InformationResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_DuplicadosCompetition_Information">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="stable" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="tcampo" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="scampo1" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="scampo2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="scampo3" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_DuplicadosCompetition_InformationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_DuplicadosCompetition_InformationResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_SearchCompetition_Information">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iid_Planning" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_SearchCompetition_InformationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_SearchCompetition_InformationResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_SearchInfoCompetition_Information">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iid_cinfo" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_SearchInfoCompetition_InformationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_SearchInfoCompetition_InformationResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_SearchInfoPOPCompetition_Information">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iid_cinfo" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_SearchInfoPOPCompetition_InformationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_SearchInfoPOPCompetition_InformationResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_SearchInfoPOPActualCompetition_Information">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iid_cinfo" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="iid_MPointOfPurchase" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_SearchInfoPOPActualCompetition_InformationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_SearchInfoPOPActualCompetition_InformationResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_SearchcategoryProductPlanning">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iid_Planning" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_SearchcategoryProductPlanningResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_SearchcategoryProductPlanningResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_idPhotographs_Service">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sPhoto_CreateBy" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_idPhotographs_ServiceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_idPhotographs_ServiceResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_FotosPhotographs_Service">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iid_Photographs" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_FotosPhotographs_ServiceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_FotosPhotographs_ServiceResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_SearchPhotographs_Service">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iid_Planning" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_SearchPhotographs_ServiceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_SearchPhotographs_ServiceResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_SearchInfoPhotographs_Service">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iid_Photographs" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_SearchInfoPhotographs_ServiceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_SearchInfoPhotographs_ServiceResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_SearchContenidoFormatosPropios">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iid_Planning" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="iid_cod_Point" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="iReport_Id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_SearchContenidoFormatosPropiosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_SearchContenidoFormatosPropiosResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_SearchContenidoFormatosPropiosIndicador">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iid_Planning" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="iReport_Id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_SearchContenidoFormatosPropiosIndicadorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_SearchContenidoFormatosPropiosIndicadorResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_SearchActivLevantPropio">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iid_Planning" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_SearchActivLevantPropioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_SearchActivLevantPropioResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_SearchInfoLevantamientoPropia">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iid_Planning" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="sdato_Date" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SRazónSocial" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SProduct_Name" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_SearchInfoLevantamientoPropiaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_SearchInfoLevantamientoPropiaResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_SearchInfoContenidoFormatosPropiosIndicador">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iReport_Id" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="iid_Planning" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ssales_Date" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sProduct_Name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="spdv_RazónSocial" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_SearchInfoContenidoFormatosPropiosIndicadorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_SearchInfoContenidoFormatosPropiosIndicadorResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_SearchInfoContenidoFormatosPropiosIndicadorCompe">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iReport_Id" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="iid_Planning" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ssales_Date" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sProduct_Name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="spdv_RazónSocial" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_SearchInfoContenidoFormatosPropiosIndicadorCompeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_SearchInfoContenidoFormatosPropiosIndicadorCompeResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_StaffSupervisorPlanning">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iid_Planning" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_StaffSupervisorPlanningResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_StaffSupervisorPlanningResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_FormatoActivPropiaEncabezado">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iid_Planning" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="iReport_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_FormatoActivPropiaEncabezadoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_FormatoActivPropiaEncabezadoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_FormatoActivPropiaDetalle">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iDesign_Formats" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="iid_Planning" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="iReport_Id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_FormatoActivPropiaDetalleResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_FormatoActivPropiaDetalleResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_FormatoActivPropiaPie">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iid_Planning" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="iReport_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_FormatoActivPropiaPieResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_FormatoActivPropiaPieResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_PdvXOperativoSel">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Person_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_PdvXOperativoSelResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_PdvXOperativoSelResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ProductosXPdvXOperativoSel">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Person_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ProductosXPdvXOperativoSelResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ProductosXPdvXOperativoSelResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_CanalXFormato">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sChannel_Name" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_CanalXFormatoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_CanalXFormatoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ProductoCompetidorXProducto">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iid_Planning" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ProductoCompetidorXProductoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ProductoCompetidorXProductoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_SearchDuplicadoInfopropia">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iid_Planning" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="sfechaopera" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPdvDigita" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sProdDigita" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_SearchDuplicadoInfopropiaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_SearchDuplicadoInfopropiaResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ReporteExibicion">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iidperson" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="sidplanning" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sidchanel" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="cod_oficina" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="id_NodeComercial" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ClientPDV_Code" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sid_categoriaproducto" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sidbrand" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="dfecha_inicio" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="dfecha_fin" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ReporteExibicionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ReporteExibicionResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ReporteCompetencias">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iidperson" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="sidplanning" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sidchanel" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="cod_oficina" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="id_NodeComercial" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ClientPDV_Code" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sidcategoriaProducto" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sidbrand" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="dfecha_inicio" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="dfecha_fin" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ReporteCompetenciasResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ReporteCompetenciasResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ReportePrecio">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iidperson" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="sidplanning" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sidchanel" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="cod_oficina" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="id_NodeComercial" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ClientPDV_Code" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sid_categoriaproducto" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sidbrand" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ssku" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="dfecha_inicio" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="dfecha_fin" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ReportePrecioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ReportePrecioResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ReporteQuiebre">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iidperson" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="sidplanning" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sidchanel" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="cod_oficina" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="id_NodeComercial" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ClientPDV_Code" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sid_categoriaproducto" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="iidbrand" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ssku" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="dfecha_inicio" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="dfecha_fin" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="icompanyid" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ReporteQuiebreResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ReporteQuiebreResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ReporteSOD">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iidperson" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="sidplanning" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sidchanel" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="cod_oficina" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="id_NodeComercial" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ClientPDV_Code" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sid_categoriaproducto" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sidbrand" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="dfecha_inicio" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="dfecha_fin" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ReporteSODResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ReporteSODResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ReporteStock">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iidperson" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="sidplanning" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sidchanel" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="cod_oficina" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="id_NodeComercial" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ClientPDV_Code" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sid_categoriaproducto" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sidfamily" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="dfecha_inicio" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="dfecha_fin" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ReporteStockResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ReporteStockResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ReporteLayout">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iidperson" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="sidplanning" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sidchanel" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sid_categoriaproducto" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sidbrand" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="dfecha_inicio" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="dfecha_fin" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ReporteLayoutResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ReporteLayoutResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ReporteFotografico">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iidperson" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="sidplanning" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sidchanel" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="cod_oficina" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="id_NodeComercial" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ClientPDV_Code" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sidtiporeporte" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sid_categoriaproducto" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sidbrand" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="stipreport" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="dfecha_inicio" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="dfecha_fin" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="icompanyid" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ReporteFotograficoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ReporteFotograficoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="Get_PlanningSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_Planning" />
+  </wsdl:message>
+  <wsdl:message name="Get_PlanningSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_PlanningResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_FormatosPlanningSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_FormatosPlanning" />
+  </wsdl:message>
+  <wsdl:message name="Get_FormatosPlanningSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_FormatosPlanningResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_StaffPlanningSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_StaffPlanning" />
+  </wsdl:message>
+  <wsdl:message name="Get_StaffPlanningSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_StaffPlanningResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ActivComercioSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ActivComercio" />
+  </wsdl:message>
+  <wsdl:message name="Get_ActivComercioSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ActivComercioResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_FormatoActivComercioSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_FormatoActivComercio" />
+  </wsdl:message>
+  <wsdl:message name="Get_FormatoActivComercioSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_FormatoActivComercioResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_idCompetition_InformationSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_idCompetition_Information" />
+  </wsdl:message>
+  <wsdl:message name="Get_idCompetition_InformationSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_idCompetition_InformationResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_FotosCompetition_InformationSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_FotosCompetition_Information" />
+  </wsdl:message>
+  <wsdl:message name="Get_FotosCompetition_InformationSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_FotosCompetition_InformationResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_DuplicadosCompetition_InformationSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_DuplicadosCompetition_Information" />
+  </wsdl:message>
+  <wsdl:message name="Get_DuplicadosCompetition_InformationSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_DuplicadosCompetition_InformationResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_SearchCompetition_InformationSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_SearchCompetition_Information" />
+  </wsdl:message>
+  <wsdl:message name="Get_SearchCompetition_InformationSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_SearchCompetition_InformationResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_SearchInfoCompetition_InformationSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_SearchInfoCompetition_Information" />
+  </wsdl:message>
+  <wsdl:message name="Get_SearchInfoCompetition_InformationSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_SearchInfoCompetition_InformationResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_SearchInfoPOPCompetition_InformationSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_SearchInfoPOPCompetition_Information" />
+  </wsdl:message>
+  <wsdl:message name="Get_SearchInfoPOPCompetition_InformationSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_SearchInfoPOPCompetition_InformationResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_SearchInfoPOPActualCompetition_InformationSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_SearchInfoPOPActualCompetition_Information" />
+  </wsdl:message>
+  <wsdl:message name="Get_SearchInfoPOPActualCompetition_InformationSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_SearchInfoPOPActualCompetition_InformationResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_SearchcategoryProductPlanningSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_SearchcategoryProductPlanning" />
+  </wsdl:message>
+  <wsdl:message name="Get_SearchcategoryProductPlanningSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_SearchcategoryProductPlanningResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_idPhotographs_ServiceSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_idPhotographs_Service" />
+  </wsdl:message>
+  <wsdl:message name="Get_idPhotographs_ServiceSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_idPhotographs_ServiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_FotosPhotographs_ServiceSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_FotosPhotographs_Service" />
+  </wsdl:message>
+  <wsdl:message name="Get_FotosPhotographs_ServiceSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_FotosPhotographs_ServiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_SearchPhotographs_ServiceSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_SearchPhotographs_Service" />
+  </wsdl:message>
+  <wsdl:message name="Get_SearchPhotographs_ServiceSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_SearchPhotographs_ServiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_SearchInfoPhotographs_ServiceSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_SearchInfoPhotographs_Service" />
+  </wsdl:message>
+  <wsdl:message name="Get_SearchInfoPhotographs_ServiceSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_SearchInfoPhotographs_ServiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_SearchContenidoFormatosPropiosSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_SearchContenidoFormatosPropios" />
+  </wsdl:message>
+  <wsdl:message name="Get_SearchContenidoFormatosPropiosSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_SearchContenidoFormatosPropiosResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_SearchContenidoFormatosPropiosIndicadorSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_SearchContenidoFormatosPropiosIndicador" />
+  </wsdl:message>
+  <wsdl:message name="Get_SearchContenidoFormatosPropiosIndicadorSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_SearchContenidoFormatosPropiosIndicadorResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_SearchActivLevantPropioSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_SearchActivLevantPropio" />
+  </wsdl:message>
+  <wsdl:message name="Get_SearchActivLevantPropioSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_SearchActivLevantPropioResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_SearchInfoLevantamientoPropiaSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_SearchInfoLevantamientoPropia" />
+  </wsdl:message>
+  <wsdl:message name="Get_SearchInfoLevantamientoPropiaSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_SearchInfoLevantamientoPropiaResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_SearchInfoContenidoFormatosPropiosIndicadorSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_SearchInfoContenidoFormatosPropiosIndicador" />
+  </wsdl:message>
+  <wsdl:message name="Get_SearchInfoContenidoFormatosPropiosIndicadorSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_SearchInfoContenidoFormatosPropiosIndicadorResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_SearchInfoContenidoFormatosPropiosIndicadorCompeSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_SearchInfoContenidoFormatosPropiosIndicadorCompe" />
+  </wsdl:message>
+  <wsdl:message name="Get_SearchInfoContenidoFormatosPropiosIndicadorCompeSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_SearchInfoContenidoFormatosPropiosIndicadorCompeResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_StaffSupervisorPlanningSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_StaffSupervisorPlanning" />
+  </wsdl:message>
+  <wsdl:message name="Get_StaffSupervisorPlanningSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_StaffSupervisorPlanningResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_FormatoActivPropiaEncabezadoSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_FormatoActivPropiaEncabezado" />
+  </wsdl:message>
+  <wsdl:message name="Get_FormatoActivPropiaEncabezadoSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_FormatoActivPropiaEncabezadoResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_FormatoActivPropiaDetalleSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_FormatoActivPropiaDetalle" />
+  </wsdl:message>
+  <wsdl:message name="Get_FormatoActivPropiaDetalleSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_FormatoActivPropiaDetalleResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_FormatoActivPropiaPieSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_FormatoActivPropiaPie" />
+  </wsdl:message>
+  <wsdl:message name="Get_FormatoActivPropiaPieSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_FormatoActivPropiaPieResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_PdvXOperativoSelSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_PdvXOperativoSel" />
+  </wsdl:message>
+  <wsdl:message name="Get_PdvXOperativoSelSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_PdvXOperativoSelResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ProductosXPdvXOperativoSelSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ProductosXPdvXOperativoSel" />
+  </wsdl:message>
+  <wsdl:message name="Get_ProductosXPdvXOperativoSelSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ProductosXPdvXOperativoSelResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_CanalXFormatoSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_CanalXFormato" />
+  </wsdl:message>
+  <wsdl:message name="Get_CanalXFormatoSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_CanalXFormatoResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ProductoCompetidorXProductoSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ProductoCompetidorXProducto" />
+  </wsdl:message>
+  <wsdl:message name="Get_ProductoCompetidorXProductoSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ProductoCompetidorXProductoResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_SearchDuplicadoInfopropiaSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_SearchDuplicadoInfopropia" />
+  </wsdl:message>
+  <wsdl:message name="Get_SearchDuplicadoInfopropiaSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_SearchDuplicadoInfopropiaResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ReporteExibicionSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ReporteExibicion" />
+  </wsdl:message>
+  <wsdl:message name="Get_ReporteExibicionSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ReporteExibicionResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ReporteCompetenciasSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ReporteCompetencias" />
+  </wsdl:message>
+  <wsdl:message name="Get_ReporteCompetenciasSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ReporteCompetenciasResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ReportePrecioSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ReportePrecio" />
+  </wsdl:message>
+  <wsdl:message name="Get_ReportePrecioSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ReportePrecioResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ReporteQuiebreSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ReporteQuiebre" />
+  </wsdl:message>
+  <wsdl:message name="Get_ReporteQuiebreSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ReporteQuiebreResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ReporteSODSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ReporteSOD" />
+  </wsdl:message>
+  <wsdl:message name="Get_ReporteSODSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ReporteSODResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ReporteStockSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ReporteStock" />
+  </wsdl:message>
+  <wsdl:message name="Get_ReporteStockSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ReporteStockResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ReporteLayoutSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ReporteLayout" />
+  </wsdl:message>
+  <wsdl:message name="Get_ReporteLayoutSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ReporteLayoutResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ReporteFotograficoSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ReporteFotografico" />
+  </wsdl:message>
+  <wsdl:message name="Get_ReporteFotograficoSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ReporteFotograficoResponse" />
+  </wsdl:message>
+  <wsdl:portType name="Facade_Proceso_OperativoSoap">
+    <wsdl:operation name="Get_Planning">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para obtener los planning en estado diferente a finalizado</wsdl:documentation>
+      <wsdl:input message="tns:Get_PlanningSoapIn" />
+      <wsdl:output message="tns:Get_PlanningSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_FormatosPlanning">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para obtener los formatos de levantamiento del planning seleccionado</wsdl:documentation>
+      <wsdl:input message="tns:Get_FormatosPlanningSoapIn" />
+      <wsdl:output message="tns:Get_FormatosPlanningSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_StaffPlanning">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para obtener el personal operativo del planning seleccionado</wsdl:documentation>
+      <wsdl:input message="tns:Get_StaffPlanningSoapIn" />
+      <wsdl:output message="tns:Get_StaffPlanningSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ActivComercio">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para obtener los formatos de activiades en el comercio del planning seleccionado</wsdl:documentation>
+      <wsdl:input message="tns:Get_ActivComercioSoapIn" />
+      <wsdl:output message="tns:Get_ActivComercioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_FormatoActivComercio">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para construir formato de levantamiento de activiades en el comercio</wsdl:documentation>
+      <wsdl:input message="tns:Get_FormatoActivComercioSoapIn" />
+      <wsdl:output message="tns:Get_FormatoActivComercioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_idCompetition_Information">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para obtener el último id registrado en Competition_ Information</wsdl:documentation>
+      <wsdl:input message="tns:Get_idCompetition_InformationSoapIn" />
+      <wsdl:output message="tns:Get_idCompetition_InformationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_FotosCompetition_Information">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para obtener las fotos de la última Actividad del comercio registrada </wsdl:documentation>
+      <wsdl:input message="tns:Get_FotosCompetition_InformationSoapIn" />
+      <wsdl:output message="tns:Get_FotosCompetition_InformationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_DuplicadosCompetition_Information">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para verificar registros duplicados en actividades del comercio</wsdl:documentation>
+      <wsdl:input message="tns:Get_DuplicadosCompetition_InformationSoapIn" />
+      <wsdl:output message="tns:Get_DuplicadosCompetition_InformationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchCompetition_Information">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para consultar actividades del comercio registradas</wsdl:documentation>
+      <wsdl:input message="tns:Get_SearchCompetition_InformationSoapIn" />
+      <wsdl:output message="tns:Get_SearchCompetition_InformationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchInfoCompetition_Information">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para consultar informacion de actividad del comercio seleccionada</wsdl:documentation>
+      <wsdl:input message="tns:Get_SearchInfoCompetition_InformationSoapIn" />
+      <wsdl:output message="tns:Get_SearchInfoCompetition_InformationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchInfoPOPCompetition_Information">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para consultar el material POP de informacion de actividad del comercio seleccionada</wsdl:documentation>
+      <wsdl:input message="tns:Get_SearchInfoPOPCompetition_InformationSoapIn" />
+      <wsdl:output message="tns:Get_SearchInfoPOPCompetition_InformationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchInfoPOPActualCompetition_Information">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para consultar el material POP de informacion de actividad del comercio a actualizar</wsdl:documentation>
+      <wsdl:input message="tns:Get_SearchInfoPOPActualCompetition_InformationSoapIn" />
+      <wsdl:output message="tns:Get_SearchInfoPOPActualCompetition_InformationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchcategoryProductPlanning">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para consultar las categorias de los productos del planning seleccionado</wsdl:documentation>
+      <wsdl:input message="tns:Get_SearchcategoryProductPlanningSoapIn" />
+      <wsdl:output message="tns:Get_SearchcategoryProductPlanningSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_idPhotographs_Service">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para obtener el último id registrado en Photographs_Service</wsdl:documentation>
+      <wsdl:input message="tns:Get_idPhotographs_ServiceSoapIn" />
+      <wsdl:output message="tns:Get_idPhotographs_ServiceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_FotosPhotographs_Service">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para obtener las fotos de la última Actividad Propia registrada </wsdl:documentation>
+      <wsdl:input message="tns:Get_FotosPhotographs_ServiceSoapIn" />
+      <wsdl:output message="tns:Get_FotosPhotographs_ServiceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchPhotographs_Service">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para consultar actividades propias registradas</wsdl:documentation>
+      <wsdl:input message="tns:Get_SearchPhotographs_ServiceSoapIn" />
+      <wsdl:output message="tns:Get_SearchPhotographs_ServiceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchInfoPhotographs_Service">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para consultar informacion de actividad del comercio seleccionada</wsdl:documentation>
+      <wsdl:input message="tns:Get_SearchInfoPhotographs_ServiceSoapIn" />
+      <wsdl:output message="tns:Get_SearchInfoPhotographs_ServiceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchContenidoFormatosPropios">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para consultar estructura de formatos propios</wsdl:documentation>
+      <wsdl:input message="tns:Get_SearchContenidoFormatosPropiosSoapIn" />
+      <wsdl:output message="tns:Get_SearchContenidoFormatosPropiosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchContenidoFormatosPropiosIndicador">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para consultar estructura de formatos para registro de datos de indicador</wsdl:documentation>
+      <wsdl:input message="tns:Get_SearchContenidoFormatosPropiosIndicadorSoapIn" />
+      <wsdl:output message="tns:Get_SearchContenidoFormatosPropiosIndicadorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchActivLevantPropio">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para consultar actividades de levantamiento propio registradas</wsdl:documentation>
+      <wsdl:input message="tns:Get_SearchActivLevantPropioSoapIn" />
+      <wsdl:output message="tns:Get_SearchActivLevantPropioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchInfoLevantamientoPropia">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para consultar informacion de actividad propia seleccionada</wsdl:documentation>
+      <wsdl:input message="tns:Get_SearchInfoLevantamientoPropiaSoapIn" />
+      <wsdl:output message="tns:Get_SearchInfoLevantamientoPropiaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchInfoContenidoFormatosPropiosIndicador">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para consultar los datos registrados en cuanto a indicadores se refiere</wsdl:documentation>
+      <wsdl:input message="tns:Get_SearchInfoContenidoFormatosPropiosIndicadorSoapIn" />
+      <wsdl:output message="tns:Get_SearchInfoContenidoFormatosPropiosIndicadorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchInfoContenidoFormatosPropiosIndicadorCompe">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para consultar los datos registrados en cuanto a indicadores se refiere del producto competidor</wsdl:documentation>
+      <wsdl:input message="tns:Get_SearchInfoContenidoFormatosPropiosIndicadorCompeSoapIn" />
+      <wsdl:output message="tns:Get_SearchInfoContenidoFormatosPropiosIndicadorCompeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_StaffSupervisorPlanning">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para obtener el personal supervisores del planning seleccionado</wsdl:documentation>
+      <wsdl:input message="tns:Get_StaffSupervisorPlanningSoapIn" />
+      <wsdl:output message="tns:Get_StaffSupervisorPlanningSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_FormatoActivPropiaEncabezado">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para construir formato de levantamiento de activiades propias encabezado</wsdl:documentation>
+      <wsdl:input message="tns:Get_FormatoActivPropiaEncabezadoSoapIn" />
+      <wsdl:output message="tns:Get_FormatoActivPropiaEncabezadoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_FormatoActivPropiaDetalle">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para construir formato de levantamiento de activiades propias detalle</wsdl:documentation>
+      <wsdl:input message="tns:Get_FormatoActivPropiaDetalleSoapIn" />
+      <wsdl:output message="tns:Get_FormatoActivPropiaDetalleSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_FormatoActivPropiaPie">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para construir formato de levantamiento de activiades propias pie</wsdl:documentation>
+      <wsdl:input message="tns:Get_FormatoActivPropiaPieSoapIn" />
+      <wsdl:output message="tns:Get_FormatoActivPropiaPieSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_PdvXOperativoSel">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para visualizar los puntos de venta asignados a c/operativo seleccionado</wsdl:documentation>
+      <wsdl:input message="tns:Get_PdvXOperativoSelSoapIn" />
+      <wsdl:output message="tns:Get_PdvXOperativoSelSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ProductosXPdvXOperativoSel">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para visualizar los productos por puntos de venta asignados a c/operativo seleccionado</wsdl:documentation>
+      <wsdl:input message="tns:Get_ProductosXPdvXOperativoSelSoapIn" />
+      <wsdl:output message="tns:Get_ProductosXPdvXOperativoSelSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_CanalXFormato">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para consultar el codigo de canal para el formato</wsdl:documentation>
+      <wsdl:input message="tns:Get_CanalXFormatoSoapIn" />
+      <wsdl:output message="tns:Get_CanalXFormatoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ProductoCompetidorXProducto">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para construir productos competidores por producto propio</wsdl:documentation>
+      <wsdl:input message="tns:Get_ProductoCompetidorXProductoSoapIn" />
+      <wsdl:output message="tns:Get_ProductoCompetidorXProductoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchDuplicadoInfopropia">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para buscar duplicados en informacion de levantamiento propia</wsdl:documentation>
+      <wsdl:input message="tns:Get_SearchDuplicadoInfopropiaSoapIn" />
+      <wsdl:output message="tns:Get_SearchDuplicadoInfopropiaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ReporteExibicion">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para el reporte de exibicion</wsdl:documentation>
+      <wsdl:input message="tns:Get_ReporteExibicionSoapIn" />
+      <wsdl:output message="tns:Get_ReporteExibicionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ReporteCompetencias">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para el reporte de competencia</wsdl:documentation>
+      <wsdl:input message="tns:Get_ReporteCompetenciasSoapIn" />
+      <wsdl:output message="tns:Get_ReporteCompetenciasSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ReportePrecio">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para el reporte de precio</wsdl:documentation>
+      <wsdl:input message="tns:Get_ReportePrecioSoapIn" />
+      <wsdl:output message="tns:Get_ReportePrecioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ReporteQuiebre">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para el reporte de quiebre</wsdl:documentation>
+      <wsdl:input message="tns:Get_ReporteQuiebreSoapIn" />
+      <wsdl:output message="tns:Get_ReporteQuiebreSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ReporteSOD">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para el reporte de SOD</wsdl:documentation>
+      <wsdl:input message="tns:Get_ReporteSODSoapIn" />
+      <wsdl:output message="tns:Get_ReporteSODSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ReporteStock">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para el reporte de stock</wsdl:documentation>
+      <wsdl:input message="tns:Get_ReporteStockSoapIn" />
+      <wsdl:output message="tns:Get_ReporteStockSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ReporteLayout">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para el reporte de layout</wsdl:documentation>
+      <wsdl:input message="tns:Get_ReporteLayoutSoapIn" />
+      <wsdl:output message="tns:Get_ReporteLayoutSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ReporteFotografico">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para el reporte de fotografico</wsdl:documentation>
+      <wsdl:input message="tns:Get_ReporteFotograficoSoapIn" />
+      <wsdl:output message="tns:Get_ReporteFotograficoSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Facade_Proceso_OperativoSoap" type="tns:Facade_Proceso_OperativoSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Get_Planning">
+      <soap:operation soapAction="http://tempuri.org/Get_Planning" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_FormatosPlanning">
+      <soap:operation soapAction="http://tempuri.org/Get_FormatosPlanning" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_StaffPlanning">
+      <soap:operation soapAction="http://tempuri.org/Get_StaffPlanning" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ActivComercio">
+      <soap:operation soapAction="http://tempuri.org/Get_ActivComercio" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_FormatoActivComercio">
+      <soap:operation soapAction="http://tempuri.org/Get_FormatoActivComercio" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_idCompetition_Information">
+      <soap:operation soapAction="http://tempuri.org/Get_idCompetition_Information" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_FotosCompetition_Information">
+      <soap:operation soapAction="http://tempuri.org/Get_FotosCompetition_Information" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_DuplicadosCompetition_Information">
+      <soap:operation soapAction="http://tempuri.org/Get_DuplicadosCompetition_Information" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchCompetition_Information">
+      <soap:operation soapAction="http://tempuri.org/Get_SearchCompetition_Information" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchInfoCompetition_Information">
+      <soap:operation soapAction="http://tempuri.org/Get_SearchInfoCompetition_Information" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchInfoPOPCompetition_Information">
+      <soap:operation soapAction="http://tempuri.org/Get_SearchInfoPOPCompetition_Information" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchInfoPOPActualCompetition_Information">
+      <soap:operation soapAction="http://tempuri.org/Get_SearchInfoPOPActualCompetition_Information" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchcategoryProductPlanning">
+      <soap:operation soapAction="http://tempuri.org/Get_SearchcategoryProductPlanning" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_idPhotographs_Service">
+      <soap:operation soapAction="http://tempuri.org/Get_idPhotographs_Service" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_FotosPhotographs_Service">
+      <soap:operation soapAction="http://tempuri.org/Get_FotosPhotographs_Service" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchPhotographs_Service">
+      <soap:operation soapAction="http://tempuri.org/Get_SearchPhotographs_Service" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchInfoPhotographs_Service">
+      <soap:operation soapAction="http://tempuri.org/Get_SearchInfoPhotographs_Service" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchContenidoFormatosPropios">
+      <soap:operation soapAction="http://tempuri.org/Get_SearchContenidoFormatosPropios" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchContenidoFormatosPropiosIndicador">
+      <soap:operation soapAction="http://tempuri.org/Get_SearchContenidoFormatosPropiosIndicador" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchActivLevantPropio">
+      <soap:operation soapAction="http://tempuri.org/Get_SearchActivLevantPropio" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchInfoLevantamientoPropia">
+      <soap:operation soapAction="http://tempuri.org/Get_SearchInfoLevantamientoPropia" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchInfoContenidoFormatosPropiosIndicador">
+      <soap:operation soapAction="http://tempuri.org/Get_SearchInfoContenidoFormatosPropiosIndicador" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchInfoContenidoFormatosPropiosIndicadorCompe">
+      <soap:operation soapAction="http://tempuri.org/Get_SearchInfoContenidoFormatosPropiosIndicadorCompe" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_StaffSupervisorPlanning">
+      <soap:operation soapAction="http://tempuri.org/Get_StaffSupervisorPlanning" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_FormatoActivPropiaEncabezado">
+      <soap:operation soapAction="http://tempuri.org/Get_FormatoActivPropiaEncabezado" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_FormatoActivPropiaDetalle">
+      <soap:operation soapAction="http://tempuri.org/Get_FormatoActivPropiaDetalle" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_FormatoActivPropiaPie">
+      <soap:operation soapAction="http://tempuri.org/Get_FormatoActivPropiaPie" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_PdvXOperativoSel">
+      <soap:operation soapAction="http://tempuri.org/Get_PdvXOperativoSel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ProductosXPdvXOperativoSel">
+      <soap:operation soapAction="http://tempuri.org/Get_ProductosXPdvXOperativoSel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_CanalXFormato">
+      <soap:operation soapAction="http://tempuri.org/Get_CanalXFormato" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ProductoCompetidorXProducto">
+      <soap:operation soapAction="http://tempuri.org/Get_ProductoCompetidorXProducto" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchDuplicadoInfopropia">
+      <soap:operation soapAction="http://tempuri.org/Get_SearchDuplicadoInfopropia" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ReporteExibicion">
+      <soap:operation soapAction="http://tempuri.org/Get_ReporteExibicion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ReporteCompetencias">
+      <soap:operation soapAction="http://tempuri.org/Get_ReporteCompetencias" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ReportePrecio">
+      <soap:operation soapAction="http://tempuri.org/Get_ReportePrecio" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ReporteQuiebre">
+      <soap:operation soapAction="http://tempuri.org/Get_ReporteQuiebre" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ReporteSOD">
+      <soap:operation soapAction="http://tempuri.org/Get_ReporteSOD" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ReporteStock">
+      <soap:operation soapAction="http://tempuri.org/Get_ReporteStock" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ReporteLayout">
+      <soap:operation soapAction="http://tempuri.org/Get_ReporteLayout" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ReporteFotografico">
+      <soap:operation soapAction="http://tempuri.org/Get_ReporteFotografico" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="Facade_Proceso_OperativoSoap12" type="tns:Facade_Proceso_OperativoSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Get_Planning">
+      <soap12:operation soapAction="http://tempuri.org/Get_Planning" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_FormatosPlanning">
+      <soap12:operation soapAction="http://tempuri.org/Get_FormatosPlanning" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_StaffPlanning">
+      <soap12:operation soapAction="http://tempuri.org/Get_StaffPlanning" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ActivComercio">
+      <soap12:operation soapAction="http://tempuri.org/Get_ActivComercio" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_FormatoActivComercio">
+      <soap12:operation soapAction="http://tempuri.org/Get_FormatoActivComercio" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_idCompetition_Information">
+      <soap12:operation soapAction="http://tempuri.org/Get_idCompetition_Information" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_FotosCompetition_Information">
+      <soap12:operation soapAction="http://tempuri.org/Get_FotosCompetition_Information" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_DuplicadosCompetition_Information">
+      <soap12:operation soapAction="http://tempuri.org/Get_DuplicadosCompetition_Information" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchCompetition_Information">
+      <soap12:operation soapAction="http://tempuri.org/Get_SearchCompetition_Information" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchInfoCompetition_Information">
+      <soap12:operation soapAction="http://tempuri.org/Get_SearchInfoCompetition_Information" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchInfoPOPCompetition_Information">
+      <soap12:operation soapAction="http://tempuri.org/Get_SearchInfoPOPCompetition_Information" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchInfoPOPActualCompetition_Information">
+      <soap12:operation soapAction="http://tempuri.org/Get_SearchInfoPOPActualCompetition_Information" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchcategoryProductPlanning">
+      <soap12:operation soapAction="http://tempuri.org/Get_SearchcategoryProductPlanning" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_idPhotographs_Service">
+      <soap12:operation soapAction="http://tempuri.org/Get_idPhotographs_Service" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_FotosPhotographs_Service">
+      <soap12:operation soapAction="http://tempuri.org/Get_FotosPhotographs_Service" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchPhotographs_Service">
+      <soap12:operation soapAction="http://tempuri.org/Get_SearchPhotographs_Service" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchInfoPhotographs_Service">
+      <soap12:operation soapAction="http://tempuri.org/Get_SearchInfoPhotographs_Service" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchContenidoFormatosPropios">
+      <soap12:operation soapAction="http://tempuri.org/Get_SearchContenidoFormatosPropios" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchContenidoFormatosPropiosIndicador">
+      <soap12:operation soapAction="http://tempuri.org/Get_SearchContenidoFormatosPropiosIndicador" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchActivLevantPropio">
+      <soap12:operation soapAction="http://tempuri.org/Get_SearchActivLevantPropio" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchInfoLevantamientoPropia">
+      <soap12:operation soapAction="http://tempuri.org/Get_SearchInfoLevantamientoPropia" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchInfoContenidoFormatosPropiosIndicador">
+      <soap12:operation soapAction="http://tempuri.org/Get_SearchInfoContenidoFormatosPropiosIndicador" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchInfoContenidoFormatosPropiosIndicadorCompe">
+      <soap12:operation soapAction="http://tempuri.org/Get_SearchInfoContenidoFormatosPropiosIndicadorCompe" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_StaffSupervisorPlanning">
+      <soap12:operation soapAction="http://tempuri.org/Get_StaffSupervisorPlanning" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_FormatoActivPropiaEncabezado">
+      <soap12:operation soapAction="http://tempuri.org/Get_FormatoActivPropiaEncabezado" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_FormatoActivPropiaDetalle">
+      <soap12:operation soapAction="http://tempuri.org/Get_FormatoActivPropiaDetalle" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_FormatoActivPropiaPie">
+      <soap12:operation soapAction="http://tempuri.org/Get_FormatoActivPropiaPie" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_PdvXOperativoSel">
+      <soap12:operation soapAction="http://tempuri.org/Get_PdvXOperativoSel" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ProductosXPdvXOperativoSel">
+      <soap12:operation soapAction="http://tempuri.org/Get_ProductosXPdvXOperativoSel" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_CanalXFormato">
+      <soap12:operation soapAction="http://tempuri.org/Get_CanalXFormato" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ProductoCompetidorXProducto">
+      <soap12:operation soapAction="http://tempuri.org/Get_ProductoCompetidorXProducto" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchDuplicadoInfopropia">
+      <soap12:operation soapAction="http://tempuri.org/Get_SearchDuplicadoInfopropia" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ReporteExibicion">
+      <soap12:operation soapAction="http://tempuri.org/Get_ReporteExibicion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ReporteCompetencias">
+      <soap12:operation soapAction="http://tempuri.org/Get_ReporteCompetencias" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ReportePrecio">
+      <soap12:operation soapAction="http://tempuri.org/Get_ReportePrecio" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ReporteQuiebre">
+      <soap12:operation soapAction="http://tempuri.org/Get_ReporteQuiebre" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ReporteSOD">
+      <soap12:operation soapAction="http://tempuri.org/Get_ReporteSOD" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ReporteStock">
+      <soap12:operation soapAction="http://tempuri.org/Get_ReporteStock" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ReporteLayout">
+      <soap12:operation soapAction="http://tempuri.org/Get_ReporteLayout" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ReporteFotografico">
+      <soap12:operation soapAction="http://tempuri.org/Get_ReporteFotografico" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Facade_Proceso_Operativo">
+    <wsdl:port name="Facade_Proceso_OperativoSoap" binding="tns:Facade_Proceso_OperativoSoap">
+      <soap:address location="http://localhost:14000/Facade_Proceso_Operativo.asmx" />
+    </wsdl:port>
+    <wsdl:port name="Facade_Proceso_OperativoSoap12" binding="tns:Facade_Proceso_OperativoSoap12">
+      <soap12:address location="http://localhost:14000/Facade_Proceso_Operativo.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

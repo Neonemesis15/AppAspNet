@@ -1,0 +1,2558 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="Get_GenerarPasswordOlvido">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="semail" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="snameuser" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_GenerarPasswordOlvidoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_GenerarPasswordOlvidoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerIdProduct">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sProduct_Name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sProduct_CreateBy" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerIdProductResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ObtenerIdProductResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObteneridSegmentsType">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sSegment_Type" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sSegmentType_CreateBy" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObteneridSegmentsTypeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ObteneridSegmentsTypeResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_CrearGrid">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ivalor" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_CrearGridResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_CrearGridResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObteneridPdv">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="spdv_Code" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPdv_CreateBy" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObteneridPdvResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ObteneridPdvResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerYears">
+        <s:complexType />
+      </s:element>
+      <s:element name="Get_ObtenerYearsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ObtenerYearsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerMeses">
+        <s:complexType />
+      </s:element>
+      <s:element name="Get_ObtenerMesesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ObtenerMesesResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_obtener_Mes_Selecionado">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="imes" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_obtener_Mes_SelecionadoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_obtener_Mes_SelecionadoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_obtener_Dias_Periodo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="icompanyid" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="scanal" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ireporte" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="saño" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="smes" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="iperiodo" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_obtener_Dias_PeriodoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_obtener_Dias_PeriodoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerReport_Description">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iReport_Id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerReport_DescriptionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ObtenerReport_DescriptionResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_Actualiza_ModuloPerson">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sPerfil_id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sModulo_id" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_Actualiza_ModuloPersonResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_Actualiza_ModuloPersonResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_Insertar_Sesion_User">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sname_user" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_Insertar_Sesion_UserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_Insertar_Sesion_UserResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_User_Sesion_Conteo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="susername" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_User_Sesion_ConteoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_User_Sesion_ConteoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_Obtener_User_Sesion">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="susername" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_Obtener_User_SesionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_Obtener_User_SesionResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_Delete_Sesion_User">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="susername" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_Delete_Sesion_UserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_Delete_Sesion_UserResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_SearchCountryDirCuenta">
+        <s:complexType />
+      </s:element>
+      <s:element name="Get_SearchCountryDirCuentaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_SearchCountryDirCuentaResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_SearchDirCuentaxPais">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sCod_Country" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_SearchDirCuentaxPaisResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_SearchDirCuentaxPaisResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_SearchDirCuentaconAsingacion">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sCod_Country" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_SearchDirCuentaconAsingacionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_SearchDirCuentaconAsingacionResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_SearchEjeCuentaxPais">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sCod_Country" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_SearchEjeCuentaxPaisResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_SearchEjeCuentaxPaisResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_Llenar_Combos">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="svalor" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_Llenar_CombosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_Llenar_CombosResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_DivPolitica">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="scod_Country" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_DivPoliticaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_DivPoliticaResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_llenar_ComboDpto">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sCODCOUNTRY" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_llenar_ComboDptoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_llenar_ComboDptoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConsultaPaísdeUsuario">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iPerson_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConsultaPaísdeUsuarioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConsultaPaísdeUsuarioResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LlenaComServicio">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sCODCOUNTRY" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LlenaComServicioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LlenaComServicioResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConsultaInformedeInfoUsu">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iCompany_id" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="iPerson_id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="scod_Channel" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="icod_Strategy" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="iid_userinforme" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConsultaInformedeInfoUsuResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConsultaInformedeInfoUsuResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LlenaComboSubCategoriaPresent">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sidProductCategory" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LlenaComboSubCategoriaPresentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LlenaComboSubCategoriaPresentResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LlenaComboClienteenProducto">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iidBrand" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LlenaComboClienteenProductoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LlenaComboClienteenProductoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LlenaComboPresentProduct">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sidProductCategory" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="iidBrand" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LlenaComboPresentProductResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LlenaComboPresentProductResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="llenaCombosPAncla">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iCompany_id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="sid_ProductCategory" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="lid_Subcategory" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="iid_Brand" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="scod_Product" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="llenaCombosPAnclaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="llenaCombosPAnclaResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="llenaConsultaCombosPAncla">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iCompany_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="llenaConsultaCombosPAnclaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="llenaConsultaCombosPAnclaResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="llenaCombosSector">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iCompany_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="llenaCombosSectorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="llenaCombosSectorResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="llenaCombosPDVCliente">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iCompany_id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="scod_country" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="scod_channel" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="iidNodeComType" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="sNodeCommercial" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="llenaCombosPDVClienteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="llenaCombosPDVClienteResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="llenaPDVClienteConsulta">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iCompany_id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="scod_country" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="scod_channel" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="iidNodeComType" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="sNodeCommercial" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="llenaPDVClienteConsultaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="llenaPDVClienteConsultaResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="llenaCheckInformes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iCompany_id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="scod_channel" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="icod_Strategy" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="llenaCheckInformesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="llenaCheckInformesResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LlenaComboUsuarioXCliente">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iCompany_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LlenaComboUsuarioXClienteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LlenaComboUsuarioXClienteResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConsultaUltimoiddeClieInfoUser">
+        <s:complexType />
+      </s:element>
+      <s:element name="ConsultaUltimoiddeClieInfoUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConsultaUltimoiddeClieInfoUserResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LLenacomboCanalporCliente">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iCompany_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LLenacomboCanalporClienteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LLenacomboCanalporClienteResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="llenaCombosConsultaInfoUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iCompany_id" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="iPerson_id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="scod_channel" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="llenaCombosConsultaInfoUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="llenaCombosConsultaInfoUserResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConsultaCiudadesdeInfoUsu">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iCompany_id" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="iPerson_id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="scod_Channel" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="icod_Strategy" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConsultaCiudadesdeInfoUsuResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConsultaCiudadesdeInfoUsuResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LLenacomboBuscarMarcaFamily">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iCompany_id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="sid_ProductCategory" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LLenacomboBuscarMarcaFamilyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LLenacomboBuscarMarcaFamilyResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="llenaCombosAsignacionCobertura">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iCompany_id" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="iPerson_id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="scod_Channel" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="icod_Strategy" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="iReport_Id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="llenaCombosAsignacionCoberturaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="llenaCombosAsignacionCoberturaResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="llenaCombosConsultaAsignacionCobertura">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iCompany_id" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="iPerson_id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="scod_Channel" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="icod_Strategy" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="iReport_Id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="llenaCombosConsultaAsignacionCoberturaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="llenaCombosConsultaAsignacionCoberturaResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="llenaCombosAsignacionReportOficina">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iCompany_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="llenaCombosAsignacionReportOficinaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="llenaCombosAsignacionReportOficinaResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="llenaCombosConsultaAsignacionReportOficina">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iCompany_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="llenaCombosConsultaAsignacionReportOficinaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="llenaCombosConsultaAsignacionReportOficinaResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LLenacomboCategoriaConsultaMarca">
+        <s:complexType />
+      </s:element>
+      <s:element name="LLenacomboCategoriaConsultaMarcaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LLenacomboCategoriaConsultaMarcaResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LLenacomboMarcaporCategoria">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sid_ProductCategory" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LLenacomboMarcaporCategoriaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LLenacomboMarcaporCategoriaResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConsultaUltimoiddeNivel">
+        <s:complexType />
+      </s:element>
+      <s:element name="ConsultaUltimoiddeNivelResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConsultaUltimoiddeNivelResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConsultallenarcomboNivel">
+        <s:complexType />
+      </s:element>
+      <s:element name="ConsultallenarcomboNivelResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConsultallenarcomboNivelResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_NodeComercialBy_idPlanning">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sidPlanning" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_NodeComercialBy_idPlanningResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_NodeComercialBy_idPlanningResult" type="tns:ArrayOfENodeComercial" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfENodeComercial">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ENodeComercial" nillable="true" type="tns:ENodeComercial" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ENodeComercial">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="NodeCommercial" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="commercialNodeName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="idNodeComType" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="NodeComType_name" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="id_corporacion" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="corporacion_name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NodeCommercialDireccion" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="NodeCommercialStatus" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="NodeCommercialCreateBy" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="NodeCommercialDateBy" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="NodeCommercialModiBy" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="NodeCommercialDatemodiBy" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="NodeCommercial_codCountry" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NodeCommercial_codDepartment" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NodeCommercial_codProvince" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NodeCommercial_codDistrict" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NodeCommercial_codCommunity" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Country_name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Department_name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Province_name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="District_name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Community_name" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="get_tipo_material_pop">
+        <s:complexType />
+      </s:element>
+      <s:element name="get_tipo_material_popResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="get_tipo_material_popResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="Get_GenerarPasswordOlvidoSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_GenerarPasswordOlvido" />
+  </wsdl:message>
+  <wsdl:message name="Get_GenerarPasswordOlvidoSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_GenerarPasswordOlvidoResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerIdProductSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerIdProduct" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerIdProductSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerIdProductResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObteneridSegmentsTypeSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ObteneridSegmentsType" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObteneridSegmentsTypeSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ObteneridSegmentsTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_CrearGridSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_CrearGrid" />
+  </wsdl:message>
+  <wsdl:message name="Get_CrearGridSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_CrearGridResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObteneridPdvSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ObteneridPdv" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObteneridPdvSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ObteneridPdvResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerYearsSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerYears" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerYearsSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerYearsResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerMesesSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerMeses" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerMesesSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerMesesResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_obtener_Mes_SelecionadoSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_obtener_Mes_Selecionado" />
+  </wsdl:message>
+  <wsdl:message name="Get_obtener_Mes_SelecionadoSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_obtener_Mes_SelecionadoResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_obtener_Dias_PeriodoSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_obtener_Dias_Periodo" />
+  </wsdl:message>
+  <wsdl:message name="Get_obtener_Dias_PeriodoSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_obtener_Dias_PeriodoResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerReport_DescriptionSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerReport_Description" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerReport_DescriptionSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerReport_DescriptionResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_Actualiza_ModuloPersonSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_Actualiza_ModuloPerson" />
+  </wsdl:message>
+  <wsdl:message name="Get_Actualiza_ModuloPersonSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_Actualiza_ModuloPersonResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_Insertar_Sesion_UserSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_Insertar_Sesion_User" />
+  </wsdl:message>
+  <wsdl:message name="Get_Insertar_Sesion_UserSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_Insertar_Sesion_UserResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_User_Sesion_ConteoSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_User_Sesion_Conteo" />
+  </wsdl:message>
+  <wsdl:message name="Get_User_Sesion_ConteoSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_User_Sesion_ConteoResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_Obtener_User_SesionSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_Obtener_User_Sesion" />
+  </wsdl:message>
+  <wsdl:message name="Get_Obtener_User_SesionSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_Obtener_User_SesionResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_Delete_Sesion_UserSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_Delete_Sesion_User" />
+  </wsdl:message>
+  <wsdl:message name="Get_Delete_Sesion_UserSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_Delete_Sesion_UserResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_SearchCountryDirCuentaSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_SearchCountryDirCuenta" />
+  </wsdl:message>
+  <wsdl:message name="Get_SearchCountryDirCuentaSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_SearchCountryDirCuentaResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_SearchDirCuentaxPaisSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_SearchDirCuentaxPais" />
+  </wsdl:message>
+  <wsdl:message name="Get_SearchDirCuentaxPaisSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_SearchDirCuentaxPaisResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_SearchDirCuentaconAsingacionSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_SearchDirCuentaconAsingacion" />
+  </wsdl:message>
+  <wsdl:message name="Get_SearchDirCuentaconAsingacionSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_SearchDirCuentaconAsingacionResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_SearchEjeCuentaxPaisSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_SearchEjeCuentaxPais" />
+  </wsdl:message>
+  <wsdl:message name="Get_SearchEjeCuentaxPaisSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_SearchEjeCuentaxPaisResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_Llenar_CombosSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_Llenar_Combos" />
+  </wsdl:message>
+  <wsdl:message name="Get_Llenar_CombosSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_Llenar_CombosResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_DivPoliticaSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_DivPolitica" />
+  </wsdl:message>
+  <wsdl:message name="Get_DivPoliticaSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_DivPoliticaResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_llenar_ComboDptoSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_llenar_ComboDpto" />
+  </wsdl:message>
+  <wsdl:message name="Get_llenar_ComboDptoSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_llenar_ComboDptoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConsultaPaísdeUsuarioSoapIn">
+    <wsdl:part name="parameters" element="tns:ConsultaPaísdeUsuario" />
+  </wsdl:message>
+  <wsdl:message name="ConsultaPaísdeUsuarioSoapOut">
+    <wsdl:part name="parameters" element="tns:ConsultaPaísdeUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="LlenaComServicioSoapIn">
+    <wsdl:part name="parameters" element="tns:LlenaComServicio" />
+  </wsdl:message>
+  <wsdl:message name="LlenaComServicioSoapOut">
+    <wsdl:part name="parameters" element="tns:LlenaComServicioResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConsultaInformedeInfoUsuSoapIn">
+    <wsdl:part name="parameters" element="tns:ConsultaInformedeInfoUsu" />
+  </wsdl:message>
+  <wsdl:message name="ConsultaInformedeInfoUsuSoapOut">
+    <wsdl:part name="parameters" element="tns:ConsultaInformedeInfoUsuResponse" />
+  </wsdl:message>
+  <wsdl:message name="LlenaComboSubCategoriaPresentSoapIn">
+    <wsdl:part name="parameters" element="tns:LlenaComboSubCategoriaPresent" />
+  </wsdl:message>
+  <wsdl:message name="LlenaComboSubCategoriaPresentSoapOut">
+    <wsdl:part name="parameters" element="tns:LlenaComboSubCategoriaPresentResponse" />
+  </wsdl:message>
+  <wsdl:message name="LlenaComboClienteenProductoSoapIn">
+    <wsdl:part name="parameters" element="tns:LlenaComboClienteenProducto" />
+  </wsdl:message>
+  <wsdl:message name="LlenaComboClienteenProductoSoapOut">
+    <wsdl:part name="parameters" element="tns:LlenaComboClienteenProductoResponse" />
+  </wsdl:message>
+  <wsdl:message name="LlenaComboPresentProductSoapIn">
+    <wsdl:part name="parameters" element="tns:LlenaComboPresentProduct" />
+  </wsdl:message>
+  <wsdl:message name="LlenaComboPresentProductSoapOut">
+    <wsdl:part name="parameters" element="tns:LlenaComboPresentProductResponse" />
+  </wsdl:message>
+  <wsdl:message name="llenaCombosPAnclaSoapIn">
+    <wsdl:part name="parameters" element="tns:llenaCombosPAncla" />
+  </wsdl:message>
+  <wsdl:message name="llenaCombosPAnclaSoapOut">
+    <wsdl:part name="parameters" element="tns:llenaCombosPAnclaResponse" />
+  </wsdl:message>
+  <wsdl:message name="llenaConsultaCombosPAnclaSoapIn">
+    <wsdl:part name="parameters" element="tns:llenaConsultaCombosPAncla" />
+  </wsdl:message>
+  <wsdl:message name="llenaConsultaCombosPAnclaSoapOut">
+    <wsdl:part name="parameters" element="tns:llenaConsultaCombosPAnclaResponse" />
+  </wsdl:message>
+  <wsdl:message name="llenaCombosSectorSoapIn">
+    <wsdl:part name="parameters" element="tns:llenaCombosSector" />
+  </wsdl:message>
+  <wsdl:message name="llenaCombosSectorSoapOut">
+    <wsdl:part name="parameters" element="tns:llenaCombosSectorResponse" />
+  </wsdl:message>
+  <wsdl:message name="llenaCombosPDVClienteSoapIn">
+    <wsdl:part name="parameters" element="tns:llenaCombosPDVCliente" />
+  </wsdl:message>
+  <wsdl:message name="llenaCombosPDVClienteSoapOut">
+    <wsdl:part name="parameters" element="tns:llenaCombosPDVClienteResponse" />
+  </wsdl:message>
+  <wsdl:message name="llenaPDVClienteConsultaSoapIn">
+    <wsdl:part name="parameters" element="tns:llenaPDVClienteConsulta" />
+  </wsdl:message>
+  <wsdl:message name="llenaPDVClienteConsultaSoapOut">
+    <wsdl:part name="parameters" element="tns:llenaPDVClienteConsultaResponse" />
+  </wsdl:message>
+  <wsdl:message name="llenaCheckInformesSoapIn">
+    <wsdl:part name="parameters" element="tns:llenaCheckInformes" />
+  </wsdl:message>
+  <wsdl:message name="llenaCheckInformesSoapOut">
+    <wsdl:part name="parameters" element="tns:llenaCheckInformesResponse" />
+  </wsdl:message>
+  <wsdl:message name="LlenaComboUsuarioXClienteSoapIn">
+    <wsdl:part name="parameters" element="tns:LlenaComboUsuarioXCliente" />
+  </wsdl:message>
+  <wsdl:message name="LlenaComboUsuarioXClienteSoapOut">
+    <wsdl:part name="parameters" element="tns:LlenaComboUsuarioXClienteResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConsultaUltimoiddeClieInfoUserSoapIn">
+    <wsdl:part name="parameters" element="tns:ConsultaUltimoiddeClieInfoUser" />
+  </wsdl:message>
+  <wsdl:message name="ConsultaUltimoiddeClieInfoUserSoapOut">
+    <wsdl:part name="parameters" element="tns:ConsultaUltimoiddeClieInfoUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="LLenacomboCanalporClienteSoapIn">
+    <wsdl:part name="parameters" element="tns:LLenacomboCanalporCliente" />
+  </wsdl:message>
+  <wsdl:message name="LLenacomboCanalporClienteSoapOut">
+    <wsdl:part name="parameters" element="tns:LLenacomboCanalporClienteResponse" />
+  </wsdl:message>
+  <wsdl:message name="llenaCombosConsultaInfoUserSoapIn">
+    <wsdl:part name="parameters" element="tns:llenaCombosConsultaInfoUser" />
+  </wsdl:message>
+  <wsdl:message name="llenaCombosConsultaInfoUserSoapOut">
+    <wsdl:part name="parameters" element="tns:llenaCombosConsultaInfoUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConsultaCiudadesdeInfoUsuSoapIn">
+    <wsdl:part name="parameters" element="tns:ConsultaCiudadesdeInfoUsu" />
+  </wsdl:message>
+  <wsdl:message name="ConsultaCiudadesdeInfoUsuSoapOut">
+    <wsdl:part name="parameters" element="tns:ConsultaCiudadesdeInfoUsuResponse" />
+  </wsdl:message>
+  <wsdl:message name="LLenacomboBuscarMarcaFamilySoapIn">
+    <wsdl:part name="parameters" element="tns:LLenacomboBuscarMarcaFamily" />
+  </wsdl:message>
+  <wsdl:message name="LLenacomboBuscarMarcaFamilySoapOut">
+    <wsdl:part name="parameters" element="tns:LLenacomboBuscarMarcaFamilyResponse" />
+  </wsdl:message>
+  <wsdl:message name="llenaCombosAsignacionCoberturaSoapIn">
+    <wsdl:part name="parameters" element="tns:llenaCombosAsignacionCobertura" />
+  </wsdl:message>
+  <wsdl:message name="llenaCombosAsignacionCoberturaSoapOut">
+    <wsdl:part name="parameters" element="tns:llenaCombosAsignacionCoberturaResponse" />
+  </wsdl:message>
+  <wsdl:message name="llenaCombosConsultaAsignacionCoberturaSoapIn">
+    <wsdl:part name="parameters" element="tns:llenaCombosConsultaAsignacionCobertura" />
+  </wsdl:message>
+  <wsdl:message name="llenaCombosConsultaAsignacionCoberturaSoapOut">
+    <wsdl:part name="parameters" element="tns:llenaCombosConsultaAsignacionCoberturaResponse" />
+  </wsdl:message>
+  <wsdl:message name="llenaCombosAsignacionReportOficinaSoapIn">
+    <wsdl:part name="parameters" element="tns:llenaCombosAsignacionReportOficina" />
+  </wsdl:message>
+  <wsdl:message name="llenaCombosAsignacionReportOficinaSoapOut">
+    <wsdl:part name="parameters" element="tns:llenaCombosAsignacionReportOficinaResponse" />
+  </wsdl:message>
+  <wsdl:message name="llenaCombosConsultaAsignacionReportOficinaSoapIn">
+    <wsdl:part name="parameters" element="tns:llenaCombosConsultaAsignacionReportOficina" />
+  </wsdl:message>
+  <wsdl:message name="llenaCombosConsultaAsignacionReportOficinaSoapOut">
+    <wsdl:part name="parameters" element="tns:llenaCombosConsultaAsignacionReportOficinaResponse" />
+  </wsdl:message>
+  <wsdl:message name="LLenacomboCategoriaConsultaMarcaSoapIn">
+    <wsdl:part name="parameters" element="tns:LLenacomboCategoriaConsultaMarca" />
+  </wsdl:message>
+  <wsdl:message name="LLenacomboCategoriaConsultaMarcaSoapOut">
+    <wsdl:part name="parameters" element="tns:LLenacomboCategoriaConsultaMarcaResponse" />
+  </wsdl:message>
+  <wsdl:message name="LLenacomboMarcaporCategoriaSoapIn">
+    <wsdl:part name="parameters" element="tns:LLenacomboMarcaporCategoria" />
+  </wsdl:message>
+  <wsdl:message name="LLenacomboMarcaporCategoriaSoapOut">
+    <wsdl:part name="parameters" element="tns:LLenacomboMarcaporCategoriaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConsultaUltimoiddeNivelSoapIn">
+    <wsdl:part name="parameters" element="tns:ConsultaUltimoiddeNivel" />
+  </wsdl:message>
+  <wsdl:message name="ConsultaUltimoiddeNivelSoapOut">
+    <wsdl:part name="parameters" element="tns:ConsultaUltimoiddeNivelResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConsultallenarcomboNivelSoapIn">
+    <wsdl:part name="parameters" element="tns:ConsultallenarcomboNivel" />
+  </wsdl:message>
+  <wsdl:message name="ConsultallenarcomboNivelSoapOut">
+    <wsdl:part name="parameters" element="tns:ConsultallenarcomboNivelResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_NodeComercialBy_idPlanningSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_NodeComercialBy_idPlanning" />
+  </wsdl:message>
+  <wsdl:message name="Get_NodeComercialBy_idPlanningSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_NodeComercialBy_idPlanningResponse" />
+  </wsdl:message>
+  <wsdl:message name="get_tipo_material_popSoapIn">
+    <wsdl:part name="parameters" element="tns:get_tipo_material_pop" />
+  </wsdl:message>
+  <wsdl:message name="get_tipo_material_popSoapOut">
+    <wsdl:part name="parameters" element="tns:get_tipo_material_popResponse" />
+  </wsdl:message>
+  <wsdl:portType name="Facade_Procesos_AdministrativosSoap">
+    <wsdl:operation name="Get_GenerarPasswordOlvido">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para Generar nueva Clave ante un olvido de Usuario</wsdl:documentation>
+      <wsdl:input message="tns:Get_GenerarPasswordOlvidoSoapIn" />
+      <wsdl:output message="tns:Get_GenerarPasswordOlvidoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerIdProduct">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para Consultar el ultimo producto registrado</wsdl:documentation>
+      <wsdl:input message="tns:Get_ObtenerIdProductSoapIn" />
+      <wsdl:output message="tns:Get_ObtenerIdProductSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObteneridSegmentsType">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para Consultar el ultimo tipo de segmento registrado</wsdl:documentation>
+      <wsdl:input message="tns:Get_ObteneridSegmentsTypeSoapIn" />
+      <wsdl:output message="tns:Get_ObteneridSegmentsTypeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_CrearGrid">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para crear el gridview de los clientes asociados a un pdv</wsdl:documentation>
+      <wsdl:input message="tns:Get_CrearGridSoapIn" />
+      <wsdl:output message="tns:Get_CrearGridSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObteneridPdv">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para Consultar el ultimo pdv registrado</wsdl:documentation>
+      <wsdl:input message="tns:Get_ObteneridPdvSoapIn" />
+      <wsdl:output message="tns:Get_ObteneridPdvSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerYears">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para Obtener Años</wsdl:documentation>
+      <wsdl:input message="tns:Get_ObtenerYearsSoapIn" />
+      <wsdl:output message="tns:Get_ObtenerYearsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerMeses">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para obtener los meses de un respectivo año</wsdl:documentation>
+      <wsdl:input message="tns:Get_ObtenerMesesSoapIn" />
+      <wsdl:output message="tns:Get_ObtenerMesesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_obtener_Mes_Selecionado">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para obtener Mes Seleccionado</wsdl:documentation>
+      <wsdl:input message="tns:Get_obtener_Mes_SelecionadoSoapIn" />
+      <wsdl:output message="tns:Get_obtener_Mes_SelecionadoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_obtener_Dias_Periodo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para obtener Dias x Periodo</wsdl:documentation>
+      <wsdl:input message="tns:Get_obtener_Dias_PeriodoSoapIn" />
+      <wsdl:output message="tns:Get_obtener_Dias_PeriodoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerReport_Description">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para obtener la descripción del informe seleccionado</wsdl:documentation>
+      <wsdl:input message="tns:Get_ObtenerReport_DescriptionSoapIn" />
+      <wsdl:output message="tns:Get_ObtenerReport_DescriptionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_Actualiza_ModuloPerson">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para actualizar modulos en person cuando se ha modificado el maestro de perfiles</wsdl:documentation>
+      <wsdl:input message="tns:Get_Actualiza_ModuloPersonSoapIn" />
+      <wsdl:output message="tns:Get_Actualiza_ModuloPersonSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_Insertar_Sesion_User">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para  Insertar Secciones</wsdl:documentation>
+      <wsdl:input message="tns:Get_Insertar_Sesion_UserSoapIn" />
+      <wsdl:output message="tns:Get_Insertar_Sesion_UserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_User_Sesion_Conteo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para Obtener Numero de sesiones SIGE por usuario</wsdl:documentation>
+      <wsdl:input message="tns:Get_User_Sesion_ConteoSoapIn" />
+      <wsdl:output message="tns:Get_User_Sesion_ConteoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_Obtener_User_Sesion">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para Obtener Usuarios en sesión</wsdl:documentation>
+      <wsdl:input message="tns:Get_Obtener_User_SesionSoapIn" />
+      <wsdl:output message="tns:Get_Obtener_User_SesionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_Delete_Sesion_User">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para Eliminar la seccion de usuario cuando cierra sesion</wsdl:documentation>
+      <wsdl:input message="tns:Get_Delete_Sesion_UserSoapIn" />
+      <wsdl:output message="tns:Get_Delete_Sesion_UserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchCountryDirCuenta">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para consultaR paises de los directores de cuenta activos en SIGE</wsdl:documentation>
+      <wsdl:input message="tns:Get_SearchCountryDirCuentaSoapIn" />
+      <wsdl:output message="tns:Get_SearchCountryDirCuentaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchDirCuentaxPais">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para consultar los directores de cuenta activos en SIGE para un país seleccionado</wsdl:documentation>
+      <wsdl:input message="tns:Get_SearchDirCuentaxPaisSoapIn" />
+      <wsdl:output message="tns:Get_SearchDirCuentaxPaisSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchDirCuentaconAsingacion">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para consultar los directores de cuenta activos en SIGE para un país seleccionado y que tienen asignacion de personal ejecutivo de cuenta</wsdl:documentation>
+      <wsdl:input message="tns:Get_SearchDirCuentaconAsingacionSoapIn" />
+      <wsdl:output message="tns:Get_SearchDirCuentaconAsingacionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchEjeCuentaxPais">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para consultar los ejecutivos de cuenta activos en SIGE para un país seleccionado y que no estan asignados a un director de cuenta</wsdl:documentation>
+      <wsdl:input message="tns:Get_SearchEjeCuentaxPaisSoapIn" />
+      <wsdl:output message="tns:Get_SearchEjeCuentaxPaisSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_Llenar_Combos">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para llenar combos</wsdl:documentation>
+      <wsdl:input message="tns:Get_Llenar_CombosSoapIn" />
+      <wsdl:output message="tns:Get_Llenar_CombosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_DivPolitica">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para  verificar Estado de División Politica</wsdl:documentation>
+      <wsdl:input message="tns:Get_DivPoliticaSoapIn" />
+      <wsdl:output message="tns:Get_DivPoliticaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_llenar_ComboDpto">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para  llenar departamento segun país seleccionado</wsdl:documentation>
+      <wsdl:input message="tns:Get_llenar_ComboDptoSoapIn" />
+      <wsdl:output message="tns:Get_llenar_ComboDptoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultaPaísdeUsuario">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Consulta usuarios por Pais</wsdl:documentation>
+      <wsdl:input message="tns:ConsultaPaísdeUsuarioSoapIn" />
+      <wsdl:output message="tns:ConsultaPaísdeUsuarioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LlenaComServicio">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">llena combo servicio por usuario en maestro Asignación informe a Usuario</wsdl:documentation>
+      <wsdl:input message="tns:LlenaComServicioSoapIn" />
+      <wsdl:output message="tns:LlenaComServicioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultaInformedeInfoUsu">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Consulta Informe de Asignación de informe a Usuario</wsdl:documentation>
+      <wsdl:input message="tns:ConsultaInformedeInfoUsuSoapIn" />
+      <wsdl:output message="tns:ConsultaInformedeInfoUsuSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LlenaComboSubCategoriaPresent">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Consulta llena combo de Subcategoria en maestro de presentación</wsdl:documentation>
+      <wsdl:input message="tns:LlenaComboSubCategoriaPresentSoapIn" />
+      <wsdl:output message="tns:LlenaComboSubCategoriaPresentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LlenaComboClienteenProducto">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Consulta llena combo de cliente en maestro de producto</wsdl:documentation>
+      <wsdl:input message="tns:LlenaComboClienteenProductoSoapIn" />
+      <wsdl:output message="tns:LlenaComboClienteenProductoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LlenaComboPresentProduct">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Consulta llena combo  de presentación en producto</wsdl:documentation>
+      <wsdl:input message="tns:LlenaComboPresentProductSoapIn" />
+      <wsdl:output message="tns:LlenaComboPresentProductSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="llenaCombosPAncla">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">llena combos del maestro de productos Ancla</wsdl:documentation>
+      <wsdl:input message="tns:llenaCombosPAnclaSoapIn" />
+      <wsdl:output message="tns:llenaCombosPAnclaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="llenaConsultaCombosPAncla">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">llena combos de Busqueda del maestro de productos Ancla</wsdl:documentation>
+      <wsdl:input message="tns:llenaConsultaCombosPAnclaSoapIn" />
+      <wsdl:output message="tns:llenaConsultaCombosPAnclaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="llenaCombosSector">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">llena combos de Malla en maestro Sector</wsdl:documentation>
+      <wsdl:input message="tns:llenaCombosSectorSoapIn" />
+      <wsdl:output message="tns:llenaCombosSectorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="llenaCombosPDVCliente">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">llena combos de filtro en maestro de realción de PDV a Cliente</wsdl:documentation>
+      <wsdl:input message="tns:llenaCombosPDVClienteSoapIn" />
+      <wsdl:output message="tns:llenaCombosPDVClienteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="llenaPDVClienteConsulta">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">llena PDV en la consulta de maestro PDV_CLiente</wsdl:documentation>
+      <wsdl:input message="tns:llenaPDVClienteConsultaSoapIn" />
+      <wsdl:output message="tns:llenaPDVClienteConsultaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="llenaCheckInformes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">llena combos de check de informes por cod_Channel, company_id y Cod_Strategy</wsdl:documentation>
+      <wsdl:input message="tns:llenaCheckInformesSoapIn" />
+      <wsdl:output message="tns:llenaCheckInformesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LlenaComboUsuarioXCliente">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Consulta llena combo de usuario por cliente en el maestro de asignación de informes a usuario</wsdl:documentation>
+      <wsdl:input message="tns:LlenaComboUsuarioXClienteSoapIn" />
+      <wsdl:output message="tns:LlenaComboUsuarioXClienteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultaUltimoiddeClieInfoUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Consulta id de la tambla asignación de informes a usuario para insertar ciudades por registro</wsdl:documentation>
+      <wsdl:input message="tns:ConsultaUltimoiddeClieInfoUserSoapIn" />
+      <wsdl:output message="tns:ConsultaUltimoiddeClieInfoUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LLenacomboCanalporCliente">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">LLENA LOS CANALES POR CLIENTE en maestro de asignación de informes a usuario</wsdl:documentation>
+      <wsdl:input message="tns:LLenacomboCanalporClienteSoapIn" />
+      <wsdl:output message="tns:LLenacomboCanalporClienteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="llenaCombosConsultaInfoUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">llena combos de consulta Cliente, Usuario, Canal y servicio en maestro de asignación informes a usuarios</wsdl:documentation>
+      <wsdl:input message="tns:llenaCombosConsultaInfoUserSoapIn" />
+      <wsdl:output message="tns:llenaCombosConsultaInfoUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultaCiudadesdeInfoUsu">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Consulta ciudades de Asignación de informe a Usuario</wsdl:documentation>
+      <wsdl:input message="tns:ConsultaCiudadesdeInfoUsuSoapIn" />
+      <wsdl:output message="tns:ConsultaCiudadesdeInfoUsuSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LLenacomboBuscarMarcaFamily">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">LLENA combo de marca en consulta de maestro familia</wsdl:documentation>
+      <wsdl:input message="tns:LLenacomboBuscarMarcaFamilySoapIn" />
+      <wsdl:output message="tns:LLenacomboBuscarMarcaFamilySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="llenaCombosAsignacionCobertura">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">llena combos  de maestro asignación de cobertura</wsdl:documentation>
+      <wsdl:input message="tns:llenaCombosAsignacionCoberturaSoapIn" />
+      <wsdl:output message="tns:llenaCombosAsignacionCoberturaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="llenaCombosConsultaAsignacionCobertura">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">llena combos de consulta de maestro asignación de cobertura</wsdl:documentation>
+      <wsdl:input message="tns:llenaCombosConsultaAsignacionCoberturaSoapIn" />
+      <wsdl:output message="tns:llenaCombosConsultaAsignacionCoberturaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="llenaCombosAsignacionReportOficina">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">llena combos de maestro asignación de Reporte a Oficinas</wsdl:documentation>
+      <wsdl:input message="tns:llenaCombosAsignacionReportOficinaSoapIn" />
+      <wsdl:output message="tns:llenaCombosAsignacionReportOficinaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="llenaCombosConsultaAsignacionReportOficina">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">llena combos  de consulta de maestro asignación de Reporte a Oficinas</wsdl:documentation>
+      <wsdl:input message="tns:llenaCombosConsultaAsignacionReportOficinaSoapIn" />
+      <wsdl:output message="tns:llenaCombosConsultaAsignacionReportOficinaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LLenacomboCategoriaConsultaMarca">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">llena las categorias en la consulta del maestro de Marca</wsdl:documentation>
+      <wsdl:input message="tns:LLenacomboCategoriaConsultaMarcaSoapIn" />
+      <wsdl:output message="tns:LLenacomboCategoriaConsultaMarcaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LLenacomboMarcaporCategoria">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">llena las marcas segun categoria</wsdl:documentation>
+      <wsdl:input message="tns:LLenacomboMarcaporCategoriaSoapIn" />
+      <wsdl:output message="tns:LLenacomboMarcaporCategoriaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultaUltimoiddeNivel">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Consulta id de la tabla nivel relacionadolo a un modulo</wsdl:documentation>
+      <wsdl:input message="tns:ConsultaUltimoiddeNivelSoapIn" />
+      <wsdl:output message="tns:ConsultaUltimoiddeNivelSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultallenarcomboNivel">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">llena combo de cosnulta en el maestro de nivel</wsdl:documentation>
+      <wsdl:input message="tns:ConsultallenarcomboNivelSoapIn" />
+      <wsdl:output message="tns:ConsultallenarcomboNivelSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_NodeComercialBy_idPlanning">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Obtine NodeComercial por id_planning</wsdl:documentation>
+      <wsdl:input message="tns:Get_NodeComercialBy_idPlanningSoapIn" />
+      <wsdl:output message="tns:Get_NodeComercialBy_idPlanningSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="get_tipo_material_pop">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Obtine lista de tipos de material POP</wsdl:documentation>
+      <wsdl:input message="tns:get_tipo_material_popSoapIn" />
+      <wsdl:output message="tns:get_tipo_material_popSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Facade_Procesos_AdministrativosSoap" type="tns:Facade_Procesos_AdministrativosSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Get_GenerarPasswordOlvido">
+      <soap:operation soapAction="http://tempuri.org/Get_GenerarPasswordOlvido" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerIdProduct">
+      <soap:operation soapAction="http://tempuri.org/Get_ObtenerIdProduct" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObteneridSegmentsType">
+      <soap:operation soapAction="http://tempuri.org/Get_ObteneridSegmentsType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_CrearGrid">
+      <soap:operation soapAction="http://tempuri.org/Get_CrearGrid" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObteneridPdv">
+      <soap:operation soapAction="http://tempuri.org/Get_ObteneridPdv" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerYears">
+      <soap:operation soapAction="http://tempuri.org/Get_ObtenerYears" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerMeses">
+      <soap:operation soapAction="http://tempuri.org/Get_ObtenerMeses" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_obtener_Mes_Selecionado">
+      <soap:operation soapAction="http://tempuri.org/Get_obtener_Mes_Selecionado" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_obtener_Dias_Periodo">
+      <soap:operation soapAction="http://tempuri.org/Get_obtener_Dias_Periodo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerReport_Description">
+      <soap:operation soapAction="http://tempuri.org/Get_ObtenerReport_Description" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_Actualiza_ModuloPerson">
+      <soap:operation soapAction="http://tempuri.org/Get_Actualiza_ModuloPerson" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_Insertar_Sesion_User">
+      <soap:operation soapAction="http://tempuri.org/Get_Insertar_Sesion_User" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_User_Sesion_Conteo">
+      <soap:operation soapAction="http://tempuri.org/Get_User_Sesion_Conteo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_Obtener_User_Sesion">
+      <soap:operation soapAction="http://tempuri.org/Get_Obtener_User_Sesion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_Delete_Sesion_User">
+      <soap:operation soapAction="http://tempuri.org/Get_Delete_Sesion_User" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchCountryDirCuenta">
+      <soap:operation soapAction="http://tempuri.org/Get_SearchCountryDirCuenta" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchDirCuentaxPais">
+      <soap:operation soapAction="http://tempuri.org/Get_SearchDirCuentaxPais" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchDirCuentaconAsingacion">
+      <soap:operation soapAction="http://tempuri.org/Get_SearchDirCuentaconAsingacion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchEjeCuentaxPais">
+      <soap:operation soapAction="http://tempuri.org/Get_SearchEjeCuentaxPais" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_Llenar_Combos">
+      <soap:operation soapAction="http://tempuri.org/Get_Llenar_Combos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_DivPolitica">
+      <soap:operation soapAction="http://tempuri.org/Get_DivPolitica" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_llenar_ComboDpto">
+      <soap:operation soapAction="http://tempuri.org/Get_llenar_ComboDpto" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultaPaísdeUsuario">
+      <soap:operation soapAction="http://tempuri.org/ConsultaPaísdeUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LlenaComServicio">
+      <soap:operation soapAction="http://tempuri.org/LlenaComServicio" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultaInformedeInfoUsu">
+      <soap:operation soapAction="http://tempuri.org/ConsultaInformedeInfoUsu" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LlenaComboSubCategoriaPresent">
+      <soap:operation soapAction="http://tempuri.org/LlenaComboSubCategoriaPresent" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LlenaComboClienteenProducto">
+      <soap:operation soapAction="http://tempuri.org/LlenaComboClienteenProducto" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LlenaComboPresentProduct">
+      <soap:operation soapAction="http://tempuri.org/LlenaComboPresentProduct" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="llenaCombosPAncla">
+      <soap:operation soapAction="http://tempuri.org/llenaCombosPAncla" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="llenaConsultaCombosPAncla">
+      <soap:operation soapAction="http://tempuri.org/llenaConsultaCombosPAncla" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="llenaCombosSector">
+      <soap:operation soapAction="http://tempuri.org/llenaCombosSector" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="llenaCombosPDVCliente">
+      <soap:operation soapAction="http://tempuri.org/llenaCombosPDVCliente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="llenaPDVClienteConsulta">
+      <soap:operation soapAction="http://tempuri.org/llenaPDVClienteConsulta" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="llenaCheckInformes">
+      <soap:operation soapAction="http://tempuri.org/llenaCheckInformes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LlenaComboUsuarioXCliente">
+      <soap:operation soapAction="http://tempuri.org/LlenaComboUsuarioXCliente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultaUltimoiddeClieInfoUser">
+      <soap:operation soapAction="http://tempuri.org/ConsultaUltimoiddeClieInfoUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LLenacomboCanalporCliente">
+      <soap:operation soapAction="http://tempuri.org/LLenacomboCanalporCliente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="llenaCombosConsultaInfoUser">
+      <soap:operation soapAction="http://tempuri.org/llenaCombosConsultaInfoUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultaCiudadesdeInfoUsu">
+      <soap:operation soapAction="http://tempuri.org/ConsultaCiudadesdeInfoUsu" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LLenacomboBuscarMarcaFamily">
+      <soap:operation soapAction="http://tempuri.org/LLenacomboBuscarMarcaFamily" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="llenaCombosAsignacionCobertura">
+      <soap:operation soapAction="http://tempuri.org/llenaCombosAsignacionCobertura" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="llenaCombosConsultaAsignacionCobertura">
+      <soap:operation soapAction="http://tempuri.org/llenaCombosConsultaAsignacionCobertura" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="llenaCombosAsignacionReportOficina">
+      <soap:operation soapAction="http://tempuri.org/llenaCombosAsignacionReportOficina" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="llenaCombosConsultaAsignacionReportOficina">
+      <soap:operation soapAction="http://tempuri.org/llenaCombosConsultaAsignacionReportOficina" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LLenacomboCategoriaConsultaMarca">
+      <soap:operation soapAction="http://tempuri.org/LLenacomboCategoriaConsultaMarca" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LLenacomboMarcaporCategoria">
+      <soap:operation soapAction="http://tempuri.org/LLenacomboMarcaporCategoria" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultaUltimoiddeNivel">
+      <soap:operation soapAction="http://tempuri.org/ConsultaUltimoiddeNivel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultallenarcomboNivel">
+      <soap:operation soapAction="http://tempuri.org/ConsultallenarcomboNivel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_NodeComercialBy_idPlanning">
+      <soap:operation soapAction="http://tempuri.org/Get_NodeComercialBy_idPlanning" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_tipo_material_pop">
+      <soap:operation soapAction="http://tempuri.org/get_tipo_material_pop" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="Facade_Procesos_AdministrativosSoap12" type="tns:Facade_Procesos_AdministrativosSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Get_GenerarPasswordOlvido">
+      <soap12:operation soapAction="http://tempuri.org/Get_GenerarPasswordOlvido" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerIdProduct">
+      <soap12:operation soapAction="http://tempuri.org/Get_ObtenerIdProduct" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObteneridSegmentsType">
+      <soap12:operation soapAction="http://tempuri.org/Get_ObteneridSegmentsType" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_CrearGrid">
+      <soap12:operation soapAction="http://tempuri.org/Get_CrearGrid" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObteneridPdv">
+      <soap12:operation soapAction="http://tempuri.org/Get_ObteneridPdv" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerYears">
+      <soap12:operation soapAction="http://tempuri.org/Get_ObtenerYears" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerMeses">
+      <soap12:operation soapAction="http://tempuri.org/Get_ObtenerMeses" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_obtener_Mes_Selecionado">
+      <soap12:operation soapAction="http://tempuri.org/Get_obtener_Mes_Selecionado" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_obtener_Dias_Periodo">
+      <soap12:operation soapAction="http://tempuri.org/Get_obtener_Dias_Periodo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerReport_Description">
+      <soap12:operation soapAction="http://tempuri.org/Get_ObtenerReport_Description" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_Actualiza_ModuloPerson">
+      <soap12:operation soapAction="http://tempuri.org/Get_Actualiza_ModuloPerson" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_Insertar_Sesion_User">
+      <soap12:operation soapAction="http://tempuri.org/Get_Insertar_Sesion_User" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_User_Sesion_Conteo">
+      <soap12:operation soapAction="http://tempuri.org/Get_User_Sesion_Conteo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_Obtener_User_Sesion">
+      <soap12:operation soapAction="http://tempuri.org/Get_Obtener_User_Sesion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_Delete_Sesion_User">
+      <soap12:operation soapAction="http://tempuri.org/Get_Delete_Sesion_User" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchCountryDirCuenta">
+      <soap12:operation soapAction="http://tempuri.org/Get_SearchCountryDirCuenta" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchDirCuentaxPais">
+      <soap12:operation soapAction="http://tempuri.org/Get_SearchDirCuentaxPais" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchDirCuentaconAsingacion">
+      <soap12:operation soapAction="http://tempuri.org/Get_SearchDirCuentaconAsingacion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_SearchEjeCuentaxPais">
+      <soap12:operation soapAction="http://tempuri.org/Get_SearchEjeCuentaxPais" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_Llenar_Combos">
+      <soap12:operation soapAction="http://tempuri.org/Get_Llenar_Combos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_DivPolitica">
+      <soap12:operation soapAction="http://tempuri.org/Get_DivPolitica" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_llenar_ComboDpto">
+      <soap12:operation soapAction="http://tempuri.org/Get_llenar_ComboDpto" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultaPaísdeUsuario">
+      <soap12:operation soapAction="http://tempuri.org/ConsultaPaísdeUsuario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LlenaComServicio">
+      <soap12:operation soapAction="http://tempuri.org/LlenaComServicio" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultaInformedeInfoUsu">
+      <soap12:operation soapAction="http://tempuri.org/ConsultaInformedeInfoUsu" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LlenaComboSubCategoriaPresent">
+      <soap12:operation soapAction="http://tempuri.org/LlenaComboSubCategoriaPresent" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LlenaComboClienteenProducto">
+      <soap12:operation soapAction="http://tempuri.org/LlenaComboClienteenProducto" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LlenaComboPresentProduct">
+      <soap12:operation soapAction="http://tempuri.org/LlenaComboPresentProduct" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="llenaCombosPAncla">
+      <soap12:operation soapAction="http://tempuri.org/llenaCombosPAncla" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="llenaConsultaCombosPAncla">
+      <soap12:operation soapAction="http://tempuri.org/llenaConsultaCombosPAncla" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="llenaCombosSector">
+      <soap12:operation soapAction="http://tempuri.org/llenaCombosSector" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="llenaCombosPDVCliente">
+      <soap12:operation soapAction="http://tempuri.org/llenaCombosPDVCliente" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="llenaPDVClienteConsulta">
+      <soap12:operation soapAction="http://tempuri.org/llenaPDVClienteConsulta" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="llenaCheckInformes">
+      <soap12:operation soapAction="http://tempuri.org/llenaCheckInformes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LlenaComboUsuarioXCliente">
+      <soap12:operation soapAction="http://tempuri.org/LlenaComboUsuarioXCliente" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultaUltimoiddeClieInfoUser">
+      <soap12:operation soapAction="http://tempuri.org/ConsultaUltimoiddeClieInfoUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LLenacomboCanalporCliente">
+      <soap12:operation soapAction="http://tempuri.org/LLenacomboCanalporCliente" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="llenaCombosConsultaInfoUser">
+      <soap12:operation soapAction="http://tempuri.org/llenaCombosConsultaInfoUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultaCiudadesdeInfoUsu">
+      <soap12:operation soapAction="http://tempuri.org/ConsultaCiudadesdeInfoUsu" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LLenacomboBuscarMarcaFamily">
+      <soap12:operation soapAction="http://tempuri.org/LLenacomboBuscarMarcaFamily" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="llenaCombosAsignacionCobertura">
+      <soap12:operation soapAction="http://tempuri.org/llenaCombosAsignacionCobertura" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="llenaCombosConsultaAsignacionCobertura">
+      <soap12:operation soapAction="http://tempuri.org/llenaCombosConsultaAsignacionCobertura" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="llenaCombosAsignacionReportOficina">
+      <soap12:operation soapAction="http://tempuri.org/llenaCombosAsignacionReportOficina" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="llenaCombosConsultaAsignacionReportOficina">
+      <soap12:operation soapAction="http://tempuri.org/llenaCombosConsultaAsignacionReportOficina" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LLenacomboCategoriaConsultaMarca">
+      <soap12:operation soapAction="http://tempuri.org/LLenacomboCategoriaConsultaMarca" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LLenacomboMarcaporCategoria">
+      <soap12:operation soapAction="http://tempuri.org/LLenacomboMarcaporCategoria" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultaUltimoiddeNivel">
+      <soap12:operation soapAction="http://tempuri.org/ConsultaUltimoiddeNivel" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultallenarcomboNivel">
+      <soap12:operation soapAction="http://tempuri.org/ConsultallenarcomboNivel" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_NodeComercialBy_idPlanning">
+      <soap12:operation soapAction="http://tempuri.org/Get_NodeComercialBy_idPlanning" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_tipo_material_pop">
+      <soap12:operation soapAction="http://tempuri.org/get_tipo_material_pop" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Facade_Procesos_Administrativos">
+    <wsdl:port name="Facade_Procesos_AdministrativosSoap" binding="tns:Facade_Procesos_AdministrativosSoap">
+      <soap:address location="http://localhost:14000/Facade_Procesos_Administrativos.asmx" />
+    </wsdl:port>
+    <wsdl:port name="Facade_Procesos_AdministrativosSoap12" binding="tns:Facade_Procesos_AdministrativosSoap12">
+      <soap12:address location="http://localhost:14000/Facade_Procesos_Administrativos.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

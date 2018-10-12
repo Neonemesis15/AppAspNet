@@ -1,0 +1,2265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="Get_ObteneAccesoUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sUser" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPassw" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObteneAccesoUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ObteneAccesoUserResult" type="tns:EUsuario" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="EUsuario">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Personid" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="idtypeDocument" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Personnd" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PersonFirtsname" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PersonLastName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PersonSurname" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PersonSeconName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PersonEmail" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PersonPhone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PersonAddres" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="codCountry" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="coddepartam" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="codcity" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="nameuser" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserPassword" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Perfilid" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NamePerfil" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Moduloid" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserRecall" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="companyid" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="companyName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fotocompany" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="idlevel" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="leveldescription" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PersonStatus" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="PersonCreateBy" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PersonDateBy" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PersonModiBy" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PersonDateModiBy" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Get_ObtenerNivelesUSuario">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sperfilid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerNivelesUSuarioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ObtenerNivelesUSuarioResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_Obtener_Servicios_Activos">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="icompanyid" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="scodcountry" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_Obtener_Servicios_ActivosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_Obtener_Servicios_ActivosResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_Obtener_Channels_Client">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="icodservice" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="icompanyid" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_Obtener_Channels_ClientResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_Obtener_Channels_ClientResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_Obtener_ActividadesComercio_Cliente">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iservice" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="idcompany" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="scodchannel" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_Obtener_ActividadesComercio_ClienteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_Obtener_ActividadesComercio_ClienteResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_obtenerPaises_Cliente">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="icompany" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_obtenerPaises_ClienteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_obtenerPaises_ClienteResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerDepartamentos_Pais">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="scodcountry" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerDepartamentos_PaisResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ObtenerDepartamentos_PaisResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerCiudadesxPais_Departamento">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="scountry" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sdpto" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerCiudadesxPais_DepartamentoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ObtenerCiudadesxPais_DepartamentoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerDistritosCity">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="scountry" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sdpto" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="scity" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerDistritosCityResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ObtenerDistritosCityResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_OtenerSegmentos">
+        <s:complexType />
+      </s:element>
+      <s:element name="Get_OtenerSegmentosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_OtenerSegmentosResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerPDVxCliente">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iidsegmen" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerPDVxClienteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ObtenerPDVxClienteResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerInformes_tipo_cliente">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="icodservice" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="iidcompany" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerInformes_tipo_clienteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ObtenerInformes_tipo_clienteResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerInformes_Dinamico_cliente">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="icodservice" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="iidcompany" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerInformes_Dinamico_clienteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ObtenerInformes_Dinamico_clienteResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerTiposAgrupacionComercial">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="icodservice" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="iidcompany" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerTiposAgrupacionComercialResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ObtenerTiposAgrupacionComercialResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerAgrupacionesComerciales">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idnotype" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerAgrupacionesComercialesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ObtenerAgrupacionesComercialesResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenercategoriasCliente_Servicio">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iidcompany" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="icodservice" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenercategoriasCliente_ServicioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ObtenercategoriasCliente_ServicioResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerMarcasCliente">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idcatego" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerMarcasClienteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ObtenerMarcasClienteResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerSubmarcaCliente">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="smarca" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerSubmarcaClienteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ObtenerSubmarcaClienteResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerPresentacionesClientte">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sidcatego" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="iidmarca" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="sidsubmarca" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerPresentacionesClientteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ObtenerPresentacionesClientteResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerCategoriasCliente">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="icompanyid" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="schannel" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerCategoriasClienteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ObtenerCategoriasClienteResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerPresentacionesxCategoria">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="icatego1" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="icatego2" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="icatego3" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerPresentacionesxCategoriaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ObtenerPresentacionesxCategoriaResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_CalcularVentasNacionalDistribucion">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="icatego" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="scodchannel" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_CalcularVentasNacionalDistribucionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_CalcularVentasNacionalDistribucionResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_CalcularVentasNacionalDistribucion_Dinamico">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="icatego" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="scodchannel" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="idmarca" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ssubmarca" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="icodpresenta" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_CalcularVentasNacionalDistribucion_DinamicoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_CalcularVentasNacionalDistribucion_DinamicoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerPlanVentasCliente">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="icompanyid" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="icodservice" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="scodchannel" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerPlanVentasClienteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ObtenerPlanVentasClienteResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerComentariosxCategoria_Canal">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="icatego" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="icompanyid" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="scodchannel" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerComentariosxCategoria_CanalResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ObtenerComentariosxCategoria_CanalResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerPrecionProComeptidores">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="icatego1" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="icatego2" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="icatego3" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerPrecionProComeptidoresResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ObtenerPrecionProComeptidoresResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerSOD_Tipo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="scodchanel" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="icatego" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="icatego1" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="icatego2" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="icompanyid" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="icodservice" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerSOD_TipoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ObtenerSOD_TipoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_Obtener_reporteXCliente_Canal">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ipersonid" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="schannel" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="icompanyid" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_Obtener_reporteXCliente_CanalResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_Obtener_reporteXCliente_CanalResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerReportesNoActivos">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ireportid" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="icompanyid" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerReportesNoActivosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ObtenerReportesNoActivosResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerurlInformes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="scountry" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="icompanyid" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="scanal" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ireportid" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="ipersonid" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerurlInformesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ObtenerurlInformesResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerurlInformesconSubcanal">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="scountry" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="icompanyid" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="scanal" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ssubcanal" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ireportid" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="ipersonid" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerurlInformesconSubcanalResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ObtenerurlInformesconSubcanalResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerCanalesxCliente">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="icompanyid" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerCanalesxClienteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ObtenerCanalesxClienteResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenercanalNoactivoxCliente">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="scanal" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="icompanyid" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenercanalNoactivoxClienteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ObtenercanalNoactivoxClienteResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerProductos_Precios">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="anio" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="mes" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="periodo" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ciudad" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="companyid" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="catego" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="subcatego" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="marca" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="submarca" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerProductos_PreciosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ObtenerProductos_PreciosResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerCategoriasPOP">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="icomppanyid" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="schannel" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerCategoriasPOPResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ObtenerCategoriasPOPResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerMarcasPOP">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="scatego" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="icompany_id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="schannel" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerMarcasPOPResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ObtenerMarcasPOPResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerPOPxMarca">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="scatego" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="icompany_id" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="imarca" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="sChannel" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerPOPxMarcaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ObtenerPOPxMarcaResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerPOPDetallado">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iid_infoPOP" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerPOPDetalladoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ObtenerPOPDetalladoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_obtnerBotonBlioteca">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iPersonid" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="icompany_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_obtnerBotonBliotecaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_obtnerBotonBliotecaResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_obtnerBotonINfGerencial">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iPersonid" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="icompany_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_obtnerBotonINfGerencialResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_obtnerBotonINfGerencialResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_obtnerBotonResumen_Ejecutivo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iPersonid" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="icompany_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_obtnerBotonResumen_EjecutivoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_obtnerBotonResumen_EjecutivoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_Obtenerinfocombos">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="icompanyid" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="scanal" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="scatego" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ipath" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ObtenerinfocombosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ObtenerinfocombosResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_Obtenerinfocombos_F">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="icompanyid" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="scanal" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ireport" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="scatego" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ipath" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_Obtenerinfocombos_FResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_Obtenerinfocombos_FResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="Get_ObteneAccesoUserSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ObteneAccesoUser" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObteneAccesoUserSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ObteneAccesoUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerNivelesUSuarioSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerNivelesUSuario" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerNivelesUSuarioSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerNivelesUSuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_Obtener_Servicios_ActivosSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_Obtener_Servicios_Activos" />
+  </wsdl:message>
+  <wsdl:message name="Get_Obtener_Servicios_ActivosSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_Obtener_Servicios_ActivosResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_Obtener_Channels_ClientSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_Obtener_Channels_Client" />
+  </wsdl:message>
+  <wsdl:message name="Get_Obtener_Channels_ClientSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_Obtener_Channels_ClientResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_Obtener_ActividadesComercio_ClienteSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_Obtener_ActividadesComercio_Cliente" />
+  </wsdl:message>
+  <wsdl:message name="Get_Obtener_ActividadesComercio_ClienteSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_Obtener_ActividadesComercio_ClienteResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_obtenerPaises_ClienteSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_obtenerPaises_Cliente" />
+  </wsdl:message>
+  <wsdl:message name="Get_obtenerPaises_ClienteSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_obtenerPaises_ClienteResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerDepartamentos_PaisSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerDepartamentos_Pais" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerDepartamentos_PaisSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerDepartamentos_PaisResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerCiudadesxPais_DepartamentoSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerCiudadesxPais_Departamento" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerCiudadesxPais_DepartamentoSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerCiudadesxPais_DepartamentoResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerDistritosCitySoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerDistritosCity" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerDistritosCitySoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerDistritosCityResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_OtenerSegmentosSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_OtenerSegmentos" />
+  </wsdl:message>
+  <wsdl:message name="Get_OtenerSegmentosSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_OtenerSegmentosResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerPDVxClienteSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerPDVxCliente" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerPDVxClienteSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerPDVxClienteResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerInformes_tipo_clienteSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerInformes_tipo_cliente" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerInformes_tipo_clienteSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerInformes_tipo_clienteResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerInformes_Dinamico_clienteSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerInformes_Dinamico_cliente" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerInformes_Dinamico_clienteSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerInformes_Dinamico_clienteResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerTiposAgrupacionComercialSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerTiposAgrupacionComercial" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerTiposAgrupacionComercialSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerTiposAgrupacionComercialResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerAgrupacionesComercialesSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerAgrupacionesComerciales" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerAgrupacionesComercialesSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerAgrupacionesComercialesResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenercategoriasCliente_ServicioSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ObtenercategoriasCliente_Servicio" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenercategoriasCliente_ServicioSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ObtenercategoriasCliente_ServicioResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerMarcasClienteSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerMarcasCliente" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerMarcasClienteSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerMarcasClienteResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerSubmarcaClienteSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerSubmarcaCliente" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerSubmarcaClienteSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerSubmarcaClienteResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerPresentacionesClientteSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerPresentacionesClientte" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerPresentacionesClientteSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerPresentacionesClientteResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerCategoriasClienteSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerCategoriasCliente" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerCategoriasClienteSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerCategoriasClienteResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerPresentacionesxCategoriaSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerPresentacionesxCategoria" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerPresentacionesxCategoriaSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerPresentacionesxCategoriaResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_CalcularVentasNacionalDistribucionSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_CalcularVentasNacionalDistribucion" />
+  </wsdl:message>
+  <wsdl:message name="Get_CalcularVentasNacionalDistribucionSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_CalcularVentasNacionalDistribucionResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_CalcularVentasNacionalDistribucion_DinamicoSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_CalcularVentasNacionalDistribucion_Dinamico" />
+  </wsdl:message>
+  <wsdl:message name="Get_CalcularVentasNacionalDistribucion_DinamicoSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_CalcularVentasNacionalDistribucion_DinamicoResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerPlanVentasClienteSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerPlanVentasCliente" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerPlanVentasClienteSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerPlanVentasClienteResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerComentariosxCategoria_CanalSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerComentariosxCategoria_Canal" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerComentariosxCategoria_CanalSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerComentariosxCategoria_CanalResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerPrecionProComeptidoresSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerPrecionProComeptidores" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerPrecionProComeptidoresSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerPrecionProComeptidoresResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerSOD_TipoSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerSOD_Tipo" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerSOD_TipoSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerSOD_TipoResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_Obtener_reporteXCliente_CanalSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_Obtener_reporteXCliente_Canal" />
+  </wsdl:message>
+  <wsdl:message name="Get_Obtener_reporteXCliente_CanalSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_Obtener_reporteXCliente_CanalResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerReportesNoActivosSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerReportesNoActivos" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerReportesNoActivosSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerReportesNoActivosResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerurlInformesSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerurlInformes" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerurlInformesSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerurlInformesResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerurlInformesconSubcanalSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerurlInformesconSubcanal" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerurlInformesconSubcanalSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerurlInformesconSubcanalResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerCanalesxClienteSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerCanalesxCliente" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerCanalesxClienteSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerCanalesxClienteResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenercanalNoactivoxClienteSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ObtenercanalNoactivoxCliente" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenercanalNoactivoxClienteSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ObtenercanalNoactivoxClienteResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerProductos_PreciosSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerProductos_Precios" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerProductos_PreciosSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerProductos_PreciosResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerCategoriasPOPSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerCategoriasPOP" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerCategoriasPOPSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerCategoriasPOPResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerMarcasPOPSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerMarcasPOP" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerMarcasPOPSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerMarcasPOPResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerPOPxMarcaSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerPOPxMarca" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerPOPxMarcaSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerPOPxMarcaResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerPOPDetalladoSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerPOPDetallado" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerPOPDetalladoSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerPOPDetalladoResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_obtnerBotonBliotecaSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_obtnerBotonBlioteca" />
+  </wsdl:message>
+  <wsdl:message name="Get_obtnerBotonBliotecaSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_obtnerBotonBliotecaResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_obtnerBotonINfGerencialSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_obtnerBotonINfGerencial" />
+  </wsdl:message>
+  <wsdl:message name="Get_obtnerBotonINfGerencialSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_obtnerBotonINfGerencialResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_obtnerBotonResumen_EjecutivoSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_obtnerBotonResumen_Ejecutivo" />
+  </wsdl:message>
+  <wsdl:message name="Get_obtnerBotonResumen_EjecutivoSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_obtnerBotonResumen_EjecutivoResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerinfocombosSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_Obtenerinfocombos" />
+  </wsdl:message>
+  <wsdl:message name="Get_ObtenerinfocombosSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ObtenerinfocombosResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_Obtenerinfocombos_FSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_Obtenerinfocombos_F" />
+  </wsdl:message>
+  <wsdl:message name="Get_Obtenerinfocombos_FSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_Obtenerinfocombos_FResponse" />
+  </wsdl:message>
+  <wsdl:portType name="Facade_Proceso_ClienteSoap">
+    <wsdl:operation name="Get_ObteneAccesoUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para Autenticar Usuario</wsdl:documentation>
+      <wsdl:input message="tns:Get_ObteneAccesoUserSoapIn" />
+      <wsdl:output message="tns:Get_ObteneAccesoUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerNivelesUSuario">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metdodo para Obtener los niveles por usuario_Cliente</wsdl:documentation>
+      <wsdl:input message="tns:Get_ObtenerNivelesUSuarioSoapIn" />
+      <wsdl:output message="tns:Get_ObtenerNivelesUSuarioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_Obtener_Servicios_Activos">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo Para Obtener Servicios Servicios Activos para un Cliente</wsdl:documentation>
+      <wsdl:input message="tns:Get_Obtener_Servicios_ActivosSoapIn" />
+      <wsdl:output message="tns:Get_Obtener_Servicios_ActivosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_Obtener_Channels_Client">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para Obtener Canales x Servicio y Cliente</wsdl:documentation>
+      <wsdl:input message="tns:Get_Obtener_Channels_ClientSoapIn" />
+      <wsdl:output message="tns:Get_Obtener_Channels_ClientSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_Obtener_ActividadesComercio_Cliente">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para Obtener las Actividades en el Comercio asociados a un cliente</wsdl:documentation>
+      <wsdl:input message="tns:Get_Obtener_ActividadesComercio_ClienteSoapIn" />
+      <wsdl:output message="tns:Get_Obtener_ActividadesComercio_ClienteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_obtenerPaises_Cliente">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para Obtener Paises donde tenga campañas el Cliente</wsdl:documentation>
+      <wsdl:input message="tns:Get_obtenerPaises_ClienteSoapIn" />
+      <wsdl:output message="tns:Get_obtenerPaises_ClienteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerDepartamentos_Pais">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para Obtener Departamentos x Pais</wsdl:documentation>
+      <wsdl:input message="tns:Get_ObtenerDepartamentos_PaisSoapIn" />
+      <wsdl:output message="tns:Get_ObtenerDepartamentos_PaisSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerCiudadesxPais_Departamento">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para Obtener Ciudades x Pais y Departamento</wsdl:documentation>
+      <wsdl:input message="tns:Get_ObtenerCiudadesxPais_DepartamentoSoapIn" />
+      <wsdl:output message="tns:Get_ObtenerCiudadesxPais_DepartamentoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerDistritosCity">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para obtener Distritos Ciudades</wsdl:documentation>
+      <wsdl:input message="tns:Get_ObtenerDistritosCitySoapIn" />
+      <wsdl:output message="tns:Get_ObtenerDistritosCitySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_OtenerSegmentos">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para obtener Segmentos</wsdl:documentation>
+      <wsdl:input message="tns:Get_OtenerSegmentosSoapIn" />
+      <wsdl:output message="tns:Get_OtenerSegmentosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerPDVxCliente">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para pbtener los PDV x cliente</wsdl:documentation>
+      <wsdl:input message="tns:Get_ObtenerPDVxClienteSoapIn" />
+      <wsdl:output message="tns:Get_ObtenerPDVxClienteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerInformes_tipo_cliente">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para Obtener informes Tipo para un Cliente</wsdl:documentation>
+      <wsdl:input message="tns:Get_ObtenerInformes_tipo_clienteSoapIn" />
+      <wsdl:output message="tns:Get_ObtenerInformes_tipo_clienteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerInformes_Dinamico_cliente">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para Obtener Informes Dinamicos para un cliente</wsdl:documentation>
+      <wsdl:input message="tns:Get_ObtenerInformes_Dinamico_clienteSoapIn" />
+      <wsdl:output message="tns:Get_ObtenerInformes_Dinamico_clienteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerTiposAgrupacionComercial">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para Obtener los tipos de Agrupacion Comercial por Servicio y Cliente</wsdl:documentation>
+      <wsdl:input message="tns:Get_ObtenerTiposAgrupacionComercialSoapIn" />
+      <wsdl:output message="tns:Get_ObtenerTiposAgrupacionComercialSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerAgrupacionesComerciales">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para Obtener las Agrupaciones comerciales con base en los tipos de Agrupacion Comercial</wsdl:documentation>
+      <wsdl:input message="tns:Get_ObtenerAgrupacionesComercialesSoapIn" />
+      <wsdl:output message="tns:Get_ObtenerAgrupacionesComercialesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenercategoriasCliente_Servicio">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para Obtener las Categorias por Cliente y Servicio</wsdl:documentation>
+      <wsdl:input message="tns:Get_ObtenercategoriasCliente_ServicioSoapIn" />
+      <wsdl:output message="tns:Get_ObtenercategoriasCliente_ServicioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerMarcasCliente">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para Obtener las Marcas por Categoria del Cliente</wsdl:documentation>
+      <wsdl:input message="tns:Get_ObtenerMarcasClienteSoapIn" />
+      <wsdl:output message="tns:Get_ObtenerMarcasClienteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerSubmarcaCliente">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para obtener las Submarcas de  una Marca del Cliente</wsdl:documentation>
+      <wsdl:input message="tns:Get_ObtenerSubmarcaClienteSoapIn" />
+      <wsdl:output message="tns:Get_ObtenerSubmarcaClienteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerPresentacionesClientte">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para Obtener las Presentaciones del Cliente</wsdl:documentation>
+      <wsdl:input message="tns:Get_ObtenerPresentacionesClientteSoapIn" />
+      <wsdl:output message="tns:Get_ObtenerPresentacionesClientteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerCategoriasCliente">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para obtener Categorias x Cliente y Canal</wsdl:documentation>
+      <wsdl:input message="tns:Get_ObtenerCategoriasClienteSoapIn" />
+      <wsdl:output message="tns:Get_ObtenerCategoriasClienteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerPresentacionesxCategoria">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para obtener presentaciones xCategoria en Cliente</wsdl:documentation>
+      <wsdl:input message="tns:Get_ObtenerPresentacionesxCategoriaSoapIn" />
+      <wsdl:output message="tns:Get_ObtenerPresentacionesxCategoriaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_CalcularVentasNacionalDistribucion">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para calcular Ventas  Nacional - Distribución %</wsdl:documentation>
+      <wsdl:input message="tns:Get_CalcularVentasNacionalDistribucionSoapIn" />
+      <wsdl:output message="tns:Get_CalcularVentasNacionalDistribucionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_CalcularVentasNacionalDistribucion_Dinamico">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para calcular Ventas  Nacional - Distribución %_Dinamico</wsdl:documentation>
+      <wsdl:input message="tns:Get_CalcularVentasNacionalDistribucion_DinamicoSoapIn" />
+      <wsdl:output message="tns:Get_CalcularVentasNacionalDistribucion_DinamicoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerPlanVentasCliente">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para Obtener el Plan de Ventas x Cliente,canal y Servicio</wsdl:documentation>
+      <wsdl:input message="tns:Get_ObtenerPlanVentasClienteSoapIn" />
+      <wsdl:output message="tns:Get_ObtenerPlanVentasClienteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerComentariosxCategoria_Canal">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo Para Obtener los Comentarios del Director de Cuenta por Categoria y canal</wsdl:documentation>
+      <wsdl:input message="tns:Get_ObtenerComentariosxCategoria_CanalSoapIn" />
+      <wsdl:output message="tns:Get_ObtenerComentariosxCategoria_CanalSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerPrecionProComeptidores">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para Obtener el precio Promedio de los Competidores</wsdl:documentation>
+      <wsdl:input message="tns:Get_ObtenerPrecionProComeptidoresSoapIn" />
+      <wsdl:output message="tns:Get_ObtenerPrecionProComeptidoresSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerSOD_Tipo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para Obtener el Espacio Lineal_Tipo</wsdl:documentation>
+      <wsdl:input message="tns:Get_ObtenerSOD_TipoSoapIn" />
+      <wsdl:output message="tns:Get_ObtenerSOD_TipoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_Obtener_reporteXCliente_Canal">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para Obtener reporte X Canal en Cliente</wsdl:documentation>
+      <wsdl:input message="tns:Get_Obtener_reporteXCliente_CanalSoapIn" />
+      <wsdl:output message="tns:Get_Obtener_reporteXCliente_CanalSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerReportesNoActivos">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para Obtener Reportes No Contratados por el Cliente</wsdl:documentation>
+      <wsdl:input message="tns:Get_ObtenerReportesNoActivosSoapIn" />
+      <wsdl:output message="tns:Get_ObtenerReportesNoActivosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerurlInformes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para obtener Informes asociados a Reportes</wsdl:documentation>
+      <wsdl:input message="tns:Get_ObtenerurlInformesSoapIn" />
+      <wsdl:output message="tns:Get_ObtenerurlInformesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerurlInformesconSubcanal">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para obtener Informes asociados a Reportes de clientes con subcanal</wsdl:documentation>
+      <wsdl:input message="tns:Get_ObtenerurlInformesconSubcanalSoapIn" />
+      <wsdl:output message="tns:Get_ObtenerurlInformesconSubcanalSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerCanalesxCliente">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para Obtener canales x Cliente</wsdl:documentation>
+      <wsdl:input message="tns:Get_ObtenerCanalesxClienteSoapIn" />
+      <wsdl:output message="tns:Get_ObtenerCanalesxClienteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenercanalNoactivoxCliente">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para obtener Canales no Activos x Cliente</wsdl:documentation>
+      <wsdl:input message="tns:Get_ObtenercanalNoactivoxClienteSoapIn" />
+      <wsdl:output message="tns:Get_ObtenercanalNoactivoxClienteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerProductos_Precios">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para obtener los Productos por año, mes, periodo, ciudad</wsdl:documentation>
+      <wsdl:input message="tns:Get_ObtenerProductos_PreciosSoapIn" />
+      <wsdl:output message="tns:Get_ObtenerProductos_PreciosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerCategoriasPOP">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para obtener  Categorias</wsdl:documentation>
+      <wsdl:input message="tns:Get_ObtenerCategoriasPOPSoapIn" />
+      <wsdl:output message="tns:Get_ObtenerCategoriasPOPSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerMarcasPOP">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para obtener Marcas x Categorias</wsdl:documentation>
+      <wsdl:input message="tns:Get_ObtenerMarcasPOPSoapIn" />
+      <wsdl:output message="tns:Get_ObtenerMarcasPOPSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerPOPxMarca">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo para obtener Materiales x marcas</wsdl:documentation>
+      <wsdl:input message="tns:Get_ObtenerPOPxMarcaSoapIn" />
+      <wsdl:output message="tns:Get_ObtenerPOPxMarcaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerPOPDetallado">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para obtener las fotografias de material pop detallado</wsdl:documentation>
+      <wsdl:input message="tns:Get_ObtenerPOPDetalladoSoapIn" />
+      <wsdl:output message="tns:Get_ObtenerPOPDetalladoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_obtnerBotonBlioteca">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para Obtener la Visualizacion del Boton de Biblioteca POP x Usuario</wsdl:documentation>
+      <wsdl:input message="tns:Get_obtnerBotonBliotecaSoapIn" />
+      <wsdl:output message="tns:Get_obtnerBotonBliotecaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_obtnerBotonINfGerencial">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para Obtener la Visualizacion del Boton de información gerencial por usuario </wsdl:documentation>
+      <wsdl:input message="tns:Get_obtnerBotonINfGerencialSoapIn" />
+      <wsdl:output message="tns:Get_obtnerBotonINfGerencialSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_obtnerBotonResumen_Ejecutivo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para Obtener la Visualizacion del Boton de Resumen Ejecutivo  por usuario </wsdl:documentation>
+      <wsdl:input message="tns:Get_obtnerBotonResumen_EjecutivoSoapIn" />
+      <wsdl:output message="tns:Get_obtnerBotonResumen_EjecutivoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_Obtenerinfocombos">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para llenar combos Cliente v.2</wsdl:documentation>
+      <wsdl:input message="tns:Get_ObtenerinfocombosSoapIn" />
+      <wsdl:output message="tns:Get_ObtenerinfocombosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_Obtenerinfocombos_F">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Método para llenar combos Cliente v.2</wsdl:documentation>
+      <wsdl:input message="tns:Get_Obtenerinfocombos_FSoapIn" />
+      <wsdl:output message="tns:Get_Obtenerinfocombos_FSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Facade_Proceso_ClienteSoap" type="tns:Facade_Proceso_ClienteSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Get_ObteneAccesoUser">
+      <soap:operation soapAction="http://tempuri.org/Get_ObteneAccesoUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerNivelesUSuario">
+      <soap:operation soapAction="http://tempuri.org/Get_ObtenerNivelesUSuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_Obtener_Servicios_Activos">
+      <soap:operation soapAction="http://tempuri.org/Get_Obtener_Servicios_Activos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_Obtener_Channels_Client">
+      <soap:operation soapAction="http://tempuri.org/Get_Obtener_Channels_Client" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_Obtener_ActividadesComercio_Cliente">
+      <soap:operation soapAction="http://tempuri.org/Get_Obtener_ActividadesComercio_Cliente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_obtenerPaises_Cliente">
+      <soap:operation soapAction="http://tempuri.org/Get_obtenerPaises_Cliente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerDepartamentos_Pais">
+      <soap:operation soapAction="http://tempuri.org/Get_ObtenerDepartamentos_Pais" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerCiudadesxPais_Departamento">
+      <soap:operation soapAction="http://tempuri.org/Get_ObtenerCiudadesxPais_Departamento" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerDistritosCity">
+      <soap:operation soapAction="http://tempuri.org/Get_ObtenerDistritosCity" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_OtenerSegmentos">
+      <soap:operation soapAction="http://tempuri.org/Get_OtenerSegmentos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerPDVxCliente">
+      <soap:operation soapAction="http://tempuri.org/Get_ObtenerPDVxCliente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerInformes_tipo_cliente">
+      <soap:operation soapAction="http://tempuri.org/Get_ObtenerInformes_tipo_cliente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerInformes_Dinamico_cliente">
+      <soap:operation soapAction="http://tempuri.org/Get_ObtenerInformes_Dinamico_cliente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerTiposAgrupacionComercial">
+      <soap:operation soapAction="http://tempuri.org/Get_ObtenerTiposAgrupacionComercial" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerAgrupacionesComerciales">
+      <soap:operation soapAction="http://tempuri.org/Get_ObtenerAgrupacionesComerciales" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenercategoriasCliente_Servicio">
+      <soap:operation soapAction="http://tempuri.org/Get_ObtenercategoriasCliente_Servicio" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerMarcasCliente">
+      <soap:operation soapAction="http://tempuri.org/Get_ObtenerMarcasCliente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerSubmarcaCliente">
+      <soap:operation soapAction="http://tempuri.org/Get_ObtenerSubmarcaCliente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerPresentacionesClientte">
+      <soap:operation soapAction="http://tempuri.org/Get_ObtenerPresentacionesClientte" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerCategoriasCliente">
+      <soap:operation soapAction="http://tempuri.org/Get_ObtenerCategoriasCliente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerPresentacionesxCategoria">
+      <soap:operation soapAction="http://tempuri.org/Get_ObtenerPresentacionesxCategoria" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_CalcularVentasNacionalDistribucion">
+      <soap:operation soapAction="http://tempuri.org/Get_CalcularVentasNacionalDistribucion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_CalcularVentasNacionalDistribucion_Dinamico">
+      <soap:operation soapAction="http://tempuri.org/Get_CalcularVentasNacionalDistribucion_Dinamico" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerPlanVentasCliente">
+      <soap:operation soapAction="http://tempuri.org/Get_ObtenerPlanVentasCliente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerComentariosxCategoria_Canal">
+      <soap:operation soapAction="http://tempuri.org/Get_ObtenerComentariosxCategoria_Canal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerPrecionProComeptidores">
+      <soap:operation soapAction="http://tempuri.org/Get_ObtenerPrecionProComeptidores" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerSOD_Tipo">
+      <soap:operation soapAction="http://tempuri.org/Get_ObtenerSOD_Tipo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_Obtener_reporteXCliente_Canal">
+      <soap:operation soapAction="http://tempuri.org/Get_Obtener_reporteXCliente_Canal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerReportesNoActivos">
+      <soap:operation soapAction="http://tempuri.org/Get_ObtenerReportesNoActivos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerurlInformes">
+      <soap:operation soapAction="http://tempuri.org/Get_ObtenerurlInformes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerurlInformesconSubcanal">
+      <soap:operation soapAction="http://tempuri.org/Get_ObtenerurlInformesconSubcanal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerCanalesxCliente">
+      <soap:operation soapAction="http://tempuri.org/Get_ObtenerCanalesxCliente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenercanalNoactivoxCliente">
+      <soap:operation soapAction="http://tempuri.org/Get_ObtenercanalNoactivoxCliente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerProductos_Precios">
+      <soap:operation soapAction="http://tempuri.org/Get_ObtenerProductos_Precios" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerCategoriasPOP">
+      <soap:operation soapAction="http://tempuri.org/Get_ObtenerCategoriasPOP" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerMarcasPOP">
+      <soap:operation soapAction="http://tempuri.org/Get_ObtenerMarcasPOP" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerPOPxMarca">
+      <soap:operation soapAction="http://tempuri.org/Get_ObtenerPOPxMarca" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerPOPDetallado">
+      <soap:operation soapAction="http://tempuri.org/Get_ObtenerPOPDetallado" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_obtnerBotonBlioteca">
+      <soap:operation soapAction="http://tempuri.org/Get_obtnerBotonBlioteca" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_obtnerBotonINfGerencial">
+      <soap:operation soapAction="http://tempuri.org/Get_obtnerBotonINfGerencial" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_obtnerBotonResumen_Ejecutivo">
+      <soap:operation soapAction="http://tempuri.org/Get_obtnerBotonResumen_Ejecutivo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_Obtenerinfocombos">
+      <soap:operation soapAction="http://tempuri.org/Get_Obtenerinfocombos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_Obtenerinfocombos_F">
+      <soap:operation soapAction="http://tempuri.org/Get_Obtenerinfocombos_F" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="Facade_Proceso_ClienteSoap12" type="tns:Facade_Proceso_ClienteSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Get_ObteneAccesoUser">
+      <soap12:operation soapAction="http://tempuri.org/Get_ObteneAccesoUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerNivelesUSuario">
+      <soap12:operation soapAction="http://tempuri.org/Get_ObtenerNivelesUSuario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_Obtener_Servicios_Activos">
+      <soap12:operation soapAction="http://tempuri.org/Get_Obtener_Servicios_Activos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_Obtener_Channels_Client">
+      <soap12:operation soapAction="http://tempuri.org/Get_Obtener_Channels_Client" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_Obtener_ActividadesComercio_Cliente">
+      <soap12:operation soapAction="http://tempuri.org/Get_Obtener_ActividadesComercio_Cliente" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_obtenerPaises_Cliente">
+      <soap12:operation soapAction="http://tempuri.org/Get_obtenerPaises_Cliente" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerDepartamentos_Pais">
+      <soap12:operation soapAction="http://tempuri.org/Get_ObtenerDepartamentos_Pais" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerCiudadesxPais_Departamento">
+      <soap12:operation soapAction="http://tempuri.org/Get_ObtenerCiudadesxPais_Departamento" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerDistritosCity">
+      <soap12:operation soapAction="http://tempuri.org/Get_ObtenerDistritosCity" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_OtenerSegmentos">
+      <soap12:operation soapAction="http://tempuri.org/Get_OtenerSegmentos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerPDVxCliente">
+      <soap12:operation soapAction="http://tempuri.org/Get_ObtenerPDVxCliente" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerInformes_tipo_cliente">
+      <soap12:operation soapAction="http://tempuri.org/Get_ObtenerInformes_tipo_cliente" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerInformes_Dinamico_cliente">
+      <soap12:operation soapAction="http://tempuri.org/Get_ObtenerInformes_Dinamico_cliente" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerTiposAgrupacionComercial">
+      <soap12:operation soapAction="http://tempuri.org/Get_ObtenerTiposAgrupacionComercial" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerAgrupacionesComerciales">
+      <soap12:operation soapAction="http://tempuri.org/Get_ObtenerAgrupacionesComerciales" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenercategoriasCliente_Servicio">
+      <soap12:operation soapAction="http://tempuri.org/Get_ObtenercategoriasCliente_Servicio" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerMarcasCliente">
+      <soap12:operation soapAction="http://tempuri.org/Get_ObtenerMarcasCliente" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerSubmarcaCliente">
+      <soap12:operation soapAction="http://tempuri.org/Get_ObtenerSubmarcaCliente" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerPresentacionesClientte">
+      <soap12:operation soapAction="http://tempuri.org/Get_ObtenerPresentacionesClientte" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerCategoriasCliente">
+      <soap12:operation soapAction="http://tempuri.org/Get_ObtenerCategoriasCliente" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerPresentacionesxCategoria">
+      <soap12:operation soapAction="http://tempuri.org/Get_ObtenerPresentacionesxCategoria" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_CalcularVentasNacionalDistribucion">
+      <soap12:operation soapAction="http://tempuri.org/Get_CalcularVentasNacionalDistribucion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_CalcularVentasNacionalDistribucion_Dinamico">
+      <soap12:operation soapAction="http://tempuri.org/Get_CalcularVentasNacionalDistribucion_Dinamico" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerPlanVentasCliente">
+      <soap12:operation soapAction="http://tempuri.org/Get_ObtenerPlanVentasCliente" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerComentariosxCategoria_Canal">
+      <soap12:operation soapAction="http://tempuri.org/Get_ObtenerComentariosxCategoria_Canal" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerPrecionProComeptidores">
+      <soap12:operation soapAction="http://tempuri.org/Get_ObtenerPrecionProComeptidores" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerSOD_Tipo">
+      <soap12:operation soapAction="http://tempuri.org/Get_ObtenerSOD_Tipo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_Obtener_reporteXCliente_Canal">
+      <soap12:operation soapAction="http://tempuri.org/Get_Obtener_reporteXCliente_Canal" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerReportesNoActivos">
+      <soap12:operation soapAction="http://tempuri.org/Get_ObtenerReportesNoActivos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerurlInformes">
+      <soap12:operation soapAction="http://tempuri.org/Get_ObtenerurlInformes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerurlInformesconSubcanal">
+      <soap12:operation soapAction="http://tempuri.org/Get_ObtenerurlInformesconSubcanal" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerCanalesxCliente">
+      <soap12:operation soapAction="http://tempuri.org/Get_ObtenerCanalesxCliente" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenercanalNoactivoxCliente">
+      <soap12:operation soapAction="http://tempuri.org/Get_ObtenercanalNoactivoxCliente" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerProductos_Precios">
+      <soap12:operation soapAction="http://tempuri.org/Get_ObtenerProductos_Precios" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerCategoriasPOP">
+      <soap12:operation soapAction="http://tempuri.org/Get_ObtenerCategoriasPOP" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerMarcasPOP">
+      <soap12:operation soapAction="http://tempuri.org/Get_ObtenerMarcasPOP" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerPOPxMarca">
+      <soap12:operation soapAction="http://tempuri.org/Get_ObtenerPOPxMarca" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ObtenerPOPDetallado">
+      <soap12:operation soapAction="http://tempuri.org/Get_ObtenerPOPDetallado" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_obtnerBotonBlioteca">
+      <soap12:operation soapAction="http://tempuri.org/Get_obtnerBotonBlioteca" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_obtnerBotonINfGerencial">
+      <soap12:operation soapAction="http://tempuri.org/Get_obtnerBotonINfGerencial" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_obtnerBotonResumen_Ejecutivo">
+      <soap12:operation soapAction="http://tempuri.org/Get_obtnerBotonResumen_Ejecutivo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_Obtenerinfocombos">
+      <soap12:operation soapAction="http://tempuri.org/Get_Obtenerinfocombos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_Obtenerinfocombos_F">
+      <soap12:operation soapAction="http://tempuri.org/Get_Obtenerinfocombos_F" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Facade_Proceso_Cliente">
+    <wsdl:port name="Facade_Proceso_ClienteSoap" binding="tns:Facade_Proceso_ClienteSoap">
+      <soap:address location="http://localhost:14000/Facade_Proceso_Cliente.asmx" />
+    </wsdl:port>
+    <wsdl:port name="Facade_Proceso_ClienteSoap12" binding="tns:Facade_Proceso_ClienteSoap12">
+      <soap12:address location="http://localhost:14000/Facade_Proceso_Cliente.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
