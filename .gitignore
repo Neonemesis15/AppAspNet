@@ -1,15 +1,2 @@
-*.class
-build/*
-App_Browsers/*
-App_Themes/*
-ClientBin
-*.xsc
-*.xsd
-*.xss
-*.suo
-*.user
 Pages/Modulos/Cliente/GaleryofBooksOnline/*
-Service References/*
-Web References/*
-bin/*
 obj/*
