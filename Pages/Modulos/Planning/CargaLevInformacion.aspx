@@ -53,12 +53,16 @@
                         </td>
                     </tr>
                     <tr>
-                    <td colspan="2" style="margin:auto">
-                    <a visible="false" runat="server" id="formato_Producto" class="button" href="../../formatos/Formato_Lev_Info_Productos.xls"><span>Descargar Formato</span></a>
-                    <a visible="false" runat="server" id="formato_Marca" class="button" href="../../formatos/Formato_Lev_Info_Marca.xls"><span>Descargar Formato</span></a>
-                    <a visible="false" runat="server" id="formato_Familia" class="button" href="../../formatos/Formato_Lev_Info_Familia.xls"><span>Descargar Formato</span></a>
-                    <a visible="false" runat="server" id="formato_Categoria" class="button" href="../../formatos/Formato_Lev_Info_Categoria.xls"><span>Descargar Formato</span></a>
-                    </td>
+                        <td colspan="2" style="margin:auto">
+                            <a visible="false" runat="server" id="formato_Producto" 
+                                class="button" href="../../formatos/Formato_Lev_Info_Productos.xls"><span>Descargar Formato</span></a>
+                            <a visible="false" runat="server" id="formato_Marca" 
+                                class="button" href="../../formatos/Formato_Lev_Info_Marca.xls"><span>Descargar Formato</span></a>
+                            <a visible="false" runat="server" id="formato_Familia" 
+                                class="button" href="../../formatos/Formato_Lev_Info_Familia.xls"><span>Descargar Formato</span></a>
+                            <a visible="false" runat="server" id="formato_Categoria" 
+                                class="button" href="../../formatos/Formato_Lev_Info_Categoria.xls"><span>Descargar Formato</span></a>
+                        </td>
                     </tr>
                 </table>
                 <br />
@@ -93,11 +97,9 @@
                         <td align="center" style="height: 119px; width: 79px;" valign="top">
                             <br />
                         </td>
-                        <td style="width: 238px; height: 119px;" valign="top">
-                            <br />
+                        <td style="width: 238px; height: 119px;" valign="top"><br />
                             <asp:Label ID="lblencabezado" runat="server" CssClass="labels"></asp:Label>
-                            <br />
-                            <br />
+                            <br /><br />
                             <asp:Label ID="lblmensajegeneral" runat="server" CssClass="labels"></asp:Label>
                         </td>
                     </tr>

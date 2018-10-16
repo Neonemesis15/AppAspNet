@@ -12,6 +12,13 @@ using System.Collections.Generic;
 
 namespace SIGE.Pages.Modulos.Planning
 {
+    /// <summary>
+    /// Seguimiento Planning.
+    /// Developed by: 
+    /// - Pablo Salas Alvarez (PSA)
+    /// Changes:
+    /// - 2018-10-15 (PSA) Refactoring.
+    /// </summary>
     public partial class Seguimiento_Planning : System.Web.UI.Page
     {
         private DateTime fechaSolicitudP;
@@ -28,11 +35,16 @@ namespace SIGE.Pages.Modulos.Planning
         private Conexion oCoon = new Conexion();
         private PointOfSale_PlanningOper PointOfSale_PlanningOper = new PointOfSale_PlanningOper();
 
-        private Facade_Procesos_Administrativos.Facade_Procesos_Administrativos PAdmin = new SIGE.Facade_Procesos_Administrativos.Facade_Procesos_Administrativos();
-        private Facade_Proceso_Planning.Facade_Proceso_Planning PPlanning = new SIGE.Facade_Proceso_Planning.Facade_Proceso_Planning();
-        private Facade_Interface_EasyWin.Facade_Info_EasyWin_for_SIGE Presupuesto = new SIGE.Facade_Interface_EasyWin.Facade_Info_EasyWin_for_SIGE();
-        private Facade_Menu_strategy.Facade_MPlanning menu = new SIGE.Facade_Menu_strategy.Facade_MPlanning();
-        private Facade_Proceso_Cliente.Facade_Proceso_Cliente wsCliente = new SIGE.Facade_Proceso_Cliente.Facade_Proceso_Cliente();
+        private Facade_Procesos_Administrativos.Facade_Procesos_Administrativos PAdmin = 
+            new SIGE.Facade_Procesos_Administrativos.Facade_Procesos_Administrativos();
+        private Facade_Proceso_Planning.Facade_Proceso_Planning PPlanning = 
+            new SIGE.Facade_Proceso_Planning.Facade_Proceso_Planning();
+        private Facade_Interface_EasyWin.Facade_Info_EasyWin_for_SIGE Presupuesto = 
+            new SIGE.Facade_Interface_EasyWin.Facade_Info_EasyWin_for_SIGE();
+        private Facade_Menu_strategy.Facade_MPlanning menu = 
+            new SIGE.Facade_Menu_strategy.Facade_MPlanning();
+        private Facade_Proceso_Cliente.Facade_Proceso_Cliente wsCliente = 
+            new SIGE.Facade_Proceso_Cliente.Facade_Proceso_Cliente();
                 
         private int level_carga;
         
@@ -78,16 +90,30 @@ namespace SIGE.Pages.Modulos.Planning
             }
         }
 
+        /// <summary>
+        /// Ocultar todos los ModalPanel
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
         private void InicializarPaneles()
         {
+            // Modal para Asignar Presupuesto
             ModalPanelASignaPresupuesto.Hide();
+            // Modal para Descripción de Campania
             ModalPanelDescCampaña.Hide();
+            // Modal para Responsables de Campania
             ModalPanelResponsablesCampaña.Hide();
+            // Modal para Asignar Personal
             ModalPanelAsignaPersonal.Hide();
+            // Modal para Asignar Puntos de Venta
             ModalPanelPDV.Hide();
+            // Modal para Asignar Paneles
             ModalPanelPaneles.Hide();
+            // Modal para Asignar Pdv por Usuario
             ModalPanelAsignacionPDVaoper.Hide();
+            // Modal para Asignar Productos
             ModalPanelProductos.Hide();
+            // Modal para Asignar Reportes
             ModalPanelReportPlan.Hide();
         }
         private void Limpiar_InformacionBasica()
@@ -167,6 +193,12 @@ namespace SIGE.Pages.Modulos.Planning
             lblmensajegeneral.Text = this.Session["mensaje"].ToString();
             MPMensajeAsignacionPresupuesto.Show();
         }
+
+        /// <summary>
+        /// Muestra el ModalPopUp Correspondiente a las validaciones de la Campaña
+        /// </summary>
+        /// <param name=""> None </param>
+        /// <returns>None</returns>
         private void Mensajes_DescripcionCampaña()
         {
             MensajeDescripcionCampaña.CssClass = this.Session["cssclass"].ToString();
@@ -596,34 +628,44 @@ namespace SIGE.Pages.Modulos.Planning
                 return true;
             }
         }
+
+        /// <summary>
+        /// Verificar que los datos obligatorios para Actualizar la Descripción de las Campañas estén completos
+        /// </summary>
+        /// <param name=""> None </param>
+        /// <returns>Bool</returns>
         private bool datoscompletosDescripcionCampaña()
         {
+            // Obtener los valores del Formulario
             txtobj.Text = txtobj.Text.TrimStart();
             txtmanda.Text = txtmanda.Text.TrimStart();
             Txtmeca.Text = Txtmeca.Text.TrimStart();
             txtcontacto.Text = txtcontacto.Text.TrimStart();
             txtarea.Text = txtarea.Text.TrimStart();
 
-            if (txtobj.Text == "" || txtmanda.Text == "" ||
-               Txtmeca.Text == "" || txtcontacto.Text == "" || txtarea.Text == "")
-            {
+            // Validar si cualquiera de los valores que se han obtenido por Formulario son diferentes de vacio
+            if (txtobj.Text == "" 
+                || txtmanda.Text == "" 
+                || Txtmeca.Text == "" 
+                || txtcontacto.Text == "" 
+                || txtarea.Text == ""){
+
                 this.Session["encabemensa"] = "Señor Usuario";
                 this.Session["cssclass"] = "MensajesSupervisor";
-                if (txtarea.Text == "")
-                { this.Session["mensaje"] = "Debe ingresar el área involucrada"; }
-                if (txtcontacto.Text == "")
-                { this.Session["mensaje"] = "Debe ingresar el nombre del contacto"; }
-                if (Txtmeca.Text == "")
-                { this.Session["mensaje"] = "Debe ingresar la mecanica de la campaña"; }
-                if (txtmanda.Text == "")
-                { this.Session["mensaje"] = "Debe ingresar los mandatorios de la campaña"; }
-                if (txtobj.Text == "")
-                { this.Session["mensaje"] = "Debe ingresar el objetivo de la campaña"; }
+
+                // Almacenar en una session el mensaje de usuario correspondiente al Error
+                if (txtarea.Text == "") this.Session["mensaje"] = "Debe ingresar el área involucrada";
+                if (txtcontacto.Text == "") this.Session["mensaje"] = "Debe ingresar el nombre del contacto"; 
+                if (Txtmeca.Text == "") this.Session["mensaje"] = "Debe ingresar la mecanica de la campaña";
+                if (txtmanda.Text == "") this.Session["mensaje"] = "Debe ingresar los mandatorios de la campaña";
+                if (txtobj.Text == "") this.Session["mensaje"] = "Debe ingresar el objetivo de la campaña"; 
+                
+                // Mostrar el ModalPopUp correspondiente al mensaje de error producido
                 Mensajes_DescripcionCampaña();
+
                 return false;
-            }
-            else
-            {
+
+            }else{
                 return true;
             }
         }
@@ -693,12 +735,10 @@ namespace SIGE.Pages.Modulos.Planning
         
         private void ConsultaAsignacionBudget()
         {
-            //DataSet ds = new DataSet();
-            //ds = PPlanning.Get_PlanningCreados(CmbSelCampaña.SelectedValue);
-            //Se cambia el objeto ds por el datatable generado anteriormente. Consulta volvia a repetir proceso.
             
+            #region Data de Prueba ( )
             //***********************
-
+            /*
             LblTxtPresupuesto.Text = "111111";
             txtnumpla.Text = "1111111";
             Rblisstatus.Items[0].Selected = true;
@@ -719,10 +759,31 @@ namespace SIGE.Pages.Modulos.Planning
             TxtDuracion.Text = "Mercaderismo02";
 
             LlenaCanales();
-
+            */
             //***********************
+            #endregion
 
-            /*
+            DataSet ds = new DataSet();
+            /// Retorna un DataSet con la información del Planning Seleccionado
+            /// como se muestra a continuación:
+            /// DataTable[0] - Obtiene información para llenar combo de Planning
+            /// DataTable[1] - Obtiene información de los objetivos para la Campaña
+            /// DataTable[2] - Obtiene información de los Productos con SKU Mandatorio
+            /// DataTable[3] - Obtiene información de la Mecánica de las Actividades
+            /// DataTable[4] - Obtiene información del Personal Asignado a la Campaña
+            /// DataTable[5] - Obtiene información de la asginación de Mercaderista y Supervisores
+            /// DataTable[6] - Obtiene información de los PDVs de la Campania
+            /// DataTable[7] - Obtiene información de los Productos Asignados por Campania 
+            /// DataTable[8] - Obtiene información de los Puntos de Venta Asignados a los Mercaderistas
+            /// DataTable[9] - Obtiene información del Planning Seleccionado
+            /// DataTable[10]- Obtiene información de los Reportes asignados a la Campania
+            /// DataTable[11]- Obtiene información de los Paneles Asignados a la Campania
+            /// DataTable[12]- Obtiene información de las Marcas Asignadas a la Campania
+            /// DataTable[12]- Obtiene información de las Familias Asignadas a la Campania
+            /// DataTable[13]- Obtiene información de las Familias Asignadas a la Categorias
+            ds = PPlanning.Get_PlanningCreados(CmbSelCampaña.SelectedValue);
+
+            //Se cambia el objeto ds por el datatable generado anteriormente. Consulta volvia a repetir proceso.
             DataTable dtplanning = ((DataSet)this.ViewState["planning_creados"]).Tables[9];
 
             if (dtplanning.Rows.Count > 0)
@@ -766,10 +827,34 @@ namespace SIGE.Pages.Modulos.Planning
              
             }
             dtplanning = null;
-             * */
-        } //revisado
+            
+        }
+
+        /// <summary>
+        /// Setea en el aspControl Panel 'PanelDescCampaña', la información de la Campaña.
+        /// </summary>
+        /// <param name=""> None </param>
+        /// <returns>None</returns>
+        /// DataTable[0] - Obtiene información para llenar combo de Planning
+        /// DataTable[1] - Obtiene información de los objetivos para la Campaña
+        /// DataTable[2] - Obtiene información de los Productos con SKU Mandatorio
+        /// DataTable[3] - Obtiene información de la Mecánica de las Actividades
+        /// DataTable[4] - Obtiene información del Personal Asignado a la Campaña
+        /// DataTable[5] - Obtiene información de la asginación de Mercaderista y Supervisores
+        /// DataTable[6] - Obtiene información de los PDVs de la Campania
+        /// DataTable[7] - Obtiene información de los Productos Asignados por Campania 
+        /// DataTable[8] - Obtiene información de los Puntos de Venta Asignados a los Mercaderistas
+        /// DataTable[9] - Obtiene información del Planning Seleccionado
+        /// DataTable[10]- Obtiene información de los Reportes asignados a la Campania
+        /// DataTable[11]- Obtiene información de los Paneles Asignados a la Campania
+        /// DataTable[12]- Obtiene información de las Marcas Asignadas a la Campania
+        /// DataTable[13]- Obtiene información de las Familias Asignadas a la Campania
+        /// DataTable[14]- Obtiene información de las Categorias Asignadas a la Campania
         private void ConsultadescripcionCampaña()
         {
+
+            #region Codigo para Test
+            /*
             TxtCodPlanningDesc.Text = "111111";
             LblTxtPresupuestoDesc.Text = "111111";
             txtobj.Text = "111111";
@@ -777,20 +862,36 @@ namespace SIGE.Pages.Modulos.Planning
             Txtmeca.Text = "111111";
             txtcontacto.Text = "111111";
             txtarea.Text = "111111";
-            
-            /*
+            */
+            #endregion
+
             DataSet ds = (DataSet)this.ViewState["planning_creados"];
-            if (ds.Tables[1].Rows.Count > 0 && ds.Tables[2].Rows.Count > 0 && ds.Tables[3].Rows.Count > 0)
-            {
+
+            // Verifica si tiene más de un registro:
+            /// DataTable[1] - Obtiene información de los objetivos para la Campaña
+            /// DataTable[2] - Obtiene información de los Productos con SKU Mandatorio
+            /// DataTable[3] - Obtiene información de la Mecánica de las Actividades
+            if (ds.Tables[1].Rows.Count > 0 
+                && ds.Tables[2].Rows.Count > 0 
+                && ds.Tables[3].Rows.Count > 0){
+                
+                /// DataTable[9] - Obtiene información del Planning Seleccionado
                 TxtCodPlanningDesc.Text = ds.Tables[9].Rows[0]["id_planning"].ToString().Trim();
                 LblTxtPresupuestoDesc.Text = ds.Tables[9].Rows[0]["Planning_Name"].ToString().Trim();
-                txtobj.Text = ds.Tables[1].Rows[0]["objPlaDescription"].ToString().Trim();
-                txtmanda.Text = ds.Tables[2].Rows[0]["MandtoryDescription"].ToString().Trim();
-                Txtmeca.Text = ds.Tables[3].Rows[0]["MechanicalActivity_Description"].ToString().Trim();
                 txtcontacto.Text = ds.Tables[9].Rows[0]["Name_Contact"].ToString().Trim();
                 txtarea.Text = ds.Tables[9].Rows[0]["Planning_AreaInvolved"].ToString().Trim();
+                
+                /// DataTable[1] - Obtiene información de los objetivos para la Campaña
+                txtobj.Text = ds.Tables[1].Rows[0]["objPlaDescription"].ToString().Trim();
+
+                /// DataTable[2] - Obtiene información de los Productos con SKU Mandatorio
+                txtmanda.Text = ds.Tables[2].Rows[0]["MandtoryDescription"].ToString().Trim();
+
+                /// DataTable[3] - Obtiene información de la Mecánica de las Actividades
+                Txtmeca.Text = ds.Tables[3].Rows[0]["MechanicalActivity_Description"].ToString().Trim();
+
             }
-            ds = null;*/
+            ds = null;
 
         } //revisado
 
@@ -884,8 +985,10 @@ namespace SIGE.Pages.Modulos.Planning
 
             GvEjecutivosAsignados.DataSource = oList;
             GvEjecutivosAsignados.DataBind();
+
             GvMercaderistasAsignados.DataSource = oList2;
             GvMercaderistasAsignados.DataBind();
+            
             GvSupervisoresAsignados.DataSource = oList3;
             GvSupervisoresAsignados.DataBind();
 
@@ -1141,10 +1244,16 @@ namespace SIGE.Pages.Modulos.Planning
 
         }
 
-        private void llena_planning()
-        {
+        /// <summary>
+        /// Obtiene los Planning por CompanyId
+        /// </summary>
+        /// <param name="iCompany_id">Id de la Compañia</param>
+        /// <returns></returns>
+        private void llena_planning(){
+            
             DataTable dt = new DataTable(); ;
-            /*dt = Presupuesto.Presupuesto_Search(Convert.ToInt32(this.Session["companyid"].ToString().Trim()));
+            // Metodo para Obtener los Presupustos Asignados
+            dt = Presupuesto.Presupuesto_Search(Convert.ToInt32(this.Session["companyid"].ToString().Trim()));
 
             if (dt != null)
             {
@@ -1162,7 +1271,10 @@ namespace SIGE.Pages.Modulos.Planning
                     this.Session["mensaje"] = "Usted está asignado a una Compañía que no tiene campañas creadas";
                     Mensajes_Seguimiento();
                 }
-            }*/
+            }
+
+            #region Codigo de Pruebas
+            /*
             ListItem listItem0 = new ListItem("PlanningPrueba00", "1");
             ListItem listItem1 = new ListItem("PlanningPrueba01", "1");
             ListItem listItem2 = new ListItem("PlanningPrueba02", "1");
@@ -1180,6 +1292,8 @@ namespace SIGE.Pages.Modulos.Planning
             CmbSelCampaña.Items.Add(listItem6);
 
             CmbSelCampaña.Items.Insert(0, new ListItem("---Seleccione---", "0"));
+            */
+            #endregion
 
         }
         private void LlenaCanales()
@@ -1892,6 +2006,11 @@ namespace SIGE.Pages.Modulos.Planning
             ImageButtonCal4.Enabled = true;
             ImageButtonCal6.Enabled = true;
         }
+        /// <summary>
+        /// Activa Controles Input Txt para Editar la Descripción de una Campania.
+        /// </summary>
+        /// <param name=""> None </param>
+        /// <returns>None</returns>
         private void ActivaControlesDescripcionCampaña()
         {
             txtobj.Enabled = true;
@@ -1967,9 +2086,15 @@ namespace SIGE.Pages.Modulos.Planning
             this.Session.Abandon();
             Response.Redirect("~/login.aspx");
         }
+        /// <summary>
+        /// Redireccionar al Menú Planning
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
         protected void BtnRegresar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Pages/Modulos/Planning/Menu_Planning.aspx", true);
+            Response.Redirect(
+                "~/Pages/Modulos/Planning/Menu_Planning.aspx", true);
         }
         protected void BtnCOlv_Click(object sender, ImageClickEventArgs e)
         {
@@ -1978,15 +2103,29 @@ namespace SIGE.Pages.Modulos.Planning
             GVReportesAsignados.EditIndex = -1;
         }
 
+        /// <summary>
+        /// Evento onChange del ComboBox 'CmbSelCampaña'
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns>DataTable</returns>
         protected void CmbSelCampaña_SelectedIndexChanged(object sender, EventArgs e)
         {
             Postback = false;
             this.Session["Postback"] = false;
-            if (!CmbSelCampaña.SelectedValue.Equals(""))
-            {
+            // Verificar si el valor seleccionado para el Control AspControl DropDownList 'CmbSelCampaña' es diferente de vacio.
+            if (!CmbSelCampaña.SelectedValue.Equals("")){
+
+                #region Codigo para saltarse validaciones 
+                // Botón para mostrar la Información General del:
+                // - Planning
+                // - Puntos de Venta
+                // - Personal Disponible
+                /*
                 ImgBtnInformeTotal.Visible = true;
 
+                // AspControl Image: 'ImgAsigBudget'
                 ImgAsigBudget.ImageUrl = "~/Pages/images/Terminado.png";
+                // 
                 ImgIrABudget.Visible = true;
 
                 ImgDescCamp.ImageUrl = "~/Pages/images/Terminado.png";
@@ -2020,100 +2159,131 @@ namespace SIGE.Pages.Modulos.Planning
                 MenuObjetivoSODMay.Visible = true;
                 
                 ImgProdAncla.Visible = true;
+                */
+                #endregion
 
-                /*
                 DataSet ds = new DataSet();
+
+                /// <summary>
+                /// Obtener los Planning creados
+                /// Retorna 14 Objetos que muestra la información del Planning
+                /// Ing. Mauricio Ortiz 14 de julio de 2010
+                /// </summary>
+                /// <param name="sid_planning">Id del Planning</param>
+                /// <returns>DataSet</returns>
+                /// DataTable[0] - Obtiene información para llenar combo de Planning
+                /// DataTable[1] - Obtiene información de los objetivos para la Campaña
+                /// DataTable[2] - Obtiene información de los Productos con SKU Mandatorio
+                /// DataTable[3] - Obtiene información de la Mecánica de las Actividades
+                /// DataTable[4] - Obtiene información del Personal Asignado a la Campaña
+                /// DataTable[5] - Obtiene información de la asginación de Mercaderista y Supervisores
+                /// DataTable[6] - Obtiene información de los PDVs de la Campania
+                /// DataTable[7] - Obtiene información de los Productos Asignados por Campania 
+                /// DataTable[8] - Obtiene información de los Puntos de Venta Asignados a los Mercaderistas
+                /// DataTable[9] - Obtiene información del Planning Seleccionado
+                /// DataTable[10]- Obtiene información de los Reportes asignados a la Campania
+                /// DataTable[11]- Obtiene información de los Paneles Asignados a la Campania
+                /// DataTable[12]- Obtiene información de las Marcas Asignadas a la Campania
+                /// DataTable[13]- Obtiene información de las Familias Asignadas a la Campania
+                /// DataTable[14]- Obtiene información de las Categorias Asignadas a la Campania
                 ds = oCoon.ejecutarDataSet("UP_WEBSIGE_PLANNIG_CREADOS", CmbSelCampaña.SelectedValue);
+
+                // Guarda en un ViewState 'planning_creados' la información del Planning (14 DataTables)
                 this.ViewState["planning_creados"] = ds;
-                DataTable dtCliente = Presupuesto.Get_ObtenerClientes(ds.Tables[9].Rows[0]["Planning_Budget"].ToString().Trim(), 1);
+                
+                // Guarda en un DataTable los Clientes asociados a un Planning.
+                DataTable dtCliente = 
+                    Presupuesto.Get_ObtenerClientes(ds.Tables[9].Rows[0]["Planning_Budget"].ToString().Trim(), 
+                    1);
                 this.Session["Numbudget"] = ds.Tables[9].Rows[0]["Planning_Budget"].ToString().Trim();
                 this.Session["company_id"] = dtCliente.Rows[0]["Company_id"].ToString().Trim();
+                
                 DataSet dtniveles = new DataSet();
 
-                if (ds.Tables[1].Rows.Count > 0 && ds.Tables[2].Rows.Count > 0 && ds.Tables[3].Rows.Count > 0)
-                {
+                // Verifica si los DataTables tienes registros en:
+                // DataTable[1] - Obtiene información de los objetivos para la Campaña
+                // DataTable[2] - Obtiene información de los Productos con SKU Mandatorio
+                // DataTable[3] - Obtiene información de la Mecánica de las Actividades
+                if (ds.Tables[1].Rows.Count > 0 
+                    && ds.Tables[2].Rows.Count > 0 
+                    && ds.Tables[3].Rows.Count > 0){
                     ImgDescCamp.ImageUrl = "~/Pages/images/Terminado.png";
                     ImgIrADesc.Visible = true;
-                }
-                else
-                {
+                }else{
                     ImgDescCamp.ImageUrl = "~/Pages/images/Pendiente.png";
                     ImgIrADesc.Visible = false;
                 }
-                
-                if (ds.Tables[4].Rows.Count > 0)
-                {
+
+                // Verifica si los DataTables tienes registros en:
+                /// DataTable[4] - Obtiene información del Personal Asignado a la Campaña
+                if (ds.Tables[4].Rows.Count > 0){
                     ImgResponsables.ImageUrl = "~/Pages/images/Terminado.png";
                     ImgIrAResponsables.Visible = true;
-                }
-                else
-                {
+                }else{
                     ImgResponsables.ImageUrl = "~/Pages/images/Pendiente.png";
                     ImgIrAResponsables.Visible = false;
                 }
-                
-                if (ds.Tables[5].Rows.Count > 0)
-                {
+                // Verifica si los DataTables tienes registros en:
+                /// DataTable[5] - Obtiene información de la asginación de Mercaderista y Supervisores                
+                if (ds.Tables[5].Rows.Count > 0){
                     ImgAsigPersonal.ImageUrl = "~/Pages/images/Terminado.png";
                     ImgIrAASigPersonal.Visible = true;
-                }
-                else
-                {
+                }else{
                     ImgAsigPersonal.ImageUrl = "~/Pages/images/Pendiente.png";
                     ImgIrAASigPersonal.Visible = false;
                 }
-                
-                if (ds.Tables[6].Rows.Count > 0)
-                {
+                // Verifica si los DataTables tienes registros en:
+                /// DataTable[6] - Obtiene información de los PDVs de la Campania
+                if (ds.Tables[6].Rows.Count > 0){
                     ImgPDV.ImageUrl = "~/Pages/images/Terminado.png";
                     ImgIrAPDV.Visible = true;
-                }
-                else
-                {
+                }else{
                     ImgPDV.ImageUrl = "~/Pages/images/Pendiente.png";
                     ImgIrAPDV.Visible = false;
                 }
                 
-                if (ds.Tables[7].Rows.Count > 0 || ds.Tables[12].Rows.Count > 0 || ds.Tables[13].Rows.Count > 0 || ds.Tables[14].Rows.Count > 0)
-                {
+                // Verifica si los DataTables tienes registros en:
+                /// DataTable[7] - Obtiene información de los Productos Asignados por Campania 
+                /// DataTable[12]- Obtiene información de las Marcas Asignadas a la Campania
+                /// DataTable[13]- Obtiene información de las Familias Asignadas a la Campania
+                /// DataTable[14]- Obtiene información de las Categorias Asignadas a la Campania
+                if (ds.Tables[7].Rows.Count > 0 
+                    || ds.Tables[12].Rows.Count > 0 
+                    || ds.Tables[13].Rows.Count > 0 
+                    || ds.Tables[14].Rows.Count > 0){
                     ImgProductos.ImageUrl = "~/Pages/images/Terminado.png";
                     ImgIrAProductos.Visible = true;
-                }
-                else
-                {
+                }else{
                     ImgProductos.ImageUrl = "~/Pages/images/Pendiente.png";
                     ImgIrAProductos.Visible = false;
                 }
-                
-                if (ds.Tables[8].Rows.Count > 0)
-                {
+
+                // Verifica si los DataTables tienes registros en:
+                /// DataTable[8] - Obtiene información de los Puntos de Venta Asignados a los Mercaderistas
+                if (ds.Tables[8].Rows.Count > 0){
                     ImgAsignaPDV.ImageUrl = "~/Pages/images/Terminado.png";
                     ImgIrAAsignapdv.Visible = true;
-                }
-                else
-                {
+                }else{
                     ImgAsignaPDV.ImageUrl = "~/Pages/images/Pendiente.png";
                     ImgIrAAsignapdv.Visible = false;
                 }
-                
-                if (ds.Tables[10].Rows.Count > 0)
-                {
+
+                // Verifica si los DataTables tienes registros en:
+                /// DataTable[10]- Obtiene información de los Reportes asignados a la Campania
+                if (ds.Tables[10].Rows.Count > 0){
                     ImgReportes.ImageUrl = "~/Pages/images/Terminado.png";
                     ImgIrAReportesCampaña.Visible = true;
-                }
-                else
-                {
+                }else{
                     ImgReportes.ImageUrl = "~/Pages/images/Pendiente.png";
                     ImgIrAReportesCampaña.Visible = false;
                 }
-                
-                if (ds.Tables[11].Rows.Count > 0)
-                {
+
+                // Verifica si los DataTables tienes registros en:
+                /// DataTable[11]- Obtiene información de los Paneles Asignados a la Campania
+                if (ds.Tables[11].Rows.Count > 0){
                     ImgPaneles.ImageUrl = "~/Pages/images/Terminado.png";
                     ImgIrAPaneles.Visible = true;
-                }
-                else
-                {
+                }else{
                     ImgPaneles.ImageUrl = "~/Pages/images/Pendiente.png";
                     ImgIrAPaneles.Visible = false;
                 }
@@ -2127,24 +2297,19 @@ namespace SIGE.Pages.Modulos.Planning
                     && ImgAsignaPDV.ImageUrl.Equals("~/Pages/images/Terminado.png")
                     && ImgReportes.ImageUrl.Equals("~/Pages/images/Terminado.png")
                     && ImgPaneles.ImageUrl.Equals("~/Pages/images/Terminado.png")
-                    )
-                {
+                    ){
                     ImgBreaf.ImageUrl = "~/Pages/images/Terminado.png";
                     ImgIrABreaf.Visible = true;
-                }
-                else
-                {
+                }else{
                     ImgBreaf.ImageUrl = "~/Pages/images/Pendiente.png";
                     ImgIrABreaf.Visible = false;
                 }
 
-
-                if (ds.Tables[9].Rows[0]["Planning_CodChannel"].ToString() == "1000")
-                {
+                // Verifica si es Canal mayorista, para mostrar el menú de 'Objetivos SOD':
+                /// DataTable[9] - Obtiene información del Planning Seleccionado
+                if (ds.Tables[9].Rows[0]["Planning_CodChannel"].ToString() == "1000"){
                     MenuObjetivoSODMay.Visible = true;
-                }
-                else
-                {
+                }else{
                     MenuObjetivoSODMay.Visible = false;
                 }
                 
@@ -2162,18 +2327,15 @@ namespace SIGE.Pages.Modulos.Planning
                     OpcionGestionFuerzaVenta.Style.Value = "display: block";
                     ImgGestionFuerzaVenta.ImageUrl = "../../images/Terminado.png";
                     ImgIrAGestionFuerzaVenta.Visible = true;
-                }
-                else
-                {
+                }else{
                     OpcionGestionNiveles.Style.Value = "display: none";
                     OpcionGestionFuerzaVenta.Style.Value = "display: none";
                 }
                 ds = null;
                 dtCliente = null;
-                */
+                
             }
-            else
-            {
+            else{
                 ImgBtnInformeTotal.Visible = false;
                 ImgAsigBudget.ImageUrl = "~/Pages/images/Esperando.png";
                 ImgDescCamp.ImageUrl = "~/Pages/images/Esperando.png";
@@ -2199,12 +2361,21 @@ namespace SIGE.Pages.Modulos.Planning
         }
 
         #region Presupuesto
+        
+        /// <summary>
+        /// Evento Click del AspControl ImageButton: 'ImgIrABudget'
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
         protected void ImgIrABudget_Click(object sender, ImageClickEventArgs e)
         {
+            // Hace visible el DIV Regresar: 'botonregresar'
             botonregresar.Visible = false;
             Postback = false;
             this.Session["Postback"] = false;
+            // Oculta todos los Panels
             InicializarPaneles();
+            // Hace visible el Panel ModalPanelASignaPresupuesto
             ModalPanelASignaPresupuesto.Show();
             ConsultaAsignacionBudget();
         }
@@ -2589,6 +2760,12 @@ namespace SIGE.Pages.Modulos.Planning
         #endregion
 
         #region Descripcion campaña
+        /// <summary>
+        /// Evento Click para el AspControl: ImgIrADesc
+        /// Que retorna la descripción de la Campaña
+        /// </summary>
+        /// <param name=""> None </param>
+        /// <returns>None</returns>
         protected void ImgIrADesc_Click(object sender, ImageClickEventArgs e)
         {
             botonregresar.Visible = false;
@@ -2609,6 +2786,14 @@ namespace SIGE.Pages.Modulos.Planning
             ModalPanelDescCampaña.Show();
 
         }
+        
+        /// <summary>
+        /// Evento Click del AspControl - BtnEditDescripcion, para Setear los valores de
+        /// la Campaña en los controladores input txt y Editar la Información
+        /// Para Editar la descripción de la Campania
+        /// </summary>
+        /// <param name=""> None </param>
+        /// <returns>None</returns>
         protected void BtnEditDescripcion_Click(object sender, EventArgs e)
         {
             InicializarPaneles();
@@ -2617,6 +2802,14 @@ namespace SIGE.Pages.Modulos.Planning
             ActivaControlesDescripcionCampaña();
             ModalPanelDescCampaña.Show();
         }
+
+        /// <summary>
+        /// Evento Click del AspControl - BtnUpdateDescripcion, para confirmar los 
+        /// cambios en la información de la Campaña
+        /// Para Editar la descripción de la Campania
+        /// </summary>
+        /// <param name=""> None </param>
+        /// <returns>None</returns>
         protected void BtnUpdateDescripcion_Click(object sender, EventArgs e)
         {
             Boolean Continuar = datoscompletosDescripcionCampaña();
@@ -2673,7 +2866,6 @@ namespace SIGE.Pages.Modulos.Planning
             DataTable dtEliminarmercaderistaTemp = new DataTable();
             dtEliminarmercaderistaTemp.Columns.Add("Person_id", typeof(Int32));
             dtEliminarmercaderistaTemp.Columns.Add("name_user", typeof(String));
-
             this.Session["dtEliminarmercaderistaTemp"] = dtEliminarmercaderistaTemp;
 
             llenaEjecutivos();
@@ -7824,19 +8016,39 @@ namespace SIGE.Pages.Modulos.Planning
         #endregion
 
 
-
-
-
-
+        /// <summary>
+        /// Evento Click del AspControl ImageButton: 'ImgBtnInformeTotal'
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
         protected void ImgBtnInformeTotal_Click(object sender, ImageClickEventArgs e)
         {
-            DataSet ds = oCoon.ejecutarDataSet("UP_WEBXPLORA_PLA_INFORMACIONGENERALPLANNING", CmbSelCampaña.SelectedValue, Convert.ToInt32(this.Session["company_id"]));
+            // Obtener el Valor Seleccionado del AspControl DropDownList 'CmbSelCampaña'
+            // Para Obtener la 
+            // Información General del Planning Seleccionado
+            // Tables[0] Información General del Planning
+            // Tables[1] Información General del Personal 
+            // Tables[2] Información General de los Puntos de Venta
+            DataSet ds = oCoon.ejecutarDataSet(
+                "UP_WEBXPLORA_PLA_INFORMACIONGENERALPLANNING", 
+                CmbSelCampaña.SelectedValue, 
+                Convert.ToInt32(this.Session["company_id"]));
+
+            // Llena la Grilla de la Información General del Planning
             GvInformacionPlanning.DataSource = ds.Tables[0];
             GvInformacionPlanning.DataBind();
-            ((GridView)GvInformacionPlanning.Rows[0].Cells[0].FindControl("GVInfogenStaff")).DataSource = ds.Tables[1];
-            ((GridView)GvInformacionPlanning.Rows[0].Cells[0].FindControl("GVInfogenStaff")).DataBind();
-            ((GridView)GvInformacionPlanning.Rows[0].Cells[0].FindControl("GVInfopdv")).DataSource = ds.Tables[2];
-            ((GridView)GvInformacionPlanning.Rows[0].Cells[0].FindControl("GVInfopdv")).DataBind();
+            
+            // Llena la Grilla del Staff
+            ((GridView)GvInformacionPlanning.Rows[0].Cells[0]
+                .FindControl("GVInfogenStaff")).DataSource = ds.Tables[1];
+            ((GridView)GvInformacionPlanning.Rows[0].Cells[0]
+                .FindControl("GVInfogenStaff")).DataBind();
+            
+            // Llena la Grilla de los Puntos de Venta
+            ((GridView)GvInformacionPlanning.Rows[0].Cells[0]
+                .FindControl("GVInfopdv")).DataSource = ds.Tables[2];
+            ((GridView)GvInformacionPlanning.Rows[0].Cells[0]
+                .FindControl("GVInfopdv")).DataBind();
         }
 
         protected void BtnCloseMasivaProd_Click(object sender, ImageClickEventArgs e)

@@ -66,79 +66,103 @@
                                         <div>
                                             <table>
                                                 <tr>
-                                                    <td> <asp:Label ID="LblSelCampaña" runat="server" Text="Campaña" CssClass="labelsN"></asp:Label> </td>
-                                                    <td><asp:DropDownList ID="CmbSelCampaña" runat="server" Width="535px" AutoPostBack="True" CausesValidation="True" OnSelectedIndexChanged="CmbSelCampaña_SelectedIndexChanged"> </asp:DropDownList></td>
+                                                    <td><asp:Label ID="LblSelCampaña" runat="server" Text="Campaña" CssClass="labelsN"></asp:Label></td>
+                                                    <td><asp:DropDownList ID="CmbSelCampaña" runat="server" Width="535px" 
+                                                        AutoPostBack="True" CausesValidation="True" 
+                                                        OnSelectedIndexChanged="CmbSelCampaña_SelectedIndexChanged">
+                                                    </asp:DropDownList></td>
                                                 </tr>
                                             </table>
                                             <table align="center">
                                                 <tr>
-                                                    <td> <asp:ImageButton ID="ImgIrABudget" runat="server" ImageUrl="~/Pages/ImgBooom/iconodescarga.png" ToolTip="Ver información..." Visible="False" OnClick="ImgIrABudget_Click" /> </td>
-                                                    <td> <span class="labelsN">Asignación de Presupuesto</span> </td>
-                                                    <td> <asp:Image ID="ImgAsigBudget" runat="server" ImageUrl="~/Pages/images/Esperando.png" Width="70%" /> </td>
-                                                    <td rowspan="10" style="display: none;"> <div> <asp:ImageButton ID="ImgBtnInformeTotal" runat="server" Visible="false" ImageUrl="~/Pages/images/Digitar.png"  Width="100px" Height="100px" ToolTip="Ver Información completa de la campaña"  OnClick="ImgBtnInformeTotal_Click" />  </div> </td>
+                                                    <td><asp:ImageButton ID="ImgIrABudget" runat="server" 
+                                                        ImageUrl="~/Pages/ImgBooom/iconodescarga.png" ToolTip="Ver información..." 
+                                                        Visible="False" OnClick="ImgIrABudget_Click" /> </td>
+                                                    <td><span class="labelsN">Asignación de Presupuesto</span> </td>
+                                                    <td><asp:Image ID="ImgAsigBudget" runat="server" ImageUrl="~/Pages/images/Esperando.png" Width="70%" /></td>
+                                                    <td rowspan="10" style="display: none;"> 
+                                                        <div><asp:ImageButton ID="ImgBtnInformeTotal" runat="server" 
+                                                            Visible="false" ImageUrl="~/Pages/images/Digitar.png"  Width="100px" Height="100px" 
+                                                            ToolTip="Ver Información completa de la campaña"  
+                                                            OnClick="ImgBtnInformeTotal_Click" />
+                                                        </div> 
+                                                    </td>
                                                 </tr>
                                                 <tr>
-                                                    <td> <asp:ImageButton ID="ImgIrADesc" runat="server" ImageUrl="~/Pages/ImgBooom/iconodescarga.png" ToolTip="Ver información..." Visible="False" OnClick="ImgIrADesc_Click" /> </td>
+                                                    <td> <asp:ImageButton ID="ImgIrADesc" runat="server" ImageUrl="~/Pages/ImgBooom/iconodescarga.png" 
+                                                        ToolTip="Ver información..." Visible="False" OnClick="ImgIrADesc_Click" /> </td>
                                                     <td> <span class="labelsN">Descripción de la Campaña</span> </td>
                                                     <td> <asp:Image ID="ImgDescCamp" runat="server" ImageUrl="~/Pages/images/Esperando.png" Width="70%" /> </td>
                                                 </tr>
                                                 <tr>
-                                                    <td> <asp:ImageButton ID="ImgIrAResponsables" runat="server" ImageUrl="~/Pages/ImgBooom/iconodescarga.png"  ToolTip="Ver información..." Visible="False" OnClick="ImgIrAResponsables_Click" /> </td>
+                                                    <td> <asp:ImageButton ID="ImgIrAResponsables" runat="server" ImageUrl="~/Pages/ImgBooom/iconodescarga.png"  
+                                                        ToolTip="Ver información..." Visible="False" OnClick="ImgIrAResponsables_Click" /> </td>
                                                     <td> <span class="labelsN">Responsables</span> </td>
                                                     <td> <asp:Image ID="ImgResponsables" runat="server" ImageUrl="~/Pages/images/Esperando.png"  Width="70%" /> </td>
                                                 </tr>
                                                 <tr>
-                                                    <td> <asp:ImageButton ID="ImgIrAASigPersonal" runat="server" ImageUrl="~/Pages/ImgBooom/iconodescarga.png" ToolTip="Ver información..." Visible="False" OnClick="ImgIrAASigPersonal_Click" /> </td>
+                                                    <td> <asp:ImageButton ID="ImgIrAASigPersonal" runat="server" ImageUrl="~/Pages/ImgBooom/iconodescarga.png" 
+                                                        ToolTip="Ver información..." Visible="False" OnClick="ImgIrAASigPersonal_Click" /> </td>
                                                     <td> <span class="labelsN">Asignación de Personal</span>  </td>
                                                     <td> <asp:Image ID="ImgAsigPersonal" runat="server" ImageUrl="~/Pages/images/Esperando.png"  Width="70%" /> </td>
                                                 </tr>
                                                 <tr>
-                                                    <td> <asp:ImageButton ID="ImgIrAPDV" runat="server" ImageUrl="~/Pages/ImgBooom/iconodescarga.png" ToolTip="Ver información..." Visible="False" OnClick="ImgIrAPDV_Click" /> </td>
+                                                    <td> <asp:ImageButton ID="ImgIrAPDV" runat="server" ImageUrl="~/Pages/ImgBooom/iconodescarga.png" 
+                                                        ToolTip="Ver información..." Visible="False" OnClick="ImgIrAPDV_Click" /> </td>
                                                     <td> <span class="labelsN">Puntos de Venta</span> </td>
                                                     <td> <asp:Image ID="ImgPDV" runat="server" ImageUrl="~/Pages/images/Esperando.png" Width="70%" /> </td>
                                                 </tr>
                                                 <tr>
-                                                    <td> <asp:ImageButton ID="ImgIrAPaneles" runat="server" ImageUrl="~/Pages/ImgBooom/iconodescarga.png" ToolTip="Ver información..." Visible="False" OnClick="ImgIrAPaneles_Click" />  </td>
+                                                    <td> <asp:ImageButton ID="ImgIrAPaneles" runat="server" ImageUrl="~/Pages/ImgBooom/iconodescarga.png" 
+                                                    ToolTip="Ver información..." Visible="False" OnClick="ImgIrAPaneles_Click" />  </td>
                                                     <td> <span class="labelsN">Páneles</span>  </td>
                                                     <td> <asp:Image ID="ImgPaneles" runat="server" ImageUrl="~/Pages/images/Esperando.png"  Width="70%" />  </td>
                                                 </tr>
                                                 <tr>
-                                                    <td> <asp:ImageButton ID="ImgIrAAsignapdv" runat="server" ImageUrl="~/Pages/ImgBooom/iconodescarga.png" ToolTip="Ver información..." Visible="False" OnClick="ImgIrAAsignapdv_Click" /> </td>
+                                                    <td> <asp:ImageButton ID="ImgIrAAsignapdv" runat="server" ImageUrl="~/Pages/ImgBooom/iconodescarga.png" 
+                                                        ToolTip="Ver información..." Visible="False" OnClick="ImgIrAAsignapdv_Click" /> </td>
                                                     <td> <span class="labelsN">Asignación de Rutas</span> </td>
                                                     <td> <asp:Image ID="ImgAsignaPDV" runat="server" ImageUrl="~/Pages/images/Esperando.png" Width="70%" /> </td>
                                                 </tr>
                                                 <tr>
-                                                    <td> <asp:ImageButton ID="ImgIrAProductos" runat="server" ImageUrl="~/Pages/ImgBooom/iconodescarga.png" ToolTip="Ver información..." Visible="False" OnClick="ImgIrAProductos_Click" />  </td>
+                                                    <td> <asp:ImageButton ID="ImgIrAProductos" runat="server" ImageUrl="~/Pages/ImgBooom/iconodescarga.png" 
+                                                        ToolTip="Ver información..." Visible="False" OnClick="ImgIrAProductos_Click" />  </td>
                                                     <td> <span class="labelsN">Levantamiento de Información</span> </td>
                                                     <td> <asp:Image ID="ImgProductos" runat="server" ImageUrl="~/Pages/images/Esperando.png"  Width="70%" /> </td>
                                                 </tr>
                                                 <tr>
-                                                    <td> <asp:ImageButton ID="ImgIrAReportesCampaña" runat="server" ImageUrl="~/Pages/ImgBooom/iconodescarga.png"  ToolTip="Ver información..." Visible="False" OnClick="ImgIrAReportesCampaña_Click" />  </td>
+                                                    <td> <asp:ImageButton ID="ImgIrAReportesCampaña" runat="server" ImageUrl="~/Pages/ImgBooom/iconodescarga.png"  
+                                                        ToolTip="Ver información..." Visible="False" OnClick="ImgIrAReportesCampaña_Click" />  </td>
                                                     <td>   <span class="labelsN">Asignación de Períodos</span>   </td>
                                                     <td>  <asp:Image ID="ImgReportes" runat="server" ImageUrl="~/Pages/images/Esperando.png"   Width="70%" />  </td>
                                                 </tr>
                                                 <tr id="OpcionGestionNiveles" runat="server" style="display: none;">
-                                                    <td> <asp:ImageButton ID="ImgIrAGestionNiveles" runat="server" ImageUrl="~/Pages/ImgBooom/iconodescarga.png"  ToolTip="Ver información..." Visible="False" OnClick="ImgIrAGestionNiveles_Click" />  </td>
+                                                    <td> <asp:ImageButton ID="ImgIrAGestionNiveles" runat="server" ImageUrl="~/Pages/ImgBooom/iconodescarga.png"  
+                                                        ToolTip="Ver información..." Visible="False" OnClick="ImgIrAGestionNiveles_Click" />  </td>
                                                     <td> <span class="labelsN">Gestión de Niveles</span> </td>
                                                     <td> <asp:Image id="ImgGestionNiveles" runat="server" ImageUrl="../../images/Esperando.png" width="70%" alt="" /> </td>
                                                 </tr>
                                                 <tr id="OpcionGestionFuerzaVenta" runat="server" style="display: none;">
-                                                    <td> <asp:ImageButton ID="ImgIrAGestionFuerzaVenta" runat="server" ImageUrl="~/Pages/ImgBooom/iconodescarga.png" ToolTip="Ver información..." Visible="False" OnClick="ImgIrAGestionFuerzaVenta_Click" /> </td>
+                                                    <td> <asp:ImageButton ID="ImgIrAGestionFuerzaVenta" runat="server" ImageUrl="~/Pages/ImgBooom/iconodescarga.png" 
+                                                        ToolTip="Ver información..." Visible="False" OnClick="ImgIrAGestionFuerzaVenta_Click" /> </td>
                                                     <td> <span class="labelsN">Gestión de Fuerza de Venta</span> </td>
                                                     <td> <asp:Image id="ImgGestionFuerzaVenta" runat="server" ImageUrl="../../images/Esperando.png" width="70%" alt="" />  </td>
                                                 </tr>
                                                 <tr style="display: none;">
-                                                    <td>  <asp:ImageButton ID="ImgIrABreaf" runat="server" ImageUrl="~/Pages/ImgBooom/iconodescarga.png" ToolTip="Ver información..." Visible="False" OnClick="ImgIrABreaf_Click" /> </td>
+                                                    <td>  <asp:ImageButton ID="ImgIrABreaf" runat="server" ImageUrl="~/Pages/ImgBooom/iconodescarga.png" 
+                                                        ToolTip="Ver información..." Visible="False" OnClick="ImgIrABreaf_Click" /> </td>
                                                     <td> <asp:Label ID="LblBreaf" runat="server" Text="Breaf" CssClass="labelsN"></asp:Label>  </td>
                                                     <td> <asp:Image ID="ImgBreaf" runat="server" ImageUrl="~/Pages/images/Esperando.png" Width="70%" /> </td>
                                                 </tr>
                                                 <tr runat="server" id="MenuProductoAncla"  visible="false">
-                                                    <td> <asp:ImageButton ID="ImgProdAncla" runat="server" ImageUrl="~/Pages/ImgBooom/iconodescarga.png"  ToolTip="Ver información..."  Visible="false" OnClick="ImgProdAncla_Click" /> </td>
+                                                    <td> <asp:ImageButton ID="ImgProdAncla" runat="server" ImageUrl="~/Pages/ImgBooom/iconodescarga.png" 
+                                                    ToolTip="Ver información..."  Visible="false" OnClick="ImgProdAncla_Click" /> </td>
                                                     <td> <asp:Label ID="Label8" runat="server" Text="Producto Ancla" CssClass="labelsN"></asp:Label> </td>
                                                     <td> <asp:Image ID="Image3" runat="server" Visible="false" ImageUrl="~/Pages/images/Esperando.png" Width="70%" /> </td>
                                                 </tr>
                                               <tr runat="server" id="MenuObjetivoSODMay" visible="false"  >
-                                                    <td><asp:ImageButton ID="ImgObjetivoSODMay" runat="server" ImageUrl="~/Pages/ImgBooom/iconodescarga.png" ToolTip="Ver información..."   OnClick="ImgObjetivoSODMay_Click" /></td>
+                                                    <td><asp:ImageButton ID="ImgObjetivoSODMay" runat="server" ImageUrl="~/Pages/ImgBooom/iconodescarga.png" 
+                                                        ToolTip="Ver información..."   OnClick="ImgObjetivoSODMay_Click" /></td>
                                                     <td><asp:Label ID="Label14" runat="server" Text="Objetivo SOD MAY" CssClass="labelsN"></asp:Label></td>
                                                     <td><asp:Image ID="Image4" runat="server" Visible="false" ImageUrl="~/Pages/images/Esperando.png" Width="70%" /></td>
                                                 </tr>
@@ -146,26 +170,34 @@
                                         </div>
                                     </asp:Panel>
                                     <div style="width: 100%; height: 800px; display: none;">
-                                        <asp:GridView ID="GvInformacionPlanning" runat="server" Width="900px" AutoGenerateColumns="False"  EnableModelValidation="True" BackColor="White" BorderColor="#336666" BorderStyle="Double"  BorderWidth="3px" CellPadding="4" Font-Names="Arial" Font-Size="10pt" GridLines="Horizontal"> 
+                                        <asp:GridView ID="GvInformacionPlanning" runat="server" Width="900px" 
+                                            AutoGenerateColumns="False"  EnableModelValidation="True" BackColor="White" 
+                                            BorderColor="#336666" BorderStyle="Double"  BorderWidth="3px" CellPadding="4" 
+                                            Font-Names="Arial" Font-Size="10pt" GridLines="Horizontal"> 
                                             <Columns>
                                                 <asp:TemplateField HeaderText="Datos generales de la campaña" ItemStyle-VerticalAlign="Top">
                                                     <ItemTemplate>
                                                         <table>
                                                             <tr>
                                                                 <td>
-                                                                    <asp:GridView ID="GVInfogenStaff" runat="server" BackColor="White" BorderColor="#336666"  BorderStyle="Double" BorderWidth="3px" CellPadding="4" Font-Names="Arial" Font-Size="10pt"  GridLines="Horizontal"> 
+                                                                    <asp:GridView ID="GVInfogenStaff" runat="server" 
+                                                                    BackColor="White" BorderColor="#336666"  BorderStyle="Double" 
+                                                                    BorderWidth="3px" CellPadding="4" Font-Names="Arial" Font-Size="10pt"  
+                                                                    GridLines="Horizontal"> 
                                                                         <HeaderStyle BackColor="#336666" Font-Bold="True" ForeColor="White" />
                                                                         <RowStyle BackColor="White" ForeColor="#333333" />
                                                                     </asp:GridView>
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <tr> <td> <br /> </td> </tr>
+                                                                <tr><td><br/></td></tr>
                                                                 <td>
-                                                                    <asp:ImageButton ID="ImgButtonExpande" runat="server" ImageUrl="~/Pages/images/add.png" ToolTip="Expandir" />
-                                                                    <asp:Label ID="infopdv" runat="server" Text="Puntos de Venta"></asp:Label>
-                                                                    <br />
-                                                                    <asp:GridView ID="gvinfopdv" runat="server" BackColor="White" BorderColor="#336666"  BorderStyle="Double" BorderWidth="3px" CellPadding="4" Font-Names="Arial" Font-Size="10pt"  GridLines="Horizontal">
+                                                                    <asp:ImageButton ID="ImgButtonExpande" runat="server" 
+                                                                        ImageUrl="~/Pages/images/add.png" ToolTip="Expandir" />
+                                                                    <asp:Label ID="infopdv" runat="server" Text="Puntos de Venta"></asp:Label><br />
+                                                                    <asp:GridView ID="gvinfopdv" runat="server" BackColor="White" 
+                                                                        BorderColor="#336666"  BorderStyle="Double" BorderWidth="3px" 
+                                                                        CellPadding="4" Font-Names="Arial" Font-Size="10pt"  GridLines="Horizontal">
                                                                         <HeaderStyle BackColor="#336666" Font-Bold="True" ForeColor="White" />
                                                                         <RowStyle BackColor="White" ForeColor="#333333" />
                                                                     </asp:GridView>
@@ -348,7 +380,9 @@
                                 </table>
                             </div>
                         </asp:Panel>
-                        <cc1:ModalPopupExtender ID="ModalPanelASignaPresupuesto" runat="server" BackgroundCssClass="modalBackground" Enabled="True" PopupControlID="PanelASignaPresupuesto" TargetControlID="btndisparaasignapresupuesto"> </cc1:ModalPopupExtender>
+                        <cc1:ModalPopupExtender ID="ModalPanelASignaPresupuesto" runat="server" 
+                            BackgroundCssClass="modalBackground" Enabled="True" PopupControlID="PanelASignaPresupuesto" 
+                            TargetControlID="btndisparaasignapresupuesto"> </cc1:ModalPopupExtender>
                         <asp:Button ID="btndisparaasignapresupuesto" runat="server" CssClass="alertas" Enabled="False" Height="0px" Text="" Width="0" />
                     </ContentTemplate>
                 </asp:UpdatePanel>
@@ -370,23 +404,16 @@
                             <div>
                                 <table align="center" border="0" cellpadding="0" cellspacing="0">
                                     <tr>
-                                        <td>
-                                            <img alt="sup1" height="6" src="../../images/tablas_genericas/bordegris_tablasgene_sup1.png"
-                                                width="6"> </img>
-                                        </td>
+                                        <td><img alt="sup1" height="6" src="../../images/tablas_genericas/bordegris_tablasgene_sup1.png"
+                                                width="6"> </img></td>
                                         <td background="../../images/tablas_genericas/bg_gris_tablasgene.jpg">
-                                            <img height="6" src="../../images/tablas_genericas/bg_gris_tablasgene.jpg" width="1">
-                                            </img>
+                                            <img height="6" src="../../images/tablas_genericas/bg_gris_tablasgene.jpg" width="1"></img>
                                         </td>
-                                        <td>
-                                            <img height="6" src="../../images/tablas_genericas/bordegris_tablasgene_sup3.png"
-                                                width="6"> </img>
-                                        </td>
+                                        <td><img height="6" src="../../images/tablas_genericas/bordegris_tablasgene_sup3.png" width="6"> </img></td>
                                     </tr>
                                     <tr>
                                         <td background="../../images/tablas_genericas/bg_gris_tablasgene.jpg">
-                                            <img height="1" src="../../images/tablas_genericas/bg_gris_tablasgene.jpg" width="6">
-                                            </img>
+                                            <img height="1" src="../../images/tablas_genericas/bg_gris_tablasgene.jpg" width="6"></img>
                                         </td>
                                         <td bgcolor="White">
                                             <asp:Panel ID="PanelDesc" runat="server" Style="vertical-align: middle;">
@@ -401,20 +428,13 @@
                                                 <br />
                                                 <table align="center">
                                                     <tr>
-                                                        <td>
-                                                            <asp:Label ID="LblPlannigDesc" runat="server" CssClass="labelsN" Text="Planning No"></asp:Label>
-                                                        </td>
-                                                        <td>
-                                                            <asp:TextBox ID="TxtCodPlanningDesc" runat="server" BackColor="#CCCCCC" Enabled="False"
-                                                                ForeColor="White"></asp:TextBox>
-                                                        </td>
-                                                        <td>
-                                                            <asp:Label ID="LblSelPresupuestoDesc" runat="server" CssClass="labelsN" Text="Campaña"></asp:Label>
-                                                        </td>
-                                                        <td>
-                                                            <asp:Label ID="LblTxtPresupuestoDesc" runat="server" Text=" presupuesto asignado"
-                                                                Width="500px" Enabled="False"></asp:Label>
-                                                        </td>
+                                                        <td><asp:Label ID="LblPlannigDesc" runat="server" CssClass="labelsN" 
+                                                            Text="Planning No"></asp:Label></td>
+                                                        <td><asp:TextBox ID="TxtCodPlanningDesc" runat="server" BackColor="#CCCCCC" Enabled="False" 
+                                                            ForeColor="White"></asp:TextBox></td>
+                                                        <td><asp:Label ID="LblSelPresupuestoDesc" runat="server" CssClass="labelsN" Text="Campaña"></asp:Label></td>
+                                                        <td><asp:Label ID="LblTxtPresupuestoDesc" runat="server" Text=" presupuesto asignado"
+                                                            Width="500px" Enabled="False"></asp:Label></td>
                                                     </tr>
                                                 </table>
                                                 <br />
@@ -422,28 +442,24 @@
                                                     <tr>
                                                         <td>
                                                             <fieldset id="Fieldset1" runat="server">
-                                                                <legend>Descripción</legend>
-                                                                <br />
+                                                                <legend>Descripción</legend><br />
                                                                 <table>
                                                                     <tr>
                                                                         <td valign="top">
                                                                             <asp:Label ID="lblobj" runat="server" CssClass="labelsN" Text="Objetivo de la Campaña"></asp:Label>
-                                                                            <asp:Label ID="lblolbli13" runat="server" ForeColor="#CC3300" Text="*"></asp:Label>
-                                                                            <br />
+                                                                            <asp:Label ID="lblolbli13" runat="server" ForeColor="#CC3300" Text="*"></asp:Label><br />
                                                                             <asp:TextBox ID="txtobj" runat="server" BorderStyle="Solid" BorderWidth="1px" Height="150px"
                                                                                 TextMode="MultiLine" Width="265px" Enabled="False"></asp:TextBox>
                                                                         </td>
                                                                         <td valign="top">
                                                                             <asp:Label ID="lblmanda" runat="server" CssClass="labelsN" Text="Mandatorios de  Campaña"></asp:Label>
-                                                                            <asp:Label ID="lblolbli14" runat="server" ForeColor="#CC3300" Text="*"></asp:Label>
-                                                                            <br />
+                                                                            <asp:Label ID="lblolbli14" runat="server" ForeColor="#CC3300" Text="*"></asp:Label><br />
                                                                             <asp:TextBox ID="txtmanda" runat="server" BorderStyle="Solid" BorderWidth="1px" Height="150px"
                                                                                 TextMode="MultiLine" Width="265px" Enabled="False"></asp:TextBox>
                                                                         </td>
                                                                         <td valign="top">
                                                                             <asp:Label ID="lblmeca" runat="server" CssClass="labelsN" Text="Mecanica"></asp:Label>
-                                                                            <asp:Label ID="lblolbli15" runat="server" ForeColor="#CC3300" Text="*"></asp:Label>
-                                                                            <br />
+                                                                            <asp:Label ID="lblolbli15" runat="server" ForeColor="#CC3300" Text="*"></asp:Label><br />
                                                                             <asp:TextBox ID="Txtmeca" runat="server" BorderStyle="Solid" BorderWidth="1px" Height="150px"
                                                                                 TextMode="MultiLine" Width="265px" Enabled="False"></asp:TextBox>
                                                                         </td>
@@ -458,8 +474,7 @@
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr>
-                                                                                    <td>
-                                                                                        <asp:Button ID="BtnClearDescrip" runat="server" BorderStyle="Solid" CssClass="buttonClearPlan"
+                                                                                    <td><asp:Button ID="BtnClearDescrip" runat="server" BorderStyle="Solid" CssClass="buttonClearPlan"
                                                                                             Height="25px" Text="Deshacer" Width="164px" OnClick="BtnClearDescrip_Click" />
                                                                                     </td>
                                                                                 </tr>
@@ -571,49 +586,32 @@
                                                     <asp:ImageButton ID="ImgCloseResponsables" runat="server" AlternateText="Cerrar Ventana"
                                                         ToolTip="Cerrar Ventana" BackColor="Transparent" Height="22px" ImageAlign="Right"
                                                         ImageUrl="~/Pages/ImgBooom/salir.png" Width="23px" OnClick="BtnCOlv_Click" />
-                                                </div>
-                                                <br />
-                                                <div class="centrarcontenido labelsTit2">
-                                                    Responsables de Campaña</div>
-                                                <br />
+                                                </div><br />
+                                                <div class="centrarcontenido labelsTit2">Responsables de Campaña</div><br />
                                                 <table>
                                                     <tr>
-                                                        <td>
-                                                            <asp:Label ID="LblPlanningRes" runat="server" CssClass="labelsN" Text="Planning No"></asp:Label>
-                                                        </td>
-                                                        <td>
-                                                            <asp:TextBox ID="TxtPlanningRes" runat="server" BackColor="#CCCCCC" Enabled="False"
-                                                                ForeColor="White"></asp:TextBox>
-                                                        </td>
-                                                        <td>
-                                                            <asp:Label ID="LblSelPresupuestoRes" runat="server" CssClass="labelsN" Text="Campaña:"></asp:Label>
-                                                        </td>
-                                                        <td>
-                                                            <asp:Label ID="LblTxtPresupuestoRes" runat="server" Text="Presupuesto" Width="500px"
-                                                                Enabled="False"></asp:Label>
-                                                        </td>
+                                                        <td><asp:Label ID="LblPlanningRes" runat="server" CssClass="labelsN" Text="Planning No"></asp:Label></td>
+                                                        <td><asp:TextBox ID="TxtPlanningRes" runat="server" BackColor="#CCCCCC" Enabled="False"
+                                                                ForeColor="White"></asp:TextBox></td>
+                                                        <td><asp:Label ID="LblSelPresupuestoRes" runat="server" CssClass="labelsN" Text="Campaña:"></asp:Label></td>
+                                                        <td><asp:Label ID="LblTxtPresupuestoRes" runat="server" Text="Presupuesto" Width="500px"
+                                                                Enabled="False"></asp:Label></td>
                                                     </tr>
-                                                </table>
-                                                <br />
+                                                </table><br />
                                                 <table width="100%">
                                                     <tr>
-                                                        <td valign="top">
-                                                            <asp:Label ID="LblSelEjecutivo" runat="server" Font-Bold="True" Font-Names="verdana"
-                                                                Font-Size="10pt" Text="Supervisor Controler"></asp:Label>
-                                                        </td>
-                                                        <td>
-                                                            <asp:Label ID="LblSelSupervisores" runat="server" Font-Bold="True" Font-Names="verdana"
-                                                                Font-Size="10pt" Text="Supervisor(es)"></asp:Label>
-                                                        </td>
-                                                        <td>
-                                                            <asp:Label ID="LblSelMercadersitas" runat="server" Font-Bold="True" Font-Names="verdana"
-                                                                Font-Size="10pt" Text="Mercaderista(s)"></asp:Label>
-                                                        </td>
+                                                        <td valign="top"><asp:Label ID="LblSelEjecutivo" runat="server" Font-Bold="True" Font-Names="verdana"
+                                                                Font-Size="10pt" Text="Supervisor Controler"></asp:Label></td>
+                                                        <td><asp:Label ID="LblSelSupervisores" runat="server" Font-Bold="True" Font-Names="verdana"
+                                                                Font-Size="10pt" Text="Supervisor(es)"></asp:Label></td>
+                                                        <td><asp:Label ID="LblSelMercadersitas" runat="server" Font-Bold="True" Font-Names="verdana"
+                                                                Font-Size="10pt" Text="Mercaderista(s)"></asp:Label></td>
                                                     </tr>
                                                     <tr>
                                                         <td valign="top">
                                                             <div style="border: 1px solid #000000; width: 380px; height: 200px;" class="p">
-                                                                <asp:GridView ID="GvEjecutivosAsignados" runat="server" EmptyDataText="Se han quitado todas las asignaciones de Ejecutivos de la Campaña"
+                                                                <asp:GridView ID="GvEjecutivosAsignados" runat="server" 
+                                                                    EmptyDataText="Se han quitado todas las asignaciones de Ejecutivos de la Campaña"
                                                                     Font-Names="Verdana" Font-Size="8pt" GridLines="None" AutoGenerateColumns="False"
                                                                     OnSelectedIndexChanged="GvEjecutivosAsignados_SelectedIndexChanged" Enabled="False">
                                                                     <Columns>
@@ -635,7 +633,8 @@
                                                         </td>
                                                         <td valign="top">
                                                             <div style="border: 1px solid #000000; width: 380px; height: 200px;" class="p">
-                                                                <asp:GridView ID="GvSupervisoresAsignados" runat="server" EmptyDataText="Se han quitado todas las asignaciones de Supervisor de la Campaña"
+                                                                <asp:GridView ID="GvSupervisoresAsignados" runat="server" 
+                                                                    EmptyDataText="Se han quitado todas las asignaciones de Supervisor de la Campaña"
                                                                     Font-Names="Verdana" Font-Size="8pt" GridLines="None" AutoGenerateColumns="False"
                                                                     OnSelectedIndexChanged="GvSupervisoresAsignados_SelectedIndexChanged" Enabled="False">
                                                                     <Columns>
@@ -657,7 +656,8 @@
                                                         </td>
                                                         <td valign="top">
                                                             <div style="border: 1px solid #000000; width: 380px; height: 200px;" class="p">
-                                                                <asp:GridView ID="GvMercaderistasAsignados" runat="server" EmptyDataText="Se han quitado todas las asignaciones de Mercaderista de la Campaña"
+                                                                <asp:GridView ID="GvMercaderistasAsignados" runat="server" 
+                                                                    EmptyDataText="Se han quitado todas las asignaciones de Mercaderista de la Campaña"
                                                                     Font-Names="Verdana" Font-Size="8pt" GridLines="None" AutoGenerateColumns="False"
                                                                     OnSelectedIndexChanged="GvMercaderistasAsignados_SelectedIndexChanged" Enabled="False">
                                                                     <Columns>
@@ -1978,14 +1978,13 @@
                                                         </td>
                                                         <td>
                                                             <asp:DropDownList ID="ddlLevantamiento_Categoria" runat="server"  AutoPostBack="true"
-                                                             OnSelectedIndexChanged="llenaLevantamiento_Categoria_SelectedIndexChanged"   ></asp:DropDownList>
+                                                             OnSelectedIndexChanged="llenaLevantamiento_Categoria_SelectedIndexChanged"></asp:DropDownList>
                                                         </td>
                                                         <td>
                                                             <asp:Label ID="Label25" runat="server" CssClass="labelsN" Text="Subcategoria" Visible="false"></asp:Label>
                                                         </td>
                                                         <td>
-                                                            <asp:DropDownList ID="ddlLevantamiento_Subcategoria" runat="server"  Visible="false"
-                                                               ></asp:DropDownList>
+                                                            <asp:DropDownList ID="ddlLevantamiento_Subcategoria" runat="server"  Visible="false"></asp:DropDownList>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -5108,11 +5107,9 @@
                     ImageAlign="Right"></asp:Image>
             </div>
             <div class="Regresa" align="left" id="botonregresar" runat="server">
-                <br />
-                <br />
-                <br />
-                <br />
-                <asp:Button ID="BtnRegresar" runat="server" CssClass="Regresar" OnClick="BtnRegresar_Click" />
+                <br /><br /><br /><br />
+                <asp:Button ID="BtnRegresar" runat="server" CssClass="Regresar" 
+                OnClick="BtnRegresar_Click" />
             </div>
         </ContentTemplate>
         <Triggers>
