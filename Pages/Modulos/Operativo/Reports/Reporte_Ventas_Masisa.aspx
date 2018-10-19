@@ -240,13 +240,12 @@
 </asp:Content>
 <asp:Content ID="Content1" runat="server" ContentPlaceHolderID="head">
     <style type="text/css">
-*{
-    margin: 0;
-    text-align: center;
-}
- * {
-	margin: 0;
-}
-
+        *{
+            margin: 0;
+            text-align: center;
+        }
+        *{
+	        margin: 0;
+        }
     </style>
     </asp:Content>

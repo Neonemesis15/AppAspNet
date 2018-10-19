@@ -4,6 +4,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Lucky.Business.Common.Application;
 using Lucky.CFG.Messenger;
+using System.Configuration;
 using Lucky.Data;
 using Lucky.Entity.Common.Application;
 
@@ -15,7 +16,7 @@ namespace SIGE.Pages.Modulos.Planning
 
         Conexion oCoon = new Conexion();
         Facade_Procesos_Administrativos.Facade_Procesos_Administrativos PAdmin = new SIGE.Facade_Procesos_Administrativos.Facade_Procesos_Administrativos();
-        
+
         //Ventanas de mensaje de usuario
         private void PopupMensajes()
         {
@@ -34,26 +35,27 @@ namespace SIGE.Pages.Modulos.Planning
 
                     if (sUser != null && sPassw != null)
                     {
-                        lblUsuario.Text = "Bienvenido " + sNameUser;
-                        //TxtSolicitante.Text = this.Session["smail"].ToString();
-                        //TxtEmail.Text = "AdminXplora@lucky.com.pe";
-                        DataTable dt = oCoon.ejecutarDataTable("PA_GET_ModulosByCodUsuario", this.Session["codUsuario"].ToString());
-                        
-                        if(dt != null)
+                        lblUsuario.Text = sNameUser;
+                        TxtSolicitante.Text = this.Session["smail"].ToString();
+                        TxtEmail.Text = "AdminXplora@lucky.com.pe";
+                        DataTable dt = oCoon.ejecutarDataTable("UP_WEBXPLORA_PLA_OBTENER_MODULOSALTERNOS", this.Session["idnivel"].ToString().Trim());
+
+                        if (dt != null)
                         {
                             if (dt.Rows.Count > 0)
                             {
                                 SelModulo.Visible = true;
                                 cmbselModulos.Visible = true;
                                 SelCliente.Visible = false;
-                                GO.Visible = false;
-                                cmbcliente.Enabled = true;                                
+                                //cmbcliente.Visible = false;
+                                GO.Visible = true;
+                                cmbcliente.Enabled = true;
                                 cmbselModulos.DataSource = dt;
-                                cmbselModulos.DataValueField = "CODIGO";
-                                cmbselModulos.DataTextField = "NOMBRE";
+                                cmbselModulos.DataTextField = "Modulo_Name";
+                                cmbselModulos.DataValueField = "Modulo_id";
                                 cmbselModulos.DataBind();
                                 cmbselModulos.Items.Insert(0, new ListItem("--Seleccione--", "0"));
-                                //cmbselModulos.Items.Remove(cmbselModulos.Items.FindByValue(this.Session["smodul"].ToString().Trim()));
+                                cmbselModulos.Items.Remove(cmbselModulos.Items.FindByValue(this.Session["smodul"].ToString().Trim()));
                             }
                             else
                             {
@@ -93,7 +95,7 @@ namespace SIGE.Pages.Modulos.Planning
 
         protected void btnasignaporcanal_Click(object sender, EventArgs e)
         {
-             Response.Redirect("~/Pages/Modulos/Planning/AsignacionesxCanal.aspx", true);                        
+            Response.Redirect("~/Pages/Modulos/Planning/AsignacionesxCanal.aspx", true);
         }
 
         // seguimiento de la construccion de los planning . Ing mauricio Ortiz
@@ -117,21 +119,24 @@ namespace SIGE.Pages.Modulos.Planning
                 Enviomail oEnviomail = new Enviomail();
                 EEnviomail oeEmail = oEnviomail.Envio_mails(this.Session["scountry"].ToString().Trim(), "Solicitud_Planning");
                 Mails oMail = new Mails();
-                oMail.Server = "mail.lucky.com.pe";                
+                oMail.Server = ConfigurationManager.AppSettings["ServerMail"];
+                oMail.Puerto = 587;
+                oMail.MCifrado = true;
+                oMail.DatosUsuario = new System.Net.NetworkCredential();
                 oMail.From = TxtSolicitante.Text;
-                oMail.To = "AdminXplora@lucky.com.pe";
+                oMail.To = ConfigurationManager.AppSettings["User"];
                 oMail.Subject = TxtMotivo.Text;
                 oMail.Body = TxtMensaje.Text;
-                oMail.CC = "sgs_mauricio@hotmail.com";
+                oMail.CC = "adminxplora@lucky.com.pe";
                 oMail.BodyFormat = "HTML";
                 oMail.send();
-                oMail = null;                
+                oMail = null;
                 oEnviomail = null;
                 TxtMotivo.Text = "";
                 TxtMensaje.Text = "";
                 Alertas.CssClass = "MensajesSupConfirm";
                 LblAlert.Text = "Envio Solicitudes";
-                LblFaltantes.Text = "Sr. Usuario, el mensaje fue enviado correctamente";                
+                LblFaltantes.Text = "Sr. Usuario, el mensaje fue enviado correctamente";
                 PopupMensajes();
             }
             catch (Exception ex)
@@ -163,27 +168,39 @@ namespace SIGE.Pages.Modulos.Planning
 
         protected void GO_Click(object sender, EventArgs e)
         {
+            if (cmbselModulos.Text != "0" && cmbcliente.Text != "0")
+            {
+                AplicacionWeb oAplicacionWeb = new AplicacionWeb();
+                EAplicacionWeb oeAplicacionWeb = oAplicacionWeb.obtenerAplicacion(this.Session["scountry"].ToString().Trim(), cmbselModulos.SelectedItem.Value);
+                this.Session["oeAplicacionWeb"] = oeAplicacionWeb;
+                this.Session["cod_applucky"] = oeAplicacionWeb.codapplucky;
+                this.Session["abr_app"] = oeAplicacionWeb.abrapp;
+                this.Session["app_url"] = oeAplicacionWeb.appurl;
+                this.Session["companyid"] = cmbcliente.SelectedItem.Value;
+                DataTable dturllogo = oCoon.ejecutarDataTable("UP_WEBXPLORA_GEN_LOGOCLIENT", Convert.ToInt32(cmbcliente.Text));
+                this.Session["fotocomany"] = dturllogo.Rows[0][0].ToString().Trim();
+                this.Session["sNombre"] = cmbcliente.SelectedItem.Text;
+                string sPagina = oeAplicacionWeb.HomePage;
+                oeAplicacionWeb = null;
+                oAplicacionWeb = null;
+                this.Response.Redirect("~/" + sPagina, true);
+                //if (this.Session["scountry"].ToString() == "589" && cmbselModulos.SelectedItem.Value == "MOVIL")
+                //{
+                //Response.Redirect("http://localhost:61260/?data=" + Lucky.CFG.Util.Encriptacion.QueryStringEncode(this.Session["sUser"].ToString() + "/" + this.Session["companyid"].ToString() + "/" + this.Session["sNombre"].ToString(), "usr"));
 
+                //    //Response.Redirect("http://localhost:61260 <http://localhost:61260/> ", true); 
+                //}
+                //else
+                //{
+                //    this.Response.Redirect("~/" + sPagina, true);
+                //}
+
+
+            }
         }
 
         protected void cmbselModulos_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string sPagina = "";
-            if (cmbselModulos.Text != "0" && cmbcliente.Text != "0")
-            {
-                DataTable dt = oCoon.ejecutarDataTable("PA_GET_ModulosByCodModulo", cmbselModulos.SelectedItem.Value);
-                if (dt != null)
-                {
-                    if (dt.Rows.Count > 0)
-                    {
-                        sPagina = dt.Rows[0][1].ToString().Trim();
-                    }
-                }
-            }
-            this.Response.Redirect("~/" + sPagina, true);
-
-            #region Inservible
-            /*
             if (cmbselModulos.SelectedItem.Value == "0")
             {
                 cmbcliente.Enabled = false;
@@ -231,7 +248,7 @@ namespace SIGE.Pages.Modulos.Planning
                         cmbcliente.Items.Remove(cmbcliente.Items.FindByValue("1478"));
                         if (dtClientes.Rows.Count == 2)
                         {
-                            cmbcliente.SelectedIndex = 1;                           
+                            cmbcliente.SelectedIndex = 1;
                         }
                         else
                         {
@@ -246,8 +263,6 @@ namespace SIGE.Pages.Modulos.Planning
                     }
                 }
             }
-             */
-            #endregion
         }
     }
 }

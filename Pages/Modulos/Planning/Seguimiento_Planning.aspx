@@ -1466,24 +1466,16 @@
                             <div>
                                 <table align="center" border="0" cellpadding="0" cellspacing="0">
                                     <tr>
-                                        <td>
-                                            <img alt="sup1" height="6" src="../../images/tablas_genericas/bordegris_tablasgene_sup1.png"
-                                                width="6"> </img>
-                                        </td>
+                                        <td><img alt="sup1" height="6" src="../../images/tablas_genericas/bordegris_tablasgene_sup1.png"
+                                                width="6"> </img></td>
                                         <td background="../../images/tablas_genericas/bg_gris_tablasgene.jpg">
-                                            <img height="6" src="../../images/tablas_genericas/bg_gris_tablasgene.jpg" width="1">
-                                            </img>
-                                        </td>
-                                        <td>
-                                            <img height="6" src="../../images/tablas_genericas/bordegris_tablasgene_sup3.png"
-                                                width="6"> </img>
-                                        </td>
+                                            <img height="6" src="../../images/tablas_genericas/bg_gris_tablasgene.jpg" width="1"></img></td>
+                                        <td><img height="6" src="../../images/tablas_genericas/bordegris_tablasgene_sup3.png"
+                                                width="6"> </img></td>
                                     </tr>
                                     <tr>
                                         <td background="../../images/tablas_genericas/bg_gris_tablasgene.jpg">
-                                            <img height="1" src="../../images/tablas_genericas/bg_gris_tablasgene.jpg" width="6">
-                                            </img>
-                                        </td>
+                                            <img height="1" src="../../images/tablas_genericas/bg_gris_tablasgene.jpg" width="6"></img></td>
                                         <td bgcolor="White">
                                             <asp:Panel ID="PanelPDVOpe" runat="server" Style="vertical-align: middle;">
                                                 <div>
@@ -1493,33 +1485,21 @@
                                                 </div>
                                                 <table align="center">
                                                     <tr>
-                                                        <td>
-                                                            <asp:Label ID="LblPanningAsigPDVOPE" runat="server" CssClass="labelsN" Text="Planning No"></asp:Label>
-                                                        </td>
-                                                        <td>
-                                                            <asp:TextBox ID="TxtPlanningAsigPDVOPE" runat="server" BackColor="#CCCCCC" Enabled="False"
-                                                                ForeColor="White" AutoCompleteType="Disabled"></asp:TextBox>
-                                                        </td>
-                                                        <td>
-                                                            <asp:Label ID="LblSelPresupuestoAsigPDVOPE" runat="server" CssClass="labelsN" Text="Presupuesto"></asp:Label>
-                                                        </td>
-                                                        <td colspan="4">
-                                                            <asp:Label ID="LblTxtPresupuestoAsigPDVOPE" runat="server" Text="Presupuesto" Width="500px"
-                                                                Enabled="False"></asp:Label>
-                                                        </td>
+                                                        <td><asp:Label ID="LblPanningAsigPDVOPE" runat="server" CssClass="labelsN" Text="Planning No"></asp:Label></td>
+                                                        <td><asp:TextBox ID="TxtPlanningAsigPDVOPE" runat="server" BackColor="#CCCCCC" Enabled="False"
+                                                                ForeColor="White" AutoCompleteType="Disabled"></asp:TextBox></td>
+                                                        <td><asp:Label ID="LblSelPresupuestoAsigPDVOPE" runat="server" CssClass="labelsN" Text="Presupuesto"></asp:Label></td>
+                                                        <td colspan="4"><asp:Label ID="LblTxtPresupuestoAsigPDVOPE" runat="server" Text="Presupuesto" Width="500px"
+                                                                Enabled="False"></asp:Label></td>
                                                     </tr>
                                                 </table>
                                                 <table align="center">
                                                     <tr>
-                                                        <td>
-                                                            <asp:Label ID="LblSelOpePlanning" runat="server" CssClass="labelsN" Font-Bold="True"
-                                                                Text="Seleccione Mercaderista"></asp:Label>
-                                                        </td>
-                                                        <td>
-                                                            <asp:DropDownList ID="CmbSelOpePlanning" runat="server" Width="520px" Enabled="False"
+                                                        <td><asp:Label ID="LblSelOpePlanning" runat="server" CssClass="labelsN" Font-Bold="True"
+                                                                Text="Seleccione Mercaderista"></asp:Label></td>
+                                                        <td><asp:DropDownList ID="CmbSelOpePlanning" runat="server" Width="520px" Enabled="False"
                                                                 AutoPostBack="True" OnSelectedIndexChanged="CmbSelOpePlanning_SelectedIndexChanged">
-                                                            </asp:DropDownList>
-                                                        </td>
+                                                            </asp:DropDownList></td>
                                                     </tr>
                                                 </table>
                                                 <asp:UpdatePanel ID="asignacionesPDV" runat="server">
@@ -1530,8 +1510,8 @@
                                                                     <fieldset id="Fieldset3" runat="server">
                                                                         <legend style="">Asignaciones existentes</legend>
                                                                         <table>
-                                                                            <tr>
-                                                                                <td valign="top" style="border-color: Black; height: 70px; border-style: solid; border-width: 1px;
+                                                                            <tr><td valign="top" 
+                                                                                style="border-color: Black; height: 70px; border-style: solid; border-width: 1px;
                                                                                     width: 1050px; min-width: 1050px;">
                                                                                     <div style="width: 1050px; height: 130px;" class="p">
                                                                                         <asp:GridView ID="GvAsignaPDVOPE" runat="server" EmptyDataText="No se ha realizado ninguna asignación"
@@ -1545,7 +1525,7 @@
                                                                                                     </ItemTemplate>
                                                                                                 </asp:TemplateField>
                                                                                                 <%-- <asp:CommandField ButtonType="Image" SelectImageUrl="~/Pages/images/delete.png" SelectText=""
-                                                                                            ShowSelectButton="True" /> --%>
+                                                                                                        ShowSelectButton="True" /> --%>
                                                                                                 <asp:TemplateField HeaderText="No.">
                                                                                                     <ItemTemplate>
                                                                                                         <asp:Label ID="LblNo" runat="server" Text='<%# Bind("No") %>'></asp:Label>
@@ -5166,7 +5146,7 @@
                     <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
     </asp:GridView>
     </div>
-    <cc2:ModalUpdateProgress ID="ModalUpdateProgress2" runat="server" DisplayAfter="3"
+    <cc2:ModalUpdateProgress ID="ModalUpdateProgress2" runat="server" DisplayAfter="0"
         AssociatedUpdatePanelID="UpPlanning" BackgroundCssClass="modalProgressGreyBackground">
         <ProgressTemplate>
             <div class="modalPopup">

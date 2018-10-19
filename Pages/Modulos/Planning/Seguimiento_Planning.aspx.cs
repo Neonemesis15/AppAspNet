@@ -54,18 +54,18 @@ namespace SIGE.Pages.Modulos.Planning
             {                
                 try
                 {
-                    /*pstring sUser = this.Session["sUser"].ToString();
+                    string sUser = this.Session["sUser"].ToString();
                     string sPassw = this.Session["sPassw"].ToString();
                     string sNameUser = this.Session["nameuser"].ToString();
                     lblUsuario.Text = sNameUser;
-                    if (sUser != null && sPassw != null)*/
+                    if (sUser != null && sPassw != null)
                         llena_planning();
-                    /*
+                    
                     if(this.Session["companyid"].ToString().Trim()=="1562" || this.Session["companyid"].ToString().Trim()=="1561")
                     {
 
                         MenuProductoAncla.Visible = true;
-                    }*/
+                    }
                 }
                 catch (Exception ex)
                 {
