@@ -1075,10 +1075,25 @@ namespace SIGE.Pages.Modulos.Planning
         } //revisado
         private void ConsultaPDVXoperativo()
         {
-            DataTable DTConsulta = PointOfSale_PlanningOper.Consultar_PDVPlanningXoperativo(TxtPlanningAsigPDVOPE.Text, Convert.ToInt32(CmbSelOpePlanning.Text));
-            GvAsignaPDVOPE.DataSource = DTConsulta;
-            GvAsignaPDVOPE.DataBind();
-            DTConsulta = null;
+            DataTable DTConsulta = PointOfSale_PlanningOper
+                .Consultar_PDVPlanningXoperativo(TxtPlanningAsigPDVOPE.Text, 
+                Convert.ToInt32(CmbSelOpePlanning.Text));
+
+            // Verifica que no existan Errores en la invocación al Servicio
+            if (PointOfSale_PlanningOper.getMessage() == null){
+                // Llena la información correspondiente a la Grilla de Pdv asignados a Usuarios.
+                GvAsignaPDVOPE.DataSource = DTConsulta;
+                GvAsignaPDVOPE.DataBind();
+            }
+            else {
+                this.Session["encabemensa"] = "Sr. Usuario";
+                this.Session["cssclass"] = "MensajesSupervisor";
+                this.Session["mensaje"] = "Ocurrio un Error: " + PointOfSale_PlanningOper.getMessage();
+                Mensajes_Seguimiento();
+            }
+
+            
+
         } //revisado
         private void ConsultaProductosCampaña()
         {
@@ -3943,7 +3958,9 @@ namespace SIGE.Pages.Modulos.Planning
                 {
 
                     DataTable dt = new DataTable();
-                    dt = oCoon.ejecutarDataTable("UP_WEBXPLORA_PLA_ACTUALIZAR_PANELES_PLANNING", Convert.ToInt32(((Label)GvPDVPaneles.Rows[i].Cells[0].FindControl("LblNo")).Text), Convert.ToInt32(ddlPeriodo.SelectedValue));
+                    dt = oCoon.ejecutarDataTable("UP_WEBXPLORA_PLA_ACTUALIZAR_PANELES_PLANNING", 
+                        Convert.ToInt32(((Label)GvPDVPaneles.Rows[i].Cells[0].FindControl("LblNo")).Text), 
+                        Convert.ToInt32(ddlPeriodo.SelectedValue));
 
                 }
 
@@ -3951,7 +3968,8 @@ namespace SIGE.Pages.Modulos.Planning
 
             this.Session["encabemensa"] = "Sr. Usuario";
             this.Session["cssclass"] = "MensajesSupConfirm";
-            this.Session["mensaje"] = "Se ha actualizado correctamente los puntos de venta para el panel del reporte " + RbtnListReportPanel.SelectedItem.Text;
+            this.Session["mensaje"] = "Se ha actualizado correctamente los puntos de venta para el panel del reporte " 
+                + RbtnListReportPanel.SelectedItem.Text;
             Mensajes_Paneles();
 
             llenarpanelesXperido();
@@ -4433,7 +4451,18 @@ namespace SIGE.Pages.Modulos.Planning
 
             for (int i = 0; i <= GvNewAsignaPDVOPE.Rows.Count - 1; i++)
             {
-                EPointOfSale_PlanningOper RegistrarPointOfSale_PlanningOper = PointOfSale_PlanningOper.RegistrarAsignPDVaOperativo(Convert.ToInt32(GvNewAsignaPDVOPE.Rows[i].Cells[3].Text), TxtPlanningAsigPDVOPE.Text, Convert.ToInt32(GvNewAsignaPDVOPE.Rows[i].Cells[1].Text), Convert.ToDateTime(GvNewAsignaPDVOPE.Rows[i].Cells[5].Text + " 01:00:00.000"), Convert.ToDateTime(GvNewAsignaPDVOPE.Rows[i].Cells[6].Text + " 23:59:00.000"),0, true, Convert.ToString(this.Session["sUser"]), DateTime.Now, Convert.ToString(this.Session["sUser"]), DateTime.Now);
+                EPointOfSale_PlanningOper RegistrarPointOfSale_PlanningOper = 
+                    PointOfSale_PlanningOper.RegistrarAsignPDVaOperativo(
+                    Convert.ToInt32(GvNewAsignaPDVOPE.Rows[i].Cells[3].Text), 
+                    TxtPlanningAsigPDVOPE.Text, 
+                    Convert.ToInt32(GvNewAsignaPDVOPE.Rows[i].Cells[1].Text), 
+                    Convert.ToDateTime(GvNewAsignaPDVOPE.Rows[i].Cells[5].Text + " 01:00:00.000"), 
+                    Convert.ToDateTime(GvNewAsignaPDVOPE.Rows[i].Cells[6].Text + " 23:59:00.000"),
+                    0, 
+                    true, 
+                    Convert.ToString(this.Session["sUser"]), 
+                    DateTime.Now, 
+                    Convert.ToString(this.Session["sUser"]), DateTime.Now);
                 PointOfSale_PlanningOper RegistrarTBL_EQUIPO_PTO_VENTA = new PointOfSale_PlanningOper();
                 RegistrarTBL_EQUIPO_PTO_VENTA.RegistrarTBL_EQUIPO_PTO_VENTA(Convert.ToInt32(GvNewAsignaPDVOPE.Rows[i].Cells[3].Text), TxtPlanningAsigPDVOPE.Text, Convert.ToInt32(GvNewAsignaPDVOPE.Rows[i].Cells[1].Text), Convert.ToDateTime(GvNewAsignaPDVOPE.Rows[i].Cells[5].Text + " 01:00:00.000"), Convert.ToDateTime(GvNewAsignaPDVOPE.Rows[i].Cells[6].Text + " 23:59:00.000"));
 

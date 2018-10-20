@@ -9,6 +9,7 @@
 <head id="Head1" runat="server">
     <title>:::XPlora-Inicio</title>
     <link href="Pages/css/SLogin.css" rel="stylesheet" type="text/css" />
+    <link href="Pages/css/backstilo.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript">
         function ValidateEvent(oSrc, args){A
         args.IsValid = ((args.Value % 2) == 0);
@@ -42,9 +43,10 @@
                             <cc2:ModalUpdateProgress ID="ModalUpdateProgress2" runat="server" DisplayAfter="3"
                                 AssociatedUpdatePanelID="UpanelLogin" BackgroundCssClass="modalProgressGreyBackground" >
                                 <ProgressTemplate>
-                                    <div>
-                                        Procesando sus Credenciales...
-                                        <img alt="Procesando Credenciales" src="Pages/images/loading5.gif"  style="vertical-align: middle" />
+                                    <div class="modalPopup">
+                                        <div>Procesando sus Credenciales...</div>
+                                        <div><img alt="Procesando Credenciales" src="Pages/images/loading5.gif"/></div>
+                                        <!--style="vertical-align: middle"-->
                                     </div>
                                 </ProgressTemplate>
                             </cc2:ModalUpdateProgress>
@@ -95,17 +97,12 @@
                                 OnClick="BtnCOlv_Click" Width="23px" />
                             <table>
                                 <tr>
-                                    <td style=" float:right">
-                                    </td>
-                                    <td style=" margin:auto">
-                                    </td>
+                                    <td style=" float:right"></td>
+                                    <td style=" margin:auto"></td>
                                 </tr>
                             </table>
                         </div>
-                        <br />
-                        <br />
-                        <br />
-                        <br />
+                        <br /><br /><br /><br />
                         <table style=" margin:auto" class="fondoOlvContrs">
                             <tr>
                                 <td>
@@ -178,18 +175,13 @@
                         <table id="tmensaje" runat="server" align="center" width="95%">
                             <tr>
                                 <td style=" margin:auto; text-align:center" class="AnchoMensaje">
-                                    <br />
-                                    <br />
-                                    <br />
+                                    <br /><br /><br />
                                     <asp:Label ID="lblencabezado" runat="server" Font-Bold="True" Font-Names="Verdana"
                                         Font-Size="10pt" ForeColor="White"></asp:Label>
-                                    <br />
-                                    <br />
+                                    <br /><br />
                                     <asp:Label ID="lblmensajegeneral" runat="server" Font-Names="Verdana" Font-Size="9pt"
                                         ForeColor="White"></asp:Label>
-                                    <br />
-                                    <br />
-                                    <br />
+                                    <br /><br /><br />
                                     <asp:Button ID="btnaceptar" runat="server" CssClass="buttonPlan" Text="Aceptar" Font-Bold="True"
                                         Font-Names="Verdana" Font-Overline="False" Style="cursor: hand; margin:auto;" Font-Strikeout="False"
                                         Font-Underline="False" ForeColor="White" Width="100px" BackColor="#D5DBE4" BorderColor="Black"
@@ -208,16 +200,12 @@
                         <table id="Table1" runat="server" align="center" width="95%">
                             <tr>
                                 <td style=" margin:auto" class="AnchoMensaje">
-                                    <br />
-                                    <br />
-                                    <br />
+                                    <br /><br /><br />
                                     <asp:Label ID="LblEncabezado2" runat="server" Font-Bold="True" Font-Names="Verdana"
                                         Font-Size="10pt" ForeColor="White"></asp:Label>
-                                    <br />
-                                    <br />
+                                    <br /><br />
                                     <asp:Label ID="LblMesanje2" runat="server" Font-Names="Verdana" Font-Size="9pt" ForeColor="White"></asp:Label>
-                                    <br />
-                                    <br />
+                                    <br /><br />
                                     <asp:Button ID="btnacepmensaje2" runat="server" CssClass="buttonPlan" Text="Aceptar"
                                         Font-Bold="True" Font-Names="Verdana" Font-Overline="False" Style="cursor: hand;"
                                         Font-Strikeout="False" Font-Underline="False" ForeColor="White" Width="100px"
@@ -227,6 +215,32 @@
                             </tr>
                         </table>
                     </asp:Panel>
+
+                    <asp:UpdatePanel ID="UpdatePanel14" runat="server">
+                        <ContentTemplate>
+                            <%--panel de mensaje de usuario paneles   --%>
+                            <asp:Panel ID="MensajeSeguimiento" runat="server" Height="169px" Style="display: none;" Width="332px">
+                                <table align="center">
+                                    <tr>
+                                        <td align="center" style="height: 119px; width: 79px;" valign="top"><br /></td>
+                                        <td style="width: 220px; height: 119px;" valign="top"><br />
+                                            <asp:Label ID="lblencabezadoSeguimiento" runat="server" CssClass="labelsTit"></asp:Label><br /><br />
+                                            <asp:Label ID="lblmensajegeneralSeguimiento" runat="server" CssClass="labels"></asp:Label>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table align="center">
+                                    <tr><td align="center"><asp:Button ID="BtnaceptaSeguimiento" runat="server" 
+                                            BorderStyle="Solid" CssClass="buttonPlan" Text="Aceptar" /></td></tr>
+                                </table>
+                            </asp:Panel>
+                            <asp:ModalPopupExtender ID="MPMensajeSeguimiento" runat="server" BackgroundCssClass="modalBackground"
+                                Enabled="True" PopupControlID="MensajeSeguimiento" TargetControlID="btndipararseguimiento">
+                            </asp:ModalPopupExtender>
+                            <asp:Button ID="btndipararseguimiento" runat="server" CssClass="alertas" Enabled="False"
+                                Height="0px" Text="" Width="0" />
+                        </ContentTemplate>
+                    </asp:UpdatePanel>	
                 </contenttemplate>
             </asp:UpdatePanel>
         </form>

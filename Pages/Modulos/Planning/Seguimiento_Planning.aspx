@@ -4544,406 +4544,330 @@
                         <div>
                         <table align="center" border="0" cellpadding="0" cellspacing="0">
                                     <tr>
-                                        <td>
-                                            <img alt="sup1" height="6" src="../../images/tablas_genericas/bordegris_tablasgene_sup1.png"
-                                                width="6"> </img>
-                                        </td>
+                                        <td><img alt="sup1" height="6" src="../../images/tablas_genericas/bordegris_tablasgene_sup1.png"
+                                                width="6"> </img></td>
                                         <td background="../../images/tablas_genericas/bg_gris_tablasgene.jpg">
-                                            <img height="6" src="../../images/tablas_genericas/bg_gris_tablasgene.jpg" width="1">
-                                            </img>
-                                        </td>
-                                        <td>
-                                            <img height="6" src="../../images/tablas_genericas/bordegris_tablasgene_sup3.png"
-                                                width="6"> </img>
-                                        </td>
+                                            <img height="6" src="../../images/tablas_genericas/bg_gris_tablasgene.jpg" width="1"></img></td>
+                                        <td><img height="6" src="../../images/tablas_genericas/bordegris_tablasgene_sup3.png"
+                                                width="6"> </img></td>
                                     </tr>
                                     <tr>
                                         <td background="../../images/tablas_genericas/bg_gris_tablasgene.jpg">
-                                            <img height="1" src="../../images/tablas_genericas/bg_gris_tablasgene.jpg" width="6">
-                                            </img>
-                                        </td>
+                                            <img height="1" src="../../images/tablas_genericas/bg_gris_tablasgene.jpg" width="6"></img></td>
                                         <td bgcolor="White">
-
-                                        <asp:Panel ID="Panel3" runat="server" Style="vertical-align: middle;">
-                                                <div>
-                                                    <asp:ImageButton ID="ImageButton1" runat="server" AlternateText="Cerrar Ventana"
+                                            <asp:Panel ID="Panel3" runat="server" Style="vertical-align: middle;">
+                                                <div><asp:ImageButton ID="ImageButton1" runat="server" AlternateText="Cerrar Ventana"
                                                         ToolTip="Cerrar Ventana" BackColor="Transparent" Height="22px" ImageAlign="Right"
                                                         ImageUrl="~/Pages/ImgBooom/salir.png" Width="23px" OnClick="BtnCOlv_Click" />
-                                                </div>
+                                                </div>               
+                                                <table id="tblcrear" align="center" runat="server">
+                                                        <tr>
+                                                            <td><br /><br />
+                                                                <fieldset id="Fieldset17" runat="server">
+                                                                    <legend style="">Objetivos SOD MAY</legend>
+                                                                    <table align="center">
+                                                                        <tr>
+                                                                            <td><asp:Label ID="Label10" runat="server" CssClass="labelsN" Text="Reportes"></asp:Label></td>
+                                                                            <td><asp:DropDownList ID="ddlReporteObjetivoSODMAY" runat="server" ></asp:DropDownList></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td colspan="2" >
+                                                                                Año: 
+                                                                                <asp:DropDownList ID="ddlAñoObjetivosSODMAY" runat="server">
+                                                                                    <asp:ListItem>2011</asp:ListItem>
+                                                                                    <asp:ListItem>2010</asp:ListItem>
+                                                                                </asp:DropDownList>
+                                                                                Mes: 
+                                                                                <asp:DropDownList ID="ddlMesObjetivosSODMAY" runat="server" AutoPostBack="True" 
+                                                                                    onselectedindexchanged="ddlMesObjetivosSODMAY_SelectedIndexChanged"> 
+                                                                                    <asp:ListItem Value="01">Enero</asp:ListItem>
+                                                                                    <asp:ListItem Value="02">Febrero</asp:ListItem>
+                                                                                    <asp:ListItem Value="03">Marzo</asp:ListItem>
+                                                                                    <asp:ListItem Value="04">Abril</asp:ListItem>
+                                                                                    <asp:ListItem Value="05">Mayo</asp:ListItem>
+                                                                                    <asp:ListItem Value="06">Junio</asp:ListItem>
+                                                                                    <asp:ListItem Value="07">Julio</asp:ListItem>
+                                                                                    <asp:ListItem Value="08">Agosto</asp:ListItem>
+                                                                                    <asp:ListItem Value="09">Septiembre</asp:ListItem>
+                                                                                    <asp:ListItem Value="10">Octubre</asp:ListItem>
+                                                                                    <asp:ListItem Value="11">Noviembre</asp:ListItem>
+                                                                                    <asp:ListItem Value="12">Diciembre</asp:ListItem>
+                                                                                </asp:DropDownList>
+                                                                                Perido: 
+                                                                                <asp:DropDownList ID="dllPeridoObjetivosSODMAY" runat="server" Width="100px">
+                                                                                </asp:DropDownList>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><asp:Label ID="Label11" runat="server"  Text="Cliente*"></asp:Label></td>
+                                                                            <td>
+                                                                                <asp:DropDownList ID="ddlClienteObjetivosSODMAY" runat="server" Enabled="False" Width="255px"
+                                                                                    AutoPostBack="True" OnSelectedIndexChanged="cmbClienteAncla_SelectedIndexChanged">
+                                                                                </asp:DropDownList>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><asp:Label ID="Label12" runat="server"  Text="Oficina*"></asp:Label></td>
+                                                                            <td><asp:DropDownList ID="ddlMallaObjetivosSODMAY" runat="server" Enabled="False" Width="255px"></asp:DropDownList></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><asp:Label ID="Label13" runat="server"  Text="Categoria *"></asp:Label></td>
+                                                                            <td><asp:DropDownList ID="ddlCategoriaObjetivosSODMAY" runat="server" Width="255px" Enabled="False"
+                                                                                    AutoPostBack="True" OnSelectedIndexChanged="ddlCategoriaObjetivosSODMAY_SelectedIndexChanged">
+                                                                                </asp:DropDownList></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><asp:Label ID="Label15" runat="server"  Text="Marca:*"></asp:Label></td>
+                                                                            <td><asp:DropDownList ID="ddlMarcaObjetivosSODMAY" runat="server" Width="255px" Enabled="False">
+                                                                                </asp:DropDownList></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><asp:Label ID="Label17" runat="server"  Text="Objetivo Categoria*"></asp:Label></td>
+                                                                            <td><asp:TextBox ID="txtObjetivoCategoria" runat="server" Width="100px" Enabled="False"></asp:TextBox></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><asp:Label ID="Label18" runat="server"  Text="Objetivo Marca*"></asp:Label></td>
+                                                                            <td><asp:TextBox ID="txtObjetivoMarca" runat="server" Width="100px" Enabled="False"></asp:TextBox></td>
+                                                                        </tr>
+                                                                    </table><br /><br />
+                                                                </fieldset>
+                                                            &nbsp;
+                                                            </td>
+                                                        </tr>
+                                                </table>
 
 
-                                                               
-                        <table id="tblcrear" align="center" runat="server">
-                                <tr>
-                                    <td>
-                                        <br />
-                                        <br />
-                                        <fieldset id="Fieldset17" runat="server">
-                                            <legend style="">Objetivos SOD MAY</legend>
-                                            <table align="center">
-                                             <tr>
-                                                    <td>
-                                                         <asp:Label ID="Label10" runat="server" CssClass="labelsN" Text="Reportes"></asp:Label>
-                                                    </td>
-                                                    <td>
-                                                        <asp:DropDownList ID="ddlReporteObjetivoSODMAY" runat="server" >
-                                                                </asp:DropDownList>
-                                                    </td>
-                                                </tr>
-                                             <tr>
-                                                    <td colspan="2" >
-                                                                                   Año: <asp:DropDownList ID="ddlAñoObjetivosSODMAY" runat="server">
-                                                <asp:ListItem>2011</asp:ListItem>
-                                                <asp:ListItem>2010</asp:ListItem>
-                                                </asp:DropDownList>
-                                                                       Mes: <asp:DropDownList ID="ddlMesObjetivosSODMAY" runat="server" AutoPostBack="True" 
-                                                    onselectedindexchanged="ddlMesObjetivosSODMAY_SelectedIndexChanged"> 
-                                                    <asp:ListItem Value="01">Enero</asp:ListItem>
-                                                    <asp:ListItem Value="02">Febrero</asp:ListItem>
-                                                    <asp:ListItem Value="03">Marzo</asp:ListItem>
-                                                    <asp:ListItem Value="04">Abril</asp:ListItem>
-                                                    <asp:ListItem Value="05">Mayo</asp:ListItem>
-                                                    <asp:ListItem Value="06">Junio</asp:ListItem>
-                                                    <asp:ListItem Value="07">Julio</asp:ListItem>
-                                                    <asp:ListItem Value="08">Agosto</asp:ListItem>
-                                                    <asp:ListItem Value="09">Septiembre</asp:ListItem>
-                                                    <asp:ListItem Value="10">Octubre</asp:ListItem>
-                                                    <asp:ListItem Value="11">Noviembre</asp:ListItem>
-                                                    <asp:ListItem Value="12">Diciembre</asp:ListItem>
-                                                </asp:DropDownList>
-                                                Perido: <asp:DropDownList ID="dllPeridoObjetivosSODMAY" runat="server" 
-                                                         Width="100px">
-                                                     </asp:DropDownList>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <asp:Label ID="Label11" runat="server"  Text="Cliente*"></asp:Label>
-                                                    </td>
-                                                    <td>
-                                                        <asp:DropDownList ID="ddlClienteObjetivosSODMAY" runat="server" Enabled="False" Width="255px"
-                                                            AutoPostBack="True" OnSelectedIndexChanged="cmbClienteAncla_SelectedIndexChanged">
-                                                        </asp:DropDownList>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <asp:Label ID="Label12" runat="server"  Text="Oficina*"></asp:Label>
-                                                    </td>
-                                                    <td>
-                                                        <asp:DropDownList ID="ddlMallaObjetivosSODMAY" runat="server" Enabled="False" Width="255px">
-                                                        </asp:DropDownList>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <asp:Label ID="Label13" runat="server"  Text="Categoria *"></asp:Label>
-                                                    </td>
-                                                    <td>
-                                                        <asp:DropDownList ID="ddlCategoriaObjetivosSODMAY" runat="server" Width="255px" Enabled="False"
-                                                            AutoPostBack="True" OnSelectedIndexChanged="ddlCategoriaObjetivosSODMAY_SelectedIndexChanged">
-                                                        </asp:DropDownList>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <asp:Label ID="Label15" runat="server"  Text="Marca:*"></asp:Label>
-                                                    </td>
-                                                    <td>
-                                                        <asp:DropDownList ID="ddlMarcaObjetivosSODMAY" runat="server" Width="255px" Enabled="False">
-                                                        </asp:DropDownList>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <asp:Label ID="Label17" runat="server"  Text="Objetivo Categoria*"></asp:Label>
-                                                    </td>
-                                                    <td>
-                                                        <asp:TextBox ID="txtObjetivoCategoria" runat="server" Width="100px" Enabled="False"></asp:TextBox>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <asp:Label ID="Label18" runat="server"  Text="Objetivo Marca*"></asp:Label>
-                                                    </td>
-                                                    <td>
-                                                        <asp:TextBox ID="txtObjetivoMarca" runat="server" Width="100px" Enabled="False"></asp:TextBox>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                            <br />
-                                            <br />
-                                        </fieldset>
-                                    &nbsp;
+                                                <table id="tblConsultar" align="center" runat="server" visible="false">
+                                                        <tr>
+                                                            <td>
+                                                                <div class="p" style="width:780px; height: 330px; background-color: #FFFFFF; padding: 2px 2px; font-size: 10pt;
+                        	                                        font-family : arial, Helvetica, sans-serif;">
+                                                                    <asp:GridView ID="gvObjetivosSODMAY" runat="server" AutoGenerateColumns="False" 
+                                                                        Font-Names="Verdana" Font-Size="8pt" EnableModelValidation="True" 
+                                                                        Width="100%" onrowediting="gvObjetivosSODMAY_RowEditing" 
+                                                                        onrowcancelingedit="gvObjetivosSODMAY_RowCancelingEdit" onrowupdating="gvObjetivosSODMAY_RowUpdating">                                               
+                                                                        <Columns>
+                                                                            <asp:TemplateField HeaderText="Cliente">
+                                                                                <EditItemTemplate>
+                                                                                        <asp:Label ID="lblclieObjetivosSODMAY" runat="server" Width="130px"  Enabled="false"  Text='<%# Bind("Company_Name") %>'  ></asp:Label>
+                                                                                </EditItemTemplate>
+                                                                                <ItemTemplate>
+                                                                                        <asp:Label ID="lblclieObjetivosSODMAY" runat="server" Width="130px" Enabled="false" Text='<%# Bind("Company_Name") %>'  ></asp:Label>
+                                                                                </ItemTemplate>
+                                                                                <ItemStyle Width="70px" />
+                                                                            </asp:TemplateField>
+                                                                            <asp:TemplateField HeaderText="Canal">
+                                                                                <EditItemTemplate>
+                                                                                        <asp:Label ID="lblCanalObjetivosSODMAY" runat="server" Width="130px"   Enabled="false" Text='<%# Bind("Channel_Name") %>' ></asp:Label>
+                                                                                </EditItemTemplate>
+                                                                                <ItemTemplate>
+                                                                                        <asp:Label ID="lblCanalObjetivosSODMAY" runat="server" Width="130px" Enabled="false" Text='<%# Bind("Channel_Name") %>' ></asp:Label>
+                                                                                </ItemTemplate>
+                                                                            </asp:TemplateField>
+                                                                             <asp:TemplateField HeaderText="Malla">
+                                                                                <EditItemTemplate>
+                                                                                        <asp:Label ID="lblMallaObjetivosSODMAY" runat="server" Width="130px"   Enabled="false" Text='<%# Bind("malla") %>'></asp:Label>
+                                                                                </EditItemTemplate>
+                                                                                <ItemTemplate>
+                                                                                        <asp:Label ID="lblMallaObjetivosSODMAY" runat="server" Width="130px" Enabled="false"  Text='<%# Bind("malla") %>'></asp:Label>
+                                                                                </ItemTemplate>
+                                                                            </asp:TemplateField>
+                                                                            <asp:TemplateField HeaderText="Categoria">
+                                                                            <EditItemTemplate>
+                                                                                    <asp:Label ID="lblcateObjetivosSODMAY" runat="server" Width="130px" Enabled="false"  Text='<%# Bind("Product_Category") %>'  ></asp:Label>
+                                                                                </EditItemTemplate>
+                                                                                <ItemTemplate>
+                                                                                <asp:Label ID="lblcateObjetivosSODMAY" runat="server" Width="130px" Enabled="false"  Text='<%# Bind("Product_Category") %>' ></asp:Label>                                                     
+                                                                                </ItemTemplate>
+                                                                            </asp:TemplateField>   
+                                                                            <asp:TemplateField HeaderText="Marca">
+                                                                            <EditItemTemplate>
+                                                                                    <asp:Label ID="lblMarcaObjetivosSODMAY" runat="server" Width="130px"  Enabled="false" Text='<%# Bind("Name_Brand") %>'></asp:Label>
+                                                                                </EditItemTemplate>
+                                                                                <ItemTemplate>
+                                                                                <asp:Label ID="lblMarcaObjetivosSODMAY" runat="server" Width="130px" Enabled="false" Text='<%# Bind("Name_Brand") %>' ></asp:Label>                                                     
+                                                                                </ItemTemplate>
+                                                                            </asp:TemplateField>  
+                                                                            <asp:TemplateField HeaderText="Obj. Categoria">
+                                                                            <EditItemTemplate>
+                                                                                    <asp:TextBox ID="txtObjCategoria" runat="server" Width="130px" Enabled="true" Text='<%# Bind("Value_Categoria") %>' ></asp:TextBox>
+                                                                                </EditItemTemplate>
+                                                                                <ItemTemplate>
+                                                                                <asp:TextBox ID="txtObjCategoria" runat="server" Width="130px" Enabled="false" Text='<%# Bind("Value_Categoria") %>' ></asp:TextBox>                                                     
+                                                                                </ItemTemplate>
+                                                                            </asp:TemplateField>    
+                                                                            <asp:TemplateField HeaderText="Obj. Marca">
+                                                                            <EditItemTemplate>
+                                                                                    <asp:TextBox ID="txtObjMarca" runat="server" Width="130px" Enabled="true" Text='<%# Bind("Value_Marca") %>' ></asp:TextBox>
+                                                                                </EditItemTemplate>
+                                                                                <ItemTemplate>
+                                                                                <asp:TextBox ID="txtObjMarca" runat="server" Width="130px" Enabled="false" Text='<%# Bind("Value_Marca") %>' ></asp:TextBox>                                                     
+                                                                                </ItemTemplate>
+                                                                            </asp:TemplateField>                                                                                     
+                                                                            <asp:TemplateField HeaderText="Periodo">
+                                                                                <EditItemTemplate>
+                                                                                        <asp:Label ID="lblPeriodo" runat="server" Width="130px" Text='<%# Bind("Periodo") %>'  Enabled="false"
+                                                                                           ></asp:Label>
+                                                                                </EditItemTemplate>
+                                                                                <ItemTemplate>
+                                                                                        <asp:Label ID="lblPeriodo" runat="server" Width="130px" Text='<%# Bind("Periodo") %>' Enabled="false" ></asp:Label>
+                                                                                </ItemTemplate>
+                                                                                <ItemStyle Width="70px" />
+                                                                            </asp:TemplateField>
+                                                                            <asp:TemplateField HeaderText="Estado" >
+                                                                                <EditItemTemplate>
+                                                                                    <asp:CheckBox ID="CheckObjetivosSODMAY" runat="server"  Enabled="true" ></asp:CheckBox> 
+                                                                                </EditItemTemplate>
+                                                                                <ItemTemplate>
+                                                                                    <asp:CheckBox ID="CheckObjetivosSODMAY" runat="server"  Enabled="false" Checked ='<%# Bind("Status") %>' ></asp:CheckBox> 
+                                                                                </ItemTemplate>
+                                                                            </asp:TemplateField>
+                                                                            <asp:TemplateField HeaderText="id_ClienteObjetivosSODMAY" Visible="false">
+                                                                                <EditItemTemplate>
+                                                                                        <asp:Label ID="lblid_ClienteObjetivosSODMAY" runat="server" Width="130px" Text='<%# Bind("company_id") %>'  Enabled="false"
+                                                                                           ></asp:Label>
+                                                                                </EditItemTemplate>
+                                                                                <ItemTemplate>
+                                                                                        <asp:Label ID="lblid_ClienteObjetivosSODMAY" runat="server" Width="130px" Text='<%# Bind("company_id") %>' Enabled="false" ></asp:Label>
+                                                                                </ItemTemplate>
+                                                                                <ItemStyle Width="70px" />
+                                                                            </asp:TemplateField>
+                                                                             <asp:TemplateField HeaderText="cod_ChannelObjetivosSODMAY" Visible="false">
+                                                                                <EditItemTemplate>
+                                                                                        <asp:Label ID="lblcod_ChannelObjetivosSODMAY" runat="server" Width="130px" Text='<%# Bind("cod_channel") %>'  Enabled="false"
+                                                                                           ></asp:Label>
+                                                                                </EditItemTemplate>
+                                                                                <ItemTemplate>
+                                                                                        <asp:Label ID="lblcod_ChannelObjetivosSODMAY" runat="server" Width="130px" Text='<%# Bind("cod_channel") %>' Enabled="false" ></asp:Label>
+                                                                                </ItemTemplate>
+                                                                                <ItemStyle Width="70px" />
+                                                                            </asp:TemplateField>
+                                                                            <asp:TemplateField HeaderText="id_mallaObjetivosSODMAY" Visible="false">
+                                                                                <EditItemTemplate>
+                                                                                        <asp:Label ID="lblid_mallaObjetivosSODMAYY" runat="server" Width="130px" Text='<%# Bind("id_malla") %>'  Enabled="false"
+                                                                                           ></asp:Label>
+                                                                                </EditItemTemplate>
+                                                                                <ItemTemplate>
+                                                                                        <asp:Label ID="lblid_mallaObjetivosSODMAYY" runat="server" Width="130px" Text='<%# Bind("id_malla") %>' Enabled="false" ></asp:Label>
+                                                                                </ItemTemplate>
+                                                                                <ItemStyle Width="70px" />
+                                                                            </asp:TemplateField>
+                                                                             <asp:TemplateField HeaderText="id_ProductCategoryObjetivosSODMAY" Visible="false">
+                                                                                <EditItemTemplate>
+                                                                                        <asp:Label ID="lblid_ProductCategoryObjetivosSODMAY" runat="server" Width="130px" Text='<%# Bind("id_ProductCategory") %>'  Enabled="false"
+                                                                                           ></asp:Label>
+                                                                                </EditItemTemplate>
+                                                                                <ItemTemplate>
+                                                                                        <asp:Label ID="lblid_ProductCategoryObjetivosSODMAY" runat="server" Width="130px" Text='<%# Bind("id_ProductCategory") %>' Enabled="false" ></asp:Label>
+                                                                                </ItemTemplate>
+                                                                                <ItemStyle Width="70px" />
+                                                                            </asp:TemplateField>
+                                                                             <asp:TemplateField HeaderText="id_BrandObjetivosSODMAY" Visible="false">
+                                                                                <EditItemTemplate>
+                                                                                        <asp:Label ID="lblid_BrandObjetivosSODMAY" runat="server" Width="130px" Text='<%# Bind("id_Brand") %>'  Enabled="false"
+                                                                                           ></asp:Label>
+                                                                                </EditItemTemplate>
+                                                                                <ItemTemplate>
+                                                                                        <asp:Label ID="lblid_BrandObjetivosSODMAY" runat="server" Width="130px" Text='<%# Bind("id_Brand") %>' Enabled="false" ></asp:Label>
+                                                                                </ItemTemplate>
+                                                                                <ItemStyle Width="70px" />
+                                                                            </asp:TemplateField>
+                                                                                 <asp:TemplateField HeaderText="id_ReportsPlanning" Visible="false">
+                                                                                <EditItemTemplate>
+                                                                                        <asp:Label ID="lblid_ReportsPlanning" runat="server" Width="130px" Text='<%# Bind("id_ReportsPlanning") %>'  Enabled="false"
+                                                                                           ></asp:Label>
+                                                                                </EditItemTemplate>
+                                                                                <ItemTemplate>
+                                                                                        <asp:Label ID="lblid_ReportsPlanning" runat="server" Width="130px" Text='<%# Bind("id_ReportsPlanning") %>' Enabled="false" ></asp:Label>
+                                                                                </ItemTemplate>
+                                                                                <ItemStyle Width="70px" />
+                                                                            </asp:TemplateField>
+                                                                            <asp:TemplateField HeaderText="id_objMay" Visible="false">
+                                                                                <EditItemTemplate>
+                                                                                        <asp:Label ID="lblid_objMay" runat="server" Width="130px" Text='<%# Bind("id_iobjsodmay") %>'  Enabled="false"
+                                                                                           ></asp:Label>
+                                                                                </EditItemTemplate>
+                                                                                <ItemTemplate>
+                                                                                        <asp:Label ID="lblid_objMay" runat="server" Width="130px" Text='<%# Bind("id_iobjsodmay") %>' Enabled="false" ></asp:Label>
+                                                                                </ItemTemplate>
+                                                                                <ItemStyle Width="70px" />
+                                                                            </asp:TemplateField>
+                                                                            <asp:CommandField ShowEditButton="True" />
+                                                                        </Columns>
+                                                                    </asp:GridView>
+                                                                    <br /><br />                                                 
+                                                                    <div align="center">
+                                                                        <div><asp:Label ID="Label19" runat="server" CssClass="labels" Text="Exportar a Excel "></asp:Label></div>
+                                                                        <div align="center">
+                                                                            <asp:Button ID="btnCancelarObjetivosSODMAYgrilla" runat="server" CssClass="buttonPlan"
+                                                                            Text="Cancelar" Width="80px" onclick="btnCancelarObjetivosSODMAYgrilla_Click" />
+                                                                        </div> 
+                                                                    </div>  
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                </table>
+
+                                                <asp:Panel ID="pBuscarObjetivosSODMAY" runat="server" CssClass="busqueda" Style="display: none;" Height="202px" Width="343px">
+                                                    <br /><br />
+                                                    <table align="center">
+                                                        <tr><td><asp:Label ID="Label20" runat="server" CssClass="labelsTit2" Text="Buscar Objetivo May" /></td></tr>
+                                                    </table><br /><br />
+                                                    <table align="center">
+                                                        <tr>
+                                                            <td><asp:Label ID="Label21" runat="server" CssClass="labels" Text="Cliente:" /></td>
+                                                            <td><asp:DropDownList ID="ddlClienteObjetivosSODMAYbuscar" runat="server" Width="215px" Enabled="false" ></asp:DropDownList></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><asp:Label ID="Label22" runat="server" CssClass="labels" Text="Malla:" /></td>
+                                                            <td><asp:DropDownList ID="ddlMallaObjetivosSODMAYbuscar" runat="server" Width="215px" ></asp:DropDownList></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><asp:Label ID="Label16" runat="server" CssClass="labels" Text="Categoria:" /></td>
+                                                            <td><asp:DropDownList ID="ddlCategoriaObjetivosSODMAYbuscar" runat="server" Width="215px"  AutoPostBack="true"
+                                                                     OnSelectedIndexChanged="ddlCategoriaObjetivosSODMAYbuscar_SelectedIndexChanged">
+                                                                </asp:DropDownList></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><asp:Label ID="Label26" runat="server" CssClass="labels" Text="Marca:" /></td>
+                                                            <td><asp:DropDownList ID="ddlMarcaObjetivosSODMAYbuscar" runat="server" Width="215px" ></asp:DropDownList></td>
+                                                        </tr>
+                                                    </table><br /><br />
+                                                    <div align="center">
+                                                        <asp:Button ID="btnBuscarObjetivosSODMAYbuscar" runat="server" CssClass="buttonPlan" 
+                                                            Text="Buscar" Width="80px" onclick="btnBuscarObjetivosSODMAYbuscar_Click" />
+                                                        <asp:Button ID="BtnCancelarObjetivosSODMAYbuscar" runat="server" CssClass="buttonPlan"
+                                                                Text="Cancelar" Width="80px" />
+                                                    </div>
+                                                </asp:Panel>
+                                                
+                                                <cc1:ModalPopupExtender ID="modalPObjetivoSODMAYbuscar" runat="server" BackgroundCssClass="modalBackground"
+                                                    OkControlID="BtnCancelarObjetivosSODMAYbuscar" PopupControlID="pBuscarObjetivosSODMAY" DropShadow="True"
+                                                    TargetControlID="btnConsultarObjetivosSODMAY" DynamicServicePath="" Enabled="True">
+                                                </cc1:ModalPopupExtender>
+
+                                                <table align="center">
+                                                    <tr>
+                                                        <td>
+                                                            <asp:Button ID="btnCrearObjetivosSODMAY" runat="server" CssClass="buttonPlan" Text="Crear"
+                                                                Width="95px" OnClick="btnCrearObjetivosSODMAY_Click" />
+                                                            <asp:Button ID="btnGuardarObjetivosSODMAY" runat="server"
+                                                                CssClass="buttonPlan" Text="Guardar" Visible="False" Width="95px" OnClick="btnGuardarObjetivosSODMAY_Click"  /><asp:Button
+                                                                ID="btnConsultarObjetivosSODMAY" runat="server" CssClass="buttonPlan" Text="Consultar"
+                                                                Width="95px" />
+                                                            <asp:Button ID="btnCancelarObjetivosSODMAY" OnClick="btnCancelarObjetivosSODMAY_Click"
+                                                                runat="server" CssClass="buttonPlan" Text="Cancelar" Width="95px"/>
+                                                            <asp:Button ID="btnCargaMasisvaObjetivosSODMAY" runat="server" CssClass="buttonPlan" Text="Carga Masiva"
+                                                                Width="95px" OnClick="btnCargaMasisvaObjetivosSODMAY_Click" />
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </asp:Panel>
+                                        </td>
+                                    <td background="../../images/tablas_genericas/bg_gris_tablasgene.jpg">
+                                        <img height="1" src="../../images/tablas_genericas/bg_gris_tablasgene.jpg" width="6">
+                                        </img>
                                     </td>
-                                </tr>
-                            </table>
-
-
-                          <table id="tblConsultar" align="center" runat="server" visible="false">
-                                <tr>
-                                    <td>
-                                        <div class="p" style="width:780px; height: 330px; background-color: #FFFFFF; padding: 2px 2px; font-size: 10pt;
-	                                        font-family : arial, Helvetica, sans-serif;">
-                                            <asp:GridView ID="gvObjetivosSODMAY" runat="server" AutoGenerateColumns="False" 
-                                                Font-Names="Verdana" Font-Size="8pt" EnableModelValidation="True" 
-                                                Width="100%" onrowediting="gvObjetivosSODMAY_RowEditing" 
-                                                onrowcancelingedit="gvObjetivosSODMAY_RowCancelingEdit" onrowupdating="gvObjetivosSODMAY_RowUpdating" 
-                                                    >                                               
-                                                <Columns>
-                                                    <asp:TemplateField HeaderText="Cliente">
-                                                        <EditItemTemplate>
-                                                                <asp:Label ID="lblclieObjetivosSODMAY" runat="server" Width="130px"  Enabled="false"  Text='<%# Bind("Company_Name") %>'  ></asp:Label>
-                                                        </EditItemTemplate>
-                                                        <ItemTemplate>
-                                                                <asp:Label ID="lblclieObjetivosSODMAY" runat="server" Width="130px" Enabled="false" Text='<%# Bind("Company_Name") %>'  ></asp:Label>
-                                                        </ItemTemplate>
-                                                        <ItemStyle Width="70px" />
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="Canal">
-                                                        <EditItemTemplate>
-                                                                <asp:Label ID="lblCanalObjetivosSODMAY" runat="server" Width="130px"   Enabled="false" Text='<%# Bind("Channel_Name") %>' ></asp:Label>
-                                                        </EditItemTemplate>
-                                                        <ItemTemplate>
-                                                                <asp:Label ID="lblCanalObjetivosSODMAY" runat="server" Width="130px" Enabled="false" Text='<%# Bind("Channel_Name") %>' ></asp:Label>
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
-                                                     <asp:TemplateField HeaderText="Malla">
-                                                        <EditItemTemplate>
-                                                                <asp:Label ID="lblMallaObjetivosSODMAY" runat="server" Width="130px"   Enabled="false" Text='<%# Bind("malla") %>'></asp:Label>
-                                                        </EditItemTemplate>
-                                                        <ItemTemplate>
-                                                                <asp:Label ID="lblMallaObjetivosSODMAY" runat="server" Width="130px" Enabled="false"  Text='<%# Bind("malla") %>'></asp:Label>
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="Categoria">
-                                                    <EditItemTemplate>
-                                                            <asp:Label ID="lblcateObjetivosSODMAY" runat="server" Width="130px" Enabled="false"  Text='<%# Bind("Product_Category") %>'  ></asp:Label>
-                                                        </EditItemTemplate>
-                                                        <ItemTemplate>
-                                                        <asp:Label ID="lblcateObjetivosSODMAY" runat="server" Width="130px" Enabled="false"  Text='<%# Bind("Product_Category") %>' ></asp:Label>                                                     
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>   
-                                                        <asp:TemplateField HeaderText="Marca">
-                                                    <EditItemTemplate>
-                                                            <asp:Label ID="lblMarcaObjetivosSODMAY" runat="server" Width="130px"  Enabled="false" Text='<%# Bind("Name_Brand") %>'></asp:Label>
-                                                        </EditItemTemplate>
-                                                        <ItemTemplate>
-                                                        <asp:Label ID="lblMarcaObjetivosSODMAY" runat="server" Width="130px" Enabled="false" Text='<%# Bind("Name_Brand") %>' ></asp:Label>                                                     
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>  
-                                                        <asp:TemplateField HeaderText="Obj. Categoria">
-                                                    <EditItemTemplate>
-                                                            <asp:TextBox ID="txtObjCategoria" runat="server" Width="130px" Enabled="true" Text='<%# Bind("Value_Categoria") %>' ></asp:TextBox>
-                                                        </EditItemTemplate>
-                                                        <ItemTemplate>
-                                                        <asp:TextBox ID="txtObjCategoria" runat="server" Width="130px" Enabled="false" Text='<%# Bind("Value_Categoria") %>' ></asp:TextBox>                                                     
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>    
-                                                    <asp:TemplateField HeaderText="Obj. Marca">
-                                                    <EditItemTemplate>
-                                                            <asp:TextBox ID="txtObjMarca" runat="server" Width="130px" Enabled="true" Text='<%# Bind("Value_Marca") %>' ></asp:TextBox>
-                                                        </EditItemTemplate>
-                                                        <ItemTemplate>
-                                                        <asp:TextBox ID="txtObjMarca" runat="server" Width="130px" Enabled="false" Text='<%# Bind("Value_Marca") %>' ></asp:TextBox>                                                     
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>                                                                                     
-                                                    <asp:TemplateField HeaderText="Periodo">
-                                                        <EditItemTemplate>
-                                                                <asp:Label ID="lblPeriodo" runat="server" Width="130px" Text='<%# Bind("Periodo") %>'  Enabled="false"
-                                                                   ></asp:Label>
-                                                        </EditItemTemplate>
-                                                        <ItemTemplate>
-                                                                <asp:Label ID="lblPeriodo" runat="server" Width="130px" Text='<%# Bind("Periodo") %>' Enabled="false" ></asp:Label>
-                                                        </ItemTemplate>
-                                                        <ItemStyle Width="70px" />
-                                                    </asp:TemplateField>
-                                                 <asp:TemplateField HeaderText="Estado" >
-                                                        <EditItemTemplate>
-                                                            <asp:CheckBox ID="CheckObjetivosSODMAY" runat="server"  Enabled="true" ></asp:CheckBox> 
-                                                        </EditItemTemplate>
-                                                        <ItemTemplate>
-                                                            <asp:CheckBox ID="CheckObjetivosSODMAY" runat="server"  Enabled="false" Checked ='<%# Bind("Status") %>' ></asp:CheckBox> 
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="id_ClienteObjetivosSODMAY" Visible="false">
-                                                        <EditItemTemplate>
-                                                                <asp:Label ID="lblid_ClienteObjetivosSODMAY" runat="server" Width="130px" Text='<%# Bind("company_id") %>'  Enabled="false"
-                                                                   ></asp:Label>
-                                                        </EditItemTemplate>
-                                                        <ItemTemplate>
-                                                                <asp:Label ID="lblid_ClienteObjetivosSODMAY" runat="server" Width="130px" Text='<%# Bind("company_id") %>' Enabled="false" ></asp:Label>
-                                                        </ItemTemplate>
-                                                        <ItemStyle Width="70px" />
-                                                    </asp:TemplateField>
-                                                     <asp:TemplateField HeaderText="cod_ChannelObjetivosSODMAY" Visible="false">
-                                                        <EditItemTemplate>
-                                                                <asp:Label ID="lblcod_ChannelObjetivosSODMAY" runat="server" Width="130px" Text='<%# Bind("cod_channel") %>'  Enabled="false"
-                                                                   ></asp:Label>
-                                                        </EditItemTemplate>
-                                                        <ItemTemplate>
-                                                                <asp:Label ID="lblcod_ChannelObjetivosSODMAY" runat="server" Width="130px" Text='<%# Bind("cod_channel") %>' Enabled="false" ></asp:Label>
-                                                        </ItemTemplate>
-                                                        <ItemStyle Width="70px" />
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="id_mallaObjetivosSODMAY" Visible="false">
-                                                        <EditItemTemplate>
-                                                                <asp:Label ID="lblid_mallaObjetivosSODMAYY" runat="server" Width="130px" Text='<%# Bind("id_malla") %>'  Enabled="false"
-                                                                   ></asp:Label>
-                                                        </EditItemTemplate>
-                                                        <ItemTemplate>
-                                                                <asp:Label ID="lblid_mallaObjetivosSODMAYY" runat="server" Width="130px" Text='<%# Bind("id_malla") %>' Enabled="false" ></asp:Label>
-                                                        </ItemTemplate>
-                                                        <ItemStyle Width="70px" />
-                                                    </asp:TemplateField>
-                                                     <asp:TemplateField HeaderText="id_ProductCategoryObjetivosSODMAY" Visible="false">
-                                                        <EditItemTemplate>
-                                                                <asp:Label ID="lblid_ProductCategoryObjetivosSODMAY" runat="server" Width="130px" Text='<%# Bind("id_ProductCategory") %>'  Enabled="false"
-                                                                   ></asp:Label>
-                                                        </EditItemTemplate>
-                                                        <ItemTemplate>
-                                                                <asp:Label ID="lblid_ProductCategoryObjetivosSODMAY" runat="server" Width="130px" Text='<%# Bind("id_ProductCategory") %>' Enabled="false" ></asp:Label>
-                                                        </ItemTemplate>
-                                                        <ItemStyle Width="70px" />
-                                                    </asp:TemplateField>
-                                                     <asp:TemplateField HeaderText="id_BrandObjetivosSODMAY" Visible="false">
-                                                        <EditItemTemplate>
-                                                                <asp:Label ID="lblid_BrandObjetivosSODMAY" runat="server" Width="130px" Text='<%# Bind("id_Brand") %>'  Enabled="false"
-                                                                   ></asp:Label>
-                                                        </EditItemTemplate>
-                                                        <ItemTemplate>
-                                                                <asp:Label ID="lblid_BrandObjetivosSODMAY" runat="server" Width="130px" Text='<%# Bind("id_Brand") %>' Enabled="false" ></asp:Label>
-                                                        </ItemTemplate>
-                                                        <ItemStyle Width="70px" />
-                                                    </asp:TemplateField>
-                                                         <asp:TemplateField HeaderText="id_ReportsPlanning" Visible="false">
-                                                        <EditItemTemplate>
-                                                                <asp:Label ID="lblid_ReportsPlanning" runat="server" Width="130px" Text='<%# Bind("id_ReportsPlanning") %>'  Enabled="false"
-                                                                   ></asp:Label>
-                                                        </EditItemTemplate>
-                                                        <ItemTemplate>
-                                                                <asp:Label ID="lblid_ReportsPlanning" runat="server" Width="130px" Text='<%# Bind("id_ReportsPlanning") %>' Enabled="false" ></asp:Label>
-                                                        </ItemTemplate>
-                                                        <ItemStyle Width="70px" />
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="id_objMay" Visible="false">
-                                                        <EditItemTemplate>
-                                                                <asp:Label ID="lblid_objMay" runat="server" Width="130px" Text='<%# Bind("id_iobjsodmay") %>'  Enabled="false"
-                                                                   ></asp:Label>
-                                                        </EditItemTemplate>
-                                                        <ItemTemplate>
-                                                                <asp:Label ID="lblid_objMay" runat="server" Width="130px" Text='<%# Bind("id_iobjsodmay") %>' Enabled="false" ></asp:Label>
-                                                        </ItemTemplate>
-                                                        <ItemStyle Width="70px" />
-                                                    </asp:TemplateField>
-                                                    <asp:CommandField ShowEditButton="True" />
-                                                </Columns>
-                                            </asp:GridView>
-                                            <br />                                                 
-                                            <br />                                                 
-                                            <div align="center">
-                                            <div>
-                                            <asp:Label ID="Label19" runat="server" CssClass="labels" Text="Exportar a Excel "></asp:Label>
-                                            </div>
-                                              
-                                                <div align="center">                                       
-                                                <asp:Button ID="btnCancelarObjetivosSODMAYgrilla" runat="server" CssClass="buttonPlan"
-                                                Text="Cancelar" Width="80px" onclick="btnCancelarObjetivosSODMAYgrilla_Click" />
-                                                </div> 
-                                                </div>  
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-
-                          <asp:Panel ID="pBuscarObjetivosSODMAY" runat="server" CssClass="busqueda" 
-                                Style="display: none;" Height="202px" Width="343px">
-                                <br />
-                                <br />
-                                <table align="center">
-                                    <tr>
-                                        <td>
-                                            <asp:Label ID="Label20" runat="server" CssClass="labelsTit2" Text="Buscar Objetivo May" />
-                                        </td>
-                                    </tr>
-                                </table>
-                                <br />
-                                <br />
-                                <table align="center">
-                                    <tr>
-                                        <td>
-                                            <asp:Label ID="Label21" runat="server" CssClass="labels" Text="Cliente:" />
-                                        </td>
-                                        <td>
-                                            <asp:DropDownList ID="ddlClienteObjetivosSODMAYbuscar" runat="server" Width="215px"
-                                                Enabled="false" >
-                                            </asp:DropDownList>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <asp:Label ID="Label22" runat="server" CssClass="labels" Text="Malla:" />
-                                        </td>
-                                        <td>
-                                            <asp:DropDownList ID="ddlMallaObjetivosSODMAYbuscar" runat="server" Width="215px" >
-                                            </asp:DropDownList>
-                                        </td>
-                                    </tr>
-                                       <tr>
-                                        <td>
-                                            <asp:Label ID="Label16" runat="server" CssClass="labels" Text="Categoria:" />
-                                        </td>
-                                        <td>
-                                            <asp:DropDownList ID="ddlCategoriaObjetivosSODMAYbuscar" runat="server" Width="215px"  AutoPostBack="true" OnSelectedIndexChanged="ddlCategoriaObjetivosSODMAYbuscar_SelectedIndexChanged"   >
-                                            </asp:DropDownList>
-                                        </td>
-                                    </tr>
-                                      <tr>
-                                        <td>
-                                            <asp:Label ID="Label26" runat="server" CssClass="labels" Text="Marca:" />
-                                        </td>
-                                        <td>
-                                            <asp:DropDownList ID="ddlMarcaObjetivosSODMAYbuscar" runat="server" Width="215px" >
-                                            </asp:DropDownList>
-                                        </td>
-                                    </tr>
-                                </table>
-                                <br />
-                                <br />
-                                <div align="center">
-                                    <asp:Button ID="btnBuscarObjetivosSODMAYbuscar" runat="server" CssClass="buttonPlan" 
-                                        Text="Buscar" Width="80px" onclick="btnBuscarObjetivosSODMAYbuscar_Click" /><asp:Button ID="BtnCancelarObjetivosSODMAYbuscar" runat="server" CssClass="buttonPlan"
-                                            Text="Cancelar" Width="80px" /></div>
-                            </asp:Panel>
-                            <cc1:ModalPopupExtender ID="modalPObjetivoSODMAYbuscar" runat="server" BackgroundCssClass="modalBackground"
-                                OkControlID="BtnCancelarObjetivosSODMAYbuscar" PopupControlID="pBuscarObjetivosSODMAY" DropShadow="True"
-                                TargetControlID="btnConsultarObjetivosSODMAY" DynamicServicePath="" Enabled="True">
-                            </cc1:ModalPopupExtender>
-
-                               <table align="center">
-                                <tr>
-                                    <td>
-                                        <asp:Button ID="btnCrearObjetivosSODMAY" runat="server" CssClass="buttonPlan" Text="Crear"
-                                            Width="95px" OnClick="btnCrearObjetivosSODMAY_Click" /><asp:Button ID="btnGuardarObjetivosSODMAY" runat="server"
-                                                CssClass="buttonPlan" Text="Guardar" Visible="False" Width="95px" OnClick="btnGuardarObjetivosSODMAY_Click"  /><asp:Button
-                                                    ID="btnConsultarObjetivosSODMAY" runat="server" CssClass="buttonPlan" Text="Consultar"
-                                                    Width="95px" /><asp:Button ID="btnCancelarObjetivosSODMAY" OnClick="btnCancelarObjetivosSODMAY_Click"
-                                                                runat="server" CssClass="buttonPlan" Text="Cancelar" Width="95px"
-                                                                /><asp:Button ID="btnCargaMasisvaObjetivosSODMAY" runat="server" CssClass="buttonPlan" Text="Carga Masiva"
-                                            Width="95px" OnClick="btnCargaMasisvaObjetivosSODMAY_Click" />
-                                    </td>
-                                </tr>
-                            </table>
-                            </asp:Panel>
-
-                  
-                          
-
-                                                                    </td>
-                                        <td background="../../images/tablas_genericas/bg_gris_tablasgene.jpg">
-                                            <img height="1" src="../../images/tablas_genericas/bg_gris_tablasgene.jpg" width="6">
-                                            </img>
-                                        </td>
                                     </tr>
                                     <tr>
                                         <td>

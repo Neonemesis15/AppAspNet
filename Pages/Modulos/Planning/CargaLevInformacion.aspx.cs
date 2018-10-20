@@ -480,8 +480,7 @@ namespace SIGE.Pages.Modulos.Planning
                                     */
                                     #endregion
 
-                                    if (dsCargar.Tables[0].Rows.Count > 0)
-                                    {
+                                    if (dsCargar.Tables[0].Rows.Count > 0){
                                         Pmensaje.CssClass = "MensajesSupConfirm";
                                         lblencabezado.Text = "Sr. Usuario";
                                         lblmensajegeneral.Text = "Se ha realizado la carga de productos para la campaña: "

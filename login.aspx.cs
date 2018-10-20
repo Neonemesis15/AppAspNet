@@ -449,12 +449,20 @@ namespace SIGE
 
         private void cmbpaisolvido()
         {
-            DataSet ds = null;
-            ds = oCoon.ejecutarDataSet("UP_WEB_LLENACOMBOS", 2);
-            cmbpaisolv.DataSource = ds;
-            cmbpaisolv.DataValueField = "cod_Country";
-            cmbpaisolv.DataTextField = "Name_Country";
-            cmbpaisolv.DataBind();
+            try{
+                DataSet ds = null;
+                ds = oCoon.ejecutarDataSet("UP_WEB_LLENACOMBOS", 2);
+                cmbpaisolv.DataSource = ds;
+                cmbpaisolv.DataValueField = "cod_Country";
+                cmbpaisolv.DataTextField = "Name_Country";
+                cmbpaisolv.DataBind();
+            }
+            catch (Exception ex) {
+                MensajeSeguimiento.CssClass = "MensajesSupervisor";
+                lblencabezadoSeguimiento.Text = "Error";
+                lblmensajegeneralSeguimiento.Text = "Error: " + ex.ToString().Substring(0,100) + " ..."; 
+                MPMensajeSeguimiento.Show();
+            }
         }
 
         /// <summary>
