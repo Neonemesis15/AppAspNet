@@ -65,16 +65,23 @@
     </Reference>
     <Reference Include="eWorld.UI, Version=2.0.6.2393, Culture=neutral, PublicKeyToken=24d65337282035f2, processorArchitecture=MSIL" />
     <Reference Include="eWorld.UI.Compatibility, Version=2.0.6.2393, Culture=neutral, PublicKeyToken=24d65337282035f2, processorArchitecture=MSIL" />
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Framework_Lucky 1.0\Lucky FrameWork\Business\bin\Debug\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Lucky.Business, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Framework_Lucky 1.0\Lucky FrameWork\Business\bin\Debug\Lucky.Business.dll</HintPath>
     </Reference>
-    <Reference Include="Lucky.CFG, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\Framework_Lucky 1.0\Lucky FrameWork\CFG\bin\Debug\Lucky.CFG.dll</HintPath>
+    <Reference Include="Lucky.CFG">
+      <HintPath>..\Framework_Lucky 1.0\Lucky FrameWork\CFG\obj\Debug\Lucky.CFG.dll</HintPath>
     </Reference>
     <Reference Include="Lucky.Data, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Framework_Lucky 1.0\Lucky FrameWork\Data\bin\Debug\Lucky.Data.dll</HintPath>
     </Reference>
     <Reference Include="Lucky.Entity, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Framework_Lucky 1.0\Lucky FrameWork\Entity\bin\Debug\Lucky.Entity.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
@@ -231,6 +238,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FormatosDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
@@ -2227,6 +2237,7 @@
   <ItemGroup>
     <Content Include="ClientBin\Xplora_v2.xap" />
     <Content Include="fueralinea.jpg" />
+    <Content Include="Global.asax" />
     <Content Include="loginV2.aspx" />
     <Content Include="menesaje_usu.html" />
     <Content Include="Pages\css\cssGridViewStyleVS2008\css\core.css" />
@@ -3133,6 +3144,7 @@
     <Content Include="Pages\Modulos\Utilitario\Carga_Masiva.aspx" />
     <Content Include="Pages\Modulos\Utilitario\DescargarAplicacionMovil.aspx" />
     <Content Include="Pages\Modulos\Utilitario\MasterPage\design\MasterPage.master" />
+    <None Include="Properties\DataSources\System.Data.DataTable.datasource" />
     <None Include="Service References\MenuService1\service.wsdl" />
     <None Include="Service References\MenuService1\service.xsd">
       <SubType>Designer</SubType>
@@ -4227,7 +4239,6 @@
     <Folder Include="Pages\Modulos\Operativo\Reports\masivo\" />
     <Folder Include="Pages\Modulos\Planning\Photos\" />
     <Folder Include="Pages\Modulos\Utilitario\Archivos\" />
-    <Folder Include="Properties\DataSources\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

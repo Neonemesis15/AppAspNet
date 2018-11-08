@@ -12,6 +12,7 @@ using Lucky.Entity.Common.Application;
 using Lucky.Entity.Common.Application.Security;
 using Lucky.Entity.Common.Security;
 
+
 namespace SIGE
 {
     /// <summary>
@@ -22,6 +23,18 @@ namespace SIGE
     /// </summary>
     public partial class login : System.Web.UI.Page
     {
+        // Se inicializa el ilog
+        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(typeof(Global));
+
+        /// <summary>
+        /// Constructor de la Clase login
+        /// </summary>
+        public login()
+        {
+            //Log.Info("Startup application.");
+        }
+
+
         #region declaracion de variables
         private Usuario oUsuario;
         private EntrySeccion oSeccion = new EntrySeccion();
@@ -124,7 +137,7 @@ namespace SIGE
                                 {
                                     // recuperar listado general de personas a las cuales se les enviará correo
                                     dtpersonalenvio = oCoon.ejecutarDataTable("UP_WEBXPLORA_PLANNING_OBTENEREMAILUSERS", 0, Convert.ToInt32(dsenvio.Tables[0].Rows[i][1].ToString().Trim()), 0, "none", Convert.ToInt32(dsenvio.Tables[0].Rows[i][0].ToString().Trim()), "none");
-                                    //Planning.Get_Obtener_Datos_Cliente(0, Convert.ToInt32(dsenvio.Tables[0].Rows[i][1].ToString().Trim()), 0, "none", Convert.ToInt32(dsenvio.Tables[0].Rows[i][0].ToString().Trim()),"");
+                                    Planning.Get_Obtener_Datos_Cliente(0, Convert.ToInt32(dsenvio.Tables[0].Rows[i][1].ToString().Trim()), 0, "none", Convert.ToInt32(dsenvio.Tables[0].Rows[i][0].ToString().Trim()), "");
                                     if (dtpersonalenvio != null)
                                     {
                                         if (dtpersonalenvio.Rows.Count > 0)
@@ -154,7 +167,7 @@ namespace SIGE
                                                         // (Obtener informes A enviar dependiendo usuario de carga , servicio canal y reportes por usuario 
                                                         DataTable dtasociacionpersonal = null;
                                                         dtasociacionpersonal = oCoon.ejecutarDataTable("UP_WEBXPLORA_PLANNING_OBTENEREMAILUSERS", 1, Convert.ToInt32(dsenvio.Tables[0].Rows[i][1].ToString().Trim()), Convert.ToInt32(dtpersonalenvio.Rows[ipersonalenvio]["Person_id"].ToString().Trim()), dsenvio.Tables[1].Rows[icanales]["cod_Channel"].ToString().Trim(), Convert.ToInt32(dsenvio.Tables[0].Rows[i][0].ToString().Trim()), fechavalida);
-                                                        // Planning.Get_Obtener_Datos_Cliente(1, Convert.ToInt32(dsenvio.Tables[0].Rows[i][1].ToString().Trim()), Convert.ToInt32(dtpersonalenvio.Rows[ipersonalenvio]["Person_id"].ToString().Trim()), dsenvio.Tables[1].Rows[icanales]["cod_Channel"].ToString().Trim(), Convert.ToInt32(dsenvio.Tables[0].Rows[i][0].ToString().Trim()), this.Session["sUser"].ToString().Trim());
+                                                        Planning.Get_Obtener_Datos_Cliente(1, Convert.ToInt32(dsenvio.Tables[0].Rows[i][1].ToString().Trim()), Convert.ToInt32(dtpersonalenvio.Rows[ipersonalenvio]["Person_id"].ToString().Trim()), dsenvio.Tables[1].Rows[icanales]["cod_Channel"].ToString().Trim(), Convert.ToInt32(dsenvio.Tables[0].Rows[i][0].ToString().Trim()), this.Session["sUser"].ToString().Trim());
 
                                                         if (dtasociacionpersonal != null)
                                                         {
@@ -230,16 +243,22 @@ namespace SIGE
             {
                 txtuser.Focus();
                 this.Session.RemoveAll();
+
                 //Definir tipo de aplicación
                 AppDomain.CurrentDomain.SetData("ApplicationType", "Web");
+
                 //Definir URL de Aplicación Web
                 string sPort = "";
+
                 if (Request.Url.Port == 80 || Request.Url.Port == 443) sPort = "";
                 else sPort = ":" + Request.Url.Port;
+
                 string sApplicationPath = "";
+
                 if (Request.ApplicationPath == "/")
                     sApplicationPath = "";
                 else sApplicationPath = Request.ApplicationPath;
+
                 this.Session["WebRoot"] = Request.Url.Scheme + "://" + Request.Url.Host + sPort + sApplicationPath + "/";
                 //this.recordatorio.Visible = false;
                 cmbpaisolvido();
@@ -249,6 +268,12 @@ namespace SIGE
         #endregion
 
         #region region Eventos de los Controles
+        
+        /// <summary>
+        /// Evento Click del Boton de Ingreso "btningreso"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btningreso_Click(object sender, EventArgs e)
         {
             string sPagina = "~/";
@@ -258,21 +283,30 @@ namespace SIGE
                 //UpdateProg1.Visible = true;
                 //PProgresso.Style.Value = "Display:block;";
 
+                // Variable para almacenar la fecha
                 DateTime fFecha = Convert.ToDateTime(Session["fFecha"]);
+
+                // Obtener el nombre de Usuario del Formulario
                 sUser = txtuser.Text.ToLower();
+
+                // Obtener el password del Usuario del Formulario
                 sPassw = txtpassw.Text;
+                
+                // Deshabilitar la caja de texto txtUser
                 txtuser.Enabled = false;
 
+                // Se crean Sessiones para sUser, sPassw y fFecha
                 this.Session["sUser"] = sUser;
                 this.Session["sPassw"] = sPassw;
                 this.Session["fFecha"] = fFecha;
 
+                // Se obtiene la Key 
                 string Key;
                 Key = ConfigurationManager.AppSettings["TamperProofKey"];
 
                 DataTable dtc = null;
                 string spasEncriptado = Lucky.CFG.Util.Encriptacion.Codificar(sPassw, Key);
-                dtc = oCoon.ejecutarDataTable("UP_WEBXPLORAGEN_PASSUSER", sUser);
+                //dtc = oCoon.ejecutarDataTable("UP_WEBXPLORAGEN_PASSUSER", sUser);
                 string sclvr;
                 dtc = oCoon.ejecutarDataTable("UP_WEBXPLORAGEN_PASSUSER", sUser);
                 sclvr = dtc.Rows[0]["User_Password"].ToString();
@@ -327,40 +361,54 @@ namespace SIGE
 
                 //ObtenerDatosEnvioMail();
 
-
-
-
                 if (oeUsuario != null)
                 {
                     UsuarioAcceso oUsuarioAcceso = new UsuarioAcceso();
                     EUsuarioAcceso oeUsuarioAcceso = new EUsuarioAcceso();
                     oeUsuarioAcceso = oUsuarioAcceso.obtenerAleatorioxUsuario(sUser, sPassw);
                     UniqueLogin(sUser);
+
                     AplicacionWeb oAplicacionWeb = new AplicacionWeb();
                     EAplicacionWeb oeAplicacionWeb = oAplicacionWeb.obtenerAplicacion(sCoutry, smodul);
-                    this.Session["oeAplicacionWeb"] = oeAplicacionWeb;
-                    this.Session["cod_applucky"] = oeAplicacionWeb.codapplucky;
-                    this.Session["abr_app"] = oeAplicacionWeb.abrapp;
-                    this.Session["app_url"] = oeAplicacionWeb.appurl;
-                    sPagina = oeAplicacionWeb.HomePage;
+                    // Verifica que no haya Errores
+                    if (oAplicacionWeb.getMessage().Equals(""))
+                    {
+                        this.Session["oeAplicacionWeb"] = oeAplicacionWeb;
+                        this.Session["cod_applucky"] = oeAplicacionWeb.codapplucky;
+                        this.Session["abr_app"] = oeAplicacionWeb.abrapp;
+                        this.Session["app_url"] = oeAplicacionWeb.appurl;
+                        sPagina = oeAplicacionWeb.HomePage;
 
-                    oeUsuarioAcceso = null;
-                    oeAplicacionWeb = null;
-                    oAplicacionWeb = null;
+                        oeUsuarioAcceso = null;
+                        oeAplicacionWeb = null;
+                        oAplicacionWeb = null;
+
+
+                    }
+                    else
+                    {
+                        MensajeSeguimiento.CssClass = "MensajesSupervisor";
+                        lblencabezadoSeguimiento.Text = "Error";
+                        lblmensajegeneralSeguimiento.Text = "Error: " + oAplicacionWeb.getMessage();
+                        MPMensajeSeguimiento.Show();
+                    }
+
+
                 }
+
                 //PProgresso.Style.Value = "Display:none";
                 //PProgresso_ModalPopupExtender.Hide();
             }
 
             catch (Exception ex)
             {
-                Lucky.CFG.Exceptions.Exceptions exs = new Lucky.CFG.Exceptions.Exceptions(ex);
+                //Lucky.CFG.Exceptions.Exceptions exs = new Lucky.CFG.Exceptions.Exceptions(ex);
                 string errMessage = "";
-                if (ex.Message.Substring(0, 20) == "Error en la Autenticación de Usuario" ||
-                    ex.Message.Substring(0, 20) == "La Clave es Errrada o Usuario no Existe")
+                if (ex.Message.Equals("Error en la Autenticación de Usuario") ||
+                    ex.Message.Equals("La Clave es Errrada o Usuario no Existe"))
                 {
                     errMessage = new Lucky.CFG.Util.Functions().preparaMsgError(ex.Message);
-                    //this.Response.Redirect("~/err_mensaje.aspx?msg=" + errMessage, true);
+                    this.Response.Redirect("~/err_mensaje.aspx?msg=" + errMessage, true);
                     this.Session["encabemensa"] = "Error de Autenticación";
                     this.Session["mensaje"] = "Usuario y/o Clave Erradas";
                     this.Session["cssclass"] = "MensajesSupervisor";
@@ -370,13 +418,13 @@ namespace SIGE
                 else
                 {
                     //Enviar error a fin de evitar que este se pierda con el redirect de página.
-                    exs.Country = "SIGE(" + ConfigurationManager.AppSettings["COUNTRY"] + ") - Usuario " + this.Session["sUser"].ToString();
+                    //exs.Country = "SIGE(" + ConfigurationManager.AppSettings["COUNTRY"] + ") - Usuario " + this.Session["sUser"].ToString();
                     string sCountry = ConfigurationManager.AppSettings["COUNTRY"];
                     //exs.errorWebsite(sCountry);
-                    //errMessage += new Lucky.CFG.Util.Functions().preparaMsgError(ex.Message);
+                    errMessage += new Lucky.CFG.Util.Functions().preparaMsgError(ex.Message);
                     errMessage = "Error de Autenticacion para " + ' ' + sUser + ' ' + "Clave errada o Usuario Inactivo";
                     this.Session["errMessage"] = errMessage;
-                    //this.Response.Redirect("~/err_mensaje.aspx?msg=" + errMessage, true);
+                    this.Response.Redirect("~/err_mensaje.aspx?msg=" + errMessage, true);
                     this.Session["encabemensa"] = "Error de Autenticacion";
                     this.Session["mensaje"] = "Usuario y/o Clave Erradas";
                     this.Session["cssclass"] = "MensajesSupervisor";
@@ -387,21 +435,17 @@ namespace SIGE
             }
 
             EEntrySeccion oeSeccion = oSeccion.PrimerAcceso(sUser);
-            if (oeSeccion.seccionname == "1")
-            {
-                Response.Redirect("Cambio_pswd.aspx", true);
-            }
-            //if (Request.Cookies["SIGE_URLRedirect"] == null)
-            //{
+            if (oeSeccion.seccionname == "1") Response.Redirect("Cambio_pswd.aspx", true);
+            //if (Request.Cookies["SIGE_URLRedirect"] == null) 
             //    this.Response.Redirect("~/" + sPagina, true);
-            //}
             else
             {
                 //HttpCookie hcURLRedirect = Request.Cookies["SIGE_URLRedirect"];
 
-                if (this.Session["companyid"].ToString() == "1562" && (this.Session["Perfilid"].ToString() == "6001" || this.Session["Perfilid"].ToString() == "4512"))
+                if (this.Session["companyid"].ToString() == "1562"
+                    && (this.Session["Perfilid"].ToString() == "6001"
+                    || this.Session["Perfilid"].ToString() == "4512"))
                 {
-
                     Response.Redirect("http://sige.lucky.com.pe:8081/");
                 }
                 else if (this.Session["companyid"].ToString() == "1561" && this.Session["Perfilid"].ToString() == "4512")
@@ -410,11 +454,16 @@ namespace SIGE
                 }
                 else
                 {
+                    //this.Response.Redirect("~/" + sPagina, true);
                     this.Response.Redirect("~/" + sPagina, true);
                 }
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="oeUsuario"></param>
         protected void SetAppSession(EUsuario oeUsuario)
         {
             Response.Cookies["companyid"].Value = oeUsuario.companyid;
@@ -439,6 +488,7 @@ namespace SIGE
             Response.Cookies["Personid"].Value = oeUsuario.Personid.ToString();
             Response.Cookies["Personid"].Expires = DateTime.Now.AddMinutes(50);
         }
+
         protected void BtnCOlv_Click(object sender, ImageClickEventArgs e)
         {
             //UpdateProg1.Visible = false;            
@@ -449,7 +499,8 @@ namespace SIGE
 
         private void cmbpaisolvido()
         {
-            try{
+            try
+            {
                 DataSet ds = null;
                 ds = oCoon.ejecutarDataSet("UP_WEB_LLENACOMBOS", 2);
                 cmbpaisolv.DataSource = ds;
@@ -457,10 +508,11 @@ namespace SIGE
                 cmbpaisolv.DataTextField = "Name_Country";
                 cmbpaisolv.DataBind();
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 MensajeSeguimiento.CssClass = "MensajesSupervisor";
                 lblencabezadoSeguimiento.Text = "Error";
-                lblmensajegeneralSeguimiento.Text = "Error: " + ex.ToString().Substring(0,100) + " ..."; 
+                lblmensajegeneralSeguimiento.Text = "Error: " + ex.ToString().Substring(0, 100) + " ...";
                 MPMensajeSeguimiento.Show();
             }
         }
@@ -526,9 +578,14 @@ namespace SIGE
             catch (Exception ex)
             {
 
-                Lucky.CFG.Exceptions.Exceptions mesjerror = new Lucky.CFG.Exceptions.Exceptions(ex);
+                this.Session["encabemensa"] = "Sr. Usuario";
+                this.Session["mensaje"] = "Error: " + ex.ToString().Substring(0, 100) + "...";
+                this.Session["cssclass"] = "MensajesSupervisor";
+                Mensajes_Usuario2();
+                ModalPopupExtender1.Show();
 
-                mesjerror.errorWebsite(ConfigurationManager.AppSettings["COUNTRY"]);
+                //Lucky.CFG.Exceptions.Exceptions mesjerror = new Lucky.CFG.Exceptions.Exceptions(ex);
+                //mesjerror.errorWebsite(ConfigurationManager.AppSettings["COUNTRY"]);
             }
         }
 

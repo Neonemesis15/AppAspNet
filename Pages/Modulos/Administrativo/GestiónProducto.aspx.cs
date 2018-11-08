@@ -23,20 +23,25 @@ using Lucky.Entity.Common.Maestros.Producto;
 
 
 namespace SIGE.Pages.Modulos.Administrativo
-{ //-- =============================================
-    //-- Author:		    <Ing. Magaly Jiménez>
-    //-- Create date:       <13/08/2010>
-    //-- Description:       <Permite al actor Administrador de SIGE realizar todos los procesos para la administracion 
-    //--                    de Gestión De Productos>
-    //-- Requerimiento No.  
-    //-- Actualizacion:  Se añade Panel para la gestion de Sub Familias, se cambia vistas en Navegacion para edicion de datos en Presentaciones y corrigen errores.
-    //--                 Se limpia codigo con lineas innecesarias y se protegen los atributos (variables globales) con private.
-    //-- 11/07/2011 - Angel Ortiz
-    //-- Actualizacion:  Se añade cliente por cada categoria
-    //-- 11/08/2011 - Angel Ortiz
-    //-- =============================================
+{ 
+    /// <summary>
+    /// Permite al actor Administrador de SIGE realizar todos los procesos para la administracion de Gestión De Productos
+    /// Developed by: 
+    /// - Ing. Magaly Jiménez (MJ)
+    /// Changes:
+    /// - 08-11-2018 Pablo Salas Alvarez (PSA)  Refactoring Productos
+    /// - 11-08-2011 Angel Ortiz (AO)           Se añade cliente por cada categoria
+    /// - 11-07-2011 Angel Ortiz (AO)           Se añade Panel para la gestion de Sub Familias, se cambia vistas en Navegacion 
+    ///                                         para edicion de datos en Presentaciones.
+    ///                                         Se limpia codigo con lineas innecesarias y se protegen los atributos (variables globales) con private.
+    /// - 13-08-2010 Magaly Jiménez (MJ)        Creación de la Clase
+    /// </summary>
     public partial class GestiónProducto : System.Web.UI.Page
     {
+        #region VARIABLES
+        // Variable para guardar los mensajes de Error en la Pagina
+        private String messages = "";
+
         private bool estado;
         private int icodBrand;
         private string sBrand = "";
@@ -65,10 +70,12 @@ namespace SIGE.Pages.Modulos.Administrativo
         private string planningADM;
         private string Cliente;
         private string scompany_id;
-
         private DataTable dt = null;
         private long iid_Product;
         private long iid_pancla;
+        #endregion 
+
+        #region CONEXION A CAPA BUSINESS LOGIC
         private Brand oBrand = new Brand();
         private SubBrand oSubBrand = new SubBrand();
         private SubCategoria oSubCategoria = new SubCategoria();
@@ -76,25 +83,37 @@ namespace SIGE.Pages.Modulos.Administrativo
         private BProduct_Family oProductFamily = new BProduct_Family();
         private Product_Presentations oProdPresent = new Product_Presentations();
         private Productos oProductos = new Productos();
-        private Conexion oConn = new Lucky.Data.Conexion();
-        private Product_Type oProductType = new Product_Type();
-        private Facade_Procesos_Administrativos.Facade_Procesos_Administrativos owsadministrativo = new SIGE.Facade_Procesos_Administrativos.Facade_Procesos_Administrativos();
-        private Conexion oCoon = new Conexion();
-        private Facade_Procesos_Administrativos.Facade_Procesos_Administrativos obtenerid = new SIGE.Facade_Procesos_Administrativos.Facade_Procesos_Administrativos();
+        #endregion 
 
+        #region CONEXION A LA BASE DE DATOS
+        private Conexion oConn = new Lucky.Data.Conexion();
+        private Conexion oCoon = new Conexion();
+        #endregion
+
+        #region CONEXION A LOS WEB SERVICES
+        private Product_Type oProductType = new Product_Type();
+        private Facade_Procesos_Administrativos.Facade_Procesos_Administrativos owsadministrativo = 
+            new SIGE.Facade_Procesos_Administrativos.Facade_Procesos_Administrativos();
+        private Facade_Procesos_Administrativos.Facade_Procesos_Administrativos obtenerid = 
+            new SIGE.Facade_Procesos_Administrativos.Facade_Procesos_Administrativos();
+        #endregion
+
+        /// <summary>
+        /// Carga Inicial de la Página
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e)
         {
-            try
-            {
-                this.planningADM = "SI"; //this.Session["AdmProd"].ToString().Trim();
+            try{
+                this.planningADM = this.Session["AdmProd"].ToString().Trim(); // "SI"; 
+            }catch{
+
             }
-            catch
-            {
-            }
-            if (!IsPostBack)
-            {
-                try
-                {
+
+            if (!IsPostBack){
+                try{
+                   
                     IfCargaMasivaGProductos.Attributes["src"] = "CargaMasivaGProductos.aspx";
                     IfCargaMCategoria.Attributes["src"] = "CargaMasivaGProductos.aspx";
                     IfCMSubcategoria.Attributes["src"] = "CargaMasivaGProductos.aspx";
@@ -103,8 +122,8 @@ namespace SIGE.Pages.Modulos.Administrativo
                     IframeCMSubmarca.Attributes["src"] = "CargaMasivaGProductos.aspx";
                     iframeCMFamilia.Attributes["src"] = "CargaMasivaGProductos.aspx";
                     
-                    if (this.planningADM == "SI")
-                    {
+                    if (this.planningADM == "SI"){
+
                         LLenacomboCategoriaBuscarMarcaporplanning();
                         llenar_comboBCategopresentPlanning();
 
@@ -118,8 +137,6 @@ namespace SIGE.Pages.Modulos.Administrativo
 
                         LlenacomboCategProducto(cmbBCategoriaProduct);
                         LlenacomboMarcaProduct(cmbBBrand);
-
-
 
                         //Guardar en sesiones los maestros de: Categoria, SubCategoria, Familia, Marca, Tipo, Formato, 
                         BL_Categoria oBL_Categoria = new BL_Categoria();
@@ -190,7 +207,7 @@ namespace SIGE.Pages.Modulos.Administrativo
             }
         }
         
-        #region Funciones
+        #region FUNCIONES
         private void SavelimpiarControlesMarca()
         {
             TxtCodBrand.Text = "";
@@ -347,20 +364,44 @@ namespace SIGE.Pages.Modulos.Administrativo
             cmbBuscarCategoryM.DataValueField = "id_ProductCategory";
             cmbBuscarCategoryM.DataBind();
         }  
+        /// <summary>
+        /// Llena el AspControl DropDownList 'cmbBuscarCategoryM' con las Categorias Disponibles por idCliente
+        /// </summary>
         private void LLenacomboCategoriaBuscarMarcaporplanning()
         {
-            /*
             DataSet ds = null;
             Cliente = Convert.ToString(this.Session["companyid"]);
-            ds = oConn.ejecutarDataSet("UP_WEBXPLORA_AD_LLENACOMBOBUSCARCATEGORIAPLANNING", Cliente);
-            //se llena cliente en Usuarios
-            cmbBuscarCategoryM.DataSource = ds;
-            cmbBuscarCategoryM.DataTextField = "Product_Category";
-            cmbBuscarCategoryM.DataValueField = "id_ProductCategory";
-            cmbBuscarCategoryM.DataBind();
-            ds = null;
-            */
+            try{
+                // Obtener las Categorias por idCliente
+                ds = oConn.ejecutarDataSet("UP_WEBXPLORA_AD_LLENACOMBOBUSCARCATEGORIAPLANNING", Cliente);
+            }catch (Exception ex) {
+                messages = "Ocurrio un Error: " + ex.ToString();
+            }
 
+            // Verificar que no existan Errores
+            if (messages.Equals("")){
+
+                // Verificar que exista al menos un Elemento para poder llenar el AspControl DropDowList 'cmbBuscarCategoryM' con las Categorias correspondientes
+                
+                if (ds.Tables[0].Rows.Count > 0){
+                    //se llena cliente en Usuarios
+                    cmbBuscarCategoryM.DataSource = ds;
+                    cmbBuscarCategoryM.DataTextField = "Product_Category";
+                    cmbBuscarCategoryM.DataValueField = "id_ProductCategory";
+                    cmbBuscarCategoryM.DataBind();
+                }
+                else{
+
+                    // Mostrar PopUp Mensaje Usuario
+                    messages = "Error: No Existen Categorías Disponibles para el Cliente indicado, ¡por favor Verificar...!";
+                }
+            }else {
+
+                // Mostrar PopUp Mensaje Usuario
+            }
+            
+            #region Data Dummy
+            /*
             ListItem listItem0 = new ListItem("Categoria00", "0");
             ListItem listItem1 = new ListItem("Categoria01", "1");
             ListItem listItem2 = new ListItem("Categoria02", "2");
@@ -370,7 +411,8 @@ namespace SIGE.Pages.Modulos.Administrativo
             cmbBuscarCategoryM.Items.Add(listItem1);
             cmbBuscarCategoryM.Items.Add(listItem2);
             cmbBuscarCategoryM.Items.Add(listItem3);
-
+            */
+            #endregion
 
         }  
         private void InicializarPaneles()
@@ -1082,6 +1124,9 @@ namespace SIGE.Pages.Modulos.Administrativo
             cmbBCategoriaPresent.DataBind();
             ds5 = null;
         }
+        /// <summary>
+        /// 
+        /// </summary>
         private void llenar_comboBCategopresentPlanning()
         {            
             /*
@@ -1094,6 +1139,8 @@ namespace SIGE.Pages.Modulos.Administrativo
             cmbBCategoriaPresent.DataValueField = "id_ProductCategory";
             cmbBCategoriaPresent.DataBind();
             */
+
+
             ListItem listItem0 = new ListItem("Categoria00", "0");
             ListItem listItem1 = new ListItem("Categoria01", "1");
             ListItem listItem2 = new ListItem("Categoria02", "2");
@@ -2119,7 +2166,8 @@ namespace SIGE.Pages.Modulos.Administrativo
             try
             {
                 DataTable dt = new DataTable();
-                dt = oCoon.ejecutarDataTable("UP_WEBXPLORA_AD_LLENACOMBOCLIENTEPRODUCT", Convert.ToInt32(((DropDownList)GVConsulProduct.Rows[GVConsulProduct.EditIndex].Cells[2].FindControl("cmbFabricante")).Text));
+                dt = oCoon.ejecutarDataTable("UP_WEBXPLORA_AD_LLENACOMBOCLIENTEPRODUCT", 
+                    Convert.ToInt32(((DropDownList)GVConsulProduct.Rows[GVConsulProduct.EditIndex].Cells[2].FindControl("cmbFabricante")).Text));
                 //se llena compañia en Productos
                 string
                 dato = dt.Rows[0]["Company_Name"].ToString().Trim();

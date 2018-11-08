@@ -21,6 +21,14 @@ namespace SIGE.Pages.Modulos.Planning
     /// </summary>
     public partial class Seguimiento_Planning : System.Web.UI.Page
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public Seguimiento_Planning() { 
+        }
+
+        #region VARIABLES GLOBALES
+        
         private DateTime fechaSolicitudP;
         private DateTime fechaFinalP;
         private DateTime fechaIniPreP;
@@ -29,11 +37,21 @@ namespace SIGE.Pages.Modulos.Planning
         private DateTime fechaIniPlaP;
         private DateTime fechaPlaFinP;
         private bool Postback = true;
-        
+        private int level_carga;
+        // Almanecar los mensajes de Error de la Aplicación, en caso de ser vacio (""), la App esta Ok, Caso Contrario Contiene Errores
+        private String messages = "";
+        #endregion
+
+        #region CONEXION A BASE DE DATOS
+
         private Staff_Planning Staff_Planning = new Staff_Planning();
         private PuntosDV PuntosDV = new PuntosDV();
         private Conexion oCoon = new Conexion();
         private PointOfSale_PlanningOper PointOfSale_PlanningOper = new PointOfSale_PlanningOper();
+
+        #endregion
+
+        #region SERVICES
 
         private Facade_Procesos_Administrativos.Facade_Procesos_Administrativos PAdmin = 
             new SIGE.Facade_Procesos_Administrativos.Facade_Procesos_Administrativos();
@@ -45,9 +63,9 @@ namespace SIGE.Pages.Modulos.Planning
             new SIGE.Facade_Menu_strategy.Facade_MPlanning();
         private Facade_Proceso_Cliente.Facade_Proceso_Cliente wsCliente = 
             new SIGE.Facade_Proceso_Cliente.Facade_Proceso_Cliente();
-                
-        private int level_carga;
         
+        #endregion
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -57,39 +75,40 @@ namespace SIGE.Pages.Modulos.Planning
                     string sUser = this.Session["sUser"].ToString();
                     string sPassw = this.Session["sPassw"].ToString();
                     string sNameUser = this.Session["nameuser"].ToString();
-                    lblUsuario.Text = sNameUser;
-                    if (sUser != null && sPassw != null)
-                        llena_planning();
                     
-                    if(this.Session["companyid"].ToString().Trim()=="1562" || this.Session["companyid"].ToString().Trim()=="1561")
-                    {
+                    lblUsuario.Text = sNameUser;
 
+                    if (sUser != null && sPassw != null) llena_planning();
+                    
+                    if(this.Session["companyid"].ToString().Trim()=="1562" 
+                        || this.Session["companyid"].ToString().Trim()=="1561"){
                         MenuProductoAncla.Visible = true;
                     }
-                }
-                catch (Exception ex)
-                {
+                }catch (Exception ex){
+
                     string error = "";
                     string mensaje = "";
                     error = Convert.ToString(ex.Message);
                     mensaje = ConfigurationManager.AppSettings["ErrorConection"];
-                    if (error.Equals(mensaje))
-                    {
+                    if (error.Equals(mensaje)){
+
                         Lucky.CFG.Exceptions.Exceptions exs = new Lucky.CFG.Exceptions.Exceptions(ex);
                         string errMessage = "";
                         errMessage = mensaje;
                         errMessage = new Lucky.CFG.Util.Functions().preparaMsgError(ex.Message);
                         this.Response.Redirect("../../../err_mensaje.aspx?msg=" + errMessage, true);
-                    }
-                    else
-                    {
+
+                    }else{
+
                         this.Session.Abandon();
                         Response.Redirect("~/err_mensaje_seccion.aspx", true);
+
                     }
                 }
             }
         }
 
+        #region GENERAL
         /// <summary>
         /// Ocultar todos los ModalPanel
         /// </summary>
@@ -142,43 +161,9 @@ namespace SIGE.Pages.Modulos.Planning
             txtcontacto.Text = "";
             txtarea.Text = "";
         }
-        private void Limpiar_InformacionAsignaPDVOPE()
-        {
-            Button1.Visible = false;
-            BtnAllAsigPDV.Visible = false;
-            BtnNoneasigPDV.Visible = false;
-            GvAsignaPDVOPE.DataBind();
-            GvNewAsignaPDVOPE.DataBind();
-            ChkListPDV.Items.Clear();
-            TxtF_iniPDVOPE.Text = "";
-            TxtF_finPDVOPE.Text = "";
-            CmbSelCityRutas.Items.Clear();
-            CmbSelTipoAgrupRutas.Items.Clear();
-            CmbSelAgrupRutas.Items.Clear();
-            CmbSelOficinaRutas.Items.Clear();
-            CmbSelMallasRutas.Items.Clear();
-            CmbSelSectorRutas.Items.Clear();
-            ChkListPDV.Items.Clear();
-            ConsultaPDVCampañaRutas();
-            llenaOperativosAsignaPDVOPE();
-            CmbSelOpePlanning.Enabled = false;
-            CmbSelCityRutas.Enabled = false;
-            CmbSelTipoAgrupRutas.Enabled = false;
-            CmbSelAgrupRutas.Enabled = false;
-            CmbSelOficinaRutas.Enabled = false;
-            CmbSelMallasRutas.Enabled = false;
-            CmbSelSectorRutas.Enabled = false;
-            ChkListPDV.Enabled = false;
-            TxtF_iniPDVOPE.Enabled = false;
-            TxtF_finPDVOPE.Enabled = false;
-            BtnCalF_iniPDVOPE.Enabled = false;
-            BtnCalF_finPDVOPE.Enabled = false;
-            BtnAsigPDVOPE.Enabled = false;
-
-            BtnEditAsigPDVOPE.Visible = true;
-            BtnUpdateAsigPDVOPE.Visible = false;
-        }
-
+        /// <summary>
+        /// Mensaje General que se setea en el AspControl ModalPopupExtender 'MPMensajeSeguimiento'
+        /// </summary>
         private void Mensajes_Seguimiento()
         {
             MensajeSeguimiento.CssClass = this.Session["cssclass"].ToString();
@@ -225,14 +210,7 @@ namespace SIGE.Pages.Modulos.Planning
             ModalPanelResponsablesCampaña.Show();
             MPMensajeResponsablesCampaña.Show();
         }
-        private void Mensajes_AsigPDVOPE()
-        {
-            MensajeAsignaPDVOPE.CssClass = this.Session["cssclass"].ToString();
-            lblencabezadoPDVOPE.Text = this.Session["encabemensa"].ToString();
-            lblmensajegeneralPDVOPE.Text = this.Session["mensaje"].ToString();
-            ModalPanelAsignacionPDVaoper.Show();
-            MPMensajeAsignaPDVOPE.Show();
-        }
+
         private void Mensajes_Productos()
         {
             MensajeProductos.CssClass = this.Session["cssclass"].ToString();
@@ -732,7 +710,6 @@ namespace SIGE.Pages.Modulos.Planning
         }
 
         //Llenar objetos
-        
         private void ConsultaAsignacionBudget()
         {
             
@@ -900,7 +877,6 @@ namespace SIGE.Pages.Modulos.Planning
             public string name_user { get; set; }
         }
         
-        
         private void ConsultaResponsablesCamapaña()
         {
 
@@ -1033,68 +1009,8 @@ namespace SIGE.Pages.Modulos.Planning
                 this.Session["InsertaConsultaPDVPresupuesto"] = ds.Tables[9].Rows[0]["Planning_Budget"].ToString().Trim();
             }
             ds = null;
-        } //revisado
-        private void ConsultaPDVCampañaRutas()
-        {
-            DataSet ds = (DataSet)this.ViewState["planning_creados"];
-            if (ds.Tables[6].Rows.Count > 0)
-            {
-                TxtPlanningAsigPDVOPE.Text = ds.Tables[9].Rows[0]["id_planning"].ToString().Trim();
-                LblTxtPresupuestoAsigPDVOPE.Text = ds.Tables[9].Rows[0]["Planning_Name"].ToString().Trim();
-                DataTable dtCliente = Presupuesto.Get_ObtenerClientes(ds.Tables[9].Rows[0]["Planning_Budget"].ToString().Trim(), 1);
-                this.Session["company_id"] = dtCliente.Rows[0]["Company_id"].ToString().Trim();
-                this.Session["Planning_CodChannel"] = ds.Tables[9].Rows[0]["Planning_CodChannel"].ToString().Trim();
-                //llenaciudadesRutas();
-                //CmbSelTipoAgrupRutas.Items.Clear();
-                //CmbSelAgrupRutas.Items.Clear();
-                //CmbSelOficinaRutas.Items.Clear();
-                //CmbSelMallasRutas.Items.Clear();
-                //CmbSelSectorRutas.Items.Clear();
-                //ChkListPDV.Items.Clear();
-                
-                DataTable dtAsigna_PDV_A_OPE_Temp = new DataTable();
-                dtAsigna_PDV_A_OPE_Temp.Columns.Add("Cod_", typeof(Int32));
-                dtAsigna_PDV_A_OPE_Temp.Columns.Add("Mercaderista", typeof(String));
-                dtAsigna_PDV_A_OPE_Temp.Columns.Add("Cod.", typeof(Int32));
-                dtAsigna_PDV_A_OPE_Temp.Columns.Add("Punto_de_Venta", typeof(String));
-                dtAsigna_PDV_A_OPE_Temp.Columns.Add("Desde", typeof(String));
-                dtAsigna_PDV_A_OPE_Temp.Columns.Add("Hasta", typeof(String));
-                GvNewAsignaPDVOPE.DataSource = dtAsigna_PDV_A_OPE_Temp;
-                GvNewAsignaPDVOPE.DataBind();
+        }
 
-                this.Session["dtAsigna_PDV_A_OPE_Temp"] = dtAsigna_PDV_A_OPE_Temp;
-                DataTable dt = PPlanning.ObtenerIdPlanning(ds.Tables[9].Rows[0]["Planning_Budget"].ToString().Trim());
-                
-                this.Session["Fechainicial"] = dt.Rows[0]["Planning_StartActivity"].ToString().Trim();
-                this.Session["Fechafinal"] = dt.Rows[0]["Planning_EndActivity"].ToString().Trim();
-                
-                dtCliente = null;
-                dt = null;
-            }
-            ds = null;
-        } //revisado
-        private void ConsultaPDVXoperativo()
-        {
-            DataTable DTConsulta = PointOfSale_PlanningOper
-                .Consultar_PDVPlanningXoperativo(TxtPlanningAsigPDVOPE.Text, 
-                Convert.ToInt32(CmbSelOpePlanning.Text));
-
-            // Verifica que no existan Errores en la invocación al Servicio
-            if (PointOfSale_PlanningOper.getMessage() == null){
-                // Llena la información correspondiente a la Grilla de Pdv asignados a Usuarios.
-                GvAsignaPDVOPE.DataSource = DTConsulta;
-                GvAsignaPDVOPE.DataBind();
-            }
-            else {
-                this.Session["encabemensa"] = "Sr. Usuario";
-                this.Session["cssclass"] = "MensajesSupervisor";
-                this.Session["mensaje"] = "Ocurrio un Error: " + PointOfSale_PlanningOper.getMessage();
-                Mensajes_Seguimiento();
-            }
-
-            
-
-        } //revisado
         private void ConsultaProductosCampaña()
         {
             DataSet ds = (DataSet)this.ViewState["planning_creados"];
@@ -1130,12 +1046,12 @@ namespace SIGE.Pages.Modulos.Planning
                 gvproductospropios.DataBind();
                 if (this.Session["company_id"].ToString() == "1561")
                 {
-                 gvproductospropios.Columns[8].Visible = true;
-                 gvproductospropios.Columns[7].Visible = true;
+                    gvproductospropios.Columns[8].Visible = true;
+                    gvproductospropios.Columns[7].Visible = true;
                 }
                 gvproductospropiosDEL.DataSource = dsProductos.Tables[0];
                 gvproductospropiosDEL.DataBind();
-       
+
 
                 Gvproductoscompetidor.DataSource = dsProductos.Tables[1];
                 Gvproductoscompetidor.DataBind();
@@ -1237,7 +1153,6 @@ namespace SIGE.Pages.Modulos.Planning
             this.Session["dtAsigna_reportplanning"] = dtAsigna_reportplanning;
         } //revisado
 
-
         protected void gvproductospropios_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             Conexion cn = new Conexion();
@@ -1270,17 +1185,13 @@ namespace SIGE.Pages.Modulos.Planning
             // Metodo para Obtener los Presupustos Asignados
             dt = Presupuesto.Presupuesto_Search(Convert.ToInt32(this.Session["companyid"].ToString().Trim()));
 
-            if (dt != null)
-            {
-                if (dt.Rows.Count > 1)
-                {
+            if (dt != null){
+                if (dt.Rows.Count > 1){
                     CmbSelCampaña.DataSource = dt;
                     CmbSelCampaña.DataTextField = "name";
                     CmbSelCampaña.DataValueField = "id_planning";
                     CmbSelCampaña.DataBind();
-                }
-                else
-                {
+                }else{
                     this.Session["encabemensa"] = "Sr. Usuario";
                     this.Session["cssclass"] = "MensajesSupervisor";
                     this.Session["mensaje"] = "Usted está asignado a una Compañía que no tiene campañas creadas";
@@ -1459,163 +1370,7 @@ namespace SIGE.Pages.Modulos.Planning
             GVPDVDelete.DataBind();
             dtpdvplanning = null;
         }
-        private void llenaOperativosAsignaPDVOPE()
-        {
-            DataSet dsStaffPlanning = PPlanning.Get_Staff_Planning(TxtPlanningAsigPDVOPE.Text);
-            if (dsStaffPlanning != null)
-            {
-                if (dsStaffPlanning.Tables[1].Rows.Count > 0)
-                {
-                    CmbSelOpePlanning.DataSource = dsStaffPlanning.Tables[1];
-                    CmbSelOpePlanning.DataTextField = "name_user";
-                    CmbSelOpePlanning.DataValueField = "Person_id";
-                    CmbSelOpePlanning.DataBind();
-                    CmbSelOpePlanning.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
-                }
-                else
-                {
-                    this.Session["encabemensa"] = "Sr. Usuario";
-                    this.Session["cssclass"] = "MensajesSupervisor";
-                    this.Session["mensaje"] = "No se ha seleccionado el personal de la campaña: " + LblTxtPresupuestoAsigPDVOPE.Text.ToUpper();
-                    Mensajes_AsigPDVOPE();
-
-                }
-            }
-            dsStaffPlanning = null;
-        }
-        private void llenaciudadesRutas()
-        {
-            DataSet ds = PPlanning.Get_cityPointofsalePlanning(TxtPlanningAsigPDVOPE.Text, "0", 0, "0", 0, 0);
-            if (ds.Tables[0].Rows.Count > 0)
-            {
-                CmbSelCityRutas.DataSource = ds.Tables[0];
-                CmbSelCityRutas.DataValueField = "cod_city";
-                CmbSelCityRutas.DataTextField = "name_city";
-                CmbSelCityRutas.DataBind();
-                CmbSelCityRutas.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
-            }
-            else
-            {
-                this.Session["encabemensa"] = "Sr. Usuario";
-                this.Session["cssclass"] = "MensajesSupervisor";
-                this.Session["mensaje"] = "No se han creado puntos de venta para la campaña: " + LblTxtPresupuestoPDV.Text.ToUpper();
-                // falta mensaje de usuario en pdv Mensajes_SeguimientoValidacionVistas();
-            }
-            ds = null;
-            CmbSelTipoAgrupRutas.Items.Clear();
-            CmbSelAgrupRutas.Items.Clear();
-            CmbSelOficinaRutas.Items.Clear();
-            CmbSelMallasRutas.Items.Clear();
-            ChkListPDV.Items.Clear();
-
-        }
-        private void llenaTipoAgrupRutas()
-        {
-            DataSet ds = PPlanning.Get_cityPointofsalePlanning(TxtPlanningAsigPDVOPE.Text, CmbSelCityRutas.Text, 0, "0", 0, 0);
-
-            CmbSelTipoAgrupRutas.DataSource = ds.Tables[1];
-
-            CmbSelTipoAgrupRutas.DataValueField = "idNodeComType";
-            CmbSelTipoAgrupRutas.DataTextField = "NodeComType_name";
-            CmbSelTipoAgrupRutas.DataBind();
-            CmbSelTipoAgrupRutas.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
-
-
-
-            ds = null;
-            CmbSelAgrupRutas.Items.Clear();
-            CmbSelOficinaRutas.Items.Clear();
-            CmbSelMallasRutas.Items.Clear();
-            CmbSelSectorRutas.Items.Clear();
-            ChkListPDV.Items.Clear();
-
-        }
-        private void llenaAgrupRutas()
-        {
-            DataSet ds = PPlanning.Get_cityPointofsalePlanning(TxtPlanningAsigPDVOPE.Text, CmbSelCityRutas.Text, Convert.ToInt32(CmbSelTipoAgrupRutas.Text), "0", 0, 0);
-
-            CmbSelAgrupRutas.DataSource = ds.Tables[2];
-
-            CmbSelAgrupRutas.DataValueField = "NodeCommercial";
-            CmbSelAgrupRutas.DataTextField = "commercialNodeName";
-            CmbSelAgrupRutas.DataBind();
-            CmbSelAgrupRutas.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
-            ds = null;
-            CmbSelOficinaRutas.Items.Clear();
-            CmbSelMallasRutas.Items.Clear();
-            CmbSelSectorRutas.Items.Clear();
-            ChkListPDV.Items.Clear();
-        }
-        private void llenaOficinasRutas()
-        {
-            DataSet ds = PPlanning.Get_cityPointofsalePlanning(TxtPlanningAsigPDVOPE.Text, CmbSelCityRutas.Text, Convert.ToInt32(CmbSelTipoAgrupRutas.Text), CmbSelAgrupRutas.Text, 0, 0);
-
-            CmbSelOficinaRutas.DataSource = ds.Tables[3];
-
-            CmbSelOficinaRutas.DataValueField = "cod_Oficina";
-            CmbSelOficinaRutas.DataTextField = "Name_Oficina";
-            CmbSelOficinaRutas.DataBind();
-            CmbSelOficinaRutas.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
-            ds = null;
-            CmbSelMallasRutas.Items.Clear();
-            CmbSelSectorRutas.Items.Clear();
-            ChkListPDV.Items.Clear();
-        }
-        private void LlenamallasRutas()
-        {
-            DataSet ds = PPlanning.Get_cityPointofsalePlanning(TxtPlanningAsigPDVOPE.Text, CmbSelCityRutas.Text, Convert.ToInt32(CmbSelTipoAgrupRutas.Text), CmbSelAgrupRutas.Text, Convert.ToInt64(CmbSelOficinaRutas.Text), 0);
-
-            CmbSelMallasRutas.DataSource = ds.Tables[4];
-
-            CmbSelMallasRutas.DataValueField = "id_malla";
-            CmbSelMallasRutas.DataTextField = "malla";
-            CmbSelMallasRutas.DataBind();
-            CmbSelMallasRutas.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
-            ds = null;
-            CmbSelSectorRutas.Items.Clear();
-
-        }
-        private void LlenasectorRutas()
-        {
-            DataSet ds = PPlanning.Get_cityPointofsalePlanning(TxtPlanningAsigPDVOPE.Text, CmbSelCityRutas.Text, Convert.ToInt32(CmbSelTipoAgrupRutas.Text), CmbSelAgrupRutas.Text, Convert.ToInt64(CmbSelOficinaRutas.Text), Convert.ToInt32(CmbSelMallasRutas.Text));
-            CmbSelSectorRutas.DataSource = ds.Tables[5];
-
-            CmbSelSectorRutas.DataValueField = "id_sector";
-            CmbSelSectorRutas.DataTextField = "Sector";
-            CmbSelSectorRutas.DataBind();
-            CmbSelSectorRutas.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
-            ds = null;
-        }
-        private void LlenaPDVPlanning()
-        {
-            // se coloca provisionalemnte con esto para seguir en crear ing. mauricio ortiz
-            DataTable dt = PointOfSale_PlanningOper.Consultar_PDVPlanning(TxtPlanningAsigPDVOPE.Text, CmbSelCityRutas.Text, Convert.ToInt32(CmbSelTipoAgrupRutas.Text), CmbSelAgrupRutas.Text, Convert.ToInt64(CmbSelOficinaRutas.Text), Convert.ToInt32(CmbSelMallasRutas.Text), Convert.ToInt32(CmbSelSectorRutas.Text));
-            if (dt != null)
-            {
-                if (dt.Rows.Count > 0)
-                {
-                    ChkListPDV.DataSource = dt;
-                    ChkListPDV.DataTextField = "Nombre";
-                    ChkListPDV.DataValueField = "id_MPOSPlanning";
-                    ChkListPDV.DataBind();
-                    BtnAllPDV.Visible = true;
-                    BtnNonePDV.Visible = true;
-                }
-                else
-                {
-                    this.Session["encabemensa"] = "Señor Usuario";
-                    this.Session["cssclass"] = "MensajesSupervisor";
-                    this.Session["mensaje"] = "No existe información de puntos de venta con este filtro. ";
-                    Mensajes_AsigPDVOPE();
-                    ChkListPDV.Items.Clear();
-                    BtnAllPDV.Visible = false;
-                    BtnNonePDV.Visible = false;
-                    LlenamallasRutas();
-                    LlenasectorRutas();
-                }
-            }
-            dt = null;
-        }
+        
         private void llenacompetidores()
         {
             DataTable dtCompetidores = PPlanning.Get_ObtenerCompetidoresCliente(Convert.ToInt32(this.Session["company_id"]));
@@ -2093,9 +1848,6 @@ namespace SIGE.Pages.Modulos.Planning
             BtnMasAsing.Enabled = false;
             GvAsignados.Enabled = false;
         }
-
-        
-
         protected void ImgCloseSession_Click(object sender, ImageClickEventArgs e)
         {
             this.Session.Abandon();
@@ -2111,13 +1863,17 @@ namespace SIGE.Pages.Modulos.Planning
             Response.Redirect(
                 "~/Pages/Modulos/Planning/Menu_Planning.aspx", true);
         }
+        /// <summary>
+        /// Cerrar el Panel de Asignación de Puntos de Venta a Mercaderistas
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void BtnCOlv_Click(object sender, ImageClickEventArgs e)
         {
             InicializarPaneles();
             botonregresar.Visible = true;
             GVReportesAsignados.EditIndex = -1;
         }
-
         /// <summary>
         /// Evento onChange del ComboBox 'CmbSelCampaña'
         /// </summary>
@@ -2374,9 +2130,11 @@ namespace SIGE.Pages.Modulos.Planning
                 ImgIrABreaf.Visible = false;
             }
         }
+        
+        #endregion
 
         #region Presupuesto
-        
+
         /// <summary>
         /// Evento Click del AspControl ImageButton: 'ImgIrABudget'
         /// </summary>
@@ -3658,7 +3416,7 @@ namespace SIGE.Pages.Modulos.Planning
         }
         #endregion
 
-        #region Puntos de Venta
+        #region Gestión de Puntos de Venta por Planning
         protected void ImgIrAPDV_Click(object sender, ImageClickEventArgs e)
         {
             botonregresar.Visible = false;
@@ -3726,7 +3484,7 @@ namespace SIGE.Pages.Modulos.Planning
         }
         #endregion
 
-        #region Paneles
+        #region Gestión de Asignación de Paneles
         protected void ImgIrAPaneles_Click(object sender, ImageClickEventArgs e)
         {
             LblTitCountReg.Visible = false;
@@ -4162,7 +3920,25 @@ namespace SIGE.Pages.Modulos.Planning
 
         #endregion
 
-        #region Rutas
+        #region Gestión de Asignación de Puntos de Ventas a Mercaderistas
+        
+        /*
+         * ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+         * ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+         * ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+         * ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+         * ---------------------------------- GESTION DE ASIGNACIÓN DE PUNTOS DE VENTAS A MERCADERISTAS ----------------------------------------------
+         * ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+         * ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+         * ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+         * ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+         */
+
+        /// <summary>
+        /// Mostrar el Panel de Asignación de Puntos de Venta / Consultar PDV por Mercaderista / 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void ImgIrAAsignapdv_Click(object sender, ImageClickEventArgs e)
         {
             botonregresar.Visible = false;
@@ -4170,76 +3946,168 @@ namespace SIGE.Pages.Modulos.Planning
             this.Session["Postback"] = false;
             InicializarPaneles();
 
+            // Mostrar el Panel de Asignación de Puntos de Venta por Mercaderista
             ModalPanelAsignacionPDVaoper.Show();
+            
             GvAsignaPDVOPE.DataBind();
-            ConsultaPDVCampañaRutas();
-            llenaOperativosAsignaPDVOPE();
-
-
+            // Verifica que no Existan Errores Previos
+            if (messages.Equals("")){
+                ConsultaPDVCampañaRutas();
+                // Verifica que Existan Puntos de Venta Asignados a la Campaña
+                if (messages.Equals("")) {
+                    llenaOperativosAsignaPDVOPE();
+                }
+            }
         }
+        /// <summary>
+        /// Evento Click del AspControl Button 'BtnEditAsigPDVOPE' para editar la Información de la asignación de Puntos de Venta por Mercaderista
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void BtnEditAsigPDVOPE_Click(object sender, EventArgs e)
         {
+            // Habilitar AspControl DropDownList 'CmbSelOpePlanning', para seleccionar el Mercaderista al cual se desea asignar Puntos de Venta
             CmbSelOpePlanning.Enabled = true;
+            // Ocultar el AspControl Button 'BtnEditAsigPDVOPE', de Editar Información de Asignación de Puntos de Venta a Mercaderista
             BtnEditAsigPDVOPE.Visible = false;
+            // Mostrar el AspControl Button 'BtnUpdateAsigPDVOPE', de Actualizar Información de Asignación de Puntos de Venta a Mercaderista
             BtnUpdateAsigPDVOPE.Visible = true;
+            // Mostrar el AspControl ModalPopupExtender 'ModalPanelAsignacionPDVaoper' para visualizar el Panel de Asignación de Puntos de Venta a Mercaderistas
             ModalPanelAsignacionPDVaoper.Show();
         }
+        /// <summary>
+        /// Deshace los cambios efectuados en la asignación de Puntos de Venta a Mercaderistas
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void BtnClearAsigPDVOPE_Click(object sender, EventArgs e)
         {
+            // Limpia la Información Contenida en el AspControl ModalPopupExtender 'ModalPanelAsignacionPDVaoper', para deshacer los cambios efectuados
+            // y empezar nuevamente.
             Limpiar_InformacionAsignaPDVOPE();
+            // Mostrar el AspControl ModalPopupExtender 'ModalPanelAsignacionPDVaoper' para visualizar el Panel de Asignación de Puntos de Venta a Mercaderistas
             ModalPanelAsignacionPDVaoper.Show();
-
         }
+        /// <summary>
+        /// Evento SelectedIndexChanged del AspControl DropDownList 'CmbSelOpePlanning' (Seleccionando Planning)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void CmbSelOpePlanning_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // Panel de Puntos de Venta Asignados al Mercaderista Seleccionado
             ModalPanelAsignacionPDVaoper.Show();
-            if (CmbSelOpePlanning.Text != "0")
-            {
+            
+            // Verificar si Existen Planning para Seleccionar
+            if (CmbSelOpePlanning.Text != "0"){
+                #region Hacer Visibles los Botones de Control del AspControl GridView 'GvAsignaPDVOPE'
+                // Hacer Visible el Boton Eliminar Punto de Venta Asignado
                 Button1.Visible = true;
-                BtnAllAsigPDV.Visible = true;
-                BtnNoneasigPDV.Visible = true;
-                ConsultaPDVXoperativo();
-                llenaciudadesRutas();
-                CmbSelTipoAgrupRutas.Items.Clear();
-                CmbSelAgrupRutas.Items.Clear();
-                CmbSelOficinaRutas.Items.Clear();
-                CmbSelMallasRutas.Items.Clear();
-                CmbSelSectorRutas.Items.Clear();
-                ChkListPDV.Items.Clear();
-                CmbSelCityRutas.Enabled = true;
-                CmbSelTipoAgrupRutas.Enabled = true;
-                CmbSelAgrupRutas.Enabled = true;
-                CmbSelOficinaRutas.Enabled = true;
-                CmbSelMallasRutas.Enabled = true;
-                CmbSelSectorRutas.Enabled = true;
-                ChkListPDV.Enabled = true;
-                TxtF_iniPDVOPE.Enabled = true;
-                TxtF_finPDVOPE.Enabled = true;
-                BtnCalF_iniPDVOPE.Enabled = true;
-                BtnCalF_finPDVOPE.Enabled = true;
-                BtnAsigPDVOPE.Enabled = true;
-            }
-            else
-            {
-                Limpiar_InformacionAsignaPDVOPE();
 
+                // Hacer Visible el Boton Seleccionar todos los Puntos de Venta Asignados
+                BtnAllAsigPDV.Visible = true;
+
+                // Hacer Visible el Boton No Seleccionar ningún Punto de Venta
+                BtnNoneasigPDV.Visible = true;
+                #endregion 
+                // Si No hay Errores continuar con la Consulta de Puntos de Venta Asignados por Planning y Mercaderista
+                if (messages.Equals("")){
+                    ConsultaPDVXoperativo();
+                    // Si no hay Errores Setear los valores de las Ciudades para los Filtros de Puntos de Venta Disponibles
+                    if (messages.Equals("")){
+                        llenaciudadesRutas();
+                        // Si no hay Errores Habilitar los AspControls Relacionados a los Puntos de Venta Disponibles
+                        if (messages.Equals("")){
+                            #region Habilitar AspControls Relacionados a la Busqueda de Puntos de Venta Disponibles
+                            #region Limpiar AspControl DropDownList Relacionados
+                            // Limpiar el ASPControl DropDownList 'CmbSelTipoAgrupRutas'
+                            CmbSelTipoAgrupRutas.Items.Clear();
+                            // Limpiar el ASPControl DropDownList 'CmbSelAgrupRutas'
+                            CmbSelAgrupRutas.Items.Clear();
+                            // Limpiar el ASPControl DropDownList 'CmbSelOficinaRutas'
+                            CmbSelOficinaRutas.Items.Clear();
+                            // Limpiar el ASPControl DropDownList 'CmbSelMallasRutas' 
+                            CmbSelMallasRutas.Items.Clear();
+                            // Limpiar el ASPControl DropDownList 'CmbSelSectorRutas'
+                            CmbSelSectorRutas.Items.Clear();
+                            // Limpiar el ASPControl CheckBoxList 'ChkListPDV'
+                            ChkListPDV.Items.Clear();
+                            #endregion
+
+                            #region Habilitar AspControl DropDownList Relacionados
+                            CmbSelCityRutas.Enabled = true;
+                            CmbSelTipoAgrupRutas.Enabled = true;
+                            CmbSelAgrupRutas.Enabled = true;
+                            CmbSelOficinaRutas.Enabled = true;
+                            CmbSelMallasRutas.Enabled = true;
+                            CmbSelSectorRutas.Enabled = true;
+                            #endregion
+
+                            // Habilitar AspControl CheckBoxList 'ChkListPDV'
+                            ChkListPDV.Enabled = true;
+
+                            // Habilitar AspControl TextBox 'TxtF_iniPDVOPE'
+                            TxtF_iniPDVOPE.Enabled = true;
+                            // Habilitar AspControl TextBox 'TxtF_finPDVOPE'
+                            TxtF_finPDVOPE.Enabled = true;
+
+                            // Habilitar AspControl Button 'BtnCalF_iniPDVOPE'
+                            BtnCalF_iniPDVOPE.Enabled = true;
+                            // Habilitar AspControl Button 'BtnCalF_finPDVOPE'
+                            BtnCalF_finPDVOPE.Enabled = true;
+
+                            // Habilitar AspControl Button 'BtnAsigPDVOPE'
+                            BtnAsigPDVOPE.Enabled = true;
+                            #endregion 
+                        }
+                    }
+                }
+            }else{
+                Limpiar_InformacionAsignaPDVOPE();
             }
         }
+        /// <summary>
+        /// Evento SelectedIndexChanged del AspControl DropDownList 'CmbSelCityRutas', para llenar las agrupaciones de Tipo de Punto de Venta por Ciudad
+        /// y mostrar el AspControl ModalPopupExtender 'ModalPanelAsignacionPDVaoper'
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void CmbSelCityRutas_SelectedIndexChanged(object sender, EventArgs e)
         {
             llenaTipoAgrupRutas();
             ModalPanelAsignacionPDVaoper.Show();
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void CmbSelTipoAgrupRutas_SelectedIndexChanged(object sender, EventArgs e)
         {
             llenaAgrupRutas();
             ModalPanelAsignacionPDVaoper.Show();
         }
+        /// <summary>
+        /// Evento SelectedIndexChanged para el AspControl DropDownList 'CmbSelAgrupRutas'
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void CmbSelAgrupRutas_SelectedIndexChanged(object sender, EventArgs e)
         {
             llenaOficinasRutas();
             ModalPanelAsignacionPDVaoper.Show();
         }
+        /// <summary>
+        /// Evento SelectedIndexChanged para el AspControl DropDownList 'CmbSelOficinaRutas' 
+        /// Completa los valores de los ComboBox para Mallas y Sectores y Muestra el Listado de Puntos de Venta 
+        /// Llena los AspControl DropDownList: 
+        /// - CmbSelMallasRutas
+        /// - CmbSelSectorRutas
+        /// Llena el AspControl CheckBoxList:
+        /// - ChkListPDV
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void CmbSelOficinaRutas_SelectedIndexChanged(object sender, EventArgs e)
         {
             LlenamallasRutas();
@@ -4247,65 +4115,97 @@ namespace SIGE.Pages.Modulos.Planning
             LlenaPDVPlanning();
             ModalPanelAsignacionPDVaoper.Show();
         }
+        /// <summary>
+        /// Evento SelectedIndexChanged del AspControl 'CmbSelMallasRutas'
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void CmbSelMallasRutas_SelectedIndexChanged(object sender, EventArgs e)
         {
             LlenasectorRutas();
             LlenaPDVPlanning();
             ModalPanelAsignacionPDVaoper.Show();
         }
+        /// <summary>
+        /// Evento SelectedIndexChanged para el AspControl 'CmbSelSectorRutas'
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void CmbSelSectorRutas_SelectedIndexChanged(object sender, EventArgs e)
         {
             LlenaPDVPlanning();
             ModalPanelAsignacionPDVaoper.Show();
         }
+        /// <summary>
+        /// Recorre el AspControl CheckBoxList 'ChkListPDV' y setea el valor Check a Cada uno de sus Elementos
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void BtnAllPDV_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i <= ChkListPDV.Items.Count - 1; i++)
-            {
+            // Recorre el AspControl CheckBoxList 'ChkListPDV' y setea el valor Check a Cada uno de sus Elementos
+            for (int i = 0; i <= ChkListPDV.Items.Count - 1; i++){
                 ChkListPDV.Items[i].Selected = true;
             }
+            // Mostrar el AspControl ModalPopupExtender 'ModalPanelAsignacionPDVaoper' para visualizar el Panel de Asignación de Puntos de Venta a Mercaderistas
             ModalPanelAsignacionPDVaoper.Show();
         }
+        /// <summary>
+        /// Deseleccionar todos las opciones marcadas para el AspControl CheckBoxList 'ChkListPDV'
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void BtnNonePDV_Click(object sender, EventArgs e)
         {
             ChkListPDV.ClearSelection();
             ModalPanelAsignacionPDVaoper.Show();
         }
+        /// <summary>
+        /// Evento Click para Asignar los Puntos de Venta, después de aplicar los Filtros
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void BtnAsigPDVOPE_Click(object sender, EventArgs e)
         {
+            // Obtiene información de la session 'dtAsigna_PDV_A_OPE_Temp'
             DataTable dtAsigna_PDV_A_OPE_Temp = (DataTable)this.Session["dtAsigna_PDV_A_OPE_Temp"];
 
             bool seguir = true;
-            if (CmbSelOpePlanning.Text == "0" || TxtF_iniPDVOPE.Text == "" || TxtF_finPDVOPE.Text == "")
-            {
+            
+            // Validación en Caso no se haya seleccionado Planning, Fecha Inicio y/o Fecha Fin
+            #region Validación Campos Vacios
+            if (CmbSelOpePlanning.Text == "0" 
+                || TxtF_iniPDVOPE.Text == "" 
+                || TxtF_finPDVOPE.Text == ""){
+                
                 this.Session["encabemensa"] = "Sr. Usuario";
                 this.Session["cssclass"] = "MensajesSupervisor";
-                if (TxtF_finPDVOPE.Text == "")
-                {
-                    this.Session["mensaje"] = "Es indispensable ingresar la fecha final";
-                }
-                if (TxtF_iniPDVOPE.Text == "")
-                {
-                    this.Session["mensaje"] = "Es indispensable ingresar la fecha inicial";
-                }
-                if (CmbSelOpePlanning.Text == "0")
-                {
-                    this.Session["mensaje"] = "Es indispensable seleccionar un Operativo";
-                }
+                
+                if (TxtF_finPDVOPE.Text == "") this.Session["mensaje"] = "Es indispensable ingresar la fecha final";
+                if (TxtF_iniPDVOPE.Text == "") this.Session["mensaje"] = "Es indispensable ingresar la fecha inicial";
+                if (CmbSelOpePlanning.Text == "0") this.Session["mensaje"] = "Es indispensable seleccionar un Operativo";
+                
                 Mensajes_AsigPDVOPE();
                 seguir = false;
-            }
-            if (seguir)
-            {
-                try
-                {
-                    DateTime FechaInicial = DateTime.Parse(TxtF_iniPDVOPE.Text);
-                    DateTime Fechafinal = DateTime.Parse(TxtF_finPDVOPE.Text);
-                    DateTime FechainicialPlanning = DateTime.Parse(this.Session["Fechainicial"].ToString().Trim());
-                    DateTime FechafinalPlanning = DateTime.Parse(this.Session["Fechafinal"].ToString().Trim());
+                }
+            #endregion
 
-                    if (FechaInicial > Fechafinal)
-                    {
+            // Continuar en caso haya pasado la validación de los Campos Vacios
+            #region Validacion de Fechas
+            if (seguir){
+                try{
+                    // Fecha Inicial de Asignación de Punto de Venta a Mercaderista
+                    DateTime FechaInicial = DateTime.Parse(TxtF_iniPDVOPE.Text);
+                    // Fecha Fin de Asignación de Punto de Venta a Mercaderista
+                    DateTime Fechafinal = DateTime.Parse(TxtF_finPDVOPE.Text);
+
+                    // Fecha Inicial del Planning que se obtiene de una Session
+                    DateTime FechainicialPlanning = DateTime.Parse(this.Session["Fechainicial"].ToString().Trim());
+                    // Fecha Fin del Planning que se obtiene de una Session
+                    DateTime FechafinalPlanning = DateTime.Parse(this.Session["Fechafinal"].ToString().Trim());
+                    
+                    // Validación 01 - La fecha Inicial debe ser Menor que la fecha Final
+                    if (FechaInicial > Fechafinal){
                         this.Session["encabemensa"] = "Sr. Usuario";
                         this.Session["cssclass"] = "MensajesSupervisor";
                         this.Session["mensaje"] = "La fecha inicial no puede ser mayor a la fecha final";
@@ -4313,98 +4213,138 @@ namespace SIGE.Pages.Modulos.Planning
                         seguir = false;
                     }
 
-                    if (FechaInicial < FechainicialPlanning || Fechafinal > FechafinalPlanning)
-                    {
+                    // Validación 02 - La fecha Inicial debe ser Mayor que la Fecha Inicial del Planning
+                    //                 La fecha Final debe ser Menor que la fecha Final del Planning
+                    if (FechaInicial < FechainicialPlanning 
+                        || Fechafinal > FechafinalPlanning){
                         this.Session["encabemensa"] = "Sr. Usuario";
                         this.Session["cssclass"] = "MensajesSupervisor";
-                        this.Session["mensaje"] = "Las fechas deben estar dentro del rango : " + FechainicialPlanning.ToShortDateString() + " y " + FechafinalPlanning.ToShortDateString() + " que corresponden a las fechas de ejecución de la Campaña";
+                        this.Session["mensaje"] = "Las fechas deben estar dentro del rango : " 
+                            + FechainicialPlanning.ToShortDateString() 
+                            + " y " 
+                            + FechafinalPlanning.ToShortDateString() 
+                            + " que corresponden a las fechas de ejecución de la Campaña";
                         Mensajes_AsigPDVOPE();
                         seguir = false;
                     }
-                    if (FechaInicial < DateTime.Today)
-                    {
+
+                    // Validación 03 - La fecha Inicial debe ser Mayor que Hoy
+                    if (FechaInicial < DateTime.Today){
                         this.Session["encabemensa"] = "Sr. Usuario";
                         this.Session["cssclass"] = "MensajesSupervisor";
                         this.Session["mensaje"] = "La fecha inicial debe ser igual o superior a la fecha actual";
                         Mensajes_AsigPDVOPE();
                         seguir = false;
                     }
-
-                }
-                catch
-                {
+                }catch{
                     this.Session["encabemensa"] = "Sr. Usuario";
                     this.Session["cssclass"] = "MensajesSupervisor";
                     this.Session["mensaje"] = "Formato de fecha no valido. Por favor verifique (dd/mm/aaaa)";
                     Mensajes_AsigPDVOPE();
                 }
             }
+            #endregion 
 
-            if (seguir)
-            {
-                for (int i = 0; i <= ChkListPDV.Items.Count - 1; i++)
-                {
-                    if (ChkListPDV.Items[i].Selected == true)
-                    {
-                        DataTable dtconsulta = PPlanning.Get_AsignacionDuplicadaPDV(Convert.ToInt32(ChkListPDV.Items[i].Value), Convert.ToInt32(CmbSelOpePlanning.SelectedItem.Value), TxtPlanningAsigPDVOPE.Text);
-                        if (dtconsulta != null)
-                        {
-                            if (dtconsulta.Rows.Count == 0)
-                            {
+            // Variable List<ListItem> 'toBeRemoved' para Almacenar los Objetos a Eliminar del AspControl CheckBoxList 'ChkListPDV'
+            List<ListItem> toBeRemoved = new List<ListItem>();
+
+            // Continuar en caso haya pasado la validación de las Fechas
+            if (seguir){
+                // >>>>>>>>>>>>>>>>> Recorrer el AspControl CheckBoxList 'ChkListPDV'
+                for (int i = 0; i <= ChkListPDV.Items.Count - 1; i++){
+                    // Verificar aquellos elementos que ha sido Seleccionados
+                    if (ChkListPDV.Items[i].Selected == true){
+                        
+                        // Verificar que el Punto de Venta a asignar No sea Duplicado
+                        DataTable dtconsulta = PPlanning.Get_AsignacionDuplicadaPDV(
+                                Convert.ToInt32(ChkListPDV.Items[i].Value), 
+                                Convert.ToInt32(CmbSelOpePlanning.SelectedItem.Value), 
+                                TxtPlanningAsigPDVOPE.Text);
+                        
+                        // Verificar que el AspControl DataTable 'dtconsulta' sea diferente de nulo
+                        if (dtconsulta != null){
+
+                            // Si no devuelve registros, no encontró Punto de Venta Repetido (Esta Ok)
+                            if (dtconsulta.Rows.Count == 0){
                                 seguir = true;
-                            }
                             // Se elimina funcionalidad : solo debe permitir guardar una vez un punto de venta por operativo sin importar la fecha. 
                             // 29/01/2011 Ing. Mauricio Ortiz 
-                            else
-                            {
+                            } else {
+                                
+                                #region Deshabilitar validacion fechas
                                 // valida rango de fechas 
                                 //for (int k = 0; k <= dtconsulta.Rows.Count - 1; k++)
                                 //{
-                                //    if (Convert.ToDateTime(TxtF_iniPDVOPE.Text) >= Convert.ToDateTime(dtconsulta.Rows[k][3].ToString().Trim()) && Convert.ToDateTime(TxtF_iniPDVOPE.Text) <= Convert.ToDateTime(dtconsulta.Rows[k][4].ToString().Trim()))
+                                //    if (Convert.ToDateTime(TxtF_iniPDVOPE.Text) >= Convert.ToDateTime(dtconsulta.Rows[k][3].ToString().Trim()) 
+                                // && Convert.ToDateTime(TxtF_iniPDVOPE.Text) <= Convert.ToDateTime(dtconsulta.Rows[k][4].ToString().Trim()))
                                 //    {
+                                #endregion
+
                                 this.Session["encabemensa"] = "Sr. Usuario";
                                 this.Session["cssclass"] = "MensajesSupervisor";
-                                this.Session["mensaje"] = "El punto de venta : " + ChkListPDV.Items[i].Text + " ya esta asignado al Mercaderista seleccionado. Por favor verifique";
+                                this.Session["mensaje"] = "El punto de venta : " 
+                                    + ChkListPDV.Items[i].Text 
+                                    + " ya esta asignado al Mercaderista seleccionado. Por favor verifique";
                                 Mensajes_AsigPDVOPE();
+
                                 //k = dtconsulta.Rows.Count - 1;
                                 i = ChkListPDV.Items.Count - 1;
 
                                 seguir = false;
+                                
+                                #region decraped
                                 //}
                                 //else
                                 //{
                                 //    seguir = true;
                                 //}
                                 //}
+                                #endregion
                             }
                         }
+                        
                         dtconsulta = null;
-                        if (seguir)
-                        {
-                            #region paso
-                            if (GvNewAsignaPDVOPE.Rows.Count > 0)
-                            {
-                                for (int j = 0; j <= GvNewAsignaPDVOPE.Rows.Count - 1; j++)
-                                {
+                        
+                        // Continuar en Caso No se haya encontrado Duplicado
+                        if (seguir){
+                            
+                            // Si el AspControl GridView tiene registros
+                            if (GvNewAsignaPDVOPE.Rows.Count > 0){
+
+                                // Validación para no volver a asignar Puntos de Venta y Asignados
+                                // En caso de encontrar registos no se podrá continuar con el proceso (seguir = false)
+                                // >>>>>>>>>>>>>>>>>>>> Recorrer el AspControl GridView 'GvNewAsignaPDVOPE'
+                                for (int j = 0; j <= GvNewAsignaPDVOPE.Rows.Count - 1; j++){    
+                                    // Si el Planning es igual entre el AspControl DropDownList 'CmbSelOpePlanning' y el valor del AspControl GridView 'GvNewAsignaPDVOPE' columna 01
+                                    // Si el valor del AspControl CheckBoxList 'ChkListPDV' item i es igual al AspControl GridView 'GvNewAsignaPDVOPE' columna 03
                                     if (CmbSelOpePlanning.SelectedItem.Value == GvNewAsignaPDVOPE.Rows[j].Cells[1].Text &&
                                         ChkListPDV.Items[i].Value == GvNewAsignaPDVOPE.Rows[j].Cells[3].Text)
-                                    //&& (Convert.ToDateTime(TxtF_iniPDVOPE.Text) >= Convert.ToDateTime(GvNewAsignaPDVOPE.Rows[j].Cells[5].Text) && Convert.ToDateTime(TxtF_iniPDVOPE.Text) <= Convert.ToDateTime(GvNewAsignaPDVOPE.Rows[j].Cells[6].Text))
+                                    // && (Convert.ToDateTime(TxtF_iniPDVOPE.Text) 
+                                    // >= Convert.ToDateTime(GvNewAsignaPDVOPE.Rows[j].Cells[5].Text) 
+                                    // && Convert.ToDateTime(TxtF_iniPDVOPE.Text) <= Convert.ToDateTime(GvNewAsignaPDVOPE.Rows[j].Cells[6].Text))
                                     {
                                         this.Session["encabemensa"] = "Sr. Usuario";
                                         this.Session["cssclass"] = "MensajesSupervisor";
-                                        this.Session["mensaje"] = "El punto de venta : " + ChkListPDV.Items[i].Text + " ya esta en la lista de nueva asignacion al Mercaderista seleccionado. Por favor verifique";
+                                        this.Session["mensaje"] = "El punto de venta : " 
+                                            + ChkListPDV.Items[i].Text 
+                                            + " ya esta en la lista de nueva asignacion al Mercaderista seleccionado. Por favor verifique";
                                         Mensajes_AsigPDVOPE();
+                                        
+                                        // Guarda en la variable 'j' la Cantidad de Objetos para el AspControl GridView 'GvNewAsignaPDVOPE'
                                         j = GvNewAsignaPDVOPE.Rows.Count - 1;
+                                        // Guarda en la variable 'i' la Cantidad de Objetos para el AspControl CheckBoxList 'ChkListPDV'
                                         i = ChkListPDV.Items.Count - 1;
+
                                         seguir = false;
-                                    }
-                                    else
-                                    {
+                                    }else{
                                         seguir = true;
                                     }
                                 }
-                                if (seguir)
-                                {
+
+                                // En caso no se haya asignado Pdv repetidos
+                                if (seguir){
+
+                                    // Se crea una fila con los datos que pasaron los filtros
                                     DataRow dr = dtAsigna_PDV_A_OPE_Temp.NewRow();
                                     dr["Cod_"] = Convert.ToInt32(CmbSelOpePlanning.SelectedItem.Value);
                                     dr["Mercaderista"] = CmbSelOpePlanning.SelectedItem.Text;
@@ -4412,59 +4352,140 @@ namespace SIGE.Pages.Modulos.Planning
                                     dr["Punto_de_Venta"] = ChkListPDV.Items[i].Text;
                                     dr["Desde"] = TxtF_iniPDVOPE.Text;
                                     dr["Hasta"] = TxtF_finPDVOPE.Text;
+                                    
+                                    // Se adiciona al DataTable 'dtAsigna_PDV_A_OPE_Temp'
                                     dtAsigna_PDV_A_OPE_Temp.Rows.Add(dr);
+
+                                    // Almacena en Session la cabecera de los Pdv Asignados
                                     this.Session["dtAsigna_PDV_A_OPE_Temp"] = dtAsigna_PDV_A_OPE_Temp;
+
+                                    // Guardar en un Objeto List<ListItem> 'toBeRemoved' los Objetos a Eliminar del AspControl CheckBoxList 'ChkListPDV'
+                                    toBeRemoved.Add(ChkListPDV.Items[i]);
                                 }
+
                             }
-                            else
-                            {
+                            else{
+                            // Si el AspControl No Tiene Registros
+                                
+                                // Creación de un DataRow
                                 DataRow dr = dtAsigna_PDV_A_OPE_Temp.NewRow();
+                                
+                                // Se crea un fila con los datos obtenidos
                                 dr["Cod_"] = Convert.ToInt32(CmbSelOpePlanning.SelectedItem.Value);
                                 dr["Mercaderista"] = CmbSelOpePlanning.SelectedItem.Text;
                                 dr["Cod."] = ChkListPDV.Items[i].Value;
                                 dr["Punto_de_Venta"] = ChkListPDV.Items[i].Text;
                                 dr["Desde"] = TxtF_iniPDVOPE.Text;
                                 dr["Hasta"] = TxtF_finPDVOPE.Text;
+
+                                // Se adiciona al DataTable 'dtAsigna_PDV_A_OPE_Temp'
                                 dtAsigna_PDV_A_OPE_Temp.Rows.Add(dr);
+
+                                // Almacena en Session la cabecera de los Pdv Asignados
                                 this.Session["dtAsigna_PDV_A_OPE_Temp"] = dtAsigna_PDV_A_OPE_Temp;
+
+                                // Guardar en un Objeto List<ListItem> 'toBeRemoved' los Objetos a Eliminar del AspControl CheckBoxList 'ChkListPDV'
+                                toBeRemoved.Add(ChkListPDV.Items[i]);
                             }
-                            #endregion
                         }
                     }
                 }
+                
+                // Setear en el AspControl GridView 'GvNewAsignaPDVOPE' los valores guardados en la Session 'dtAsigna_PDV_A_OPE_Temp'
                 GvNewAsignaPDVOPE.DataSource = dtAsigna_PDV_A_OPE_Temp;
                 GvNewAsignaPDVOPE.DataBind();
+
+                // Eliminar los registros asignados del AspControl CheckBoxList 'ChkListPDV' (Puntos de Venta Seleccionados)
+                for (int i = 0; i < toBeRemoved.Count; i++){
+                    ChkListPDV.Items.Remove(toBeRemoved[i]);
+                }
+
+                // Vaciar el DataTable 'dtAsigna_PDV_A_OPE_Temp' que almacena de manera temporal los Puntos de Venta a Asignar
                 dtAsigna_PDV_A_OPE_Temp = null;
+
+                // Vaciar el AspControl CheckBoxList 'ChkListPDV'
                 ChkListPDV.ClearSelection();
             }
 
             ModalPanelAsignacionPDVaoper.Show();
         }
+        /// <summary>
+        /// Evento Click del AspControl Button 'BtnaceptaPDVOPE' correspondiente al AspControl ModalPopupExtender 'ModalPanelAsignacionPDVaoper'
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void BtnaceptaPDVOPE_Click(object sender, EventArgs e)
         {
+            MPMensajeAsignaPDVOPE.Hide();
             ModalPanelAsignacionPDVaoper.Show();
         }
+        /// <summary>
+        /// Evento Click del AspControl Button 'BtnUpdateAsigPDVOPE' que guarda los cambios realizados en la gestión de Asignación de Puntos de Venta.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void BtnUpdateAsigPDVOPE_Click(object sender, EventArgs e)
         {
             ModalPanelAsignacionPDVaoper.Show();
 
+            // Recorre el AspControl GridView 'GvNewAsignaPDVOPE', para guardar cada uno de los Puntos de Venta Asignados al Mercaderista en Base de Datos
+            for (int i = 0; i <= GvNewAsignaPDVOPE.Rows.Count - 1; i++){
 
-            for (int i = 0; i <= GvNewAsignaPDVOPE.Rows.Count - 1; i++)
-            {
-                EPointOfSale_PlanningOper RegistrarPointOfSale_PlanningOper = 
-                    PointOfSale_PlanningOper.RegistrarAsignPDVaOperativo(
-                    Convert.ToInt32(GvNewAsignaPDVOPE.Rows[i].Cells[3].Text), 
-                    TxtPlanningAsigPDVOPE.Text, 
-                    Convert.ToInt32(GvNewAsignaPDVOPE.Rows[i].Cells[1].Text), 
-                    Convert.ToDateTime(GvNewAsignaPDVOPE.Rows[i].Cells[5].Text + " 01:00:00.000"), 
-                    Convert.ToDateTime(GvNewAsignaPDVOPE.Rows[i].Cells[6].Text + " 23:59:00.000"),
-                    0, 
-                    true, 
-                    Convert.ToString(this.Session["sUser"]), 
-                    DateTime.Now, 
-                    Convert.ToString(this.Session["sUser"]), DateTime.Now);
-                PointOfSale_PlanningOper RegistrarTBL_EQUIPO_PTO_VENTA = new PointOfSale_PlanningOper();
-                RegistrarTBL_EQUIPO_PTO_VENTA.RegistrarTBL_EQUIPO_PTO_VENTA(Convert.ToInt32(GvNewAsignaPDVOPE.Rows[i].Cells[3].Text), TxtPlanningAsigPDVOPE.Text, Convert.ToInt32(GvNewAsignaPDVOPE.Rows[i].Cells[1].Text), Convert.ToDateTime(GvNewAsignaPDVOPE.Rows[i].Cells[5].Text + " 01:00:00.000"), Convert.ToDateTime(GvNewAsignaPDVOPE.Rows[i].Cells[6].Text + " 23:59:00.000"));
+                #region Registro de Ruta en BD Web
+                // Registra Ruta del Mercaderista (Por cada Punto de Venta)
+                try{
+                   
+                    EPointOfSale_PlanningOper RegistrarPointOfSale_PlanningOper =
+                        PointOfSale_PlanningOper.RegistrarAsignPDVaOperativo(
+                            Convert.ToInt32(GvNewAsignaPDVOPE.Rows[i].Cells[3].Text),
+                            TxtPlanningAsigPDVOPE.Text,
+                            Convert.ToInt32(GvNewAsignaPDVOPE.Rows[i].Cells[1].Text),
+                            Convert.ToDateTime(GvNewAsignaPDVOPE.Rows[i].Cells[5].Text + " 01:00:00.000"),
+                            Convert.ToDateTime(GvNewAsignaPDVOPE.Rows[i].Cells[6].Text + " 23:59:00.000"),
+                            0,
+                            true,
+                            Convert.ToString(this.Session["sUser"]),
+                            DateTime.Now,
+                            Convert.ToString(this.Session["sUser"]), DateTime.Now);
+
+                } catch (Exception ex) {
+                    
+                    messages = ex.ToString();
+                    
+                    this.Session["encabemensa"] = "Sr. Usuario";
+                    this.Session["cssclass"] = "MensajesSupConfirm";
+                    this.Session["mensaje"] = "Ocurrio un Error al guardar el Punto de Venta :"+ ex.ToString().Substring(0,100) + "...";
+                    
+                    Mensajes_AsigPDVOPE();
+
+                }
+                #endregion
+
+                #region Registro de Ruta en BD Mobile
+                // Verifica que se Haya podido registrar Correctamente en la Base de datos del App Web para proceder a registrar el registro en la App Mobile
+                if (messages.Equals("")) {
+                    // Registra Ruta del Mercaderista (Por cada Punto de Venta) - Aplicativo Mobile
+                    try{
+                        
+                        PointOfSale_PlanningOper RegistrarTBL_EQUIPO_PTO_VENTA = new PointOfSale_PlanningOper();
+                        RegistrarTBL_EQUIPO_PTO_VENTA.RegistrarTBL_EQUIPO_PTO_VENTA(
+                            Convert.ToInt32(GvNewAsignaPDVOPE.Rows[i].Cells[3].Text),
+                            TxtPlanningAsigPDVOPE.Text,
+                            Convert.ToInt32(GvNewAsignaPDVOPE.Rows[i].Cells[1].Text),
+                            Convert.ToDateTime(GvNewAsignaPDVOPE.Rows[i].Cells[5].Text + " 01:00:00.000"),
+                            Convert.ToDateTime(GvNewAsignaPDVOPE.Rows[i].Cells[6].Text + " 23:59:00.000"));
+
+                    }catch (Exception ex) {
+                        messages = ex.ToString();
+
+                        this.Session["encabemensa"] = "Sr. Usuario";
+                        this.Session["cssclass"] = "MensajesSupConfirm";
+                        this.Session["mensaje"] = "Ocurrio un Error al guardar el Punto de Venta en la Base de Datos Mobile:" + ex.ToString().Substring(0, 100) + "...";
+
+                        Mensajes_AsigPDVOPE();
+                    }
+                }
+                #endregion
 
             }
             this.Session["encabemensa"] = "Sr. Usuario";
@@ -4474,15 +4495,27 @@ namespace SIGE.Pages.Modulos.Planning
             Limpiar_InformacionAsignaPDVOPE();
 
         }
+        /// <summary>
+        /// Evento SelectedIndexChanged que elimina el registro seleccionado del Objeto 'GvNewAsignaPDVOPE'
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void GvNewAsignaPDVOPE_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // Obtiene la Fila Seleccionada y lo guarda en un nuevo Objeto GridViewRow 'row'
             GridViewRow row = GvNewAsignaPDVOPE.SelectedRow;
+            // Obtiene el DataTable de los Puntos de Venta, del Objeto Session 'dtAsigna_PDV_A_OPE_Temp'
             DataTable dtdel = (DataTable)this.Session["dtAsigna_PDV_A_OPE_Temp"];
+            // Obtiene el RowIndex de la Fila Seleccionada y Elimina ese Elemento del DataTable Obtenido de la Session
             dtdel.Rows[row.RowIndex].Delete();
+            // Sobreescribe el objeto Session 'dtAsigna_PDV_A_OPE_Temp' con el DataTable Alterado (Sin el registro Seleccionado)
             this.Session["dtAsigna_PDV_A_OPE_Temp"] = dtdel;
+
+            // Llena el AspControl GridView 'GvNewAsignaPDVOPE' con la información Alterada
             GvNewAsignaPDVOPE.DataSource = (DataTable)this.Session["dtAsigna_PDV_A_OPE_Temp"];
             GvNewAsignaPDVOPE.DataBind();
             dtdel = null;
+            // Muestra el Panel
             ModalPanelAsignacionPDVaoper.Show();
 
         }
@@ -4492,55 +4525,107 @@ namespace SIGE.Pages.Modulos.Planning
         //    ModalConfirmacion.Show();
         //    ModalPanelAsignacionPDVaoper.Show();
         //}
+        /// <summary>
+        /// Evento Click AspControl Button 'BtnNoConfirma' (Confirmar Eliminar Puntos de Venta) - Panel de Confirmación
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void BtnNoConfirma_Click(object sender, EventArgs e)
         {
             ModalPanelAsignacionPDVaoper.Show();
         }
+        /// <summary>
+        /// Evento Click AspControl Button 'BtnSiConfirma' (Confirmar Eliminar Puntos de Venta) - Panel de Confirmación
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void BtnSiConfirma_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i <= GvAsignaPDVOPE.Rows.Count - 1; i++)
-            {
-                if (((CheckBox)GvAsignaPDVOPE.Rows[i].FindControl("CheckBox1")).Checked == true)
-                {
+            // Recorre el Listado de Puntos de Venta Asignados en el AspControl CheckBoxList 'GvAsignaPDVOPE'
+            for (int i = 0; i <= GvAsignaPDVOPE.Rows.Count - 1; i++){
+                // Verifica todos aquellos Puntos de Venta que tienen Check
+                if (((CheckBox)GvAsignaPDVOPE.Rows[i].FindControl("CheckBox1")).Checked == true){
+
                     int prueba2 = Convert.ToInt32(((Label)GvAsignaPDVOPE.Rows[i].FindControl("LblNo")).Text);
-                    DataTable dt1 = PointOfSale_PlanningOper.EliminarPuntosVentaXoperativo_TBL_EQUIPO_PTO_VENTA(TxtPlanningAsigPDVOPE.Text, Convert.ToInt32(CmbSelOpePlanning.Text), Convert.ToInt32(((Label)GvAsignaPDVOPE.Rows[i].FindControl("LblNo")).Text));
-                    DataTable dt = PointOfSale_PlanningOper.EliminarPuntosVentaXoperativo(Convert.ToInt32(((Label)GvAsignaPDVOPE.Rows[i].FindControl("LblNo")).Text));
-                    dt = null;
-                    dt1 = null;
+                    
+                    // Eliminar el Punto de Venta Asignado de la Base de Datos App Mobile (tbl_equipo_pto_venta)
+                    PointOfSale_PlanningOper.EliminarPuntosVentaXoperativo_TBL_EQUIPO_PTO_VENTA(
+                        TxtPlanningAsigPDVOPE.Text, 
+                        Convert.ToInt32(CmbSelOpePlanning.Text), 
+                        Convert.ToInt32(((Label)GvAsignaPDVOPE.Rows[i].FindControl("LblNo")).Text));
+                    
+                    // Si la Eliminación Anterior fue Correcta, continuar con la eliminación del Punto de Venta asignado
+                    // en la Base de Datos del App Web (pointofsale_planningoper)
+                    if (PointOfSale_PlanningOper.getMessage().Equals("")){
+
+                        // Eliminar Punto de Venta asignado en la Base de Datos del App Web (pointofsale_planningoper)
+                        PointOfSale_PlanningOper.EliminarPuntosVentaXoperativo(
+                            Convert.ToInt32(((Label)GvAsignaPDVOPE.Rows[i].FindControl("LblNo")).Text));
+            
+                        // Verificar si Hubo Errores Durante la Eliminación de Puntos de Venta asignados
+                        if (!PointOfSale_PlanningOper.getMessage().Equals("")) {
+                            this.Session["encabemensa"] = "Señor Usuario";
+                            this.Session["cssclass"] = "MensajesSupervisor";
+                            this.Session["mensaje"] = "Ocurrio un Error: " + PointOfSale_PlanningOper.getMessage().Substring(0, 100) + "...";
+                            Mensajes_AsigPDVOPE();
+                        }
+                    }else {
+                        this.Session["encabemensa"] = "Señor Usuario";
+                        this.Session["cssclass"] = "MensajesSupervisor";
+                        this.Session["mensaje"] = "Ocurrio un Error: " + PointOfSale_PlanningOper.getMessage().Substring(0,100) + "...";
+                        Mensajes_AsigPDVOPE();
+                    }
                 }
             }
+
             ModalPanelAsignacionPDVaoper.Show();
+            
             ConsultaPDVXoperativo();
-            if (GvAsignaPDVOPE.Rows.Count == 0)
-            {
+
+            // Ocultar Botones de Control en caso no haya Puntos de Venta Disponibles para Editar
+            if (GvAsignaPDVOPE.Rows.Count == 0){
                 Button1.Visible = false;
                 BtnAllAsigPDV.Visible = false;
                 BtnNoneasigPDV.Visible = false;
             }
-
         }
+        /// <summary>
+        /// Evento OnRowEditing del AspControl GridView 'GvAsignaPDVOPE', correspondiente a los Puntos de Venta Asignados
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void GvAsignaPDVOPE_RowEditing(object sender, GridViewEditEventArgs e)
         {
             ModalPanelAsignacionPDVaoper.Show();
             GvAsignaPDVOPE.EditIndex = e.NewEditIndex;
             ConsultaPDVXoperativo();
         }
+        /// <summary>
+        /// Evento OnRowCancelingEdit del AspControl GridView 'GvAsignaPDVOPE', correspondiente a los Puntos de Venta Asignados
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void GvAsignaPDVOPE_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
             ModalPanelAsignacionPDVaoper.Show();
             GvAsignaPDVOPE.EditIndex = -1;
             ConsultaPDVXoperativo();
         }
-        protected void GvAsignaPDVOPE_RowUpdating(object sender, GridViewUpdateEventArgs e)
-        {
+        /// <summary>
+        /// Evento OnRowUpdating del AspControl GridView 'GvAsignaPDVOPE', correspondiente a los Puntos de Venta Asignados
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void GvAsignaPDVOPE_RowUpdating(object sender, GridViewUpdateEventArgs e){
             bool seguir = true;
+
             ModalPanelAsignacionPDVaoper.Show();
 
             DateTime FechaInicial = Convert.ToDateTime(((TextBox)GvAsignaPDVOPE.Rows[GvAsignaPDVOPE.EditIndex].Cells[0].FindControl("TxtFechaini")).Text);
             DateTime Fechafinal = Convert.ToDateTime(((TextBox)GvAsignaPDVOPE.Rows[GvAsignaPDVOPE.EditIndex].Cells[0].FindControl("TxtFechafin")).Text);
 
-            if (FechaInicial > Fechafinal)
-            {
+            // Validación de Fecha 01 - Fecha Inicial Mayor que Fecha Final
+            if (FechaInicial > Fechafinal){
                 this.Session["encabemensa"] = "Sr. Usuario";
                 this.Session["cssclass"] = "MensajesSupervisor";
                 this.Session["mensaje"] = "La fecha inicial no puede ser mayor a la fecha final";
@@ -4548,32 +4633,63 @@ namespace SIGE.Pages.Modulos.Planning
                 seguir = false;
             }
 
-            if (seguir)
-            {
-                EPointOfSale_PlanningOper ActualizarPointOfSale_PlanningOper = PointOfSale_PlanningOper.ActualizarAsignPDVaOperativo(
+            if (seguir){
+                
+                // Actualizar la Base de Datos del App Web Correspondiente a la Asignación de Puntos de Venta ([PointOfSale_PlanningOper])                
+                PointOfSale_PlanningOper.ActualizarAsignPDVaOperativo(
                     Convert.ToInt32(((Label)GvAsignaPDVOPE.Rows[GvAsignaPDVOPE.EditIndex].Cells[0].FindControl("LblNo")).Text),
-                   Convert.ToDateTime(((TextBox)GvAsignaPDVOPE.Rows[GvAsignaPDVOPE.EditIndex].Cells[0].FindControl("TxtFechaini")).Text + " 07:00:00.000"),
-                   Convert.ToDateTime(((TextBox)GvAsignaPDVOPE.Rows[GvAsignaPDVOPE.EditIndex].Cells[0].FindControl("TxtFechafin")).Text + " 23:59:00.000"),
-                      Convert.ToString(this.Session["sUser"]),
-                      DateTime.Now);
+                    Convert.ToDateTime(((TextBox)GvAsignaPDVOPE.Rows[GvAsignaPDVOPE.EditIndex].Cells[0].FindControl("TxtFechaini")).Text + " 07:00:00.000"),
+                    Convert.ToDateTime(((TextBox)GvAsignaPDVOPE.Rows[GvAsignaPDVOPE.EditIndex].Cells[0].FindControl("TxtFechafin")).Text + " 23:59:00.000"),
+                    Convert.ToString(this.Session["sUser"]),
+                    DateTime.Now);
 
-                PointOfSale_PlanningOper ActualizarTBL_EQUIPO_PTO_VENTA = new PointOfSale_PlanningOper();
-                ActualizarTBL_EQUIPO_PTO_VENTA.ActualizarTBL_EQUIPO_PTO_VENTA(((Label)GvAsignaPDVOPE.Rows[GvAsignaPDVOPE.EditIndex].Cells[0].FindControl("Label2")).Text,
-                    TxtPlanningAsigPDVOPE.Text, Convert.ToInt32(CmbSelOpePlanning.Text),
-                     Convert.ToDateTime(((TextBox)GvAsignaPDVOPE.Rows[GvAsignaPDVOPE.EditIndex].Cells[0].FindControl("TxtFechaini")).Text + " 07:00:00.000"),
-                   Convert.ToDateTime(((TextBox)GvAsignaPDVOPE.Rows[GvAsignaPDVOPE.EditIndex].Cells[0].FindControl("TxtFechafin")).Text + " 23:59:00.000"));
+                // Verificar si en el proceso de Actualización en la Asignación de Puntos de Venta en la App Web fue correcta
+                if (PointOfSale_PlanningOper.getMessage().Equals("")){
 
+                    // Actualizar la Base de Datos del App Mobile Correspondiente a la Asignación de Puntos de Venta ()
+                    PointOfSale_PlanningOper.ActualizarTBL_EQUIPO_PTO_VENTA(
+                        ((Label)GvAsignaPDVOPE.Rows[GvAsignaPDVOPE.EditIndex].Cells[0].FindControl("Label2")).Text,
+                        TxtPlanningAsigPDVOPE.Text, Convert.ToInt32(CmbSelOpePlanning.Text),
+                        Convert.ToDateTime(((TextBox)GvAsignaPDVOPE.Rows[GvAsignaPDVOPE.EditIndex].Cells[0].FindControl("TxtFechaini")).Text + " 07:00:00.000"),
+                        Convert.ToDateTime(((TextBox)GvAsignaPDVOPE.Rows[GvAsignaPDVOPE.EditIndex].Cells[0].FindControl("TxtFechafin")).Text + " 23:59:00.000"));
+                    
+                    // Verificar que no se haya presentado errores durante la Actualización del App Mobile
+                    if (!PointOfSale_PlanningOper.getMessage().Equals("")) {
+                        this.Session["encabemensa"] = "Señor Usuario";
+                        this.Session["cssclass"] = "MensajesSupervisor";
+                        this.Session["mensaje"] = "Error: " + PointOfSale_PlanningOper.getMessage();
+                        Mensajes_AsigPDVOPE();
+                    }
+                }
+                else {
+                    this.Session["encabemensa"] = "Señor Usuario";
+                    this.Session["cssclass"] = "MensajesSupervisor";
+                    this.Session["mensaje"] = "Error: " + PointOfSale_PlanningOper.getMessage();
+                    Mensajes_AsigPDVOPE();
+                }
 
                 GvAsignaPDVOPE.EditIndex = -1;
                 ConsultaPDVXoperativo();
             }
         }
+        /// <summary>
+        /// Evento Click del AspControl 'Button1_Click' (Eliminar) Mensaje para Confirmar la Acción de Eliminar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Button1_Click(object sender, EventArgs e)
         {
-            LblMensajeConfirm.Text = "Realmente desea eliminar los puntos de venta seleccionados para el usuario " + CmbSelOpePlanning.SelectedItem.Text + " ?";
+            LblMensajeConfirm.Text = "Realmente desea eliminar los puntos de venta seleccionados para el usuario " 
+                + CmbSelOpePlanning.SelectedItem.Text + " ?";
             ModalConfirmacion.Show();
             ModalPanelAsignacionPDVaoper.Show();
         }
+        /// <summary>
+        /// Evento Click para el AspControl 'BtnCargaPDVOPE' correspondiente a la Carga Masiva - Muestra el Panel para la Carga Masiva por Excel
+        /// Carga en un IFrame la página 'Carga_PDVOPE.aspx'
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void BtnCargaPDVOPE_Click(object sender, EventArgs e)
         {
             ModalPanelAsignacionPDVaoper.Show();
@@ -4581,29 +4697,476 @@ namespace SIGE.Pages.Modulos.Planning
             this.Session["PresupuestoPDVOPE"] = this.Session["Numbudget"].ToString().Trim() + " " + LblTxtPresupuestoAsigPDVOPE.Text;
             this.Session["id_planningPDVOPE"] = TxtPlanningAsigPDVOPE.Text;
             IframeMasivaPDVOpe.Attributes["src"] = "Carga_PDVOPE.aspx";
-
-
         }
+        /// <summary>
+        /// Eventro Click del AspControl 'BtnAllAsigPDV', para seleccionar todos los puntos de Venta Asignados
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void BtnAllAsigPDV_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i <= GvAsignaPDVOPE.Rows.Count - 1; i++)
-            {
+            for (int i = 0; i <= GvAsignaPDVOPE.Rows.Count - 1; i++){
                 ((CheckBox)GvAsignaPDVOPE.Rows[i].FindControl("CheckBox1")).Checked = true;
-
             }
+
             ModalPanelAsignacionPDVaoper.Show();
 
         }
+        /// <summary>
+        /// Eventro Click del AspControl 'BtnNoneasigPDV', para no  seleccionar todos ningún punto de Venta Asignados.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void BtnNoneasigPDV_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i <= GvAsignaPDVOPE.Rows.Count - 1; i++)
-            {
+            for (int i = 0; i <= GvAsignaPDVOPE.Rows.Count - 1; i++){
                 ((CheckBox)GvAsignaPDVOPE.Rows[i].FindControl("CheckBox1")).Checked = false;
 
             }
             ModalPanelAsignacionPDVaoper.Show();
 
         }
+        /// <summary>
+        /// Consultar PDVs por Campaña y setearlo en el ASPControl GridView : 'GvNewAsignaPDVOPE'
+        /// </summary>
+        private void ConsultaPDVCampañaRutas()
+        {
+            DataSet ds = (DataSet)this.ViewState["planning_creados"];
+            if (ds.Tables[6].Rows.Count > 0 && ds.Tables[9].Rows.Count > 0)
+            {
+                TxtPlanningAsigPDVOPE.Text = ds.Tables[9].Rows[0]["id_planning"].ToString().Trim();
+                LblTxtPresupuestoAsigPDVOPE.Text = ds.Tables[9].Rows[0]["Planning_Name"].ToString().Trim();
+
+                DataTable dtCliente = Presupuesto.Get_ObtenerClientes(ds.Tables[9].Rows[0]["Planning_Budget"].ToString().Trim(), 1);
+
+                this.Session["company_id"] = dtCliente.Rows[0]["Company_id"].ToString().Trim();
+                this.Session["Planning_CodChannel"] = ds.Tables[9].Rows[0]["Planning_CodChannel"].ToString().Trim();
+                
+                //llenaciudadesRutas();
+                //CmbSelTipoAgrupRutas.Items.Clear();
+                //CmbSelAgrupRutas.Items.Clear();
+                //CmbSelOficinaRutas.Items.Clear();
+                //CmbSelMallasRutas.Items.Clear();
+                //CmbSelSectorRutas.Items.Clear();
+                //ChkListPDV.Items.Clear();
+
+                DataTable dtAsigna_PDV_A_OPE_Temp = new DataTable();
+                dtAsigna_PDV_A_OPE_Temp.Columns.Add("Cod_", typeof(Int32));
+                dtAsigna_PDV_A_OPE_Temp.Columns.Add("Mercaderista", typeof(String));
+                dtAsigna_PDV_A_OPE_Temp.Columns.Add("Cod.", typeof(Int32));
+                dtAsigna_PDV_A_OPE_Temp.Columns.Add("Punto_de_Venta", typeof(String));
+                dtAsigna_PDV_A_OPE_Temp.Columns.Add("Desde", typeof(String));
+                dtAsigna_PDV_A_OPE_Temp.Columns.Add("Hasta", typeof(String));
+                
+                GvNewAsignaPDVOPE.DataSource = dtAsigna_PDV_A_OPE_Temp;
+                GvNewAsignaPDVOPE.DataBind();
+
+                this.Session["dtAsigna_PDV_A_OPE_Temp"] = dtAsigna_PDV_A_OPE_Temp;
+
+                // Obtener la información del Planning (id_planning,status_id,status_name,planning_codchannel,name_country,channel_name,
+                // company_id,planning_startactivity,planning_endactivity)
+                DataTable dt = PPlanning.ObtenerIdPlanning(ds.Tables[9].Rows[0]["Planning_Budget"].ToString().Trim());
+                // Guardar en un AspControl Session 'Fechainicial' Fecha inicial del Planning
+                this.Session["Fechainicial"] = dt.Rows[0]["Planning_StartActivity"].ToString().Trim();
+                // Guardar en un AspControl Session 'Fechafinal' Fecha final del Planning
+                this.Session["Fechafinal"] = dt.Rows[0]["Planning_EndActivity"].ToString().Trim();
+
+                dtCliente = null;
+                dt = null;
+                ds = null;
+            }else {
+                this.Session["encabemensa"] = "Sr. Usuario";
+                this.Session["cssclass"] = "MensajesSupervisor";
+                this.Session["mensaje"] = "¡No tiene Puntos de Venta Asignados a la Campaña Seleccionada!, Por favor Verifique... ";
+                messages = "¡No tiene Puntos de Venta Asignados a la Campaña Seleccionada!, Por favor Verifique... ";
+                Mensajes_Seguimiento();
+            }
+            
+        } //revisado
+        /// <summary>
+        /// Consultar PDVs por Campaña y idPerson y setea el resultado en el ASPControl GridView 'GvAsignaPDVOPE'
+        /// </summary>
+        private void ConsultaPDVXoperativo()
+        {
+            DataTable DTConsulta = PointOfSale_PlanningOper
+                .Consultar_PDVPlanningXoperativo(TxtPlanningAsigPDVOPE.Text,
+                Convert.ToInt32(CmbSelOpePlanning.Text));
+
+            // Verifica que no existan Errores en la invocación al Servicio
+            if (PointOfSale_PlanningOper.getMessage() == null){
+                // Llena la información correspondiente a la Grilla de Pdv asignados a Usuarios.
+                GvAsignaPDVOPE.DataSource = DTConsulta;
+                GvAsignaPDVOPE.DataBind();
+            }else{
+                this.Session["encabemensa"] = "Sr. Usuario";
+                this.Session["cssclass"] = "MensajesSupervisor";
+                this.Session["mensaje"] = "Ocurrio un Error: " + PointOfSale_PlanningOper.getMessage();
+                messages = PointOfSale_PlanningOper.getMessage();
+                Mensajes_Seguimiento();
+            }
+
+
+
+        } //revisado
+        /// <summary>
+        /// Obtener Mercaderistas por Campaña y asignarlos al ASPControl DropDownList : 'CmbSelOpePlanning'
+        /// </summary>
+        private void llenaOperativosAsignaPDVOPE()
+        {
+            DataSet dsStaffPlanning = PPlanning.Get_Staff_Planning(TxtPlanningAsigPDVOPE.Text);
+            if (dsStaffPlanning != null){
+                if (dsStaffPlanning.Tables[1].Rows.Count > 0){
+                    CmbSelOpePlanning.DataSource = dsStaffPlanning.Tables[1];
+                    CmbSelOpePlanning.DataTextField = "name_user";
+                    CmbSelOpePlanning.DataValueField = "Person_id";
+                    CmbSelOpePlanning.DataBind();
+                    CmbSelOpePlanning.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
+                }else{
+                    this.Session["encabemensa"] = "Sr. Usuario";
+                    this.Session["cssclass"] = "MensajesSupervisor";
+                    this.Session["mensaje"] = "No se ha asignado personal a la campaña: " + LblTxtPresupuestoAsigPDVOPE.Text.ToUpper();
+                    messages = "No se ha asignado personal a la campaña: " + LblTxtPresupuestoAsigPDVOPE.Text.ToUpper();
+                    Mensajes_AsigPDVOPE();
+                }
+            }
+            dsStaffPlanning = null;
+        }
+        /// <summary>
+        /// Obtener Ciudades y setearlo al ASPControl DropDownList 'CmbSelCityRutas' tambien   
+        /// Limpiar los ASPControl DrowDownList: 'CmbSelTipoAgrupRutas', 'CmbSelAgrupRutas', 'CmbSelOficinaRutas', 'CmbSelMallasRutas' y el 
+        /// CheckBoxList 'ChkListPDV'
+        /// </summary>
+        private void llenaciudadesRutas()
+        {
+            DataSet ds = PPlanning.Get_cityPointofsalePlanning(TxtPlanningAsigPDVOPE.Text, "0", 0, "0", 0, 0);
+
+            if (ds.Tables[0].Rows.Count > 0){
+                CmbSelCityRutas.DataSource = ds.Tables[0];
+                CmbSelCityRutas.DataValueField = "cod_city";
+                CmbSelCityRutas.DataTextField = "name_city";
+                CmbSelCityRutas.DataBind();
+                CmbSelCityRutas.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
+
+                ds = null;
+
+                #region Limpiar los AspControl DropDownList Relacionados
+                CmbSelTipoAgrupRutas.Items.Clear();
+                CmbSelAgrupRutas.Items.Clear();
+                CmbSelOficinaRutas.Items.Clear();
+                CmbSelMallasRutas.Items.Clear();
+                ChkListPDV.Items.Clear();
+                #endregion
+
+            }else{
+                this.Session["encabemensa"] = "Sr. Usuario";
+                this.Session["cssclass"] = "MensajesSupervisor";
+                this.Session["mensaje"] = "No se han creado puntos de venta para la campaña: " + LblTxtPresupuestoPDV.Text.ToUpper();
+                messages = "No se han creado puntos de venta para la campaña: " + LblTxtPresupuestoPDV.Text.ToUpper();
+                // falta mensaje de usuario en pdv Mensajes_SeguimientoValidacionVistas();
+            }
+
+
+        }
+        /// <summary>
+        /// Limpiar y Deshabilitar los controles correspondientes a la Asignación de Puntos de Venta por Mercaderista
+        /// </summary>
+        private void Limpiar_InformacionAsignaPDVOPE()
+        {
+            Button1.Visible = false;
+            BtnAllAsigPDV.Visible = false;
+            BtnNoneasigPDV.Visible = false;
+            GvAsignaPDVOPE.DataBind();
+            GvNewAsignaPDVOPE.DataBind();
+            ChkListPDV.Items.Clear();
+            TxtF_iniPDVOPE.Text = "";
+            TxtF_finPDVOPE.Text = "";
+            CmbSelCityRutas.Items.Clear();
+            CmbSelTipoAgrupRutas.Items.Clear();
+            CmbSelAgrupRutas.Items.Clear();
+            CmbSelOficinaRutas.Items.Clear();
+            CmbSelMallasRutas.Items.Clear();
+            CmbSelSectorRutas.Items.Clear();
+            ChkListPDV.Items.Clear();
+            ConsultaPDVCampañaRutas();
+            llenaOperativosAsignaPDVOPE();
+            CmbSelOpePlanning.Enabled = false;
+            CmbSelCityRutas.Enabled = false;
+            CmbSelTipoAgrupRutas.Enabled = false;
+            CmbSelAgrupRutas.Enabled = false;
+            CmbSelOficinaRutas.Enabled = false;
+            CmbSelMallasRutas.Enabled = false;
+            CmbSelSectorRutas.Enabled = false;
+            ChkListPDV.Enabled = false;
+            TxtF_iniPDVOPE.Enabled = false;
+            TxtF_finPDVOPE.Enabled = false;
+            BtnCalF_iniPDVOPE.Enabled = false;
+            BtnCalF_finPDVOPE.Enabled = false;
+            BtnAsigPDVOPE.Enabled = false;
+
+            BtnEditAsigPDVOPE.Visible = true;
+            BtnUpdateAsigPDVOPE.Visible = false;
+        }
+        /// <summary>
+        /// Llenar Agrupaciones de Puntos de Venta por Ciudades en el AspControl DropDownList 'CmbSelTipoAgrupRutas'
+        /// </summary>
+        private void llenaTipoAgrupRutas()
+        {
+            DataSet ds = PPlanning.Get_cityPointofsalePlanning(TxtPlanningAsigPDVOPE.Text, CmbSelCityRutas.Text, 0, "0", 0, 0);
+
+            if (ds.Tables[1].Rows.Count > 0){
+                CmbSelTipoAgrupRutas.DataSource = ds.Tables[1];
+                CmbSelTipoAgrupRutas.DataValueField = "idNodeComType";
+                CmbSelTipoAgrupRutas.DataTextField = "NodeComType_name";
+                CmbSelTipoAgrupRutas.DataBind();
+                CmbSelTipoAgrupRutas.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
+                
+                ds = null;
+
+                #region Limpiar los AspControl DropDownList Relacionados
+                CmbSelAgrupRutas.Items.Clear();
+                CmbSelOficinaRutas.Items.Clear();
+                CmbSelMallasRutas.Items.Clear();
+                CmbSelSectorRutas.Items.Clear();
+                ChkListPDV.Items.Clear();
+                #endregion
+            }
+            else {
+                this.Session["encabemensa"] = "Sr. Usuario";
+                this.Session["cssclass"] = "MensajesSupervisor";
+                this.Session["mensaje"] = "No se han Asignado Agrupaciones para la Ciudad Seleccionada... ";
+                messages = "No se han Asignado Agrupaciones para la Ciudad Seleccionada... ";
+            }
+        }
+        /// <summary>
+        /// Llena el AspControl DropDownList 'CmbSelAgrupRutas' , correspondiente a Nodos Comerciales por idPlanning, idCiudad y idTipoDeNodoComercial
+        /// Obtiene un Conjunto de DataTables con información Geográfica de los Puntos de Venta, como se detalla a continuación:
+        /// DataTable[0] Listado de Ciudades (Principal Departamento de una Provincia, Por ejemplo Arequipa, Lima, Trujillo, Chiclayo....)
+        /// DataTable[1] Listado de Tipo de Nodos Comerciales (Agrupación Nivel 1 de Puntos de Ventas, Por Ejemplo Cencosud)
+        /// DataTable[2] Listado de Nodos Comerciales (Agrupación Nivel 2 de Puntos de Ventas, Por Ejemplo Wong)
+        /// DataTable[3] Listado de Oficinas (Agrupación Geografica Nivel 1 (Agrupación de Departamentos y se le asigna un nombre), Ejemplo Zona Centro)
+        /// DataTable[4] Listado de Mallas (Agrupación Geografica Nivel 2 (Agrupación de Ciudades (Puede ser 1 o más) y se le asigna un nombre), Ejemplo Lima)
+        /// DataTable[5] Listado de Sectores (Agrupación Geografica Nivel 3 (Agrupación de Distritos (más de 1) y se le asigna un nombre), Lima Este, Lima Norte, Lima Sur, Lima Oeste)
+        /// </summary>
+        private void llenaAgrupRutas()
+        {
+            DataSet ds = PPlanning.Get_cityPointofsalePlanning(
+                TxtPlanningAsigPDVOPE.Text, 
+                CmbSelCityRutas.Text, 
+                Convert.ToInt32(CmbSelTipoAgrupRutas.Text), 
+                "0", 
+                0, 
+                0);
+            if (ds.Tables[2].Rows.Count > 0){
+                CmbSelAgrupRutas.DataSource = ds.Tables[2];
+                CmbSelAgrupRutas.DataValueField = "NodeCommercial";
+                CmbSelAgrupRutas.DataTextField = "commercialNodeName";
+                CmbSelAgrupRutas.DataBind();
+                CmbSelAgrupRutas.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
+
+                ds = null;
+                
+                #region Limpiar los AspControl DropDownList Relacionados
+                CmbSelOficinaRutas.Items.Clear();
+                CmbSelMallasRutas.Items.Clear();
+                CmbSelSectorRutas.Items.Clear();
+                ChkListPDV.Items.Clear();
+                #endregion
+            }
+            else {
+                this.Session["encabemensa"] = "Sr. Usuario";
+                this.Session["cssclass"] = "MensajesSupervisor";
+                this.Session["mensaje"] = "¡No se han asignado Nodos Comerciales! ... ¡por favor verificar!";
+                Mensajes_Seguimiento();
+            }
+
+        }
+        /// <summary>
+        /// Llena el AspControl DropDownList 'CmbSelOficinaRutas' , correspondiente a Oficinas por idPlanning, idCiudad, idTipoDeNodoComercial, idNodoComercial
+        /// Obtiene un Conjunto de DataTables con información Geográfica de los Puntos de Venta, como se detalla a continuación:
+        /// DataTable[0] Listado de Ciudades (Principal Departamento de una Provincia, Por ejemplo Arequipa, Lima, Trujillo, Chiclayo....)
+        /// DataTable[1] Listado de Tipo de Nodos Comerciales (Agrupación Nivel 1 de Puntos de Ventas, Por Ejemplo Cencosud)
+        /// DataTable[2] Listado de Nodos Comerciales (Agrupación Nivel 2 de Puntos de Ventas, Por Ejemplo Wong)
+        /// DataTable[3] Listado de Oficinas (Agrupación Geografica Nivel 1 (Agrupación de Departamentos y se le asigna un nombre), Ejemplo Zona Centro)
+        /// DataTable[4] Listado de Mallas (Agrupación Geografica Nivel 2 (Agrupación de Ciudades (Puede ser 1 o más) y se le asigna un nombre), Ejemplo Lima)
+        /// DataTable[5] Listado de Sectores (Agrupación Geografica Nivel 3 (Agrupación de Distritos (más de 1) y se le asigna un nombre), Lima Este, Lima Norte, Lima Sur, Lima Oeste)
+        /// </summary>
+        private void llenaOficinasRutas()
+        {
+            DataSet ds = PPlanning.Get_cityPointofsalePlanning(
+                TxtPlanningAsigPDVOPE.Text, 
+                CmbSelCityRutas.Text, 
+                Convert.ToInt32(CmbSelTipoAgrupRutas.Text), 
+                CmbSelAgrupRutas.Text, 
+                0, 
+                0);
+            if (ds.Tables[3].Rows.Count > 0){
+                CmbSelOficinaRutas.DataSource = ds.Tables[3];
+
+                CmbSelOficinaRutas.DataValueField = "cod_Oficina";
+                CmbSelOficinaRutas.DataTextField = "Name_Oficina";
+                CmbSelOficinaRutas.DataBind();
+                CmbSelOficinaRutas.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
+                
+                ds = null;
+
+                #region Limpiar los AspControl DropDownList Relacionados
+                CmbSelMallasRutas.Items.Clear();
+                CmbSelSectorRutas.Items.Clear();
+                ChkListPDV.Items.Clear();
+                #endregion
+
+            } else {
+                this.Session["encabemensa"] = "Sr. Usuario";
+                this.Session["cssclass"] = "MensajesSupervisor";
+                this.Session["mensaje"] = "¡No se han encontrado Oficinas disponibles!... ¡Por favor verifique!";
+                Mensajes_Seguimiento();
+            }
+
+        }
+        /// <summary>
+        /// Llena el AspControl DropDownList 'CmbSelMallasRutas' , correspondiente a Mallas por idPlanning, idCiudad, idTipoDeNodoComercial, idNodoComercial, idOficina
+        /// Obtiene un Conjunto de DataTables con información Geográfica de los Puntos de Venta, como se detalla a continuación:
+        /// DataTable[0] Listado de Ciudades (Principal Departamento de una Provincia, Por ejemplo Arequipa, Lima, Trujillo, Chiclayo....)
+        /// DataTable[1] Listado de Tipo de Nodos Comerciales (Agrupación Nivel 1 de Puntos de Ventas, Por Ejemplo Cencosud)
+        /// DataTable[2] Listado de Nodos Comerciales (Agrupación Nivel 2 de Puntos de Ventas, Por Ejemplo Wong)
+        /// DataTable[3] Listado de Oficinas (Agrupación Geografica Nivel 1 (Agrupación de Departamentos y se le asigna un nombre), Ejemplo Zona Centro)
+        /// DataTable[4] Listado de Mallas (Agrupación Geografica Nivel 2 (Agrupación de Ciudades (Puede ser 1 o más) y se le asigna un nombre), Ejemplo Lima)
+        /// DataTable[5] Listado de Sectores (Agrupación Geografica Nivel 3 (Agrupación de Distritos (más de 1) y se le asigna un nombre), Lima Este, Lima Norte, Lima Sur, Lima Oeste)
+        /// </summary>
+        private void LlenamallasRutas(){
+            
+            DataSet ds = PPlanning.Get_cityPointofsalePlanning(
+                TxtPlanningAsigPDVOPE.Text, 
+                CmbSelCityRutas.Text, 
+                Convert.ToInt32(CmbSelTipoAgrupRutas.Text), 
+                CmbSelAgrupRutas.Text, 
+                Convert.ToInt64(CmbSelOficinaRutas.Text), 
+                0);
+
+            if (ds.Tables[4].Rows.Count > 0){
+
+                CmbSelMallasRutas.DataSource = ds.Tables[4];
+                CmbSelMallasRutas.DataValueField = "id_malla";
+                CmbSelMallasRutas.DataTextField = "malla";
+                CmbSelMallasRutas.DataBind();
+                CmbSelMallasRutas.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
+                
+                ds = null;
+
+                // Limpiar los AspControl DropDownList Relacionados
+                CmbSelSectorRutas.Items.Clear();
+
+            }else {
+                this.Session["encabemensa"] = "Sr. Usuario";
+                this.Session["cssclass"] = "MensajesSupervisor";
+                this.Session["mensaje"] = "¡No Existen Mallas de Punto de Venta Asignados!, ¡Por favor Verificar!";
+                Mensajes_Seguimiento();
+            }
+        }
+        /// <summary>
+        /// Llena el AspControl DropDownList 'CmbSelSectorRutas' , correspondiente a Sector por idPlanning, idCiudad, idTipoDeNodoComercial, idNodoComercial, idOficina, idSector
+        /// Obtiene un Conjunto de DataTables con información Geográfica de los Puntos de Venta, como se detalla a continuación:
+        /// DataTable[0] Listado de Ciudades (Principal Departamento de una Provincia, Por ejemplo Arequipa, Lima, Trujillo, Chiclayo....)
+        /// DataTable[1] Listado de Tipo de Nodos Comerciales (Agrupación Nivel 1 de Puntos de Ventas, Por Ejemplo Cencosud)
+        /// DataTable[2] Listado de Nodos Comerciales (Agrupación Nivel 2 de Puntos de Ventas, Por Ejemplo Wong)
+        /// DataTable[3] Listado de Oficinas (Agrupación Geografica Nivel 1 (Agrupación de Departamentos y se le asigna un nombre), Ejemplo Zona Centro)
+        /// DataTable[4] Listado de Mallas (Agrupación Geografica Nivel 2 (Agrupación de Ciudades (Puede ser 1 o más) y se le asigna un nombre), Ejemplo Lima)
+        /// DataTable[5] Listado de Sectores (Agrupación Geografica Nivel 3 (Agrupación de Distritos (más de 1) y se le asigna un nombre), Lima Este, Lima Norte, Lima Sur, Lima Oeste)
+        /// </summary>
+        private void LlenasectorRutas(){
+
+            DataSet ds = PPlanning.Get_cityPointofsalePlanning(
+                TxtPlanningAsigPDVOPE.Text, 
+                CmbSelCityRutas.Text, 
+                Convert.ToInt32(CmbSelTipoAgrupRutas.Text), 
+                CmbSelAgrupRutas.Text, 
+                Convert.ToInt64(CmbSelOficinaRutas.Text), 
+                Convert.ToInt32(CmbSelMallasRutas.Text));
+
+            if (ds.Tables[0].Rows.Count > 0){
+                CmbSelSectorRutas.DataSource = ds.Tables[5];
+
+                CmbSelSectorRutas.DataValueField = "id_sector";
+                CmbSelSectorRutas.DataTextField = "Sector";
+                CmbSelSectorRutas.DataBind();
+                CmbSelSectorRutas.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
+                ds = null;
+            }else {
+                this.Session["encabemensa"] = "Sr. Usuario";
+                this.Session["cssclass"] = "MensajesSupervisor";
+                this.Session["mensaje"] = "¡No Existen Sectores de Punto de Venta Asignados!, ¡Por favor Verificar!";
+                Mensajes_Seguimiento();
+            }
+        }
+        /// <summary>
+        /// Consulta Puntos de Venta por idPlanning, idCiudad, idTipoNodoCommercial, idNodoComercial, idOficina, idMalla, idRuta
+        /// y lo llena en un AspControl CheckBoxList 'ChkListPDV'
+        /// </summary>
+        private void LlenaPDVPlanning(){
+            
+            // se coloca provisionalemnte con esto para seguir en crear ing. mauricio ortiz
+            DataTable dt = PointOfSale_PlanningOper.Consultar_PDVPlanning(
+                TxtPlanningAsigPDVOPE.Text, 
+                CmbSelCityRutas.Text, 
+                Convert.ToInt32(CmbSelTipoAgrupRutas.Text), 
+                CmbSelAgrupRutas.Text, 
+                Convert.ToInt64(CmbSelOficinaRutas.Text), 
+                Convert.ToInt32(CmbSelMallasRutas.Text), 
+                Convert.ToInt32(CmbSelSectorRutas.Text));
+            if (dt != null){
+                if (dt.Rows.Count > 0){
+                    ChkListPDV.DataSource = dt;
+                    ChkListPDV.DataTextField = "Nombre";
+                    ChkListPDV.DataValueField = "id_MPOSPlanning";
+                    ChkListPDV.DataBind();
+                    
+                    // Botón Seleccionar todos los Puntos de Venta
+                    BtnAllPDV.Visible = true;
+
+                    // Botón Deseleccionar todos los Puntos de Venta
+                    BtnNonePDV.Visible = true;
+
+                }else{
+                    this.Session["encabemensa"] = "Señor Usuario";
+                    this.Session["cssclass"] = "MensajesSupervisor";
+                    this.Session["mensaje"] = "No existe información de puntos de venta con los filtros seleccionados. ";
+                    Mensajes_AsigPDVOPE();
+                    
+                    ChkListPDV.Items.Clear();
+
+                    #region Ocultar AspControl Button Relacionados
+                    BtnAllPDV.Visible = false;
+                    BtnNonePDV.Visible = false;
+                    #endregion
+                    
+                    LlenamallasRutas();
+                    LlenasectorRutas();
+                }
+            }
+            dt = null;
+        }
+        /// <summary>
+        /// Mensaje para Asignación de PDV por Trabajador
+        /// </summary>
+        private void Mensajes_AsigPDVOPE()
+        {
+            MensajeAsignaPDVOPE.CssClass = this.Session["cssclass"].ToString();
+            lblencabezadoPDVOPE.Text = this.Session["encabemensa"].ToString();
+            lblmensajegeneralPDVOPE.Text = this.Session["mensaje"].ToString();
+            ModalPanelAsignacionPDVaoper.Show();
+            MPMensajeAsignaPDVOPE.Show();
+        }
+        /*
+         * ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+         * ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+         * ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+         * ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+         * ---------------------------------- F                             I                         N ----------------------------------------------
+         * ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+         * ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+         * ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+         * ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+         */
         #endregion
 
         #region Levantamiento de informacion
@@ -8086,7 +8649,6 @@ namespace SIGE.Pages.Modulos.Planning
             ModalPanelMasivaProd.Hide();
         }
 
-
         #region Gestión de niveles
         protected void ImgIrAGestionNiveles_Click(object sender, ImageClickEventArgs e)
         {
@@ -8315,9 +8877,6 @@ namespace SIGE.Pages.Modulos.Planning
 
         #endregion
 
-        
-
-
         protected void ImgIrAGestionFuerzaVenta_Click(object sender, ImageClickEventArgs e)
         {
             //botonregresar.Visible = false;
@@ -8392,7 +8951,7 @@ namespace SIGE.Pages.Modulos.Planning
         }
 
 
-            #region Producto Ancla
+        #region Producto Ancla
 
         protected void ImgProdAncla_Click(object sender, ImageClickEventArgs e)
         {
@@ -10573,9 +11132,6 @@ namespace SIGE.Pages.Modulos.Planning
             div_Elementos.Style.Value = "display:none";
         }
         #endregion
-
-
-
 
 
     }

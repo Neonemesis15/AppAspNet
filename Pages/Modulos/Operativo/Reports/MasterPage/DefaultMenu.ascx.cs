@@ -15,21 +15,21 @@ namespace SIGE.Pages.Modulos.Operativo.Reports.MasterPage
         {
             try
             {
-                //string sidperdil = this.Session["Perfilid"].ToString();
+                string sidperdil = this.Session["Perfilid"].ToString();
                 if (!Page.IsPostBack)
                 {
                    
-                    //if (ConfigurationManager.AppSettings["PerfilAnalista"] == sidperdil || sidperdil == "1" )
-                    //{
-                        //cargarMenuHeaderPlanning();
-                    //}
-                    //cargarXploramaps();
+                    if (ConfigurationManager.AppSettings["PerfilAnalista"] == sidperdil || sidperdil == "1" )
+                    {
+                        cargarMenuHeaderPlanning();
+                    }
+                    cargarXploramaps();
                     
-                    /*if (Session["companyid"].ToString() == "1562")
+                    if (Session["companyid"].ToString() == "1562")
                     {
                         cargarDataValidada();
                     }
-                    cargarMenu();*/
+                    cargarMenu();
                     
                 }
             }

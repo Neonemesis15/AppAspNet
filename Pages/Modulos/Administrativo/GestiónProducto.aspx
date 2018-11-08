@@ -4,6 +4,15 @@
 <%@ Register Assembly="AjaxControls" Namespace="AjaxControls" TagPrefix="cc2" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 
+<!--
+-- Author       : Magaly Jiminez (MJ)
+-- Create date  : 13/08/2010
+-- Description  : Permite al actor Administrador de SIGE realizar todos los procesos para la administracion de Gestión De Productos.
+--
+-- Change History:
+-- 08/11/2018 Pablo Salas Alvarez (PSA): Refactoring Producto.
+-->
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
@@ -51,8 +60,11 @@
 </head>
 <body style="background: transparent;">
     <form id="form1" runat="server">
-    <cc1:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" ScriptMode="release" EnableScriptGlobalization="True" EnableScriptLocalization="True"> 
+    
+    <cc1:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" ScriptMode="release" EnableScriptGlobalization="True" 
+        EnableScriptLocalization="True"> 
     </cc1:ToolkitScriptManager>
+
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
             <%-- <table align="center">
@@ -78,49 +90,43 @@
                     AssociatedUpdatePanelID="UpdatePanel1" BackgroundCssClass="modalProgressGreyBackground">
                 <ProgressTemplate>
                     <div class="modalPopup">
-                        <div>
-                            Cargando...
-                        </div>
-                        <br />
-                        <div>
-                            <img alt="Procesando" src="../../images/loading5.gif" style="vertical-align: middle" />
-                        </div>
+                        <div>Cargando...</div><br />
+                        <div><img alt="Procesando" src="../../images/loading5.gif" style="vertical-align: middle" /></div>
                     </div>
                 </ProgressTemplate>
             </cc2:ModalUpdateProgress>
             <cc1:TabContainer ID="TabAdministradorProductos" runat="server" ActiveTabIndex="7"
                 Width="100%" Height="460px" Font-Names="Verdana" 
                 allowtransparency="true" style="margin-top: 0px; Overflow:auto">
+                
+                <!-- TAB_PANEL_CATEGORIA - INI -->
                 <cc1:TabPanel runat="server" HeaderText="Gestión Productos" ID="Panel_CategProduct">
-                    <HeaderTemplate>
-                        Categorias
-                    </HeaderTemplate>
-                    <ContentTemplate>
-                        <br /><br />
+                    <HeaderTemplate>Categorias</HeaderTemplate>
+                    <ContentTemplate><br /><br />
+                        
+                        <!-- HEADER - INI -->
                         <div class="centrarcontenido">
-                            <span class="labelsTit2">Gestión de Categorías de Producto</span>
-                            &nbsp;
-                        </div>
-                        <br /><br />
+                            <span class="labelsTit2">Gestión de Categorías de Producto</span>&nbsp;
+                        </div><br /><br />
+                        <!-- HEADER - FIN -->
+
+                        <!-- BODY - INI -->
                         <div class="centrar">
                             <div class="tabla centrar">
                                 <fieldset>
                                     <legend style="">Categoría de Producto</legend>
                                     <div class="fila">
                                         <div class="celda">
-                                            <span class="labels">Código*</span>
-                                            &nbsp;
+                                            <span class="labels">Código*</span>&nbsp;
                                         </div>
                                         <div class="celda">
                                             <asp:TextBox ID="TxtCodProductType" runat="server" BackColor="#DDDDDD" ReadOnly="True"
-                                                Width="190px" Enabled="False">
-                                            </asp:TextBox>
+                                                Width="190px" Enabled="False"></asp:TextBox>
                                         </div>
                                     </div>
                                     <div class="fila">
                                         <div class="celda">
-                                            <asp:Label ID="LblNomProductType" runat="server" CssClass="labels" Text="Nombre *">
-                                            </asp:Label>
+                                            <asp:Label ID="LblNomProductType" runat="server" CssClass="labels" Text="Nombre *"></asp:Label>
                                         </div>
                                         <div class="celda">
                                             <asp:TextBox ID="TxtNomProductType" runat="server" MaxLength="50" Width="190px" Enabled="False">
@@ -147,29 +153,36 @@
                                                 Enabled="False">
                                             </asp:DropDownList>
                                         </div>
-                                    </div>
-                                    <br /><br />
+                                    </div><br /><br />
                                 </fieldset>
                             </div>
-                        </div>     
+                        </div>
+                        <!-- BODY - FIN -->
+
+                        <!-- PANEL_RESULTADO_BUSQUEDA- INI -->
                         <asp:Panel ID="CosultaGVCategoria" runat="server" Style="display: block"  >                        
                             <div class="centrar centrarcontenido">                                
+                                
                                 <div class="p" style="width:780px; height: 315px; background-color: #FFFFFF; padding: 2px 2px; font-size: 10pt;
 	                                    font-family : arial, Helvetica, sans-serif;"> 
+
+                                    <!-- GRILLA_DATOS - INI -->
                                     <asp:GridView ID="GVConsultaCategoria" runat="server" AutoGenerateColumns="False"  
                                             Font-Names="Verdana" Font-Size="8pt" EnableModelValidation="True" 
                                             Width="100%" 
                                             onrowediting="GVConsultaCategoria_RowEditing" 
                                             onpageindexchanging="GVConsultaCategoria_PageIndexChanging" 
-                                            onrowcancelingedit="GVConsultaCategoria_RowCancelingEdit" onrowupdating="GVConsultaCategoria_RowUpdating" 
-                                            >                                               
+                                            onrowcancelingedit="GVConsultaCategoria_RowCancelingEdit" 
+                                            onrowupdating="GVConsultaCategoria_RowUpdating">
                                         <Columns>
                                             <asp:TemplateField HeaderText="Cod.Categoria">
                                                 <EditItemTemplate>
-                                                        <asp:Label ID="LblCodProductType" runat="server"  Text='<%# Bind("id_ProductCategory") %>'></asp:Label>
+                                                        <asp:Label ID="LblCodProductType" runat="server"  Text='<%# Bind("id_ProductCategory") %>'>
+                                                        </asp:Label>
                                                 </EditItemTemplate>
                                                 <ItemTemplate>
-                                                    <asp:Label ID="LblCodProductType" runat="server" Text='<%# Bind("id_ProductCategory") %>'></asp:Label>
+                                                    <asp:Label ID="LblCodProductType" runat="server" Text='<%# Bind("id_ProductCategory") %>'>
+                                                    </asp:Label>
                                                 </ItemTemplate>
                                                 <ItemStyle Width="70px" />
                                             </asp:TemplateField>
@@ -179,7 +192,8 @@
                                                     </asp:TextBox>
                                                 </EditItemTemplate>
                                                 <ItemTemplate>
-                                                    <asp:Label ID="LblNomProductType" runat="server"  Width="150px" Text='<%# Bind("Product_Category") %>'></asp:Label>
+                                                    <asp:Label ID="LblNomProductType" runat="server"  Width="150px" Text='<%# Bind("Product_Category") %>'>
+                                                    </asp:Label>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                             <asp:TemplateField HeaderText="Grupo Categoria">
@@ -188,7 +202,8 @@
                                                     </asp:TextBox>
                                                 </EditItemTemplate>
                                                 <ItemTemplate>
-                                                <asp:Label ID="Lblgroupcategory" runat="server"  Width="150px" Text='<%# Bind("Group_Category") %>'></asp:Label>                                                      
+                                                <asp:Label ID="Lblgroupcategory" runat="server"  Width="150px" Text='<%# Bind("Group_Category") %>'>
+                                                </asp:Label>                                                      
                                                 </ItemTemplate>
                                             </asp:TemplateField> 
                                             <asp:TemplateField HeaderText="Cod.Cliente" Visible="False">
@@ -214,32 +229,43 @@
                                                     <asp:CheckBox ID="CheckECategoria" runat="server"  Enabled="true" ></asp:CheckBox> 
                                                 </EditItemTemplate>
                                                 <ItemTemplate>
-                                                    <asp:CheckBox ID="CheckECategoria" runat="server"  Enabled="false" Checked ='<%# Bind("ProductCategory_Status") %>'  ></asp:CheckBox> 
+                                                    <asp:CheckBox ID="CheckECategoria" runat="server"  Enabled="false" Checked ='<%# Bind("ProductCategory_Status") %>' >
+                                                    </asp:CheckBox> 
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                             <asp:CommandField ShowEditButton="True" />
                                         </Columns>                                                
-                                    </asp:GridView>
-                                    <br /><br />                                                 
+                                    </asp:GridView><br /><br />
+                                    <!-- GRILLA_DATOS - FIN -->
+
+                                    <!-- EXPORTAR_EXCEL - INI -->
                                     <div class="centrar">
                                         <div class="centrar centrarcontenido">
-                                            <asp:Label ID="Lblcateeexc" runat="server" CssClass="labels" Text="Exportar a Excel ">
-                                            </asp:Label>
+                                            <asp:Label ID="Lblcateeexc" runat="server" CssClass="labels" Text="Exportar a Excel "></asp:Label>
                                         </div>
-                                        <iframe id="iframeexcelCategoria" runat="server" src="pruebaexcel.aspx" frameborder="0"  width="64px" height="64px"  ></iframe>
+                                        <iframe id="iframeexcelCategoria" runat="server" src="pruebaexcel.aspx" frameborder="0"  width="64px" height="64px">
+                                        </iframe>
                                         <div class="centrar centrarcontenido">                                       
-                                            <asp:Button ID="btnCCategoria" runat="server" CssClass="buttonPlan" Text="Cancelar" Width="80px" onclick="BtnCancelProductType_Click" />
+                                            <asp:Button ID="btnCCategoria" runat="server" CssClass="buttonPlan" Text="Cancelar" Width="80px" 
+                                                onclick="BtnCancelProductType_Click" />
                                         </div> 
-                                    </div>                                                               
+                                    </div>
+                                    <!-- EXPORTAR_EXCEL - FIN -->
+
                                 </div>
                             </div> 
                         </asp:Panel>
+                        <!-- PANEL_RESULTADO_BUSQUEDA- FIN -->
+
                         <cc1:ModalPopupExtender ID="MopopConsulCate" runat="server" BackgroundCssClass="modalBackground"
                             DropShadow="True" Enabled="True"  PopupControlID="CosultaGVCategoria"
                             TargetControlID="btnPopupGVcategoria" DynamicServicePath="">
                         </cc1:ModalPopupExtender>
+
                         <asp:Button ID="btnPopupGVcategoria" runat="server" CssClass="alertas" Width="0px" />
-                        <br /><br /><br /><br />                                  
+                        
+                        <!-- SECCION_OPCIONES- INI -->
+                        <br /><br />
                         <div class="tabla centrar">
                             <div class="fila">
                                 <div class="celda centrarcontenido">
@@ -249,25 +275,35 @@
                                         runat="server" CssClass="buttonPlan" Text="Guardar" Visible="False" Width="95px"
                                         OnClick="BtnSaveProductType_Click" />
                                     <asp:Button ID="BtnConsultaProductType" runat="server"
-                                            CssClass="buttonPlan" Text="Consultar" Width="95px"/>
+                                        CssClass="buttonPlan" Text="Consultar" Width="95px"/>
                                     <asp:Button ID="BtnCancelProductType" runat="server" CssClass="buttonPlan" Text="Cancelar"
-                                                        Width="95px" OnClick="BtnCancelProductType_Click" />
+                                        Width="95px" OnClick="BtnCancelProductType_Click" />
                                     <asp:Button ID="BtnCargaMasivaCate" runat="server" CssClass="buttonPlan"
-                                                            Text="Carga Masiva" Width="95px"/>
+                                        Text="Carga Masiva" Width="95px"/>
                                 </div>
                             </div>
                         </div>
+                        <!-- SECCION_OPCIONES- FIN -->
+
+                        <!-- PANEL_BUSQUEDA - INI -->
                         <asp:Panel ID="BuscarProductCateg" runat="server" CssClass="busqueda" DefaultButton="BtnBTypeProduct"
                             Height="211px" Style="display: none" Width="343px" >
+
+                            <!-- HEADER_TITLE - INI -->
                             <br /><br />
                             <div class="tabla centrar">
                                 <div class="fila">
                                     <div class="celda">
-                                        <asp:Label ID="LbltitBProductcat" runat="server" CssClass="labelsTit2" Text="Buscar Categoria de Producto" />
+                                        <asp:Label ID="LbltitBProductcat" runat="server" CssClass="labelsTit2" 
+                                            Text="Buscar Categoria de Producto" />
                                     </div>
                                 </div>
                             </div>
                             <br /><br />
+                            <!-- HEADER_TITLE - FIN -->
+
+
+                            <!-- FILTROS - INI -->
                             <div class="tabla centrar">
                                 <div class="fila">
                                     <div class="celda">
@@ -293,49 +329,66 @@
                                         <asp:Label ID="lblClieId" runat="server" CssClass="labels" Text="Cliente:" />
                                     </div>
                                     <div class="celda">
-                                        <asp:DropDownList ID="cmb_Cliente" runat="server" Width="180px">
-                                        </asp:DropDownList>
+                                        <asp:DropDownList ID="cmb_Cliente" runat="server" Width="180px"></asp:DropDownList>
                                     </div>
                                 </div>
                             </div>
-                            <br /><br /><br /><br />
+                            <!-- FILTROS - FIN -->
+
+                            <!-- OPCIONES_BUSQUEDA - INI -->
+                            <br /><br />
                             <div class="centrar centrarcontenido">
                                 <asp:Button ID="BtnBTypeProduct" runat="server" CssClass="buttonPlan" Text="Buscar"
                                 Width="80px" OnClick="BtnBTypeProduct_Click" />
                                 <asp:Button ID="BtnCancelBTypeProduct"
                                     runat="server" CssClass="buttonPlan" Text="Cancelar" Width="80px" />
-                            </div>       
+                            </div>
+                            <!-- OPCIONES_BUSQUEDA - FIN -->
+
                         </asp:Panel>
+                        <!-- PANEL_BUSQUEDA - FIN -->
+
                         <cc1:ModalPopupExtender ID="IbtnProductType" runat="server" BackgroundCssClass="modalBackground"
                             DropShadow="True" Enabled="True" OkControlID="BtnCancelBTypeProduct" PopupControlID="BuscarProductCateg"
                             TargetControlID="BtnConsultaProductType" DynamicServicePath="">
-                        </cc1:ModalPopupExtender>    
-                        <asp:Panel ID="CarMasivaCategoria" runat="server" Style="vertical-align: middle; " BackColor="#7F99CC" BorderColor="#7F99CC"
+                        </cc1:ModalPopupExtender>
+
+                        <!-- PANEL_CARGA_MASIVA - INI -->
+                        <asp:Panel ID="CarMasivaCategoria" runat="server" Style="vertical-align: middle;" 
+                            BackColor="#7F99CC" BorderColor="#7F99CC"
                             BorderStyle="Solid" BorderWidth="6px" Font-Names="Verdana" Font-Size="10pt">    
                             <div style="position:absolute; z-index:1;  width:100%;" align="right" > 
                                 <asp:ImageButton ID="ImCMCategoria" runat="server" AlternateText="Cerrar Ventana"
-                                                    ToolTip="Cerrar Ventana" BackColor="Transparent" Height="22px" ImageAlign="Right"
-                                                    ImageUrl="~/Pages/ImgBooom/salir.png" Width="23px"  
-                                        />
+                                    ToolTip="Cerrar Ventana" BackColor="Transparent" Height="22px" ImageAlign="Right"
+                                    ImageUrl="~/Pages/ImgBooom/salir.png" Width="23px" />
                             </div>
                             <div class="centrar">                                   
                                 <iframe id="IfCargaMCategoria" runat="server" height="230px" src="" width="500px">
                                 </iframe>                                       
                             </div>                                                           
                         </asp:Panel>
+                        <!-- PANEL_CARGA_MASIVA - FIN -->
+
                         <cc1:ModalPopupExtender ID="ModalCMasivaCategoria" runat="server" BackgroundCssClass="modalBackground"
                             DropShadow="True" Enabled="True"  PopupControlID="CarMasivaCategoria"
                             TargetControlID="btnPopupCategoria" DynamicServicePath="">
                         </cc1:ModalPopupExtender>
+
                         <asp:Button ID="btnPopupCategoria" runat="server" CssClass="alertas" Width="0px" />
+                        
+                        <!-- PANEL_CATEGORIA_CLIENTE - INI -->
                         <asp:Panel ID="Asignar_categoria_x_cliente" runat="server" Display = "block">
                         </asp:Panel>
+                        <!-- PANEL_CATEGORIA_CLIENTE - FIN -->
+
                         <cc1:ModalPopupExtender ID="Modal_categoria_x_cliente" runat="server" BackgroundCssClass="modalBackground"
                             DropShadow="True" Enabled="True"  PopupControlID="CarMasivaCategoria"
                             TargetControlID="btnPopupCategoria" DynamicServicePath="">
                         </cc1:ModalPopupExtender>
                     </ContentTemplate>
                 </cc1:TabPanel>                     
+                <!-- TAB_PANEL_CATEGORIA - FIN -->
+
                 <cc1:TabPanel runat="server" HeaderText="SubCategoría" ID="Panel_SubCategoria"> 
                     <HeaderTemplate>
                         SubCategoría
@@ -550,7 +603,9 @@
                         </cc1:ModalPopupExtender>
                         <asp:Button ID="btnPopupSubCategoria" runat="server" CssClass="alertas" Width="0px" />
                     </ContentTemplate>
-                </cc1:TabPanel>  
+                </cc1:TabPanel> 
+
+                
                 <cc1:TabPanel runat="server" HeaderText="Marcas" ID="Panel_Marcas">
                     <HeaderTemplate>
                         Marcas
@@ -2523,7 +2578,7 @@
 		                        <asp:Label ID="lblBuscarLote" runat="server" CssClass="labelsTit2" Text="Buscar Lote" />
 	                        </div>
 	                        <br />                  
-	                        <table align="center">
+	                        <%--<table align="center">
 		                        <tr>
 			                        <td>
 				                        <asp:Label ID="lblBuscarLote_FechaInicio" runat="server" CssClass="labels" Text="Fecha Inicio:" />
@@ -2544,7 +2599,7 @@
 				                        <cc1:CalendarExtender ID="Calendar2" PopupButtonID="imgPopup" runat="server" TargetControlID="imgBuscarLote_FechaFin" Format="dd/MM/yyyy"></cc1:CalendarExtender>
 			                        </td>
 		                        </tr>
-	                        </table>
+	                        </table>--%>
 	                        <br />
 	                        <div align="center">
 		                        <asp:Button ID="btnPnBuscarLote" runat="server" CssClass="buttonPlan" Text="Buscar"

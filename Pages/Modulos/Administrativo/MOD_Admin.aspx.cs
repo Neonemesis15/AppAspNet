@@ -7,7 +7,7 @@ namespace SIGE.Pages.Modulos.Administrativo
     public partial class MOD_Admin : System.Web.UI.Page
     {
         private string planningADM;
-        //private Facade_Procesos_Administrativos.Facade_Procesos_Administrativos PAdmin = new SIGE.Facade_Procesos_Administrativos.Facade_Procesos_Administrativos();
+        private Facade_Procesos_Administrativos.Facade_Procesos_Administrativos PAdmin = new SIGE.Facade_Procesos_Administrativos.Facade_Procesos_Administrativos();
 
         private void inicializa_botones()
         {
@@ -20,7 +20,7 @@ namespace SIGE.Pages.Modulos.Administrativo
         }
         protected void ImgCloseSession_Click(object sender, ImageClickEventArgs e)
         {
-            //PAdmin.Get_Delete_Sesion_User(this.Session["sUser"].ToString());
+            PAdmin.Get_Delete_Sesion_User(this.Session["sUser"].ToString());
             this.Session.Abandon();
             Response.Redirect("~/login.aspx");
         }
@@ -33,18 +33,19 @@ namespace SIGE.Pages.Modulos.Administrativo
                 {
                     try
                     {
-                         //planningADM = this.Session["AdmProd"].ToString().Trim();
+                         planningADM = this.Session["AdmProd"].ToString().Trim();
                     }
                     catch 
                     { 
                     }
-                        /*string sUser = this.Session["sUser"].ToString();
+                        string sUser = this.Session["sUser"].ToString();
                         string sPassw = this.Session["sPassw"].ToString();
-                        string sNameUser = this.Session["nameuser"].ToString();*/
+                        string sNameUser = this.Session["nameuser"].ToString();
                         
-                        string sUser = "sUser";
-                        string sPassw = "sPassw";
-                        string sNameUser = "nameuser";
+                        //string sUser = "sUser";
+                        //string sPassw = "sPassw";
+                        //string sNameUser = "nameuser";
+
                         planningADM = "NO";
 
                         if (sUser != null && sPassw != null)

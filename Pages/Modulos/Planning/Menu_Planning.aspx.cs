@@ -23,27 +23,33 @@ namespace SIGE.Pages.Modulos.Planning
             ModalPopupAlertas.Show();
             ModalPanelSolicitud.Show();
         }
+
+        /// <summary>
+        /// Carga Inicial de la Página
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                try
-                {
+            if (!IsPostBack){
+
+                try{
+                    
                     string sUser = this.Session["sUser"].ToString();
                     string sPassw = this.Session["sPassw"].ToString();
                     string sNameUser = this.Session["nameuser"].ToString();
 
-                    if (sUser != null && sPassw != null)
-                    {
+                    if (sUser != null && sPassw != null){
+
                         lblUsuario.Text = sNameUser;
+
                         TxtSolicitante.Text = this.Session["smail"].ToString();
                         TxtEmail.Text = "AdminXplora@lucky.com.pe";
+                        
                         DataTable dt = oCoon.ejecutarDataTable("UP_WEBXPLORA_PLA_OBTENER_MODULOSALTERNOS", this.Session["idnivel"].ToString().Trim());
 
-                        if (dt != null)
-                        {
-                            if (dt.Rows.Count > 0)
-                            {
+                        if (dt != null){
+                            if (dt.Rows.Count > 0){
                                 SelModulo.Visible = true;
                                 cmbselModulos.Visible = true;
                                 SelCliente.Visible = false;
@@ -56,9 +62,7 @@ namespace SIGE.Pages.Modulos.Planning
                                 cmbselModulos.DataBind();
                                 cmbselModulos.Items.Insert(0, new ListItem("--Seleccione--", "0"));
                                 cmbselModulos.Items.Remove(cmbselModulos.Items.FindByValue(this.Session["smodul"].ToString().Trim()));
-                            }
-                            else
-                            {
+                            }else{
                                 SelModulo.Visible = false;
                                 cmbselModulos.Visible = false;
                                 SelCliente.Visible = false;
@@ -69,9 +73,7 @@ namespace SIGE.Pages.Modulos.Planning
                             }
                         }
                     }
-                }
-                catch (Exception ex)
-                {
+                }catch (Exception ex){
                     this.Session.Abandon();
                     string errmensajeseccion = Convert.ToString(ex);
                     Response.Redirect("~/err_mensaje_seccion.aspx", true);
@@ -143,8 +145,10 @@ namespace SIGE.Pages.Modulos.Planning
             {
                 Alertas.CssClass = "MensajesSupervisor";
                 LblAlert.Text = "Envio Solicitudes";
-                LblFaltantes.Text = "Sr. Usuario, se presentó un error inesperado al momento de enviar el correo. Por favor inténtelo nuevamente o consulte al Administrador de la aplicación";
-                PopupMensajes();
+                LblFaltantes.Text = "Sr. Usuario, se presentó un error inesperado al momento " + 
+                    " de enviar el correo. Por favor inténtelo nuevamente o consulte al Administrador de la aplicación";
+                ModalPopupAlertas.Show();
+                //PopupMensajes();
                 return;
             }
         }
@@ -166,36 +170,60 @@ namespace SIGE.Pages.Modulos.Planning
             Response.Redirect("~/Pages/Modulos/Planning/ini_PlanningFinal.aspx", true);
         }
 
+        /// <summary>
+        /// Evento Go Click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void GO_Click(object sender, EventArgs e)
         {
-            if (cmbselModulos.Text != "0" && cmbcliente.Text != "0")
-            {
+            /// Si los Control cmbselModulos y cmbcliente son diferente de 0
+            if (cmbselModulos.Text != "0" && cmbcliente.Text != "0"){
+
+                // Instanciando el BusinessLogic para obtener la información del App
                 AplicacionWeb oAplicacionWeb = new AplicacionWeb();
-                EAplicacionWeb oeAplicacionWeb = oAplicacionWeb.obtenerAplicacion(this.Session["scountry"].ToString().Trim(), cmbselModulos.SelectedItem.Value);
-                this.Session["oeAplicacionWeb"] = oeAplicacionWeb;
-                this.Session["cod_applucky"] = oeAplicacionWeb.codapplucky;
-                this.Session["abr_app"] = oeAplicacionWeb.abrapp;
-                this.Session["app_url"] = oeAplicacionWeb.appurl;
-                this.Session["companyid"] = cmbcliente.SelectedItem.Value;
-                DataTable dturllogo = oCoon.ejecutarDataTable("UP_WEBXPLORA_GEN_LOGOCLIENT", Convert.ToInt32(cmbcliente.Text));
-                this.Session["fotocomany"] = dturllogo.Rows[0][0].ToString().Trim();
-                this.Session["sNombre"] = cmbcliente.SelectedItem.Text;
-                string sPagina = oeAplicacionWeb.HomePage;
-                oeAplicacionWeb = null;
-                oAplicacionWeb = null;
-                this.Response.Redirect("~/" + sPagina, true);
-                //if (this.Session["scountry"].ToString() == "589" && cmbselModulos.SelectedItem.Value == "MOVIL")
-                //{
-                //Response.Redirect("http://localhost:61260/?data=" + Lucky.CFG.Util.Encriptacion.QueryStringEncode(this.Session["sUser"].ToString() + "/" + this.Session["companyid"].ToString() + "/" + this.Session["sNombre"].ToString(), "usr"));
+              
+                // Obteniendo información de la Aplicación
+                EAplicacionWeb oeAplicacionWeb = 
+                    oAplicacionWeb.obtenerAplicacion(
+                    this.Session["scountry"].ToString().Trim(), 
+                    cmbselModulos.SelectedItem.Value);
+                
+                // Verificar que no haya Errores
+                if (oAplicacionWeb.getMessage().Equals(""))
+                {
+                    this.Session["oeAplicacionWeb"] = oeAplicacionWeb;
+                    this.Session["cod_applucky"] = oeAplicacionWeb.codapplucky;
+                    this.Session["abr_app"] = oeAplicacionWeb.abrapp;
+                    this.Session["app_url"] = oeAplicacionWeb.appurl;
+                    this.Session["companyid"] = cmbcliente.SelectedItem.Value;
+                    DataTable dturllogo =
+                        oCoon.ejecutarDataTable("UP_WEBXPLORA_GEN_LOGOCLIENT",
+                        Convert.ToInt32(cmbcliente.Text));
+                    this.Session["fotocomany"] = dturllogo.Rows[0][0].ToString().Trim();
+                    this.Session["sNombre"] = cmbcliente.SelectedItem.Text;
+                    string sPagina = oeAplicacionWeb.HomePage;
+                    oeAplicacionWeb = null;
+                    oAplicacionWeb = null;
+                    this.Response.Redirect("~/" + sPagina, true);
+                    //if (this.Session["scountry"].ToString() == "589" && cmbselModulos.SelectedItem.Value == "MOVIL")
+                    //{
+                    //Response.Redirect("http://localhost:61260/?data=" + Lucky.CFG.Util.Encriptacion.QueryStringEncode(this.Session["sUser"].ToString() + "/" + this.Session["companyid"].ToString() + "/" + this.Session["sNombre"].ToString(), "usr"));
 
-                //    //Response.Redirect("http://localhost:61260 <http://localhost:61260/> ", true); 
-                //}
-                //else
-                //{
-                //    this.Response.Redirect("~/" + sPagina, true);
-                //}
-
-
+                    //    //Response.Redirect("http://localhost:61260 <http://localhost:61260/> ", true); 
+                    //}
+                    //else
+                    //{
+                    //    this.Response.Redirect("~/" + sPagina, true);
+                    //}
+                }else {
+                    Alertas.CssClass = "MensajesSupervisor";
+                    LblAlert.Text = "Error:";
+                    LblFaltantes.Text = "Sr. Usuario, ocurrió un error inesperado: " 
+                        + oAplicacionWeb.getMessage();
+                    ModalPopupAlertas.Show();
+                    return;
+                }
             }
         }
 
