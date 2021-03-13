@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Bootstrap 3 Modals</title>
+
+    <link type="text/css" rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" media="screen">
+    <link type="text/css" rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" media="screen">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+    <!-- <script type="text/javascript" src='https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.3.min.js'></script> -->
+    <!-- <script type="text/javascript" src="../../js/jquery-1.4.2.min.js" ></script> -->
+    <!-- <script type="text/javascript" src="../../js/bootstrap.min.js" ></script> -->
+    <!-- <link type="text/css" href="../../css/bootstrap.min.css" rel="stylesheet" media="screen" /> -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#packtpub").modal('show');
+        });
+    </script>
+    <style>
+        #packt { padding: 30px 30px 30px 30px; }
+    </style> 
+</head>
+<body id="packt">
+    <div id="packtpub" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" datadismiss="modal" aria-hidden="true">&times;</button>
+                    <h1 class="modal-title">Beware</h1>
+                </div>
+                <div class="modal-body">
+                    <p>The Site has been blocked due to malicious content</p>
+                    <p class="text-warning"><small> Proceed at your own risk</small></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" datadismiss="modal">Quit</button>
+                    <button type="button" class="btn btn-danger">Proceed</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

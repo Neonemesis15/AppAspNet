@@ -9,7 +9,6 @@ using Lucky.Data.Common.Application;
 using Lucky.Entity.Common.Application;
 using Lucky.CFG.Util;
 using System.Collections.Generic;
-
 namespace SIGE.Pages.Modulos.Planning
 {
     /// <summary>
@@ -28,7 +27,7 @@ namespace SIGE.Pages.Modulos.Planning
         }
 
         #region VARIABLES GLOBALES
-        
+        // Variable String para guardar los Errores
         private DateTime fechaSolicitudP;
         private DateTime fechaFinalP;
         private DateTime fechaIniPreP;
@@ -40,6 +39,15 @@ namespace SIGE.Pages.Modulos.Planning
         private int level_carga;
         // Almanecar los mensajes de Error de la Aplicación, en caso de ser vacio (""), la App esta Ok, Caso Contrario Contiene Errores
         private String messages = "";
+
+        private String idPlanning;
+        private String idCity;
+        private int idTypeNodeCommercial;
+        private String idNodeCommercial;
+        private int idOficina;
+        private int idMalla;
+        private int idSector;
+        
         #endregion
 
         #region CONEXION A BASE DE DATOS
@@ -47,8 +55,11 @@ namespace SIGE.Pages.Modulos.Planning
         private Staff_Planning Staff_Planning = new Staff_Planning();
         private PuntosDV PuntosDV = new PuntosDV();
         private Conexion oCoon = new Conexion();
-        private PointOfSale_PlanningOper PointOfSale_PlanningOper = new PointOfSale_PlanningOper();
-
+        private PointOfSale_PlanningOper PointOfSale_PlanningOper 
+            = new PointOfSale_PlanningOper();
+        private Company oBLCompany = new Company();
+        private Lucky.Business.Common.Application.Planning 
+            oBLPlanning = new Lucky.Business.Common.Application.Planning();
         #endregion
 
         #region SERVICES
@@ -68,22 +79,36 @@ namespace SIGE.Pages.Modulos.Planning
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {                
-                try
-                {
-                    string sUser = this.Session["sUser"].ToString();
-                    string sPassw = this.Session["sPassw"].ToString();
-                    string sNameUser = this.Session["nameuser"].ToString();
+            if (!IsPostBack){ 
+                try{
                     
-                    lblUsuario.Text = sNameUser;
+                    fncLoginDummy();
 
-                    if (sUser != null && sPassw != null) llena_planning();
+                    //string sUser = this.Session["sUser"].ToString();
+                    //string sPassw = this.Session["sPassw"].ToString();
+                    //string sNameUser = this.Session["nameuser"].ToString();
+
+                    int idCompany = 
+                        Convert.ToInt32(
+                        this.Session["companyid"].ToString().Trim());
+
+                    lblUsuario.Text = this.Session["nameuser"].ToString();
                     
-                    if(this.Session["companyid"].ToString().Trim()=="1562" 
-                        || this.Session["companyid"].ToString().Trim()=="1561"){
+                    //Verificar que tengan un  UserName y Password
+                    if (this.Session["sUser"].ToString() != null && 
+                        this.Session["sPassw"].ToString() != null){
+
+                        fillPlanning(idCompany);
+                        //llena_planning();
+                    }
+
+                    // Validar por la Company si debe mostrar o no
+                    // el Menú productoAncla.
+                    if (idCompany.Equals("1562") || 
+                        idCompany.Equals("1561")){
                         MenuProductoAncla.Visible = true;
                     }
+
                 }catch (Exception ex){
 
                     string error = "";
@@ -118,20 +143,28 @@ namespace SIGE.Pages.Modulos.Planning
         {
             // Modal para Asignar Presupuesto
             ModalPanelASignaPresupuesto.Hide();
+
             // Modal para Descripción de Campania
             ModalPanelDescCampaña.Hide();
+            
             // Modal para Responsables de Campania
             ModalPanelResponsablesCampaña.Hide();
+            
             // Modal para Asignar Personal
             ModalPanelAsignaPersonal.Hide();
+            
             // Modal para Asignar Puntos de Venta
             ModalPanelPDV.Hide();
+            
             // Modal para Asignar Paneles
             ModalPanelPaneles.Hide();
+            
             // Modal para Asignar Pdv por Usuario
             ModalPanelAsignacionPDVaoper.Hide();
+            
             // Modal para Asignar Productos
             ModalPanelProductos.Hide();
+            
             // Modal para Asignar Reportes
             ModalPanelReportPlan.Hide();
         }
@@ -162,15 +195,36 @@ namespace SIGE.Pages.Modulos.Planning
             txtarea.Text = "";
         }
         /// <summary>
-        /// Mensaje General que se setea en el AspControl ModalPopupExtender 'MPMensajeSeguimiento'
+        /// Mensaje General que se setea en el 
+        /// AspControl ModalPopupExtender 'MPMensajeSeguimiento'
         /// </summary>
         private void Mensajes_Seguimiento()
         {
-            MensajeSeguimiento.CssClass = this.Session["cssclass"].ToString();
-            lblencabezadoSeguimiento.Text = this.Session["encabemensa"].ToString();
-            lblmensajegeneralSeguimiento.Text = this.Session["mensaje"].ToString();
+            MensajeSeguimiento.CssClass = 
+                this.Session["cssclass"].ToString();
+            lblencabezadoSeguimiento.Text = 
+                this.Session["encabemensa"].ToString();
+            lblmensajegeneralSeguimiento.Text = 
+                this.Session["mensaje"].ToString();
             MPMensajeSeguimiento.Show();
         }
+
+        /// <summary>
+        /// Mostrar popUp informativo al Usuario.
+        /// </summary>
+        /// <param name="ccsClass"></param>
+        /// <param name="messageTitle"></param>
+        /// <param name="messageText"></param>
+        private void showMensajesSeguimiento(String ccsClass,
+            String messageTitle, String messageText) {
+
+            MensajeSeguimiento.CssClass = ccsClass;
+            lblencabezadoSeguimiento.Text = messageTitle;
+            lblmensajegeneralSeguimiento.Text = messageText;
+
+            MPMensajeSeguimiento.Show();
+        }
+
         private void Mensajes_AsignacionPresupuesto()
         {
             MensajeAsignacionPresupuesto.CssClass = this.Session["cssclass"].ToString();
@@ -868,7 +922,6 @@ namespace SIGE.Pages.Modulos.Planning
                 Txtmeca.Text = ds.Tables[3].Rows[0]["MechanicalActivity_Description"].ToString().Trim();
 
             }
-            ds = null;
 
         } //revisado
 
@@ -993,22 +1046,64 @@ namespace SIGE.Pages.Modulos.Planning
 
         private void ConsultaPDVCampaña()
         {
-            DataSet ds = (DataSet)this.ViewState["planning_creados"];
-            if (ds.Tables[6].Rows.Count > 0)
+            DataSet ds = 
+                (DataSet)this.ViewState["planning_creados"];
+
+            if (ds.Tables[6].Rows.Count > 0 &&
+                ds.Tables[9].Rows.Count > 0)
             {
-                TxtPlanningPDV.Text = ds.Tables[9].Rows[0]["id_planning"].ToString().Trim();
-                LblTxtPresupuestoPDV.Text = ds.Tables[9].Rows[0]["Planning_Name"].ToString().Trim();
-                DataTable dtCliente = Presupuesto.Get_ObtenerClientes(ds.Tables[9].Rows[0]["Planning_Budget"].ToString().Trim(), 1);
-                this.Session["company_id"] = dtCliente.Rows[0]["Company_id"].ToString().Trim();
-                this.Session["Planning_CodChannel"] = ds.Tables[9].Rows[0]["Planning_CodChannel"].ToString().Trim();
-                llenaciudades();
-                GvPDV.DataBind();
-                GVPDVDelete.DataBind();
-                dtCliente = null;
-                this.Session["InsertaConsultaPDV"] = "true";
-                this.Session["InsertaConsultaPDVPresupuesto"] = ds.Tables[9].Rows[0]["Planning_Budget"].ToString().Trim();
+                String idPlanning = ds.Tables[9].Rows[0]["id_planning"]
+                .ToString().Trim();
+
+                TxtPlanningPDV.Text = idPlanning;
+
+                LblTxtPresupuestoPDV.Text =
+                    ds.Tables[9].Rows[0]["Planning_Name"]
+                    .ToString().Trim();
+
+                // Obtener Clientes de Lucky                
+                DataTable dtCliente =
+                    oBLPlanning.cmbInterfaceEasyWinDummy(
+                    ds.Tables[9].Rows[0]["Planning_Budget"]
+                        .ToString().Trim(),
+                    1);
+
+                if (oBLPlanning.getMessages().Equals(""))
+                {
+                    // Presupuesto.Get_ObtenerClientes(ds.Tables[9].Rows[0]["Planning_Budget"].ToString().Trim(), 1);
+                    this.Session["company_id"] =
+                        dtCliente.Rows[0]["Company_id"]
+                        .ToString().Trim();
+
+                    this.Session["Planning_CodChannel"] =
+                        ds.Tables[9].Rows[0]["Planning_CodChannel"]
+                        .ToString().Trim();
+
+                    llenaciudades(idPlanning);
+
+                    if (getMessage().Equals(""))
+                    {
+                        GvPDV.DataBind();
+                        GVPDVDelete.DataBind();
+                        dtCliente = null;
+                        this.Session["InsertaConsultaPDV"] = "true";
+                        this.Session["InsertaConsultaPDVPresupuesto"] =
+                            ds.Tables[9].Rows[0]["Planning_Budget"]
+                            .ToString().Trim();
+                    }
+                }
             }
-            ds = null;
+            else {
+                messages = "Error: " + "¡No se encontraron registros!";
+            }
+
+            if (!getMessage().Equals(""))
+            {
+                showMensajesSeguimiento(
+                        "MensajesSupervisor",
+                        "Sr. Usuario",
+                        getMessage());
+            }
         }
 
         private void ConsultaProductosCampaña()
@@ -1181,23 +1276,24 @@ namespace SIGE.Pages.Modulos.Planning
         /// <returns></returns>
         private void llena_planning(){
             
-            DataTable dt = new DataTable(); ;
+            DataTable dt = new DataTable();
             // Metodo para Obtener los Presupustos Asignados
-            dt = Presupuesto.Presupuesto_Search(Convert.ToInt32(this.Session["companyid"].ToString().Trim()));
-
-            if (dt != null){
-                if (dt.Rows.Count > 1){
-                    CmbSelCampaña.DataSource = dt;
-                    CmbSelCampaña.DataTextField = "name";
-                    CmbSelCampaña.DataValueField = "id_planning";
-                    CmbSelCampaña.DataBind();
-                }else{
-                    this.Session["encabemensa"] = "Sr. Usuario";
-                    this.Session["cssclass"] = "MensajesSupervisor";
-                    this.Session["mensaje"] = "Usted está asignado a una Compañía que no tiene campañas creadas";
-                    Mensajes_Seguimiento();
-                }
+            dt = Presupuesto.Presupuesto_Search(
+                Convert.ToInt32(
+                this.Session["companyid"].ToString().Trim()));
+            
+            if (dt.Rows.Count > 1){
+                CmbSelCampaña.DataSource = dt;
+                CmbSelCampaña.DataTextField = "name";
+                CmbSelCampaña.DataValueField = "id_planning";
+                CmbSelCampaña.DataBind();
+            }else{
+                this.Session["encabemensa"] = "Sr. Usuario";
+                this.Session["cssclass"] = "MensajesSupervisor";
+                this.Session["mensaje"] = "Usted está asignado a una Compañía que no tiene campañas creadas";
+                Mensajes_Seguimiento();
             }
+         
 
             #region Codigo de Pruebas
             /*
@@ -1222,6 +1318,62 @@ namespace SIGE.Pages.Modulos.Planning
             #endregion
 
         }
+
+        /// <summary>
+        /// Fill AspControl DropDownList 'CmbSelCampaña'
+        /// correspondiente a los Planning asociados al 
+        /// Lucky bucket.
+        /// </summary>
+        private void fillPlanning(int idCompany) {
+
+            DataTable dt = findPresupuesto(idCompany);
+            
+            if (getMessage().Equals(""))
+            {
+                //if (dt.Rows.Count > 1)
+                //{
+                fillDropDownList(CmbSelCampaña,
+                    dt,
+                    "name",
+                    "id_planning");
+                    //CmbSelCampaña.DataSource = dt;
+                    //CmbSelCampaña.DataTextField = "name";
+                    //CmbSelCampaña.DataValueField = "id_planning";
+                    //CmbSelCampaña.DataBind();
+                //}
+            }
+            else {
+                messages = getMessage();
+            }
+
+            if (!getMessage().Equals("")) {
+                showMensajesSeguimiento(
+                       "MensajesSupervisor",
+                       "Sr. Usuario",
+                       getMessage());
+            }
+        }
+
+        /// <summary>
+        /// Buscar Presupuesto by idCompany
+        /// </summary>
+        /// <param name="idCompany"></param>
+        /// <returns></returns>
+        public DataTable findPresupuesto(int idCompany) {
+            DataTable dt = new DataTable();
+            try
+            {
+                dt = oBLPlanning.presupuestoSearch(idCompany);
+                if (!oBLPlanning.getMessages().Equals("")) {
+                    messages = oBLPlanning.getMessages();
+                }
+            }
+            catch (Exception ex) {
+                messages = "Error: " + ex.Message.ToString();
+            }
+            return dt;
+        }
+
         private void LlenaCanales()
         {
             ListItem listItem1 = new ListItem("Mayorista", "1");
@@ -1246,49 +1398,101 @@ namespace SIGE.Pages.Modulos.Planning
             dt = null;
             */
         }
-        private void llenaciudades()
+        private void llenaciudades(String idPlanning)
         {
-            DataSet ds = PPlanning.Get_cityPointofsalePlanning(TxtPlanningPDV.Text, "0", 0, "0", 0, 0);
+            // PPlanning.Get_cityPointofsalePlanning(
+            // TxtPlanningPDV.Text, "0", 0, "0", 0, 0);
+            DataSet ds = oBLPlanning.getInfoPtoVentaDummy(
+                //TxtPlanningPDV.Text,
+                idPlanning,
+                "0",0,"0",0,0);
+
             if (ds.Tables[0].Rows.Count > 0)
             {
-                CmbSelCity.DataSource = ds.Tables[0];
+                fillDropDownList(CmbSelCity,
+                ds.Tables[0],
+                "name_city",
+                "cod_city");
 
-                CmbSelCity.DataValueField = "cod_city";
-                CmbSelCity.DataTextField = "name_city";
-                CmbSelCity.DataBind();
-                CmbSelCity.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
+                if (!getMessage().Equals("")) { 
+                    messages = getMessage();
+                }
+
+                //CmbSelCity.DataSource = ds.Tables[0];
+                //CmbSelCity.DataValueField = "cod_city";
+                //CmbSelCity.DataTextField = "name_city";
+                //CmbSelCity.DataBind();
+                //CmbSelCity.Items.Insert(0, 
+                //    new ListItem("<Seleccione..>", "0"));
+
             }
             else
             {
-                this.Session["encabemensa"] = "Sr. Usuario";
-                this.Session["cssclass"] = "MensajesSupervisor";
-                this.Session["mensaje"] = "No se han creado puntos de venta para la campaña: " + LblTxtPresupuestoPDV.Text.ToUpper();
+                messages = "No se Encontraron registros " +
+                "para mostrar ciudades.";
+                //this.Session["encabemensa"] = "Sr. Usuario";
+                //this.Session["cssclass"] = "MensajesSupervisor";
+                //this.Session["mensaje"] = "No se han creado puntos de venta para la campaña: " + LblTxtPresupuestoPDV.Text.ToUpper();
                 // falta mensaje de usuario en pdv Mensajes_SeguimientoValidacionVistas();
 
             }
-            ds = null;
+
+            if (!getMessage().Equals("")) {
+                showMensajesSeguimiento(
+                        "MensajesSupervisor",
+                        "Sr. Usuario",
+                        getMessage());
+            }
+
+
+            //ds = null;
             CmbSelTipoAgrup.Items.Clear();
             CmbSelAgrup.Items.Clear();
             CmbSelOficina.Items.Clear();
             CmbSelMalla.Items.Clear();
             GvPDV.DataBind();
             GVPDVDelete.DataBind();
-
-
         }
-        private void llenaTipoAgrup()
+
+        private void llenaTipoAgrup(String idPlanning, 
+        String idCity)
         {
-            DataSet ds = PPlanning.Get_cityPointofsalePlanning(TxtPlanningPDV.Text, CmbSelCity.Text, 0, "0", 0, 0);
+            //DataSet ds = 
+            //    PPlanning.Get_cityPointofsalePlanning(
+            //    TxtPlanningPDV.Text, 
+            //    CmbSelCity.Text, 0, "0", 0, 0);
 
-            CmbSelTipoAgrup.DataSource = ds.Tables[1];
+            DataSet ds = oBLPlanning.getInfoPtoVentaDummy(
+                idPlanning,
+                idCity, 
+                0, "0", 0, 0);
 
-            CmbSelTipoAgrup.DataValueField = "idNodeComType";
-            CmbSelTipoAgrup.DataTextField = "NodeComType_name";
-            CmbSelTipoAgrup.DataBind();
-            CmbSelTipoAgrup.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
+            if (oBLPlanning.getMessages().Equals(""))
+            {
+                fillDropDownList(CmbSelTipoAgrup,
+                ds.Tables[1],
+                "NodeComType_name",
+                "idNodeComType");
 
+                //CmbSelTipoAgrup.DataSource = ds.Tables[1];
+                //CmbSelTipoAgrup.DataValueField = "idNodeComType";
+                //CmbSelTipoAgrup.DataTextField = "NodeComType_name";
+                //CmbSelTipoAgrup.DataBind();
+                //CmbSelTipoAgrup.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
 
-            ds = null;
+            }
+            else {
+                messages = oBLPlanning.getMessages();
+            }
+
+            if (!getMessage().Equals("")) {
+                showMensajesSeguimiento(
+                    "MensajesSupervisor",
+                    "Sr. Usuario",
+                    getMessage());
+            }
+
+            //ds = null;
             CmbSelAgrup.Items.Clear();
             CmbSelOficina.Items.Clear();
             CmbSelMalla.Items.Clear();
@@ -1297,78 +1501,233 @@ namespace SIGE.Pages.Modulos.Planning
             GVPDVDelete.DataBind();
 
         }
-        private void llenaAgrup()
+
+
+        private void llenaAgrup(String idPlanning,
+        string idCity, int idNodeCommercialType,
+        string idNodeCommercial, int idOficina,
+        int idMalla)
         {
-            DataSet ds = PPlanning.Get_cityPointofsalePlanning(TxtPlanningPDV.Text, CmbSelCity.Text, Convert.ToInt32(CmbSelTipoAgrup.Text), "0", 0, 0);
+            //DataSet ds = 
+            //    PPlanning.Get_cityPointofsalePlanning(
+            //    TxtPlanningPDV.Text, 
+            //    CmbSelCity.Text, 
+            //    Convert.ToInt32(CmbSelTipoAgrup.Text), 
+            //    "0",
+            //    0, 
+            //    0);
 
-            CmbSelAgrup.DataSource = ds.Tables[2];
+            DataSet ds = oBLPlanning.getInfoPtoVentaDummy(
+                idPlanning,
+                idCity,
+                idNodeCommercialType,
+                idNodeCommercial,
+                idOficina,
+                idMalla
+                );
 
-            CmbSelAgrup.DataValueField = "NodeCommercial";
-            CmbSelAgrup.DataTextField = "commercialNodeName";
-            CmbSelAgrup.DataBind();
-            CmbSelAgrup.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
-            ds = null;
+            if (oBLPlanning.getMessages().Equals(""))
+            {
+
+                fillDropDownList(CmbSelAgrup, ds.Tables[2],
+                "commercialNodeName", "NodeCommercial");
+                //CmbSelAgrup.DataSource = ds.Tables[2];
+                //CmbSelAgrup.DataValueField = "NodeCommercial";
+                //CmbSelAgrup.DataTextField = "commercialNodeName";
+                //CmbSelAgrup.DataBind();
+                //CmbSelAgrup.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
+                //ds = null;
+            }
+            else {
+                messages = oBLPlanning.getMessages();
+            }
+
             CmbSelOficina.Items.Clear();
             CmbSelMalla.Items.Clear();
             CmbSelSector.Items.Clear();
             GvPDV.DataBind();
             GVPDVDelete.DataBind();
         }
-        private void llenaOficinas()
+        private void llenaOficinas(String idPlanning,
+        string idCity, int idNodeCommercialType,
+        string idNodeCommercial, int idOficina,
+        int idMalla)
         {
-            DataSet ds = PPlanning.Get_cityPointofsalePlanning(TxtPlanningPDV.Text, CmbSelCity.Text, Convert.ToInt32(CmbSelTipoAgrup.Text), CmbSelAgrup.Text, 0, 0);
+            //DataSet ds = 
+            //    PPlanning.Get_cityPointofsalePlanning(
+            //    TxtPlanningPDV.Text, 
+            //    CmbSelCity.Text, 
+            //    Convert.ToInt32(CmbSelTipoAgrup.Text), 
+            //    CmbSelAgrup.Text, 0, 0);
 
-            CmbSelOficina.DataSource = ds.Tables[3];
+            DataSet ds = oBLPlanning.getInfoPtoVentaDummy(
+            idPlanning, idCity, idNodeCommercialType,
+            idNodeCommercial, idOficina, idMalla);
 
-            CmbSelOficina.DataValueField = "cod_Oficina";
-            CmbSelOficina.DataTextField = "Name_Oficina";
-            CmbSelOficina.DataBind();
-            CmbSelOficina.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
-            ds = null;
+            if (oBLPlanning.getMessages().Equals("")){
+                fillDropDownList(CmbSelOficina, ds.Tables[3],
+                "Name_Oficina", "cod_Oficina");
+                
+                //CmbSelOficina.DataSource = ds.Tables[3];
+                //CmbSelOficina.DataValueField = "cod_Oficina";
+                //CmbSelOficina.DataTextField = "Name_Oficina";
+                //CmbSelOficina.DataBind();
+                //CmbSelOficina.Items.Insert(0, 
+                //    new ListItem("<Seleccione..>", "0"));
+                //ds = null;
+            }
+            else {
+                messages = oBLPlanning.getMessages();
+            }
+
             CmbSelMalla.Items.Clear();
             CmbSelSector.Items.Clear();
             GvPDV.DataBind();
             GVPDVDelete.DataBind();
         }
-        private void Llenamallas()
+        private void Llenamallas(String idPlanning, String idCity,
+        int idTypeNodeCommercial, String idNodeCommercial,
+        int idOficina, int idMalla)
         {
 
-            DataSet ds = PPlanning.Get_cityPointofsalePlanning(TxtPlanningPDV.Text, CmbSelCity.Text, Convert.ToInt32(CmbSelTipoAgrup.Text), CmbSelAgrup.Text, Convert.ToInt64(CmbSelOficina.Text), 0);
+            //DataSet ds = 
+            //    PPlanning.Get_cityPointofsalePlanning(
+            //    TxtPlanningPDV.Text, 
+            //    CmbSelCity.Text, 
+            //    Convert.ToInt32(CmbSelTipoAgrup.Text), 
+            //    CmbSelAgrup.Text, 
+            //    Convert.ToInt64(CmbSelOficina.Text), 
+            //    0);
 
-            CmbSelMalla.DataSource = ds.Tables[4];
+            DataSet ds = oBLPlanning.getInfoPtoVentaDummy(
+            idPlanning, idCity, idTypeNodeCommercial,
+            idNodeCommercial, idOficina, idMalla );
 
-            CmbSelMalla.DataValueField = "id_malla";
-            CmbSelMalla.DataTextField = "malla";
-            CmbSelMalla.DataBind();
-            CmbSelMalla.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
-            ds = null;
-            CmbSelSector.Items.Clear();
+            if (oBLPlanning.getMessages().Equals(""))
+            {
+                fillDropDownList(CmbSelMalla, ds.Tables[4],
+                "malla", "id_malla");
+
+                if (getMessage().Equals("")) {
+                    CmbSelSector.Items.Clear();
+                }
+
+                //CmbSelMalla.DataSource = ds.Tables[4];
+                //CmbSelMalla.DataValueField = "id_malla";
+                //CmbSelMalla.DataTextField = "malla";
+                //CmbSelMalla.DataBind();
+                //CmbSelMalla.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
+                //ds = null;
+                //CmbSelSector.Items.Clear();
+
+            }
+            else {
+                messages = oBLPlanning.getMessages();
+            }
+
+            if (!getMessage().Equals("")) {
+                showMensajesSeguimiento(
+                        "MensajesSupervisor",
+                        "Sr. Usuario",
+                        getMessage());
+            }
+
 
         }
-        private void Llenasector()
+        private void Llenasector(String idPlanning, String idCity,
+        int idTypeNodeCommercial, String idNodeCommercial,
+        int idOficina, int idMalla)
         {
-            DataSet ds = PPlanning.Get_cityPointofsalePlanning(TxtPlanningPDV.Text, CmbSelCity.Text, Convert.ToInt32(CmbSelTipoAgrup.Text), CmbSelAgrup.Text, Convert.ToInt64(CmbSelOficina.Text), Convert.ToInt32(CmbSelMalla.Text));
+            //DataSet ds = 
+            //    PPlanning.Get_cityPointofsalePlanning(
+            //    TxtPlanningPDV.Text, 
+            //    CmbSelCity.Text, 
+            //    Convert.ToInt32(CmbSelTipoAgrup.Text), 
+            //    CmbSelAgrup.Text, 
+            //    Convert.ToInt64(CmbSelOficina.Text), 
+            //    Convert.ToInt32(CmbSelMalla.Text));
 
-            CmbSelSector.DataSource = ds.Tables[5];
+            DataSet ds = oBLPlanning.getInfoPtoVentaDummy(
+                idPlanning,
+                idCity,
+                idTypeNodeCommercial,
+                idNodeCommercial,
+                idOficina,
+                idMalla
+                );
 
-            CmbSelSector.DataValueField = "id_sector";
-            CmbSelSector.DataTextField = "Sector";
-            CmbSelSector.DataBind();
-            CmbSelSector.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
-            ds = null;
+            if (oBLPlanning.getMessages().Equals("")){
+                fillDropDownList(CmbSelSector,
+                ds.Tables[5],
+                "Sector", "id_sector");
+            }
+            else {
+                messages = oBLPlanning.getMessages();
+            }
+
+
+            if (!getMessage().Equals("")) {
+                showMensajesSeguimiento(
+                "MensajesSupervisor",
+                "Sr. Usuario",
+                getMessage().ToString());
+            }
+
+            
+            //CmbSelSector.DataSource = ds.Tables[5];
+            //CmbSelSector.DataValueField = "id_sector";
+            //CmbSelSector.DataTextField = "Sector";
+            //CmbSelSector.DataBind();
+            //CmbSelSector.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
+            //ds = null;
         }
-        private void llenaGrillaPDV()
+        private void llenaGrillaPDV(String idPlanning,
+        String idCity, int idTypeNodeCommercial,
+        String idNodeCommercial, int idOficina,
+        int idMalla, int idSector)
         {
-            DataTable dtpdvplanning = null;
-            dtpdvplanning = oCoon.ejecutarDataTable("UP_WEBSIGE_PLANNING_OBTENERPDVPLA", TxtPlanningPDV.Text, CmbSelCity.Text, Convert.ToInt32(CmbSelTipoAgrup.Text), CmbSelAgrup.Text, Convert.ToInt64(CmbSelOficina.Text), Convert.ToInt32(CmbSelMalla.Text), Convert.ToInt32(CmbSelSector.Text));
+            //DataTable dtpdvplanning = null;
+            //dtpdvplanning = 
+            //    oCoon.ejecutarDataTable(
+            //    "UP_WEBSIGE_PLANNING_OBTENERPDVPLA", 
+            //    TxtPlanningPDV.Text, 
+            //    CmbSelCity.Text, 
+            //    Convert.ToInt32(CmbSelTipoAgrup.Text), 
+            //    CmbSelAgrup.Text, 
+            //    Convert.ToInt64(CmbSelOficina.Text), 
+            //    Convert.ToInt32(CmbSelMalla.Text), 
+            //    Convert.ToInt32(CmbSelSector.Text));
 
             // pendiente cambiar por este metodo
             //DataTable dtpdvplanning = PuntosDV.Consultar_PDVPlanningGeneral(TxtPlanningPDV.Text, Convert.ToInt32(CmbSelMalla.Text), Convert.ToInt32(CmbSelSector.Text));
-            GvPDV.DataSource = dtpdvplanning;
-            GvPDV.DataBind();
-            GVPDVDelete.DataSource = dtpdvplanning;
-            GVPDVDelete.DataBind();
-            dtpdvplanning = null;
+
+            DataTable dtpdvplanning =
+                oBLPlanning.getListPdvPlanningDummy(
+                idPlanning,
+                idCity, idTypeNodeCommercial, idNodeCommercial,
+                idOficina, idMalla, idSector);
+            if (oBLPlanning.getMessages().Equals(""))
+            {
+
+                GvPDV.DataSource = dtpdvplanning;
+                GvPDV.DataBind();
+
+                GVPDVDelete.DataSource = dtpdvplanning;
+                GVPDVDelete.DataBind();
+                //dtpdvplanning = null;            
+            }
+            else {
+                messages = oBLPlanning.getMessages();
+            }
+
+            if (!getMessage().Equals("")) {
+                showMensajesSeguimiento(
+                "MensajesSupervisor",
+                "Sr. Usuario", 
+                getMessage());
+            }
+
+
         }
         
         private void llenacompetidores()
@@ -1542,39 +1901,133 @@ namespace SIGE.Pages.Modulos.Planning
                 return;
             }*/
         } 
+        
+        /// <summary>
+        /// Completa la información de los Supervisores 
+        /// y Mercaderistas para la parte Front.
+        /// </summary>
         private void llenaStaffplanning()
         {
-            DataSet dsStaffPlanning = PPlanning.Get_Staff_Planning(CmbSelCampaña.SelectedValue);
-            if (dsStaffPlanning != null)
+            // DataSet dsStaffPlanning = PPlanning.Get_Staff_Planning(CmbSelCampaña.SelectedValue);
+            DataSet dsStaffPlanning = oBLPlanning.getStaffPlanningDummy(CmbSelCampaña.SelectedValue);
+            //if (dsStaffPlanning != null)
+            //{
+            if (oBLPlanning.getMessages().Equals(""))
             {
-                if (dsStaffPlanning.Tables[0].Rows.Count > 0 && dsStaffPlanning.Tables[1].Rows.Count > 0)
+                if (dsStaffPlanning.Tables[0].Rows.Count > 0
+                    && dsStaffPlanning.Tables[1].Rows.Count > 0)
                 {
-                    CmbSelSupervisoresAsig.DataSource = dsStaffPlanning.Tables[0];
-                    CmbSelSupervisoresAsig.DataTextField = "name_user";
-                    CmbSelSupervisoresAsig.DataValueField = "Person_id";
-                    CmbSelSupervisoresAsig.DataBind();
-                    CmbSelSupervisoresAsig.Items.Insert(0, new ListItem("--Seleccione--", "0"));
 
-                    LstBoxMercaderistas.DataSource = dsStaffPlanning.Tables[1];
-                    LstBoxMercaderistas.DataTextField = "name_user";
-                    LstBoxMercaderistas.DataValueField = "Person_id";
-                    LstBoxMercaderistas.DataBind();
+                    fillDropDownList(CmbSelSupervisoresAsig, 
+                    dsStaffPlanning.Tables[0],
+                    "name_user", "Person_id");
 
-                    for (int i = 0; i <= LstBoxMercaderistas.Items.Count - 1; i++)
+                    #region Comment
+                    //CmbSelSupervisoresAsig.DataSource = dsStaffPlanning.Tables[0];
+                    //CmbSelSupervisoresAsig.DataTextField = "name_user";
+                    //CmbSelSupervisoresAsig.DataValueField = "Person_id";
+                    //CmbSelSupervisoresAsig.DataBind();
+                    //CmbSelSupervisoresAsig.Items.Insert(0, new ListItem("--Seleccione--", "0"));
+                    #endregion
+
+                    if (getMessage().Equals(""))
                     {
-                        DataTable dtverificacion = PPlanning.Get_VerficaAsignaOperativo(TxtPlanningAsig.Text, Convert.ToInt32(LstBoxMercaderistas.Items[i].Value));
-                        if (dtverificacion.Rows.Count > 0)
+
+                        fillListBox(LstBoxMercaderistas, dsStaffPlanning.Tables[1],
+                        "name_user", "Person_id");
+
+                        if (!getMessage().Equals(""))
                         {
-                            LstBoxMercaderistas.Items.Remove(LstBoxMercaderistas.Items[i]);
-                            i--;
+                            messages = getMessage();
                         }
-                        dtverificacion = null;
+
+                        #region
+                        //LstBoxMercaderistas.DataSource = dsStaffPlanning.Tables[1];
+                        //LstBoxMercaderistas.DataTextField = "name_user";
+                        //LstBoxMercaderistas.DataValueField = "Person_id";
+                        //LstBoxMercaderistas.DataBind();
+                        #endregion
+
+                        #region Remover Mercaderistas con Supervisor
+                        //for (int i = 0; 
+                        //    i <= LstBoxMercaderistas.Items.Count - 1; 
+                        //    i++)
+                        //{
+                        //    DataTable dtverificacion = 
+                        //        PPlanning.Get_VerficaAsignaOperativo(
+                        //        TxtPlanningAsig.Text, 
+                        //        Convert.ToInt32(LstBoxMercaderistas.Items[i].Value));
+                        //    if (dtverificacion.Rows.Count > 0){
+                        //        LstBoxMercaderistas.Items.Remove(LstBoxMercaderistas.Items[i]);
+                        //        i--;
+                        //    }
+                        //    dtverificacion = null;
+                        //}
+                        #endregion
+
                     }
                 }
             }
-            dsStaffPlanning = null;
+            else {
+                messages = oBLPlanning.getMessages();
+            }
 
+            /// Validar que no existan errores
+            if (!getMessage().Equals(""))
+            {
+                showMensajesSeguimiento(
+                        "MensajesSupervisor",
+                        "Sr. Usuario",
+                        getMessage());
+            }
+
+            //}
+            //dsStaffPlanning = null;
         }
+
+        /// <summary>
+        /// Llenar DropDownList General
+        /// </summary>
+        /// <param name="ddl"></param>
+        /// <param name="dt"></param>
+        /// <param name="textField"></param>
+        /// <param name="valueField"></param>
+        private void fillDropDownList(DropDownList ddl, DataTable dt,
+        String textField, String valueField) {
+            try
+            {
+                ddl.DataSource = dt;
+                ddl.DataTextField = textField;
+                ddl.DataValueField = valueField;
+                ddl.DataBind();
+                ddl.Items.Insert(0, new ListItem("--Seleccione--", "0"));
+            }
+            catch (Exception ex) {
+                messages = "Error: " + ex.Message.ToString();
+            }
+        }
+
+        /// <summary>
+        /// Llenar ListBox General
+        /// </summary>
+        /// <param name="lb"></param>
+        /// <param name="dt"></param>
+        /// <param name="textField"></param>
+        /// <param name="valueField"></param>
+        private void fillListBox(ListBox lb, DataTable dt,
+        String textField, String valueField) {
+            try
+            {
+                lb.DataSource = dt;
+                lb.DataTextField = textField;
+                lb.DataValueField = valueField;
+                lb.DataBind();
+            }
+            catch (Exception ex) {
+                messages = "Error: " + ex.Message.ToString();
+            }
+        }
+
         private void LlenaCategorias()
         {
             //Llena las Categorias          
@@ -1687,7 +2140,8 @@ namespace SIGE.Pages.Modulos.Planning
         {
             try
             {
-                DataSet ds = oCoon.ejecutarDataSet("UP_WEBXPLORA_PLA_CONSULTA_INFORMESYMESES_PLANNING", TxtPlanningAsigProd.Text, Convert.ToInt32(this.Session["company_id"]), this.Session["Planning_CodChannel"].ToString().Trim(), 0);
+                DataSet ds = oCoon.ejecutarDataSet("UP_WEBXPLORA_PLA_CONSULTA_INFORMESYMESES_PLANNING", 
+                    TxtPlanningAsigProd.Text, Convert.ToInt32(this.Session["company_id"]), this.Session["Planning_CodChannel"].ToString().Trim(), 0);
                 RbtnListInfProd.DataSource = ds.Tables[1];
                 RbtnListInfProd.DataValueField = "Report_id";
                 RbtnListInfProd.DataTextField = "Report_NameReport";
@@ -1728,7 +2182,8 @@ namespace SIGE.Pages.Modulos.Planning
         private void llenaGrillaPDVPaneles()
         {
             DataTable dtpdvplanning = null;
-            dtpdvplanning = oCoon.ejecutarDataTable("UP_WEBXPLORA_PLA_CONSULTARPDVPLANNING_PANELES", TxtCodPlanningPanel.Text, RbtnListReportPanel.SelectedItem.Value,"0","0");
+            dtpdvplanning = oCoon.ejecutarDataTable("UP_WEBXPLORA_PLA_CONSULTARPDVPLANNING_PANELES", 
+                TxtCodPlanningPanel.Text, RbtnListReportPanel.SelectedItem.Value,"0","0");
 
             GvPDVPaneles.DataSource = dtpdvplanning;
             GvPDVPaneles.DataBind();
@@ -1883,7 +2338,9 @@ namespace SIGE.Pages.Modulos.Planning
         {
             Postback = false;
             this.Session["Postback"] = false;
-            // Verificar si el valor seleccionado para el Control AspControl DropDownList 'CmbSelCampaña' es diferente de vacio.
+            // Verificar si el valor seleccionado para el 
+            // Control AspControl DropDownList 'CmbSelCampaña' 
+            // es diferente de vacio.
             if (!CmbSelCampaña.SelectedValue.Equals("")){
 
                 #region Codigo para saltarse validaciones 
@@ -1933,204 +2390,248 @@ namespace SIGE.Pages.Modulos.Planning
                 */
                 #endregion
 
-                DataSet ds = new DataSet();
+                DataSet ds = getAllInfoPlanning(
+                    CmbSelCampaña.SelectedValue);
 
-                /// <summary>
-                /// Obtener los Planning creados
-                /// Retorna 14 Objetos que muestra la información del Planning
-                /// Ing. Mauricio Ortiz 14 de julio de 2010
-                /// </summary>
-                /// <param name="sid_planning">Id del Planning</param>
-                /// <returns>DataSet</returns>
-                /// DataTable[0] - Obtiene información para llenar combo de Planning
-                /// DataTable[1] - Obtiene información de los objetivos para la Campaña
-                /// DataTable[2] - Obtiene información de los Productos con SKU Mandatorio
-                /// DataTable[3] - Obtiene información de la Mecánica de las Actividades
-                /// DataTable[4] - Obtiene información del Personal Asignado a la Campaña
-                /// DataTable[5] - Obtiene información de la asginación de Mercaderista y Supervisores
-                /// DataTable[6] - Obtiene información de los PDVs de la Campania
-                /// DataTable[7] - Obtiene información de los Productos Asignados por Campania 
-                /// DataTable[8] - Obtiene información de los Puntos de Venta Asignados a los Mercaderistas
-                /// DataTable[9] - Obtiene información del Planning Seleccionado
-                /// DataTable[10]- Obtiene información de los Reportes asignados a la Campania
-                /// DataTable[11]- Obtiene información de los Paneles Asignados a la Campania
-                /// DataTable[12]- Obtiene información de las Marcas Asignadas a la Campania
-                /// DataTable[13]- Obtiene información de las Familias Asignadas a la Campania
-                /// DataTable[14]- Obtiene información de las Categorias Asignadas a la Campania
-                ds = oCoon.ejecutarDataSet("UP_WEBSIGE_PLANNIG_CREADOS", CmbSelCampaña.SelectedValue);
-
-                // Guarda en un ViewState 'planning_creados' la información del Planning (14 DataTables)
-                this.ViewState["planning_creados"] = ds;
-                
-                // Guarda en un DataTable los Clientes asociados a un Planning.
-                DataTable dtCliente = 
-                    Presupuesto.Get_ObtenerClientes(ds.Tables[9].Rows[0]["Planning_Budget"].ToString().Trim(), 
-                    1);
-                this.Session["Numbudget"] = ds.Tables[9].Rows[0]["Planning_Budget"].ToString().Trim();
-                this.Session["company_id"] = dtCliente.Rows[0]["Company_id"].ToString().Trim();
-                
-                DataSet dtniveles = new DataSet();
-
-                // Verifica si los DataTables tienes registros en:
-                // DataTable[1] - Obtiene información de los objetivos para la Campaña
-                // DataTable[2] - Obtiene información de los Productos con SKU Mandatorio
-                // DataTable[3] - Obtiene información de la Mecánica de las Actividades
-                if (ds.Tables[1].Rows.Count > 0 
-                    && ds.Tables[2].Rows.Count > 0 
-                    && ds.Tables[3].Rows.Count > 0){
-                    ImgDescCamp.ImageUrl = "~/Pages/images/Terminado.png";
-                    ImgIrADesc.Visible = true;
-                }else{
-                    ImgDescCamp.ImageUrl = "~/Pages/images/Pendiente.png";
-                    ImgIrADesc.Visible = false;
-                }
-
-                // Verifica si los DataTables tienes registros en:
-                /// DataTable[4] - Obtiene información del Personal Asignado a la Campaña
-                if (ds.Tables[4].Rows.Count > 0){
-                    ImgResponsables.ImageUrl = "~/Pages/images/Terminado.png";
-                    ImgIrAResponsables.Visible = true;
-                }else{
-                    ImgResponsables.ImageUrl = "~/Pages/images/Pendiente.png";
-                    ImgIrAResponsables.Visible = false;
-                }
-                // Verifica si los DataTables tienes registros en:
-                /// DataTable[5] - Obtiene información de la asginación de Mercaderista y Supervisores                
-                if (ds.Tables[5].Rows.Count > 0){
-                    ImgAsigPersonal.ImageUrl = "~/Pages/images/Terminado.png";
-                    ImgIrAASigPersonal.Visible = true;
-                }else{
-                    ImgAsigPersonal.ImageUrl = "~/Pages/images/Pendiente.png";
-                    ImgIrAASigPersonal.Visible = false;
-                }
-                // Verifica si los DataTables tienes registros en:
-                /// DataTable[6] - Obtiene información de los PDVs de la Campania
-                if (ds.Tables[6].Rows.Count > 0){
-                    ImgPDV.ImageUrl = "~/Pages/images/Terminado.png";
-                    ImgIrAPDV.Visible = true;
-                }else{
-                    ImgPDV.ImageUrl = "~/Pages/images/Pendiente.png";
-                    ImgIrAPDV.Visible = false;
-                }
-                
-                // Verifica si los DataTables tienes registros en:
-                /// DataTable[7] - Obtiene información de los Productos Asignados por Campania 
-                /// DataTable[12]- Obtiene información de las Marcas Asignadas a la Campania
-                /// DataTable[13]- Obtiene información de las Familias Asignadas a la Campania
-                /// DataTable[14]- Obtiene información de las Categorias Asignadas a la Campania
-                if (ds.Tables[7].Rows.Count > 0 
-                    || ds.Tables[12].Rows.Count > 0 
-                    || ds.Tables[13].Rows.Count > 0 
-                    || ds.Tables[14].Rows.Count > 0){
-                    ImgProductos.ImageUrl = "~/Pages/images/Terminado.png";
-                    ImgIrAProductos.Visible = true;
-                }else{
-                    ImgProductos.ImageUrl = "~/Pages/images/Pendiente.png";
-                    ImgIrAProductos.Visible = false;
-                }
-
-                // Verifica si los DataTables tienes registros en:
-                /// DataTable[8] - Obtiene información de los Puntos de Venta Asignados a los Mercaderistas
-                if (ds.Tables[8].Rows.Count > 0){
-                    ImgAsignaPDV.ImageUrl = "~/Pages/images/Terminado.png";
-                    ImgIrAAsignapdv.Visible = true;
-                }else{
-                    ImgAsignaPDV.ImageUrl = "~/Pages/images/Pendiente.png";
-                    ImgIrAAsignapdv.Visible = false;
-                }
-
-                // Verifica si los DataTables tienes registros en:
-                /// DataTable[10]- Obtiene información de los Reportes asignados a la Campania
-                if (ds.Tables[10].Rows.Count > 0){
-                    ImgReportes.ImageUrl = "~/Pages/images/Terminado.png";
-                    ImgIrAReportesCampaña.Visible = true;
-                }else{
-                    ImgReportes.ImageUrl = "~/Pages/images/Pendiente.png";
-                    ImgIrAReportesCampaña.Visible = false;
-                }
-
-                // Verifica si los DataTables tienes registros en:
-                /// DataTable[11]- Obtiene información de los Paneles Asignados a la Campania
-                if (ds.Tables[11].Rows.Count > 0){
-                    ImgPaneles.ImageUrl = "~/Pages/images/Terminado.png";
-                    ImgIrAPaneles.Visible = true;
-                }else{
-                    ImgPaneles.ImageUrl = "~/Pages/images/Pendiente.png";
-                    ImgIrAPaneles.Visible = false;
-                }
-
-                if (ImgAsigBudget.ImageUrl.Equals("~/Pages/images/Terminado.png")
-                    && ImgDescCamp.ImageUrl.Equals("~/Pages/images/Terminado.png")
-                    && ImgResponsables.ImageUrl.Equals("~/Pages/images/Terminado.png")
-                    && ImgAsigPersonal.ImageUrl.Equals("~/Pages/images/Terminado.png")
-                    && ImgPDV.ImageUrl.Equals("~/Pages/images/Terminado.png")
-                    && ImgProductos.ImageUrl.Equals("~/Pages/images/Terminado.png")
-                    && ImgAsignaPDV.ImageUrl.Equals("~/Pages/images/Terminado.png")
-                    && ImgReportes.ImageUrl.Equals("~/Pages/images/Terminado.png")
-                    && ImgPaneles.ImageUrl.Equals("~/Pages/images/Terminado.png")
-                    ){
-                    ImgBreaf.ImageUrl = "~/Pages/images/Terminado.png";
-                    ImgIrABreaf.Visible = true;
-                }else{
-                    ImgBreaf.ImageUrl = "~/Pages/images/Pendiente.png";
-                    ImgIrABreaf.Visible = false;
-                }
-
-                // Verifica si es Canal mayorista, para mostrar el menú de 'Objetivos SOD':
-                /// DataTable[9] - Obtiene información del Planning Seleccionado
-                if (ds.Tables[9].Rows[0]["Planning_CodChannel"].ToString() == "1000"){
-                    MenuObjetivoSODMay.Visible = true;
-                }else{
-                    MenuObjetivoSODMay.Visible = false;
-                }
-                
-                ImgProdAncla.Visible = true;
-                
-                //metodo temporal para la visualizacion de Niveles en AA_VV
-
-                if (CmbSelCampaña.SelectedValue.Equals("101131122011"))//si la campaña es AA_VV
+                if (getMessage().Equals(""))
                 {
-                    this.Session["id_planning"] = CmbSelCampaña.SelectedValue;
-                    OpcionGestionNiveles.Style.Value = "display: block";
-                    ImgGestionNiveles.ImageUrl = "../../images/Terminado.png";
-                    ImgIrAGestionNiveles.Visible = true;
+                    // Guarda en un ViewState 'planning_creados' la información del Planning (14 DataTables)
+                    //this.ViewState["planning_creados"] = ds;
+                    createViewStateInfoPlanning(ds);
 
-                    OpcionGestionFuerzaVenta.Style.Value = "display: block";
-                    ImgGestionFuerzaVenta.ImageUrl = "../../images/Terminado.png";
-                    ImgIrAGestionFuerzaVenta.Visible = true;
-                }else{
-                    OpcionGestionNiveles.Style.Value = "display: none";
-                    OpcionGestionFuerzaVenta.Style.Value = "display: none";
-                }
-                ds = null;
-                dtCliente = null;
+                    // Guardar el Lucky Budget
+                    //String planningBudget = ds.Tables[9].Rows[0]["Planning_Budget"]
+                    //    .ToString().Trim();
+
+                    // Guarda en un DataTable los Clientes asociados a un Planning.
+                    //DataTable dtCliente = 
+                    //    Presupuesto.Get_ObtenerClientes(
+                    //    planningBudget, 1);
+
+                    // Guardar el Lucky Budget
+                    this.Session["Numbudget"] = 
+                        ds.Tables[9].Rows[0]["Planning_Budget"]
+                        .ToString().Trim();
+
+                    //this.Session["company_id"] = 
+                    //   Presupuesto.Get_ObtenerClientes(
+                    //   this.Session["Numbudget"].ToString().Trim(), 
+                    //   1)
+                    //   .Rows[0]["Company_id"].ToString().Trim();
+                    try
+                    {
+                        this.Session["company_id"] =
+                            cmbElementsPlanning(
+                            this.Session["Numbudget"]
+                            .ToString().Trim(),1)
+                            .Rows[0]["Company_id"].ToString().Trim();
+
+                        if (getMessage().Equals(""))
+                        {
+                            //DataSet dtniveles = new DataSet();
+                            // Actualizar iconos
+                            updateIcons(ds);
+
+                            #region
+                            /*
+                            // Verifica si los DataTables tienes registros en:
+                            // DataTable[1] - Obtiene información de los objetivos para la Campaña
+                            // DataTable[2] - Obtiene información de los Productos con SKU Mandatorio
+                            // DataTable[3] - Obtiene información de la Mecánica de las Actividades
+                            if (ds.Tables[1].Rows.Count > 0 
+                                && ds.Tables[2].Rows.Count > 0 
+                                && ds.Tables[3].Rows.Count > 0){
+                                ImgDescCamp.ImageUrl = "~/Pages/images/Terminado.png";
+                                ImgIrADesc.Visible = true;
+                            }
+                            else{
+                                ImgDescCamp.ImageUrl = "~/Pages/images/Pendiente.png";
+                                ImgIrADesc.Visible = false;
+                            }
+
+                            // Verifica si los DataTables tienes registros en:
+                            /// DataTable[4] - Obtiene información del Personal Asignado a la Campaña
+                            if (ds.Tables[4].Rows.Count > 0){
+                                ImgResponsables.ImageUrl = "~/Pages/images/Terminado.png";
+                                ImgIrAResponsables.Visible = true;
+                            }
+                            else{
+                                ImgResponsables.ImageUrl = "~/Pages/images/Pendiente.png";
+                                ImgIrAResponsables.Visible = false;
+                            }
                 
+                            // Verifica si los DataTables tienes registros en:
+                            /// DataTable[5] - Obtiene información de la asginación de Mercaderista y Supervisores                
+                            if (ds.Tables[5].Rows.Count > 0){
+                                ImgAsigPersonal.ImageUrl = "~/Pages/images/Terminado.png";
+                                ImgIrAASigPersonal.Visible = true;
+                            }
+                            else{
+                                ImgAsigPersonal.ImageUrl = "~/Pages/images/Pendiente.png";
+                                ImgIrAASigPersonal.Visible = false;
+                            }
+                
+                            // Verifica si los DataTables tienes registros en:
+                            /// DataTable[6] - Obtiene información de los PDVs de la Campania
+                            if (ds.Tables[6].Rows.Count > 0){
+                                ImgPDV.ImageUrl = "~/Pages/images/Terminado.png";
+                                ImgIrAPDV.Visible = true;
+                            }
+                            else{
+                                ImgPDV.ImageUrl = "~/Pages/images/Pendiente.png";
+                                ImgIrAPDV.Visible = false;
+                            }
+                
+                            // Verifica si los DataTables tienes registros en:
+                            /// DataTable[7] - Obtiene información de los Productos Asignados por Campania 
+                            /// DataTable[12]- Obtiene información de las Marcas Asignadas a la Campania
+                            /// DataTable[13]- Obtiene información de las Familias Asignadas a la Campania
+                            /// DataTable[14]- Obtiene información de las Categorias Asignadas a la Campania
+                            if (ds.Tables[7].Rows.Count > 0 
+                                || ds.Tables[12].Rows.Count > 0 
+                                || ds.Tables[13].Rows.Count > 0 
+                                || ds.Tables[14].Rows.Count > 0){
+                                ImgProductos.ImageUrl = "~/Pages/images/Terminado.png";
+                                ImgIrAProductos.Visible = true;
+                            }
+                            else{
+                                ImgProductos.ImageUrl = "~/Pages/images/Pendiente.png";
+                                ImgIrAProductos.Visible = false;
+                            }
+
+                            // Verifica si los DataTables tienes registros en:
+                            /// DataTable[8] - Obtiene información de los Puntos de Venta Asignados a los Mercaderistas
+                            if (ds.Tables[8].Rows.Count > 0){
+                                ImgAsignaPDV.ImageUrl = "~/Pages/images/Terminado.png";
+                                ImgIrAAsignapdv.Visible = true;
+                            }
+                            else{
+                                ImgAsignaPDV.ImageUrl = "~/Pages/images/Pendiente.png";
+                                ImgIrAAsignapdv.Visible = false;
+                            }
+
+                            // Verifica si los DataTables tienes registros en:
+                            /// DataTable[10]- Obtiene información de los Reportes asignados a la Campania
+                            if (ds.Tables[10].Rows.Count > 0){
+                                ImgReportes.ImageUrl = "~/Pages/images/Terminado.png";
+                                ImgIrAReportesCampaña.Visible = true;
+                            }
+                            else{
+                                ImgReportes.ImageUrl = "~/Pages/images/Pendiente.png";
+                                ImgIrAReportesCampaña.Visible = false;
+                            }
+
+                            // Verifica si los DataTables tienes registros en:
+                            /// DataTable[11]- Obtiene información de los Paneles Asignados a la Campania
+                            if (ds.Tables[11].Rows.Count > 0){
+                                ImgPaneles.ImageUrl = "~/Pages/images/Terminado.png";
+                                ImgIrAPaneles.Visible = true;
+                            }
+                            else{
+                                ImgPaneles.ImageUrl = "~/Pages/images/Pendiente.png";
+                                ImgIrAPaneles.Visible = false;
+                            }
+
+                            if (ImgAsigBudget.ImageUrl.Equals("~/Pages/images/Terminado.png")
+                                && ImgDescCamp.ImageUrl.Equals("~/Pages/images/Terminado.png")
+                                && ImgResponsables.ImageUrl.Equals("~/Pages/images/Terminado.png")
+                                && ImgAsigPersonal.ImageUrl.Equals("~/Pages/images/Terminado.png")
+                                && ImgPDV.ImageUrl.Equals("~/Pages/images/Terminado.png")
+                                && ImgProductos.ImageUrl.Equals("~/Pages/images/Terminado.png")
+                                && ImgAsignaPDV.ImageUrl.Equals("~/Pages/images/Terminado.png")
+                                && ImgReportes.ImageUrl.Equals("~/Pages/images/Terminado.png")
+                                && ImgPaneles.ImageUrl.Equals("~/Pages/images/Terminado.png")
+                                ){
+                                ImgBreaf.ImageUrl = "~/Pages/images/Terminado.png";
+                                ImgIrABreaf.Visible = true;
+                            }
+                            else{
+                                ImgBreaf.ImageUrl = "~/Pages/images/Pendiente.png";
+                                ImgIrABreaf.Visible = false;
+                            }
+
+                            // Verifica si es Canal mayorista, para mostrar el menú de 'Objetivos SOD':
+                            /// DataTable[9] - Obtiene información del Planning Seleccionado
+                            if (ds.Tables[9].Rows[0]["Planning_CodChannel"].ToString() == "1000"){
+                                MenuObjetivoSODMay.Visible = true;
+                            }
+                            else{
+                                MenuObjetivoSODMay.Visible = false;
+                            }
+                
+                            ImgProdAncla.Visible = true;
+                
+                            //metodo temporal para la visualizacion de Niveles en AA_VV
+
+                            if (CmbSelCampaña.SelectedValue.Equals("101131122011"))//si la campaña es AA_VV
+                            {
+                                this.Session["id_planning"] = CmbSelCampaña.SelectedValue;
+                                OpcionGestionNiveles.Style.Value = "display: block";
+                                ImgGestionNiveles.ImageUrl = "../../images/Terminado.png";
+                                ImgIrAGestionNiveles.Visible = true;
+
+                                OpcionGestionFuerzaVenta.Style.Value = "display: block";
+                                ImgGestionFuerzaVenta.ImageUrl = "../../images/Terminado.png";
+                                ImgIrAGestionFuerzaVenta.Visible = true;
+                            }
+                            else{
+                                OpcionGestionNiveles.Style.Value = "display: none";
+                                OpcionGestionFuerzaVenta.Style.Value = "display: none";
+                            }
+                            */
+                            #endregion
+
+                            //ds = null;
+                            //dtCliente = null;                    
+                        }
+                    }
+                    catch (Exception ex) {
+                        messages = "Error: " + ex.Message.ToString();
+                    }
+                }
+                else {
+                    messages = oBLPlanning.getMessages();
+                }
             }
             else{
-                ImgBtnInformeTotal.Visible = false;
-                ImgAsigBudget.ImageUrl = "~/Pages/images/Esperando.png";
-                ImgDescCamp.ImageUrl = "~/Pages/images/Esperando.png";
-                ImgResponsables.ImageUrl = "~/Pages/images/Esperando.png";
-                ImgAsigPersonal.ImageUrl = "~/Pages/images/Esperando.png";
-                ImgPDV.ImageUrl = "~/Pages/images/Esperando.png";
-                ImgPaneles.ImageUrl = "~/Pages/images/Esperando.png";
-                ImgProductos.ImageUrl = "~/Pages/images/Esperando.png";
-                ImgAsignaPDV.ImageUrl = "~/Pages/images/Esperando.png";
-                ImgReportes.ImageUrl = "~/Pages/images/Esperando.png";
-                ImgBreaf.ImageUrl = "~/Pages/images/Esperando.png";
-                ImgIrABudget.Visible = false;
-                ImgIrADesc.Visible = false;
-                ImgIrAResponsables.Visible = false;
-                ImgIrAASigPersonal.Visible = false;
-                ImgIrAPDV.Visible = false;
-                ImgIrAProductos.Visible = false;
-                ImgIrAAsignapdv.Visible = false;
-                ImgIrAReportesCampaña.Visible = false;
-                ImgIrAPaneles.Visible = false;
-                ImgIrABreaf.Visible = false;
+                disabledIcons();
+            }
+
+            /// Validar que no existan errores
+            if (!getMessage().Equals("")){
+                showMensajesSeguimiento(
+                "MensajesSupervisor",
+                "Sr. Usuario", 
+                getMessage() );
             }
         }
-        
+        /// <summary>
+        /// Deshabilitar y Ocultar lo iconos en caso no cumpla con 
+        /// las condiciones requeridas
+        /// </summary>
+        public void disabledIcons() {
+            ImgBtnInformeTotal.Visible = false;
+            ImgAsigBudget.ImageUrl = "~/Pages/images/Esperando.png";
+            ImgDescCamp.ImageUrl = "~/Pages/images/Esperando.png";
+            ImgResponsables.ImageUrl = "~/Pages/images/Esperando.png";
+            ImgAsigPersonal.ImageUrl = "~/Pages/images/Esperando.png";
+            ImgPDV.ImageUrl = "~/Pages/images/Esperando.png";
+            ImgPaneles.ImageUrl = "~/Pages/images/Esperando.png";
+            ImgProductos.ImageUrl = "~/Pages/images/Esperando.png";
+            ImgAsignaPDV.ImageUrl = "~/Pages/images/Esperando.png";
+            ImgReportes.ImageUrl = "~/Pages/images/Esperando.png";
+            ImgBreaf.ImageUrl = "~/Pages/images/Esperando.png";
+            ImgIrABudget.Visible = false;
+            ImgIrADesc.Visible = false;
+            ImgIrAResponsables.Visible = false;
+            ImgIrAASigPersonal.Visible = false;
+            ImgIrAPDV.Visible = false;
+            ImgIrAProductos.Visible = false;
+            ImgIrAAsignapdv.Visible = false;
+            ImgIrAReportesCampaña.Visible = false;
+            ImgIrAPaneles.Visible = false;
+            ImgIrABreaf.Visible = false;
+        }
         #endregion
 
         #region Presupuesto
@@ -3214,6 +3715,8 @@ namespace SIGE.Pages.Modulos.Planning
             GvEliminaSupervisor.DataBind();
             GvEliminaMercaderista.DataBind();
         }
+
+
         #endregion
 
         #region Asignacion de personal
@@ -3430,45 +3933,272 @@ namespace SIGE.Pages.Modulos.Planning
         }
         protected void CmbSelCity_SelectedIndexChanged(object sender, EventArgs e)
         {
-            llenaTipoAgrup();
-            ModalPanelPDV.Show();
+            llenaTipoAgrup(TxtPlanningPDV.Text, CmbSelCity.Text);
+
+            if (getMessage().Equals(""))
+            {
+                ModalPanelPDV.Show();
+            }
+            else {
+                showMensajesSeguimiento(
+                        "MensajesSupervisor",
+                        "Sr. Usuario",
+                        getMessage());
+            }
         }
         protected void CmbSelTipoAgrup_SelectedIndexChanged(object sender, EventArgs e)
         {
-            llenaAgrup();
-            ModalPanelPDV.Show();
+            idPlanning = TxtPlanningPDV.Text.Equals("") ? "0" :
+                TxtPlanningPDV.Text;
+            idCity = CmbSelCity.Text.Equals("") ? "0" :
+                CmbSelCity.Text;
+            idTypeNodeCommercial =
+                Convert.ToInt32(CmbSelTipoAgrup.Text.Equals("")
+                ? "0" : CmbSelTipoAgrup.Text);
+            idNodeCommercial = CmbSelAgrup.Text.Equals("") ? "0"
+                : CmbSelAgrup.Text;
+            idOficina = Convert.ToInt32(CmbSelOficina.Text.Equals("")
+                ? "0" : CmbSelOficina.Text);
+            idMalla = Convert.ToInt32(CmbSelMalla.Text.Equals("")
+                ? "0" : CmbSelMalla.Text);
+            idSector = Convert.ToInt32(CmbSelSector.Text.Equals("")
+                ? "0" : CmbSelSector.Text);   
+
+            llenaAgrup(idPlanning, idCity, idTypeNodeCommercial,
+            idNodeCommercial, idOficina, idMalla);
+            if (getMessage().Equals(""))
+            {
+                ModalPanelPDV.Show();
+            }
+            else {
+                showMensajesSeguimiento(
+                "MensajesSupervisor",
+                "Sr. Usuario",
+                getMessage());
+            }
+
         }
         protected void CmbSelAgrup_SelectedIndexChanged(object sender, EventArgs e)
         {
-            llenaOficinas();
-            ModalPanelPDV.Show();
+            idPlanning = TxtPlanningPDV.Text.Equals("") ? "0" :
+                TxtPlanningPDV.Text;
+            idCity = CmbSelCity.Text.Equals("") ? "0" :
+                CmbSelCity.Text;
+            idTypeNodeCommercial =
+                Convert.ToInt32(CmbSelTipoAgrup.Text.Equals("")
+                ? "0" : CmbSelTipoAgrup.Text);
+            idNodeCommercial = CmbSelAgrup.Text.Equals("") ? "0"
+                : CmbSelAgrup.Text;
+            idOficina = Convert.ToInt32(CmbSelOficina.Text.Equals("")
+                ? "0" : CmbSelOficina.Text);
+            idMalla = Convert.ToInt32(CmbSelMalla.Text.Equals("")
+                ? "0" : CmbSelMalla.Text);
+            idSector = Convert.ToInt32(CmbSelSector.Text.Equals("")
+                ? "0" : CmbSelSector.Text);   
+
+            llenaOficinas(idPlanning, idCity, idTypeNodeCommercial,
+            idNodeCommercial,idOficina, idMalla);
+
+            if (getMessage().Equals(""))
+            {
+                ModalPanelPDV.Show();
+            }
+            else {
+                showMensajesSeguimiento(
+                "MensajesSupervisor",
+                "Sr. Usuario",
+                getMessage());
+            }
+            
         }
-        protected void CmbSelOficina_SelectedIndexChanged(object sender, EventArgs e)
+
+        /// <summary>
+        /// Setear los valores de los filtros (DropDownList)
+        /// </summary>
+        public void setGeneralValues() {
+            idPlanning = TxtPlanningPDV.Text.Equals("") ? "0" : 
+                TxtPlanningPDV.Text;
+            idCity = CmbSelCity.Text.Equals("") ? "0" : 
+                CmbSelCity.Text;
+            idTypeNodeCommercial =
+                Convert.ToInt32(CmbSelTipoAgrup.Text.Equals("") 
+                ? "0" : CmbSelTipoAgrup.Text);
+            idNodeCommercial = CmbSelAgrup.Text.Equals("") ? "0" 
+                : CmbSelAgrup.Text;
+            idOficina = Convert.ToInt32(CmbSelOficina.Text.Equals("") 
+                ? "0" : CmbSelOficina.Text);
+            idMalla = Convert.ToInt32(CmbSelMalla.Text.Equals("") 
+                ? "0" : CmbSelMalla.Text);
+            idSector = Convert.ToInt32(CmbSelSector.Text.Equals("") 
+                ? "0" : CmbSelSector.Text);        
+        }
+
+        protected void CmbSelOficina_SelectedIndexChanged(
+        object sender, EventArgs e)
         {
-            Llenamallas();
-            Llenasector();
-            llenaGrillaPDV();
-            ModalPanelPDV.Show();
+
+            idPlanning = TxtPlanningPDV.Text.Equals("") ? "0" :
+                TxtPlanningPDV.Text;
+            idCity = CmbSelCity.Text.Equals("") ? "0" :
+                CmbSelCity.Text;
+            idTypeNodeCommercial =
+                Convert.ToInt32(CmbSelTipoAgrup.Text.Equals("")
+                ? "0" : CmbSelTipoAgrup.Text);
+            idNodeCommercial = CmbSelAgrup.Text.Equals("") ? "0"
+                : CmbSelAgrup.Text;
+            idOficina = Convert.ToInt32(CmbSelOficina.Text.Equals("")
+                ? "0" : CmbSelOficina.Text);
+            idMalla = Convert.ToInt32(CmbSelMalla.Text.Equals("")
+                ? "0" : CmbSelMalla.Text);
+            idSector = Convert.ToInt32(CmbSelSector.Text.Equals("")
+                ? "0" : CmbSelSector.Text);   
+
+            Llenamallas(idPlanning, idCity, idTypeNodeCommercial,
+            idNodeCommercial, idOficina, 0);
+
+            if (getMessage().Equals("")) {
+                Llenasector(idPlanning, idCity, 
+                idTypeNodeCommercial, idNodeCommercial, 
+                idOficina, idMalla);
+                if (getMessage().Equals("")) {
+                    llenaGrillaPDV(idPlanning, 
+                        idCity, idTypeNodeCommercial,
+                        idNodeCommercial, idOficina,
+                        idMalla,
+                        idSector
+                        );
+                    if (getMessage().Equals("")) {
+                        ModalPanelPDV.Show();                
+                    }
+                }
+            }
+
+            if (!getMessage().Equals("")) {
+                showMensajesSeguimiento(
+                "MensajesSupervisor",
+                "Sr. Usuario",
+                getMessage());
+            }
+
         }
         protected void CmbSelMalla_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Llenasector();
-            llenaGrillaPDV();
-            ModalPanelPDV.Show();
+            idPlanning = TxtPlanningPDV.Text.Equals("") ? "0" :
+                TxtPlanningPDV.Text;
+            idCity = CmbSelCity.Text.Equals("") ? "0" :
+                CmbSelCity.Text;
+            idTypeNodeCommercial =
+                Convert.ToInt32(CmbSelTipoAgrup.Text.Equals("")
+                ? "0" : CmbSelTipoAgrup.Text);
+            idNodeCommercial = CmbSelAgrup.Text.Equals("") ? "0"
+                : CmbSelAgrup.Text;
+            idOficina = Convert.ToInt32(CmbSelOficina.Text.Equals("")
+                ? "0" : CmbSelOficina.Text);
+            idMalla = Convert.ToInt32(CmbSelMalla.Text.Equals("")
+                ? "0" : CmbSelMalla.Text);
+            idSector = Convert.ToInt32(CmbSelSector.Text.Equals("")
+                ? "0" : CmbSelSector.Text);   
+
+            Llenasector(idPlanning, idCity, idTypeNodeCommercial,
+                idNodeCommercial, idOficina, idMalla);
+            
+            if (getMessage().Equals("")) {
+                
+                llenaGrillaPDV(idPlanning, idCity,
+                idTypeNodeCommercial, idNodeCommercial,
+                idOficina, idMalla, idSector);
+
+                if (getMessage().Equals("")) {
+                    ModalPanelPDV.Show();                            
+                }
+            }
+
+            if (!getMessage().Equals("")) {
+                showMensajesSeguimiento(
+                    "MensajesSupervisor",
+                    "Sr. Usuario",
+                    getMessage().ToString());
+            }
+
         }
-        protected void CmbSelSector_SelectedIndexChanged(object sender, EventArgs e)
+        protected void CmbSelSector_SelectedIndexChanged(
+            object sender, EventArgs e)
         {
-            llenaGrillaPDV();
-            ModalPanelPDV.Show();
+            idPlanning = TxtPlanningPDV.Text.Equals("") ? "0" :
+                TxtPlanningPDV.Text;
+            idCity = CmbSelCity.Text.Equals("") ? "0" :
+                CmbSelCity.Text;
+            idTypeNodeCommercial =
+                Convert.ToInt32(CmbSelTipoAgrup.Text.Equals("")
+                ? "0" : CmbSelTipoAgrup.Text);
+            idNodeCommercial = CmbSelAgrup.Text.Equals("") ? "0"
+                : CmbSelAgrup.Text;
+            idOficina = Convert.ToInt32(CmbSelOficina.Text.Equals("")
+                ? "0" : CmbSelOficina.Text);
+            idMalla = Convert.ToInt32(CmbSelMalla.Text.Equals("")
+                ? "0" : CmbSelMalla.Text);
+            idSector = Convert.ToInt32(CmbSelSector.Text.Equals("")
+                ? "0" : CmbSelSector.Text);   
+
+            llenaGrillaPDV(idPlanning, idCity,
+                idTypeNodeCommercial, idNodeCommercial,
+                idOficina, idMalla, idSector);
+
+            if (getMessage().Equals(""))
+            {
+                ModalPanelPDV.Show();
+            }
+
+            showMensajesSeguimiento(
+                "MensajesSupervisor",
+                "Sr. Usuario",
+                getMessage().ToString());
+
+            //llenaGrillaPDV();
+            //ModalPanelPDV.Show();
         }
+
+
+
         protected void GvPDV_SelectedIndexChanged(object sender, EventArgs e)
         {
+            idPlanning = TxtPlanningPDV.Text.Equals("") ? "0" :
+                TxtPlanningPDV.Text;
+            idCity = CmbSelCity.Text.Equals("") ? "0" :
+                CmbSelCity.Text;
+            idTypeNodeCommercial =
+                Convert.ToInt32(CmbSelTipoAgrup.Text.Equals("")
+                ? "0" : CmbSelTipoAgrup.Text);
+            idNodeCommercial = CmbSelAgrup.Text.Equals("") ? "0"
+                : CmbSelAgrup.Text;
+            idOficina = Convert.ToInt32(CmbSelOficina.Text.Equals("")
+                ? "0" : CmbSelOficina.Text);
+            idMalla = Convert.ToInt32(CmbSelMalla.Text.Equals("")
+                ? "0" : CmbSelMalla.Text);
+            idSector = Convert.ToInt32(CmbSelSector.Text.Equals("")
+                ? "0" : CmbSelSector.Text);   
+
             // eliminar registros de la tabla puntos de venta planning
             try
             {
-                PPlanning.Get_EliminarPDVPlanning(Convert.ToInt32(GVPDVDelete.Rows[GvPDV.SelectedIndex].Cells[5].Text));
-                llenaGrillaPDV();
-                ModalPanelPDV.Show();
+                PPlanning.Get_EliminarPDVPlanning(
+                    Convert.ToInt32(
+                    GVPDVDelete.Rows[GvPDV.SelectedIndex].Cells[5].Text));
+                llenaGrillaPDV(idPlanning, idCity, idTypeNodeCommercial,
+                    idNodeCommercial, idOficina, idMalla, idSector);
+
+                if (!getMessage().Equals(""))
+                {
+                    showMensajesSeguimiento(
+                    "MensajesSupervisor",
+                    "Sr. Usuario",
+                    getMessage());
+                }
+                else {
+                    ModalPanelPDV.Show();
+                }
+
+                
             }
             catch (Exception ex)
             {
@@ -3562,7 +4292,7 @@ namespace SIGE.Pages.Modulos.Planning
 
         public void llenarpanelesXperido()
         {
-              DPlanning odplanning = new DPlanning();
+             DPlanning odplanning = new DPlanning();
             DataTable dt = odplanning.Consulta_Pla_paneles(TxtCodPlanningPanel.Text, Convert.ToInt32(RbtnListReportPanel.SelectedItem.Value),0);
 
            // DataTable dt = PPlanning.Consulta_Pla_paneles(TxtCodPlanningPanel.Text, Convert.ToInt32(RbtnListReportPanel.SelectedItem.Value));
@@ -3921,7 +4651,7 @@ namespace SIGE.Pages.Modulos.Planning
         #endregion
 
         #region Gestión de Asignación de Puntos de Ventas a Mercaderistas
-        
+
         /*
          * ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
          * ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -3934,6 +4664,7 @@ namespace SIGE.Pages.Modulos.Planning
          * ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
          */
 
+        #region Menu Principal
         /// <summary>
         /// Mostrar el Panel de Asignación de Puntos de Venta / Consultar PDV por Mercaderista / 
         /// </summary>
@@ -3959,6 +4690,35 @@ namespace SIGE.Pages.Modulos.Planning
                 }
             }
         }
+        #endregion
+
+        /// <summary>
+        /// Definir las columnas para GridView de Asignación 
+        /// de Rutas 
+        /// </summary>
+        private void addColumnsToGridViewPdvOpeTemp() {
+            try
+            {
+                DataTable dtAsigna_PDV_A_OPE_Temp = new DataTable();
+                dtAsigna_PDV_A_OPE_Temp.Columns.Add("Cod_", typeof(Int32));
+                dtAsigna_PDV_A_OPE_Temp.Columns.Add("Mercaderista", typeof(String));
+                dtAsigna_PDV_A_OPE_Temp.Columns.Add("Cod.", typeof(Int32));
+                dtAsigna_PDV_A_OPE_Temp.Columns.Add("Punto_de_Venta", typeof(String));
+                dtAsigna_PDV_A_OPE_Temp.Columns.Add("Desde", typeof(String));
+                dtAsigna_PDV_A_OPE_Temp.Columns.Add("Hasta", typeof(String));
+
+                GvNewAsignaPDVOPE.DataSource =
+                    dtAsigna_PDV_A_OPE_Temp;
+                GvNewAsignaPDVOPE.DataBind();
+
+                this.Session["dtAsigna_PDV_A_OPE_Temp"] = dtAsigna_PDV_A_OPE_Temp;
+            }
+            catch (Exception ex) {
+                messages = "Error: " + ex.Message.ToString();
+            }
+        }
+
+        #region Eventos Botones: Editar / Actualizar / Borrar (Gestión General).
         /// <summary>
         /// Evento Click del AspControl Button 'BtnEditAsigPDVOPE' para editar la Información de la asignación de Puntos de Venta por Mercaderista
         /// </summary>
@@ -3989,7 +4749,180 @@ namespace SIGE.Pages.Modulos.Planning
             ModalPanelAsignacionPDVaoper.Show();
         }
         /// <summary>
+        /// Evento Click del AspControl Button 'BtnUpdateAsigPDVOPE' que guarda los cambios realizados en la gestión de Asignación de Puntos de Venta.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void BtnUpdateAsigPDVOPE_Click(object sender, EventArgs e)
+        {
+            ModalPanelAsignacionPDVaoper.Show();
+
+            // Recorre el AspControl GridView 'GvNewAsignaPDVOPE', 
+            // para guardar cada uno de los Puntos de Venta Asignados 
+            // al Mercaderista en Base de Datos
+            for (int i = 0; i <= GvNewAsignaPDVOPE.Rows.Count - 1; i++)
+            {
+
+                #region Registro de Ruta en BD Web
+                // Registra Ruta del Mercaderista (Por cada Punto de Venta)
+                //try
+                //{
+
+                    //EPointOfSale_PlanningOper RegistrarPointOfSale_PlanningOper =
+                        //PointOfSale_PlanningOper.RegistrarAsignPDVaOperativo(
+                        //    Convert.ToInt32(GvNewAsignaPDVOPE.Rows[i].Cells[3].Text),
+                        //    TxtPlanningAsigPDVOPE.Text,
+                        //    Convert.ToInt32(GvNewAsignaPDVOPE.Rows[i].Cells[1].Text),
+                        //    Convert.ToDateTime(GvNewAsignaPDVOPE.Rows[i].Cells[5].Text + " 01:00:00.000"),
+                        //    Convert.ToDateTime(GvNewAsignaPDVOPE.Rows[i].Cells[6].Text + " 23:59:00.000"),
+                        //    0,
+                        //    true,
+                        //    Convert.ToString(this.Session["sUser"]),
+                        //    DateTime.Now,
+                        //    Convert.ToString(this.Session["sUser"]),
+                        //    DateTime.Now);
+
+                //}
+                //catch (Exception ex)
+                //{
+
+                //    messages = ex.ToString();
+
+                //    this.Session["encabemensa"] = "Sr. Usuario";
+                //    this.Session["cssclass"] = "MensajesSupConfirm";
+                //    this.Session["mensaje"] = "Ocurrio un Error al guardar el Punto de Venta :" + ex.ToString().Substring(0, 100) + "...";
+
+                //    Mensajes_AsigPDVOPE();
+
+                //}
+                #endregion
+
+                insAsignacionPdvOperativo(
+                Convert.ToInt32(GvNewAsignaPDVOPE.Rows[i].Cells[3].Text),
+                TxtPlanningAsigPDVOPE.Text,
+                Convert.ToInt32(GvNewAsignaPDVOPE.Rows[i].Cells[1].Text),
+                GvNewAsignaPDVOPE.Rows[i].Cells[5].Text,
+                GvNewAsignaPDVOPE.Rows[i].Cells[6].Text,
+                0,
+                true,
+                Convert.ToString(this.Session["sUser"]),
+                DateTime.Now,
+                Convert.ToString(this.Session["sUser"]),
+                DateTime.Now);
+
+                if (messages.Equals("")) {
+                    // Deshabilitado la Inserción a Base de Datos Mobile
+                    //insAsignacionPdvOperativoMobile(
+                    //    Convert.ToInt32(GvNewAsignaPDVOPE.Rows[i].Cells[3].Text),
+                    //    TxtPlanningAsigPDVOPE.Text,
+                    //    Convert.ToInt32(GvNewAsignaPDVOPE.Rows[i].Cells[1].Text),
+                    //    GvNewAsignaPDVOPE.Rows[i].Cells[5].Text,
+                    //    GvNewAsignaPDVOPE.Rows[i].Cells[6].Text
+                    //    );
+
+                    //if (getMessage().Equals("")) {
+                    showMensajesSeguimiento(
+                        "MensajesSupervisor",
+                        "Sr. Usuario",
+                        "Se ha asignado con éxito los puntos de venta para la campaña : "
+                        + LblTxtPresupuestoAsigPDVOPE.Text.ToUpper());
+                    //}
+                }
+
+                //if (messages.Equals("")) {
+                //    showMensajesSeguimiento();
+                //}
+
+                #region Registro de Ruta en BD Mobile
+                // Verifica que se Haya podido registrar Correctamente en la Base de datos del App Web para proceder a registrar el registro en la App Mobile
+                //if (messages.Equals(""))
+                //{
+                    // Registra Ruta del Mercaderista (Por cada Punto de Venta) - Aplicativo Mobile
+                    //try
+                    //{
+
+                        //PointOfSale_PlanningOper RegistrarTBL_EQUIPO_PTO_VENTA = new PointOfSale_PlanningOper();
+                        //RegistrarTBL_EQUIPO_PTO_VENTA.RegistrarTBL_EQUIPO_PTO_VENTA(
+                        //    Convert.ToInt32(GvNewAsignaPDVOPE.Rows[i].Cells[3].Text),
+                        //    TxtPlanningAsigPDVOPE.Text,
+                        //    Convert.ToInt32(GvNewAsignaPDVOPE.Rows[i].Cells[1].Text),
+                        //    Convert.ToDateTime(GvNewAsignaPDVOPE.Rows[i].Cells[5].Text + " 01:00:00.000"),
+                        //    Convert.ToDateTime(GvNewAsignaPDVOPE.Rows[i].Cells[6].Text + " 23:59:00.000"));
+
+                    //}
+                    //catch (Exception ex)
+                    //{
+                    //    messages = ex.ToString();
+
+                    //    this.Session["encabemensa"] = "Sr. Usuario";
+                    //    this.Session["cssclass"] = "MensajesSupConfirm";
+                    //    this.Session["mensaje"] = "Ocurrio un Error al guardar el Punto de Venta en la Base de Datos Mobile:" + ex.ToString().Substring(0, 100) + "...";
+
+                    //    Mensajes_AsigPDVOPE();
+                    //}
+                //}
+                #endregion
+
+            }
+            //this.Session["encabemensa"] = "Sr. Usuario";
+            //this.Session["cssclass"] = "MensajesSupConfirm";
+            //this.Session["mensaje"] = "Se ha asignado con éxito los puntos de venta para la campaña : " + LblTxtPresupuestoAsigPDVOPE.Text.ToUpper();
+            //Mensajes_AsigPDVOPE();
+
+            Limpiar_InformacionAsignaPDVOPE();
+
+
+        }
+        #endregion
+
+        #region Eventos Botones: Eliminar / Select All / UnSelect All
+        /// <summary>
+        /// Evento Click del AspControl 'Button1_Click' (Eliminar) Mensaje para Confirmar la Acción de Eliminar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            LblMensajeConfirm.Text = "Realmente desea eliminar los puntos de venta seleccionados para el usuario "
+                + CmbSelOpePlanning.SelectedItem.Text + " ?";
+            ModalConfirmacion.Show();
+            ModalPanelAsignacionPDVaoper.Show();
+        }
+        /// <summary>
+        /// Eventro Click del AspControl 'BtnAllAsigPDV', para seleccionar todos los puntos de Venta Asignados
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void BtnAllAsigPDV_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i <= GvAsignaPDVOPE.Rows.Count - 1; i++)
+            {
+                ((CheckBox)GvAsignaPDVOPE.Rows[i].FindControl("CheckBox1")).Checked = true;
+            }
+
+            ModalPanelAsignacionPDVaoper.Show();
+
+        }
+        /// <summary>
+        /// Eventro Click del AspControl 'BtnNoneasigPDV', para no  seleccionar todos ningún punto de Venta Asignados.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void BtnNoneasigPDV_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i <= GvAsignaPDVOPE.Rows.Count - 1; i++)
+            {
+                ((CheckBox)GvAsignaPDVOPE.Rows[i].FindControl("CheckBox1")).Checked = false;
+
+            }
+            ModalPanelAsignacionPDVaoper.Show();
+
+        }
+        #endregion
+
+        /// <summary>
         /// Evento SelectedIndexChanged del AspControl DropDownList 'CmbSelOpePlanning' (Seleccionando Planning)
+        /// Evento SelectedIndexChanged cada vez que selecciona una Campaña  (Asignación de Rutas).
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -4012,10 +4945,36 @@ namespace SIGE.Pages.Modulos.Planning
                 #endregion 
                 // Si No hay Errores continuar con la Consulta de Puntos de Venta Asignados por Planning y Mercaderista
                 if (messages.Equals("")){
-                    ConsultaPDVXoperativo();
+                    
+                    String idPlanning = TxtPlanningAsigPDVOPE.Text;
+                    int idPersona = Convert.ToInt32(CmbSelOpePlanning.Text);
+                    DataTable dt = ConsultaPDVXoperativo(idPlanning, idPersona);
+
                     // Si no hay Errores Setear los valores de las Ciudades para los Filtros de Puntos de Venta Disponibles
                     if (messages.Equals("")){
-                        llenaciudadesRutas();
+
+                        GvAsignaPDVOPE.DataSource = dt;
+                        GvAsignaPDVOPE.DataBind();
+
+                        //llenaciudadesRutas();
+
+                        //idPlanning = 
+                        //    TxtPlanningAsigPDVOPE.Text.Equals("") ? "0" :
+                        //TxtPlanningAsigPDVOPE.Text;
+                        idCity = "0";
+                        idTypeNodeCommercial = 0;
+                        idNodeCommercial = "0";
+                        idOficina = 0;
+                        idMalla = 0;
+                        idSector = 0;
+
+                        llenaciudadesRutas( idPlanning, 
+                                            idCity,
+                                            idTypeNodeCommercial, 
+                                            idNodeCommercial, 
+                                            idOficina, 
+                                            idMalla);
+
                         // Si no hay Errores Habilitar los AspControls Relacionados a los Puntos de Venta Disponibles
                         if (messages.Equals("")){
                             #region Habilitar AspControls Relacionados a la Busqueda de Puntos de Venta Disponibles
@@ -4065,7 +5024,18 @@ namespace SIGE.Pages.Modulos.Planning
             }else{
                 Limpiar_InformacionAsignaPDVOPE();
             }
+
+            if (!getMessage().Equals(""))
+            {
+                showMensajesSeguimiento(
+                "MensajesSupervisor",
+                "Sr. Usuario",
+                getMessage());
+            }
+
         }
+
+        #region Eventos DropDownList: Filtros Generales
         /// <summary>
         /// Evento SelectedIndexChanged del AspControl DropDownList 'CmbSelCityRutas', para llenar las agrupaciones de Tipo de Punto de Venta por Ciudad
         /// y mostrar el AspControl ModalPopupExtender 'ModalPanelAsignacionPDVaoper'
@@ -4074,8 +5044,24 @@ namespace SIGE.Pages.Modulos.Planning
         /// <param name="e"></param>
         protected void CmbSelCityRutas_SelectedIndexChanged(object sender, EventArgs e)
         {
-            llenaTipoAgrupRutas();
-            ModalPanelAsignacionPDVaoper.Show();
+            idPlanning = TxtPlanningAsigPDVOPE.Text.Equals("") ? "0" :
+                         TxtPlanningAsigPDVOPE.Text;
+            idCity = CmbSelCityRutas.Text.Equals("") ? "0" :
+                     CmbSelCityRutas.Text;
+            idTypeNodeCommercial = 0;
+            idNodeCommercial = "0";
+            idOficina = 0;
+            idMalla = 0;
+            idSector = 0;
+
+            llenaTipoAgrupRutas(idPlanning, idCity,
+                idTypeNodeCommercial, idNodeCommercial,
+                idOficina, idMalla);
+
+            if (getMessage().Equals("")) {
+                ModalPanelAsignacionPDVaoper.Show();            
+            }
+
         }
         /// <summary>
         /// 
@@ -4084,8 +5070,36 @@ namespace SIGE.Pages.Modulos.Planning
         /// <param name="e"></param>
         protected void CmbSelTipoAgrupRutas_SelectedIndexChanged(object sender, EventArgs e)
         {
-            llenaAgrupRutas();
-            ModalPanelAsignacionPDVaoper.Show();
+            idPlanning = TxtPlanningAsigPDVOPE.Text.Equals("") ? "0" :
+                TxtPlanningAsigPDVOPE.Text;
+            idCity = CmbSelCityRutas.Text.Equals("") ? "0" :
+                CmbSelCityRutas.Text;
+            idTypeNodeCommercial =
+                Convert.ToInt32(CmbSelTipoAgrupRutas.Text.Equals("")
+                ? "0" : CmbSelTipoAgrupRutas.Text);
+            idNodeCommercial = CmbSelAgrupRutas.Text.Equals("") ? "0"
+                : CmbSelAgrupRutas.Text;
+            idOficina = Convert.ToInt32(CmbSelOficinaRutas.Text.Equals("")
+                ? "0" : CmbSelOficinaRutas.Text);
+            idMalla = Convert.ToInt32(CmbSelMallasRutas.Text.Equals("")
+                ? "0" : CmbSelMallasRutas.Text);
+            idSector = Convert.ToInt32(CmbSelSectorRutas.Text.Equals("")
+                ? "0" : CmbSelSectorRutas.Text);   
+
+            llenaAgrupRutas(idPlanning, idCity, idTypeNodeCommercial,
+            idNodeCommercial, idOficina, idMalla);
+
+            if (getMessage().Equals(""))
+            {
+                ModalPanelAsignacionPDVaoper.Show();
+            }
+            else {
+                showMensajesSeguimiento(
+                    "MensajesSupervisor",
+                    "Sr. Usuario",
+                    getMessage());
+            }
+
         }
         /// <summary>
         /// Evento SelectedIndexChanged para el AspControl DropDownList 'CmbSelAgrupRutas'
@@ -4094,8 +5108,32 @@ namespace SIGE.Pages.Modulos.Planning
         /// <param name="e"></param>
         protected void CmbSelAgrupRutas_SelectedIndexChanged(object sender, EventArgs e)
         {
-            llenaOficinasRutas();
-            ModalPanelAsignacionPDVaoper.Show();
+            idPlanning = TxtPlanningAsigPDVOPE.Text.Equals("") ? "0" :
+                         TxtPlanningAsigPDVOPE.Text;
+            idCity = CmbSelCityRutas.Text.Equals("") ? "0" :
+                     CmbSelCityRutas.Text;
+            idTypeNodeCommercial = int.Parse(CmbSelAgrupRutas.Text.Equals("") ? "0" :
+                     CmbSelAgrupRutas.Text);
+            idNodeCommercial = CmbSelAgrupRutas.Text.Equals("") ? "0" : CmbSelAgrupRutas.Text;
+            idOficina = 0;
+            idMalla = 0;
+            idSector = 0;
+
+            llenaOficinasRutas(idPlanning, idCity, 
+            idTypeNodeCommercial, idNodeCommercial, 
+            idOficina, idMalla);
+
+            if (getMessage().Equals(""))
+            {
+                ModalPanelAsignacionPDVaoper.Show();
+            }
+            else {
+                showMensajesSeguimiento(
+                "MensajesSupervisor",
+                "Sr. Usuario",
+                getMessage());
+            }
+
         }
         /// <summary>
         /// Evento SelectedIndexChanged para el AspControl DropDownList 'CmbSelOficinaRutas' 
@@ -4110,10 +5148,59 @@ namespace SIGE.Pages.Modulos.Planning
         /// <param name="e"></param>
         protected void CmbSelOficinaRutas_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LlenamallasRutas();
-            LlenasectorRutas();
-            LlenaPDVPlanning();
-            ModalPanelAsignacionPDVaoper.Show();
+            idPlanning = TxtPlanningAsigPDVOPE.Text.Equals("") ? "0" :
+                TxtPlanningAsigPDVOPE.Text;
+            idCity = CmbSelCityRutas.Text.Equals("") ? "0" :
+                CmbSelCityRutas.Text;
+            idTypeNodeCommercial =
+                Convert.ToInt32(CmbSelTipoAgrupRutas.Text.Equals("")
+                ? "0" : CmbSelTipoAgrupRutas.Text);
+            idNodeCommercial = CmbSelAgrupRutas.Text.Equals("") ? "0"
+                : CmbSelAgrupRutas.Text;
+            idOficina = Convert.ToInt32(CmbSelOficinaRutas.Text.Equals("")
+                ? "0" : CmbSelOficinaRutas.Text);
+            idMalla = Convert.ToInt32(CmbSelMallasRutas.Text.Equals("")
+                ? "0" : CmbSelMallasRutas.Text);
+            idSector = Convert.ToInt32(CmbSelSectorRutas.Text.Equals("")
+                ? "0" : CmbSelSectorRutas.Text);   
+
+            LlenamallasRutas(
+                idPlanning,
+                idCity,
+                idTypeNodeCommercial,
+                idNodeCommercial,
+                idOficina, 
+                idMalla);
+            if (getMessage().Equals("")) {
+                LlenasectorRutas(
+                    idPlanning,
+                    idCity,
+                    idTypeNodeCommercial,
+                    idNodeCommercial,
+                    idOficina,
+                    idMalla);
+                if (getMessage().Equals("")) {
+                    LlenaPDVPlanning(idPlanning,
+                    idCity,
+                    idTypeNodeCommercial,
+                    idNodeCommercial,
+                    idOficina,
+                    idMalla,
+                    idSector);
+                    if (getMessage().Equals(""))
+                    {
+                        ModalPanelAsignacionPDVaoper.Show();
+                    }
+                }       
+            }
+
+            if (!getMessage().Equals("")) {
+                showMensajesSeguimiento(
+                    "MensajesSupervisor",
+                    "Sr. Usuario",
+                    getMessage());
+            }
+
         }
         /// <summary>
         /// Evento SelectedIndexChanged del AspControl 'CmbSelMallasRutas'
@@ -4122,9 +5209,52 @@ namespace SIGE.Pages.Modulos.Planning
         /// <param name="e"></param>
         protected void CmbSelMallasRutas_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LlenasectorRutas();
-            LlenaPDVPlanning();
-            ModalPanelAsignacionPDVaoper.Show();
+            idPlanning = TxtPlanningAsigPDVOPE.Text.Equals("") ? "0" :
+                TxtPlanningAsigPDVOPE.Text;
+            idCity = CmbSelCityRutas.Text.Equals("") ? "0" :
+                CmbSelCityRutas.Text;
+            idTypeNodeCommercial =
+                Convert.ToInt32(CmbSelTipoAgrupRutas.Text.Equals("")
+                ? "0" : CmbSelTipoAgrupRutas.Text);
+            idNodeCommercial = CmbSelAgrupRutas.Text.Equals("") ? "0"
+                : CmbSelAgrupRutas.Text;
+            idOficina = Convert.ToInt32(CmbSelOficinaRutas.Text.Equals("")
+                ? "0" : CmbSelOficinaRutas.Text);
+            idMalla = Convert.ToInt32(CmbSelMallasRutas.Text.Equals("")
+                ? "0" : CmbSelMallasRutas.Text);
+            idSector = Convert.ToInt32(CmbSelSectorRutas.Text.Equals("")
+                ? "0" : CmbSelSectorRutas.Text);   
+
+            LlenasectorRutas(idPlanning,
+                    idCity,
+                    idTypeNodeCommercial,
+                    idNodeCommercial,
+                    idOficina,
+                    idMalla);
+            
+            if (getMessage().Equals("")) {
+                LlenaPDVPlanning(idPlanning,
+                        idCity,
+                        idTypeNodeCommercial,
+                        idNodeCommercial,
+                        idOficina,
+                        idMalla,
+                        idSector);
+                if (getMessage().Equals("")) {
+                    ModalPanelAsignacionPDVaoper.Show();
+                }
+            }
+
+            if (!getMessage().Equals(""))
+            {
+                showMensajesSeguimiento(
+                    "MensajesSupervisor",
+                    "Sr. Usuario",
+                    getMessage());
+            }
+
+            
+            
         }
         /// <summary>
         /// Evento SelectedIndexChanged para el AspControl 'CmbSelSectorRutas'
@@ -4133,9 +5263,46 @@ namespace SIGE.Pages.Modulos.Planning
         /// <param name="e"></param>
         protected void CmbSelSectorRutas_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LlenaPDVPlanning();
-            ModalPanelAsignacionPDVaoper.Show();
+            idPlanning = TxtPlanningAsigPDVOPE.Text.Equals("") ? "0" :
+                TxtPlanningAsigPDVOPE.Text;
+            idCity = CmbSelCityRutas.Text.Equals("") ? "0" :
+                CmbSelCityRutas.Text;
+            idTypeNodeCommercial =
+                Convert.ToInt32(CmbSelTipoAgrupRutas.Text.Equals("")
+                ? "0" : CmbSelTipoAgrupRutas.Text);
+            idNodeCommercial = CmbSelAgrupRutas.Text.Equals("") ? "0"
+                : CmbSelAgrupRutas.Text;
+            idOficina = Convert.ToInt32(CmbSelOficinaRutas.Text.Equals("")
+                ? "0" : CmbSelOficinaRutas.Text);
+            idMalla = Convert.ToInt32(CmbSelMallasRutas.Text.Equals("")
+                ? "0" : CmbSelMallasRutas.Text);
+            idSector = Convert.ToInt32(CmbSelSectorRutas.Text.Equals("")
+                ? "0" : CmbSelSectorRutas.Text);   
+
+            LlenaPDVPlanning(idPlanning,
+                        idCity,
+                        idTypeNodeCommercial,
+                        idNodeCommercial,
+                        idOficina,
+                        idMalla,
+                        idSector);
+            if (getMessage().Equals(""))
+            {
+                ModalPanelAsignacionPDVaoper.Show();
+            }
+
+            if (!getMessage().Equals(""))
+            {
+                showMensajesSeguimiento(
+                    "MensajesSupervisor",
+                    "Sr. Usuario",
+                    getMessage());
+            }
+
         }
+        #endregion 
+
+        #region Eventos Botones: Mantenimiento de Puntos de Ventas Filtrados
         /// <summary>
         /// Recorre el AspControl CheckBoxList 'ChkListPDV' y setea el valor Check a Cada uno de sus Elementos
         /// </summary>
@@ -4160,6 +5327,8 @@ namespace SIGE.Pages.Modulos.Planning
             ChkListPDV.ClearSelection();
             ModalPanelAsignacionPDVaoper.Show();
         }
+        #endregion
+
         /// <summary>
         /// Evento Click para Asignar los Puntos de Venta, después de aplicar los Filtros
         /// </summary>
@@ -4173,242 +5342,333 @@ namespace SIGE.Pages.Modulos.Planning
             bool seguir = true;
             
             // Validación en Caso no se haya seleccionado Planning, Fecha Inicio y/o Fecha Fin
-            #region Validación Campos Vacios
-            if (CmbSelOpePlanning.Text == "0" 
-                || TxtF_iniPDVOPE.Text == "" 
-                || TxtF_finPDVOPE.Text == ""){
-                
-                this.Session["encabemensa"] = "Sr. Usuario";
-                this.Session["cssclass"] = "MensajesSupervisor";
-                
-                if (TxtF_finPDVOPE.Text == "") this.Session["mensaje"] = "Es indispensable ingresar la fecha final";
-                if (TxtF_iniPDVOPE.Text == "") this.Session["mensaje"] = "Es indispensable ingresar la fecha inicial";
-                if (CmbSelOpePlanning.Text == "0") this.Session["mensaje"] = "Es indispensable seleccionar un Operativo";
-                
-                Mensajes_AsigPDVOPE();
-                seguir = false;
-                }
+            #region Validación Campos Vacios (Decraped)
+            //if (CmbSelOpePlanning.Text == "0" 
+            //|| TxtF_iniPDVOPE.Text == "" 
+            //|| TxtF_finPDVOPE.Text == "")
+            //{
+                    //String msg = "";
+                //this.Session["encabemensa"] = "Sr. Usuario";
+                //this.Session["cssclass"] = "MensajesSupervisor";
+
+                //if (TxtF_finPDVOPE.Text == "") { 
+                //    //this.Session["mensaje"] = "Es indispensable ingresar la fecha final"; 
+                //    msg = "Es indispensable ingresar la fecha final";
+                //}
+                //if (TxtF_iniPDVOPE.Text == "") { 
+                //    //this.Session["mensaje"] = "Es indispensable ingresar la fecha inicial";
+                //    msg = "Es indispensable ingresar la fecha inicial";
+                //}
+                //if (CmbSelOpePlanning.Text == "0") { 
+                //    //this.Session["mensaje"] = "Es indispensable seleccionar un Operativo"; 
+                //    msg = "Es indispensable seleccionar un Operativo";
+                //}
+
+                //Mensajes_AsigPDVOPE();
+                //seguir = false;
+
+            //}
             #endregion
 
+            validarCamposVaciosRutas(CmbSelOpePlanning.Text, TxtF_iniPDVOPE.Text, TxtF_finPDVOPE.Text);
+
+            #region Delete 01
+            //if (!getMessage().Equals(""))
+            //{
+                //seguir = false;
+                //showMensajesSeguimiento(
+                //        "MensajesSupervisor",
+                //        "Sr. Usuario",
+                //        getMessage());
+                //ModalPanelAsignacionPDVaoper.Show();
+            //}
+            //else {
             // Continuar en caso haya pasado la validación de los Campos Vacios
-            #region Validacion de Fechas
-            if (seguir){
-                try{
-                    // Fecha Inicial de Asignación de Punto de Venta a Mercaderista
-                    DateTime FechaInicial = DateTime.Parse(TxtF_iniPDVOPE.Text);
-                    // Fecha Fin de Asignación de Punto de Venta a Mercaderista
-                    DateTime Fechafinal = DateTime.Parse(TxtF_finPDVOPE.Text);
+            #endregion
+            #region Validacion de Fechas (Decraped)
+            //if (seguir){
+                //    try{
+                //        // Fecha Inicial de Asignación de Punto de Venta a Mercaderista
+                //        DateTime FechaInicial = DateTime.Parse(TxtF_iniPDVOPE.Text);
+                //        // Fecha Fin de Asignación de Punto de Venta a Mercaderista
+                //        DateTime Fechafinal = DateTime.Parse(TxtF_finPDVOPE.Text);
 
-                    // Fecha Inicial del Planning que se obtiene de una Session
-                    DateTime FechainicialPlanning = DateTime.Parse(this.Session["Fechainicial"].ToString().Trim());
-                    // Fecha Fin del Planning que se obtiene de una Session
-                    DateTime FechafinalPlanning = DateTime.Parse(this.Session["Fechafinal"].ToString().Trim());
-                    
-                    // Validación 01 - La fecha Inicial debe ser Menor que la fecha Final
-                    if (FechaInicial > Fechafinal){
-                        this.Session["encabemensa"] = "Sr. Usuario";
-                        this.Session["cssclass"] = "MensajesSupervisor";
-                        this.Session["mensaje"] = "La fecha inicial no puede ser mayor a la fecha final";
-                        Mensajes_AsigPDVOPE();
-                        seguir = false;
-                    }
+                //        // Fecha Inicial del Planning que se obtiene de una Session
+                //        DateTime FechainicialPlanning = DateTime.Parse(this.Session["Fechainicial"].ToString().Trim());
+                //        // Fecha Fin del Planning que se obtiene de una Session
+                //        DateTime FechafinalPlanning = DateTime.Parse(this.Session["Fechafinal"].ToString().Trim());
 
-                    // Validación 02 - La fecha Inicial debe ser Mayor que la Fecha Inicial del Planning
-                    //                 La fecha Final debe ser Menor que la fecha Final del Planning
-                    if (FechaInicial < FechainicialPlanning 
-                        || Fechafinal > FechafinalPlanning){
-                        this.Session["encabemensa"] = "Sr. Usuario";
-                        this.Session["cssclass"] = "MensajesSupervisor";
-                        this.Session["mensaje"] = "Las fechas deben estar dentro del rango : " 
-                            + FechainicialPlanning.ToShortDateString() 
-                            + " y " 
-                            + FechafinalPlanning.ToShortDateString() 
-                            + " que corresponden a las fechas de ejecución de la Campaña";
-                        Mensajes_AsigPDVOPE();
-                        seguir = false;
-                    }
+                //        // Validación 01 - La fecha Inicial debe ser Menor que la fecha Final
+                //        if (FechaInicial > Fechafinal){
+                //            this.Session["encabemensa"] = "Sr. Usuario";
+                //            this.Session["cssclass"] = "MensajesSupervisor";
+                //            this.Session["mensaje"] = "La fecha inicial no puede ser mayor a la fecha final";
+                //            Mensajes_AsigPDVOPE();
+                //            seguir = false;
+                //        }
 
-                    // Validación 03 - La fecha Inicial debe ser Mayor que Hoy
-                    if (FechaInicial < DateTime.Today){
-                        this.Session["encabemensa"] = "Sr. Usuario";
-                        this.Session["cssclass"] = "MensajesSupervisor";
-                        this.Session["mensaje"] = "La fecha inicial debe ser igual o superior a la fecha actual";
-                        Mensajes_AsigPDVOPE();
-                        seguir = false;
-                    }
-                }catch{
-                    this.Session["encabemensa"] = "Sr. Usuario";
-                    this.Session["cssclass"] = "MensajesSupervisor";
-                    this.Session["mensaje"] = "Formato de fecha no valido. Por favor verifique (dd/mm/aaaa)";
-                    Mensajes_AsigPDVOPE();
-                }
-            }
-            #endregion 
+                //        // Validación 02 - La fecha Inicial debe ser Mayor que la Fecha Inicial del Planning
+                //        //                 La fecha Final debe ser Menor que la fecha Final del Planning
+                //        if (FechaInicial < FechainicialPlanning 
+                //            || Fechafinal > FechafinalPlanning){
+                //            this.Session["encabemensa"] = "Sr. Usuario";
+                //            this.Session["cssclass"] = "MensajesSupervisor";
+                //            this.Session["mensaje"] = "Las fechas deben estar dentro del rango : " 
+                //                + FechainicialPlanning.ToShortDateString() 
+                //                + " y " 
+                //                + FechafinalPlanning.ToShortDateString() 
+                //                + " que corresponden a las fechas de ejecución de la Campaña";
+                //            Mensajes_AsigPDVOPE();
+                //            seguir = false;
+                //        }
 
-            // Variable List<ListItem> 'toBeRemoved' para Almacenar los Objetos a Eliminar del AspControl CheckBoxList 'ChkListPDV'
-            List<ListItem> toBeRemoved = new List<ListItem>();
+                //        // Validación 03 - La fecha Inicial debe ser Mayor que Hoy
+                //        if (FechaInicial < DateTime.Today){
+                //            this.Session["encabemensa"] = "Sr. Usuario";
+                //            this.Session["cssclass"] = "MensajesSupervisor";
+                //            this.Session["mensaje"] = "La fecha inicial debe ser igual o superior a la fecha actual";
+                //            Mensajes_AsigPDVOPE();
+                //            seguir = false;
+                //        }
+                //    }catch{
+                //        this.Session["encabemensa"] = "Sr. Usuario";
+                //        this.Session["cssclass"] = "MensajesSupervisor";
+                //        this.Session["mensaje"] = "Formato de fecha no valido. Por favor verifique (dd/mm/aaaa)";
+                //        Mensajes_AsigPDVOPE();
+                //    }
+                //}
+                #endregion 
+            
+            if (getMessage().Equals("")) {
+                //validarFechasRutas(TxtF_iniPDVOPE.Text, TxtF_finPDVOPE.Text);
+                if (getMessage().Equals("")) {
 
-            // Continuar en caso haya pasado la validación de las Fechas
-            if (seguir){
-                // >>>>>>>>>>>>>>>>> Recorrer el AspControl CheckBoxList 'ChkListPDV'
-                for (int i = 0; i <= ChkListPDV.Items.Count - 1; i++){
-                    // Verificar aquellos elementos que ha sido Seleccionados
-                    if (ChkListPDV.Items[i].Selected == true){
-                        
-                        // Verificar que el Punto de Venta a asignar No sea Duplicado
-                        DataTable dtconsulta = PPlanning.Get_AsignacionDuplicadaPDV(
-                                Convert.ToInt32(ChkListPDV.Items[i].Value), 
-                                Convert.ToInt32(CmbSelOpePlanning.SelectedItem.Value), 
-                                TxtPlanningAsigPDVOPE.Text);
-                        
-                        // Verificar que el AspControl DataTable 'dtconsulta' sea diferente de nulo
-                        if (dtconsulta != null){
+                    // Variable List<ListItem> 'toBeRemoved' para Almacenar los Objetos a Eliminar del AspControl CheckBoxList 'ChkListPDV'
+                    List<ListItem> toBeRemoved = new List<ListItem>();
 
-                            // Si no devuelve registros, no encontró Punto de Venta Repetido (Esta Ok)
-                            if (dtconsulta.Rows.Count == 0){
-                                seguir = true;
-                            // Se elimina funcionalidad : solo debe permitir guardar una vez un punto de venta por operativo sin importar la fecha. 
-                            // 29/01/2011 Ing. Mauricio Ortiz 
-                            } else {
-                                
-                                #region Deshabilitar validacion fechas
-                                // valida rango de fechas 
-                                //for (int k = 0; k <= dtconsulta.Rows.Count - 1; k++)
-                                //{
-                                //    if (Convert.ToDateTime(TxtF_iniPDVOPE.Text) >= Convert.ToDateTime(dtconsulta.Rows[k][3].ToString().Trim()) 
-                                // && Convert.ToDateTime(TxtF_iniPDVOPE.Text) <= Convert.ToDateTime(dtconsulta.Rows[k][4].ToString().Trim()))
-                                //    {
-                                #endregion
+                    #region Bucle FOR Grande
+                    // Continuar en caso haya pasado la validación de las Fechas
+                    //if (seguir){
+                    // >>>>>>>>>>>>>>>>> Recorrer el AspControl CheckBoxList 'ChkListPDV'
+                    for (int i = 0; i <= ChkListPDV.Items.Count - 1; i++)
+                    {
+                        // Verificar aquellos elementos que ha sido Seleccionados
+                        if (ChkListPDV.Items[i].Selected == true)
+                        {
 
-                                this.Session["encabemensa"] = "Sr. Usuario";
-                                this.Session["cssclass"] = "MensajesSupervisor";
-                                this.Session["mensaje"] = "El punto de venta : " 
-                                    + ChkListPDV.Items[i].Text 
-                                    + " ya esta asignado al Mercaderista seleccionado. Por favor verifique";
-                                Mensajes_AsigPDVOPE();
+                            // Verificar que el Punto de Venta a asignar No sea Duplicado
+                            //DataTable dtconsulta = PPlanning.Get_AsignacionDuplicadaPDV(
+                            //        Convert.ToInt32(ChkListPDV.Items[i].Value), 
+                            //        Convert.ToInt32(CmbSelOpePlanning.SelectedItem.Value), 
+                            //        TxtPlanningAsigPDVOPE.Text);
 
-                                //k = dtconsulta.Rows.Count - 1;
-                                i = ChkListPDV.Items.Count - 1;
+                            DataTable dtconsulta = validarAsignacionPdvDuplicated(
+                                ChkListPDV.Items[i].Value,
+                                CmbSelOpePlanning.SelectedItem.Value,
+                                TxtPlanningAsigPDVOPE.Text
+                            );
 
-                                seguir = false;
-                                
-                                #region decraped
+                            if (messages.Equals(""))
+                            {
+                                // Verificar que el AspControl DataTable 'dtconsulta' sea diferente de nulo
+                                //if (dtconsulta != null){
+
+                                // Si no devuelve registros, no encontró Punto de Venta Repetido (Esta Ok)
+                                if (dtconsulta.Rows.Count == 0)
+                                {
+                                    seguir = true;
+                                    // Se elimina funcionalidad : solo debe permitir guardar una vez un punto de venta por operativo sin importar la fecha. 
+                                    // 29/01/2011 Ing. Mauricio Ortiz 
+                                }
+                                else
+                                {
+
+                                    #region Deshabilitar validacion fechas
+                                    // valida rango de fechas 
+                                    //for (int k = 0; k <= dtconsulta.Rows.Count - 1; k++)
+                                    //{
+                                    //    if (Convert.ToDateTime(TxtF_iniPDVOPE.Text) >= Convert.ToDateTime(dtconsulta.Rows[k][3].ToString().Trim()) 
+                                    // && Convert.ToDateTime(TxtF_iniPDVOPE.Text) <= Convert.ToDateTime(dtconsulta.Rows[k][4].ToString().Trim()))
+                                    //    {
+                                    #endregion
+
+                                    showMensajesSeguimiento(
+                                            "MensajesSupervisor",
+                                            "Sr. Usuario",
+                                            "El punto de venta : "
+                                             + ChkListPDV.Items[i].Text
+                                             + " ya esta asignado al Mercaderista seleccionado. Por favor verifique");
+                                    ModalPanelAsignacionPDVaoper.Show();    
+
+                                    //this.Session["encabemensa"] = "Sr. Usuario";
+                                    //this.Session["cssclass"] = "MensajesSupervisor";
+                                    //this.Session["mensaje"] = "El punto de venta : "
+                                    //    + ChkListPDV.Items[i].Text
+                                    //    + " ya esta asignado al Mercaderista seleccionado. Por favor verifique";
+                                    //Mensajes_AsigPDVOPE();
+
+                                    //k = dtconsulta.Rows.Count - 1;
+                                    i = ChkListPDV.Items.Count - 1;
+
+                                    seguir = false;
+
+                                    #region decraped
+                                    //}
+                                    //else
+                                    //{
+                                    //    seguir = true;
+                                    //}
+                                    //}
+                                    #endregion
+                                }
                                 //}
-                                //else
-                                //{
-                                //    seguir = true;
-                                //}
-                                //}
-                                #endregion
-                            }
-                        }
-                        
-                        dtconsulta = null;
-                        
-                        // Continuar en Caso No se haya encontrado Duplicado
-                        if (seguir){
-                            
-                            // Si el AspControl GridView tiene registros
-                            if (GvNewAsignaPDVOPE.Rows.Count > 0){
+                                //dtconsulta = null;
 
-                                // Validación para no volver a asignar Puntos de Venta y Asignados
-                                // En caso de encontrar registos no se podrá continuar con el proceso (seguir = false)
-                                // >>>>>>>>>>>>>>>>>>>> Recorrer el AspControl GridView 'GvNewAsignaPDVOPE'
-                                for (int j = 0; j <= GvNewAsignaPDVOPE.Rows.Count - 1; j++){    
-                                    // Si el Planning es igual entre el AspControl DropDownList 'CmbSelOpePlanning' y el valor del AspControl GridView 'GvNewAsignaPDVOPE' columna 01
-                                    // Si el valor del AspControl CheckBoxList 'ChkListPDV' item i es igual al AspControl GridView 'GvNewAsignaPDVOPE' columna 03
-                                    if (CmbSelOpePlanning.SelectedItem.Value == GvNewAsignaPDVOPE.Rows[j].Cells[1].Text &&
-                                        ChkListPDV.Items[i].Value == GvNewAsignaPDVOPE.Rows[j].Cells[3].Text)
-                                    // && (Convert.ToDateTime(TxtF_iniPDVOPE.Text) 
-                                    // >= Convert.ToDateTime(GvNewAsignaPDVOPE.Rows[j].Cells[5].Text) 
-                                    // && Convert.ToDateTime(TxtF_iniPDVOPE.Text) <= Convert.ToDateTime(GvNewAsignaPDVOPE.Rows[j].Cells[6].Text))
+                                // Continuar en Caso No se haya encontrado Duplicado
+                                if (seguir)
+                                {
+                                    #region GridView
+                                    // Si el AspControl GridView tiene registros
+                                    if (GvNewAsignaPDVOPE.Rows.Count > 0)
                                     {
-                                        this.Session["encabemensa"] = "Sr. Usuario";
-                                        this.Session["cssclass"] = "MensajesSupervisor";
-                                        this.Session["mensaje"] = "El punto de venta : " 
-                                            + ChkListPDV.Items[i].Text 
-                                            + " ya esta en la lista de nueva asignacion al Mercaderista seleccionado. Por favor verifique";
-                                        Mensajes_AsigPDVOPE();
-                                        
-                                        // Guarda en la variable 'j' la Cantidad de Objetos para el AspControl GridView 'GvNewAsignaPDVOPE'
-                                        j = GvNewAsignaPDVOPE.Rows.Count - 1;
-                                        // Guarda en la variable 'i' la Cantidad de Objetos para el AspControl CheckBoxList 'ChkListPDV'
-                                        i = ChkListPDV.Items.Count - 1;
 
-                                        seguir = false;
-                                    }else{
-                                        seguir = true;
+                                        #region For
+                                        // Validación para no volver a asignar Puntos de Venta y Asignados
+                                        // En caso de encontrar registos no se podrá continuar con el proceso (seguir = false)
+                                        // >>>>>>>>>>>>>>>>>>>> Recorrer el AspControl GridView 'GvNewAsignaPDVOPE'
+                                        for (int j = 0; j <= GvNewAsignaPDVOPE.Rows.Count - 1; j++)
+                                        {
+                                            // Si el Planning es igual entre el AspControl DropDownList 'CmbSelOpePlanning' y el valor del AspControl GridView 'GvNewAsignaPDVOPE' columna 01
+                                            // Si el valor del AspControl CheckBoxList 'ChkListPDV' item i es igual al AspControl GridView 'GvNewAsignaPDVOPE' columna 03
+                                            if (CmbSelOpePlanning.SelectedItem.Value == GvNewAsignaPDVOPE.Rows[j].Cells[1].Text &&
+                                                ChkListPDV.Items[i].Value == GvNewAsignaPDVOPE.Rows[j].Cells[3].Text)
+                                            // && (Convert.ToDateTime(TxtF_iniPDVOPE.Text) 
+                                            // >= Convert.ToDateTime(GvNewAsignaPDVOPE.Rows[j].Cells[5].Text) 
+                                            // && Convert.ToDateTime(TxtF_iniPDVOPE.Text) <= Convert.ToDateTime(GvNewAsignaPDVOPE.Rows[j].Cells[6].Text))
+                                            {
+                                                //this.Session["encabemensa"] = "Sr. Usuario";
+                                                //this.Session["cssclass"] = "MensajesSupervisor";
+                                                //this.Session["mensaje"] = "El punto de venta : "
+                                                //    + ChkListPDV.Items[i].Text
+                                                //    + " ya esta en la lista de nueva asignacion al Mercaderista seleccionado. Por favor verifique";
+                                                //Mensajes_AsigPDVOPE();
+
+                                                showMensajesSeguimiento(
+                                                "MensajesSupervisor",
+                                                "Sr. Usuario",
+                                                "El punto de venta : "
+                                                 + ChkListPDV.Items[i].Text
+                                                 + " ya esta en la lista de nueva asignacion al Mercaderista seleccionado. Por favor verifique");
+                                                ModalPanelAsignacionPDVaoper.Show();    
+
+
+                                                // Guarda en la variable 'j' la Cantidad de Objetos para el AspControl GridView 'GvNewAsignaPDVOPE'
+                                                j = GvNewAsignaPDVOPE.Rows.Count - 1;
+                                                // Guarda en la variable 'i' la Cantidad de Objetos para el AspControl CheckBoxList 'ChkListPDV'
+                                                i = ChkListPDV.Items.Count - 1;
+
+                                                seguir = false;
+                                            }
+                                            else
+                                            {
+                                                seguir = true;
+                                            }
+                                        }
+                                        #endregion
+
+                                        #region If
+                                        // En caso no se haya asignado Pdv repetidos
+                                        if (seguir)
+                                        {
+
+                                            // Se crea una fila con los datos que pasaron los filtros
+                                            DataRow dr = dtAsigna_PDV_A_OPE_Temp.NewRow();
+                                            dr["Cod_"] = Convert.ToInt32(CmbSelOpePlanning.SelectedItem.Value);
+                                            dr["Mercaderista"] = CmbSelOpePlanning.SelectedItem.Text;
+                                            dr["Cod."] = ChkListPDV.Items[i].Value;
+                                            dr["Punto_de_Venta"] = ChkListPDV.Items[i].Text;
+                                            dr["Desde"] = TxtF_iniPDVOPE.Text;
+                                            dr["Hasta"] = TxtF_finPDVOPE.Text;
+
+                                            // Se adiciona al DataTable 'dtAsigna_PDV_A_OPE_Temp'
+                                            dtAsigna_PDV_A_OPE_Temp.Rows.Add(dr);
+
+                                            // Almacena en Session la cabecera de los Pdv Asignados
+                                            this.Session["dtAsigna_PDV_A_OPE_Temp"] = dtAsigna_PDV_A_OPE_Temp;
+
+                                            // Guardar en un Objeto List<ListItem> 'toBeRemoved' los Objetos a Eliminar del AspControl CheckBoxList 'ChkListPDV'
+                                            toBeRemoved.Add(ChkListPDV.Items[i]);
+                                        }
+                                        #endregion
+
                                     }
+                                    else
+                                    {
+                                        // Si el AspControl No Tiene Registros
+
+                                        // Creación de un DataRow
+                                        DataRow dr = dtAsigna_PDV_A_OPE_Temp.NewRow();
+
+                                        // Se crea un fila con los datos obtenidos
+                                        dr["Cod_"] = Convert.ToInt32(CmbSelOpePlanning.SelectedItem.Value);
+                                        dr["Mercaderista"] = CmbSelOpePlanning.SelectedItem.Text;
+                                        dr["Cod."] = ChkListPDV.Items[i].Value;
+                                        dr["Punto_de_Venta"] = ChkListPDV.Items[i].Text;
+                                        dr["Desde"] = TxtF_iniPDVOPE.Text;
+                                        dr["Hasta"] = TxtF_finPDVOPE.Text;
+
+                                        // Se adiciona al DataTable 'dtAsigna_PDV_A_OPE_Temp'
+                                        dtAsigna_PDV_A_OPE_Temp.Rows.Add(dr);
+
+                                        // Almacena en Session la cabecera de los Pdv Asignados
+                                        this.Session["dtAsigna_PDV_A_OPE_Temp"] = dtAsigna_PDV_A_OPE_Temp;
+
+                                        // Guardar en un Objeto List<ListItem> 'toBeRemoved' los Objetos a Eliminar del AspControl CheckBoxList 'ChkListPDV'
+                                        toBeRemoved.Add(ChkListPDV.Items[i]);
+                                    }
+                                    #endregion
+
                                 }
-
-                                // En caso no se haya asignado Pdv repetidos
-                                if (seguir){
-
-                                    // Se crea una fila con los datos que pasaron los filtros
-                                    DataRow dr = dtAsigna_PDV_A_OPE_Temp.NewRow();
-                                    dr["Cod_"] = Convert.ToInt32(CmbSelOpePlanning.SelectedItem.Value);
-                                    dr["Mercaderista"] = CmbSelOpePlanning.SelectedItem.Text;
-                                    dr["Cod."] = ChkListPDV.Items[i].Value;
-                                    dr["Punto_de_Venta"] = ChkListPDV.Items[i].Text;
-                                    dr["Desde"] = TxtF_iniPDVOPE.Text;
-                                    dr["Hasta"] = TxtF_finPDVOPE.Text;
-                                    
-                                    // Se adiciona al DataTable 'dtAsigna_PDV_A_OPE_Temp'
-                                    dtAsigna_PDV_A_OPE_Temp.Rows.Add(dr);
-
-                                    // Almacena en Session la cabecera de los Pdv Asignados
-                                    this.Session["dtAsigna_PDV_A_OPE_Temp"] = dtAsigna_PDV_A_OPE_Temp;
-
-                                    // Guardar en un Objeto List<ListItem> 'toBeRemoved' los Objetos a Eliminar del AspControl CheckBoxList 'ChkListPDV'
-                                    toBeRemoved.Add(ChkListPDV.Items[i]);
-                                }
-
-                            }
-                            else{
-                            // Si el AspControl No Tiene Registros
-                                
-                                // Creación de un DataRow
-                                DataRow dr = dtAsigna_PDV_A_OPE_Temp.NewRow();
-                                
-                                // Se crea un fila con los datos obtenidos
-                                dr["Cod_"] = Convert.ToInt32(CmbSelOpePlanning.SelectedItem.Value);
-                                dr["Mercaderista"] = CmbSelOpePlanning.SelectedItem.Text;
-                                dr["Cod."] = ChkListPDV.Items[i].Value;
-                                dr["Punto_de_Venta"] = ChkListPDV.Items[i].Text;
-                                dr["Desde"] = TxtF_iniPDVOPE.Text;
-                                dr["Hasta"] = TxtF_finPDVOPE.Text;
-
-                                // Se adiciona al DataTable 'dtAsigna_PDV_A_OPE_Temp'
-                                dtAsigna_PDV_A_OPE_Temp.Rows.Add(dr);
-
-                                // Almacena en Session la cabecera de los Pdv Asignados
-                                this.Session["dtAsigna_PDV_A_OPE_Temp"] = dtAsigna_PDV_A_OPE_Temp;
-
-                                // Guardar en un Objeto List<ListItem> 'toBeRemoved' los Objetos a Eliminar del AspControl CheckBoxList 'ChkListPDV'
-                                toBeRemoved.Add(ChkListPDV.Items[i]);
                             }
                         }
                     }
+                    #endregion
+
+                    // Setear en el AspControl GridView 'GvNewAsignaPDVOPE' los valores guardados en la Session 'dtAsigna_PDV_A_OPE_Temp'
+                    GvNewAsignaPDVOPE.DataSource = dtAsigna_PDV_A_OPE_Temp;
+                    GvNewAsignaPDVOPE.DataBind();
+
+                    // Eliminar los registros asignados del AspControl CheckBoxList 'ChkListPDV' (Puntos de Venta Seleccionados)
+                    for (int i = 0; i < toBeRemoved.Count; i++)
+                    {
+                        ChkListPDV.Items.Remove(toBeRemoved[i]);
+                    }
+
+                    // Vaciar el DataTable 'dtAsigna_PDV_A_OPE_Temp' que almacena de manera temporal los Puntos de Venta a Asignar
+                    dtAsigna_PDV_A_OPE_Temp = null;
+
+                    // Vaciar el AspControl CheckBoxList 'ChkListPDV'
+                    ChkListPDV.ClearSelection();
+                    //}
+
+                    ModalPanelAsignacionPDVaoper.Show();    
                 }
-                
-                // Setear en el AspControl GridView 'GvNewAsignaPDVOPE' los valores guardados en la Session 'dtAsigna_PDV_A_OPE_Temp'
-                GvNewAsignaPDVOPE.DataSource = dtAsigna_PDV_A_OPE_Temp;
-                GvNewAsignaPDVOPE.DataBind();
-
-                // Eliminar los registros asignados del AspControl CheckBoxList 'ChkListPDV' (Puntos de Venta Seleccionados)
-                for (int i = 0; i < toBeRemoved.Count; i++){
-                    ChkListPDV.Items.Remove(toBeRemoved[i]);
-                }
-
-                // Vaciar el DataTable 'dtAsigna_PDV_A_OPE_Temp' que almacena de manera temporal los Puntos de Venta a Asignar
-                dtAsigna_PDV_A_OPE_Temp = null;
-
-                // Vaciar el AspControl CheckBoxList 'ChkListPDV'
-                ChkListPDV.ClearSelection();
             }
 
-            ModalPanelAsignacionPDVaoper.Show();
+            if (!getMessage().Equals(""))
+            {
+                seguir = false;
+                showMensajesSeguimiento(
+                        "MensajesSupervisor",
+                        "Sr. Usuario",
+                        getMessage());
+                ModalPanelAsignacionPDVaoper.Show();
+            }
+
+            //}
+
         }
+        
         /// <summary>
         /// Evento Click del AspControl Button 'BtnaceptaPDVOPE' correspondiente al AspControl ModalPopupExtender 'ModalPanelAsignacionPDVaoper'
         /// </summary>
@@ -4419,82 +5679,7 @@ namespace SIGE.Pages.Modulos.Planning
             MPMensajeAsignaPDVOPE.Hide();
             ModalPanelAsignacionPDVaoper.Show();
         }
-        /// <summary>
-        /// Evento Click del AspControl Button 'BtnUpdateAsigPDVOPE' que guarda los cambios realizados en la gestión de Asignación de Puntos de Venta.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        protected void BtnUpdateAsigPDVOPE_Click(object sender, EventArgs e)
-        {
-            ModalPanelAsignacionPDVaoper.Show();
 
-            // Recorre el AspControl GridView 'GvNewAsignaPDVOPE', para guardar cada uno de los Puntos de Venta Asignados al Mercaderista en Base de Datos
-            for (int i = 0; i <= GvNewAsignaPDVOPE.Rows.Count - 1; i++){
-
-                #region Registro de Ruta en BD Web
-                // Registra Ruta del Mercaderista (Por cada Punto de Venta)
-                try{
-                   
-                    EPointOfSale_PlanningOper RegistrarPointOfSale_PlanningOper =
-                        PointOfSale_PlanningOper.RegistrarAsignPDVaOperativo(
-                            Convert.ToInt32(GvNewAsignaPDVOPE.Rows[i].Cells[3].Text),
-                            TxtPlanningAsigPDVOPE.Text,
-                            Convert.ToInt32(GvNewAsignaPDVOPE.Rows[i].Cells[1].Text),
-                            Convert.ToDateTime(GvNewAsignaPDVOPE.Rows[i].Cells[5].Text + " 01:00:00.000"),
-                            Convert.ToDateTime(GvNewAsignaPDVOPE.Rows[i].Cells[6].Text + " 23:59:00.000"),
-                            0,
-                            true,
-                            Convert.ToString(this.Session["sUser"]),
-                            DateTime.Now,
-                            Convert.ToString(this.Session["sUser"]), DateTime.Now);
-
-                } catch (Exception ex) {
-                    
-                    messages = ex.ToString();
-                    
-                    this.Session["encabemensa"] = "Sr. Usuario";
-                    this.Session["cssclass"] = "MensajesSupConfirm";
-                    this.Session["mensaje"] = "Ocurrio un Error al guardar el Punto de Venta :"+ ex.ToString().Substring(0,100) + "...";
-                    
-                    Mensajes_AsigPDVOPE();
-
-                }
-                #endregion
-
-                #region Registro de Ruta en BD Mobile
-                // Verifica que se Haya podido registrar Correctamente en la Base de datos del App Web para proceder a registrar el registro en la App Mobile
-                if (messages.Equals("")) {
-                    // Registra Ruta del Mercaderista (Por cada Punto de Venta) - Aplicativo Mobile
-                    try{
-                        
-                        PointOfSale_PlanningOper RegistrarTBL_EQUIPO_PTO_VENTA = new PointOfSale_PlanningOper();
-                        RegistrarTBL_EQUIPO_PTO_VENTA.RegistrarTBL_EQUIPO_PTO_VENTA(
-                            Convert.ToInt32(GvNewAsignaPDVOPE.Rows[i].Cells[3].Text),
-                            TxtPlanningAsigPDVOPE.Text,
-                            Convert.ToInt32(GvNewAsignaPDVOPE.Rows[i].Cells[1].Text),
-                            Convert.ToDateTime(GvNewAsignaPDVOPE.Rows[i].Cells[5].Text + " 01:00:00.000"),
-                            Convert.ToDateTime(GvNewAsignaPDVOPE.Rows[i].Cells[6].Text + " 23:59:00.000"));
-
-                    }catch (Exception ex) {
-                        messages = ex.ToString();
-
-                        this.Session["encabemensa"] = "Sr. Usuario";
-                        this.Session["cssclass"] = "MensajesSupConfirm";
-                        this.Session["mensaje"] = "Ocurrio un Error al guardar el Punto de Venta en la Base de Datos Mobile:" + ex.ToString().Substring(0, 100) + "...";
-
-                        Mensajes_AsigPDVOPE();
-                    }
-                }
-                #endregion
-
-            }
-            this.Session["encabemensa"] = "Sr. Usuario";
-            this.Session["cssclass"] = "MensajesSupConfirm";
-            this.Session["mensaje"] = "Se ha asignado con éxito los puntos de venta para la campaña : " + LblTxtPresupuestoAsigPDVOPE.Text.ToUpper();
-            Mensajes_AsigPDVOPE();
-            Limpiar_InformacionAsignaPDVOPE();
-
-        }
         /// <summary>
         /// Evento SelectedIndexChanged que elimina el registro seleccionado del Objeto 'GvNewAsignaPDVOPE'
         /// </summary>
@@ -4525,6 +5710,7 @@ namespace SIGE.Pages.Modulos.Planning
         //    ModalConfirmacion.Show();
         //    ModalPanelAsignacionPDVaoper.Show();
         //}
+        
         /// <summary>
         /// Evento Click AspControl Button 'BtnNoConfirma' (Confirmar Eliminar Puntos de Venta) - Panel de Confirmación
         /// </summary>
@@ -4534,6 +5720,7 @@ namespace SIGE.Pages.Modulos.Planning
         {
             ModalPanelAsignacionPDVaoper.Show();
         }
+        
         /// <summary>
         /// Evento Click AspControl Button 'BtnSiConfirma' (Confirmar Eliminar Puntos de Venta) - Panel de Confirmación
         /// </summary>
@@ -4580,7 +5767,19 @@ namespace SIGE.Pages.Modulos.Planning
 
             ModalPanelAsignacionPDVaoper.Show();
             
-            ConsultaPDVXoperativo();
+            //ConsultaPDVXoperativo();
+            String idPlanning = TxtPlanningAsigPDVOPE.Text;
+
+            int idPersona = Convert.ToInt32(
+                CmbSelOpePlanning.Text);
+
+            DataTable dt = ConsultaPDVXoperativo(idPlanning,
+                idPersona);
+            if (getMessage().Equals(""))
+            {
+                GvAsignaPDVOPE.DataSource = dt;
+                GvAsignaPDVOPE.DataBind();
+            }
 
             // Ocultar Botones de Control en caso no haya Puntos de Venta Disponibles para Editar
             if (GvAsignaPDVOPE.Rows.Count == 0){
@@ -4589,6 +5788,7 @@ namespace SIGE.Pages.Modulos.Planning
                 BtnNoneasigPDV.Visible = false;
             }
         }
+        
         /// <summary>
         /// Evento OnRowEditing del AspControl GridView 'GvAsignaPDVOPE', correspondiente a los Puntos de Venta Asignados
         /// </summary>
@@ -4598,8 +5798,21 @@ namespace SIGE.Pages.Modulos.Planning
         {
             ModalPanelAsignacionPDVaoper.Show();
             GvAsignaPDVOPE.EditIndex = e.NewEditIndex;
-            ConsultaPDVXoperativo();
+            //ConsultaPDVXoperativo();
+            String idPlanning = TxtPlanningAsigPDVOPE.Text;
+
+            int idPersona = Convert.ToInt32(
+                CmbSelOpePlanning.Text);
+
+            DataTable dt = ConsultaPDVXoperativo(idPlanning,
+                idPersona);
+            if (getMessage().Equals(""))
+            {
+                GvAsignaPDVOPE.DataSource = dt;
+                GvAsignaPDVOPE.DataBind();
+            }
         }
+        
         /// <summary>
         /// Evento OnRowCancelingEdit del AspControl GridView 'GvAsignaPDVOPE', correspondiente a los Puntos de Venta Asignados
         /// </summary>
@@ -4609,8 +5822,21 @@ namespace SIGE.Pages.Modulos.Planning
         {
             ModalPanelAsignacionPDVaoper.Show();
             GvAsignaPDVOPE.EditIndex = -1;
-            ConsultaPDVXoperativo();
+            //ConsultaPDVXoperativo();
+            String idPlanning = TxtPlanningAsigPDVOPE.Text;
+
+            int idPersona = Convert.ToInt32(
+                CmbSelOpePlanning.Text);
+
+            DataTable dt = ConsultaPDVXoperativo(idPlanning,
+                idPersona);
+            if (getMessage().Equals(""))
+            {
+                GvAsignaPDVOPE.DataSource = dt;
+                GvAsignaPDVOPE.DataBind();
+            }
         }
+        
         /// <summary>
         /// Evento OnRowUpdating del AspControl GridView 'GvAsignaPDVOPE', correspondiente a los Puntos de Venta Asignados
         /// </summary>
@@ -4669,21 +5895,23 @@ namespace SIGE.Pages.Modulos.Planning
                 }
 
                 GvAsignaPDVOPE.EditIndex = -1;
-                ConsultaPDVXoperativo();
+                //ConsultaPDVXoperativo();
+                String idPlanning = TxtPlanningAsigPDVOPE.Text;
+
+                int idPersona = Convert.ToInt32(
+                    CmbSelOpePlanning.Text);
+
+                DataTable dt = ConsultaPDVXoperativo(idPlanning,
+                    idPersona);
+                if (getMessage().Equals(""))
+                {
+                    GvAsignaPDVOPE.DataSource = dt;
+                    GvAsignaPDVOPE.DataBind();
+                }
             }
         }
-        /// <summary>
-        /// Evento Click del AspControl 'Button1_Click' (Eliminar) Mensaje para Confirmar la Acción de Eliminar
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        protected void Button1_Click(object sender, EventArgs e)
-        {
-            LblMensajeConfirm.Text = "Realmente desea eliminar los puntos de venta seleccionados para el usuario " 
-                + CmbSelOpePlanning.SelectedItem.Text + " ?";
-            ModalConfirmacion.Show();
-            ModalPanelAsignacionPDVaoper.Show();
-        }
+
+        #region Evento Boton:Carga Masiva Excel
         /// <summary>
         /// Evento Click para el AspControl 'BtnCargaPDVOPE' correspondiente a la Carga Masiva - Muestra el Panel para la Carga Masiva por Excel
         /// Carga en un IFrame la página 'Carga_PDVOPE.aspx'
@@ -4698,175 +5926,704 @@ namespace SIGE.Pages.Modulos.Planning
             this.Session["id_planningPDVOPE"] = TxtPlanningAsigPDVOPE.Text;
             IframeMasivaPDVOpe.Attributes["src"] = "Carga_PDVOPE.aspx";
         }
+        #endregion
+
         /// <summary>
-        /// Eventro Click del AspControl 'BtnAllAsigPDV', para seleccionar todos los puntos de Venta Asignados
+        /// Retorna DataSet con toda la información de la 
+        /// Campaña por idPlanning
+        ///DataTable[0] = Info Planning (id_planning,planning_name)
+        ///DataTable[1] = Info Objetivos (id_objplanning,
+        ///               id_planning, objpladescription, 
+        ///               objplacreateby, objpladateby, 
+        ///               objplamodiby, objpladatemodiby)
+        ///DataTable[2] = Info SKU Mandatorios(id_mandtoryplanning,
+        ///               id_planning,mandtorydescription,
+        ///               mandtorycreateby, mandtorydateby,
+        ///               mandtorymodiby, mandtorydatemodiby)
+        ///DataTable[3] = Info Mecanica (mechanicalactivity_id,
+        ///               id_planning, mechanicalactivity_description,
+        ///               mechanicalactivity_createby, 
+        ///               mechanicalactivity_dateby,
+        ///               mechanicalactivity_modyby,
+        ///               mechanicalactivity_datemodyby)
+        ///DataTable[4] = Info Staff (id_staffplanning,
+        ///               id_planning, person_id,
+        ///               staffplanning_status,
+        ///               staffplanning_createby,
+        ///               staffplanning_dateby,
+        ///               staffplanning_modiby,
+        ///               staffplanning_datemodiby)
+        ///DataTable[5] = Info Supervisores (id_asigper,
+        ///               id_planning, person_idsupe,
+        ///               person_idopera, asigmenper_status,
+        ///               asigmenper_createby, asigmenper_dateby,
+        ///               asigmenper_modiby, asigmenper_datemodiby)
+        ///DataTable[6] = Info Puntos de Venta Planning (id_mposplanning)
+        ///DataTable[7] = Info Products (id_productsplanning,
+        ///               id_planning, id_product, id_productcategory,
+        ///               id_brand, id_subbrand, id_productfamily,
+        ///               id_productsubfamily, product_caracte,
+        ///               product_benefi, 
+        ///               productsplanning_initialstock, report_id,
+        ///               status, productplan_createby, 
+        ///               productplan_dateby, productplan_modiby,
+        ///               productplan_datemodiby)
+        ///DataTable[8] = Info Rutas (id_posplanningope, id_mposplanning
+        ///               id_planning, person_id, 
+        ///               posplanningope_fechainicio,
+        ///               posplanningope_fechafin,
+        ///               id_frecuencia, posplanningope_status,
+        ///               posplanningope_createby, 
+        ///               posplanningope_dateby,
+        ///               posplanningope_modiby,
+        ///               posplanningope_datemodiby)
+        ///DataTable[9] = Info Vigencia del Planning (
+        ///               id_planning, planning_name, cod_strategy,
+        ///               planning_codchannel, planning_startactivity,
+        ///               planning_endactivity, 
+        ///               planning_reportaditional, 
+        ///               planning_developmentactivityreport,
+        ///               planning_person_eje, 
+        ///               planning_activityformats,
+        ///               planning_areainvolved,
+        ///               planning_daterepsoli,
+        ///               planning_preprodudateini,
+        ///               planning_preprodudateend,
+        ///               planning_projectduration,
+        ///               planning_datefinreport,
+        ///               planning_vigen,
+        ///               planning_budget,
+        ///               id_designfor,
+        ///               name_contact,
+        ///               email_contac,
+        ///               planning_status,
+        ///               status_id,
+        ///               planning_formacompe,
+        ///               planning_createby,
+        ///               planning_dateby,
+        ///               planning_modiby,
+        ///               planning_datemodiby,
+        ///               strategy_name)
+        ///DataTable[10] = Info Reports Planning (
+        ///               id_reportsplanning,
+        ///               id_planning,
+        ///               report_id,
+        ///               id_year,
+        ///               id_month,
+        ///               reportsplanning_periodo,
+        ///               reportsplanning_recogerdesde,
+        ///               reportsplanning_recogerhasta,
+        ///               reportsplanning_validacionanalista,
+        ///               reportsplanning_status,
+        ///               reportsplanning_createby,
+        ///               reportsplanning_dateby,
+        ///               reportsplanning_modiby,
+        ///               reportsplanning_datemodiby)
+        ///DataTable[11] = Info Panel Planning (
+        ///              id_panelplanning,
+        ///              id_planning,
+        ///              id_mposplanning,
+        ///              clientpdv_code,
+        ///              report_id,
+        ///              status_panelplanning,
+        ///              panelplanning_createby,
+        ///              panelplanning_dateby,
+        ///              panelplanning_modiby,
+        ///              panelplanning_datemodiby)
+        ///DataTable[12] = Info Marcas Planning (
+        ///              id_brandplanning,
+        ///              id_planning,
+        ///              id_brand,
+        ///              report_id,
+        ///              status,
+        ///              brandplan_createby,
+        ///              brandplan_dateby,
+        ///              brandplan_modiby,
+        ///              brandplan_datemodiby)
+        ///DataTable[13] = Info Familias Planning (
+        ///              id_brandplanning,
+        ///              id_planning,
+        ///              id_productcategory,
+        ///              id_brand,
+        ///              id_productfamily,
+        ///              report_id,
+        ///              status,
+        ///              familyplan_createby,
+        ///              familyplan_dateby,
+        ///              familyplan_modiby,
+        ///              familyplan_datemodiby)
+        ///DataTable[14] = Info Categorias Planning (
+        ///              id_categoryplanning,
+        ///              id_planning, 
+        ///              id_productcategory, 
+        ///              report_id, 
+        ///              status,
+        ///              categoryplan_createby, 
+        ///              categoryplan_dateby, 
+        ///              categoryplan_modiby, 
+        ///              categoryplan_datemodiby)
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        protected void BtnAllAsigPDV_Click(object sender, EventArgs e)
-        {
-            for (int i = 0; i <= GvAsignaPDVOPE.Rows.Count - 1; i++){
-                ((CheckBox)GvAsignaPDVOPE.Rows[i].FindControl("CheckBox1")).Checked = true;
+        /// <param name="idPlanning"></param>
+        /// <returns></returns>
+        private DataSet getAllInfoPlanning(String idPlanning) {
+            DataSet ds = new DataSet();
+            try
+            {
+                ds = oBLPlanning.getInfoPlanning(idPlanning);
+                if (!oBLPlanning.getMessages().Equals("")) {
+                    messages = oBLPlanning.getMessages();
+                }
             }
-
-            ModalPanelAsignacionPDVaoper.Show();
-
+            catch (Exception ex) {
+                messages = "Error Info Planning: " + 
+                    ex.Message.ToString();
+            }
+            return ds;
         }
+
         /// <summary>
-        /// Eventro Click del AspControl 'BtnNoneasigPDV', para no  seleccionar todos ningún punto de Venta Asignados.
+        /// Retornar un DataTable para los ComboBox que estan
+        /// relacionados para al idPlanning indicando, además
+        /// pueden variar estableciendo las siguientes opciones:
+        /// Option 1: Info Company (Company_id,Company_Name)
+        /// Option 2: Info Responsables (Person_id, Nombres
+        ///           person_status, Perfil_id, name_user, 
+        ///           User_Password, Person_Email)
+        /// Option 3: Info Personas Operativos (Person_id, Nombres, 
+        ///           Perfil_id, perfil_name)
+        /// Option 4: Info Personas Supervisor (Person_id, Nombres, 
+        ///           Perfil_id, perfil_name)
+        /// Option 5: Info Empresas Competidoras (Company_id, 
+        ///           Company_Name)
+        /// Option 6: Info Mercaderistas (Person_id, Nombres
+        ///           person_status, Perfil_id, name_user, 
+        ///           User_Password, Person_Email)
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        protected void BtnNoneasigPDV_Click(object sender, EventArgs e)
-        {
-            for (int i = 0; i <= GvAsignaPDVOPE.Rows.Count - 1; i++){
-                ((CheckBox)GvAsignaPDVOPE.Rows[i].FindControl("CheckBox1")).Checked = false;
+        /// <param name="idPlanning"></param>
+        /// <param name="idOption"></param>
+        /// <returns></returns>
+        private DataTable cmbElementsPlanning(String idPlanning,
+        int idOption) {
+            DataTable dt = new DataTable();
+            try
+            {
+                dt = oBLPlanning.cmbInterfaceEasyWinDummy(idPlanning,
+                idOption);
 
+                if (!oBLPlanning.getMessages().Equals("")) {
+                    messages = oBLPlanning.getMessages();
+                }
             }
-            ModalPanelAsignacionPDVaoper.Show();
-
+            catch (Exception ex) {
+                messages = "Error Cargando Combos Planning: " +
+                    ex.Message.ToString();
+            }
+            return dt;
         }
+
         /// <summary>
-        /// Consultar PDVs por Campaña y setearlo en el ASPControl GridView : 'GvNewAsignaPDVOPE'
+        /// Crea un ViewState de la información del Planning. 
+        ///DataTable[0] = Info Planning (id_planning,planning_name)
+        ///DataTable[1] = Info Objetivos (id_objplanning,
+        ///               id_planning, objpladescription, 
+        ///               objplacreateby, objpladateby, 
+        ///               objplamodiby, objpladatemodiby)
+        ///DataTable[2] = Info SKU Mandatorios(id_mandtoryplanning,
+        ///               id_planning,mandtorydescription,
+        ///               mandtorycreateby, mandtorydateby,
+        ///               mandtorymodiby, mandtorydatemodiby)
+        ///DataTable[3] = Info Mecanica (mechanicalactivity_id,
+        ///               id_planning, mechanicalactivity_description,
+        ///               mechanicalactivity_createby, 
+        ///               mechanicalactivity_dateby,
+        ///               mechanicalactivity_modyby,
+        ///               mechanicalactivity_datemodyby)
+        ///DataTable[4] = Info Staff (id_staffplanning,
+        ///               id_planning, person_id,
+        ///               staffplanning_status,
+        ///               staffplanning_createby,
+        ///               staffplanning_dateby,
+        ///               staffplanning_modiby,
+        ///               staffplanning_datemodiby)
+        ///DataTable[5] = Info Supervisores (id_asigper,
+        ///               id_planning, person_idsupe,
+        ///               person_idopera, asigmenper_status,
+        ///               asigmenper_createby, asigmenper_dateby,
+        ///               asigmenper_modiby, asigmenper_datemodiby)
+        ///DataTable[6] = Info Puntos de Venta Planning (id_mposplanning)
+        ///DataTable[7] = Info Products (id_productsplanning,
+        ///               id_planning, id_product, id_productcategory,
+        ///               id_brand, id_subbrand, id_productfamily,
+        ///               id_productsubfamily, product_caracte,
+        ///               product_benefi, 
+        ///               productsplanning_initialstock, report_id,
+        ///               status, productplan_createby, 
+        ///               productplan_dateby, productplan_modiby,
+        ///               productplan_datemodiby)
+        ///DataTable[8] = Info Rutas (id_posplanningope, id_mposplanning
+        ///               id_planning, person_id, 
+        ///               posplanningope_fechainicio,
+        ///               posplanningope_fechafin,
+        ///               id_frecuencia, posplanningope_status,
+        ///               posplanningope_createby, 
+        ///               posplanningope_dateby,
+        ///               posplanningope_modiby,
+        ///               posplanningope_datemodiby)
+        ///DataTable[9] = Info Vigencia del Planning (
+        ///               id_planning, planning_name, cod_strategy,
+        ///               planning_codchannel, planning_startactivity,
+        ///               planning_endactivity, 
+        ///               planning_reportaditional, 
+        ///               planning_developmentactivityreport,
+        ///               planning_person_eje, 
+        ///               planning_activityformats,
+        ///               planning_areainvolved,
+        ///               planning_daterepsoli,
+        ///               planning_preprodudateini,
+        ///               planning_preprodudateend,
+        ///               planning_projectduration,
+        ///               planning_datefinreport,
+        ///               planning_vigen,
+        ///               planning_budget,
+        ///               id_designfor,
+        ///               name_contact,
+        ///               email_contac,
+        ///               planning_status,
+        ///               status_id,
+        ///               planning_formacompe,
+        ///               planning_createby,
+        ///               planning_dateby,
+        ///               planning_modiby,
+        ///               planning_datemodiby,
+        ///               strategy_name)
+        ///DataTable[10] = Info Reports Planning (
+        ///               id_reportsplanning,
+        ///               id_planning,
+        ///               report_id,
+        ///               id_year,
+        ///               id_month,
+        ///               reportsplanning_periodo,
+        ///               reportsplanning_recogerdesde,
+        ///               reportsplanning_recogerhasta,
+        ///               reportsplanning_validacionanalista,
+        ///               reportsplanning_status,
+        ///               reportsplanning_createby,
+        ///               reportsplanning_dateby,
+        ///               reportsplanning_modiby,
+        ///               reportsplanning_datemodiby)
+        ///DataTable[11] = Info Panel Planning (
+        ///              id_panelplanning,
+        ///              id_planning,
+        ///              id_mposplanning,
+        ///              clientpdv_code,
+        ///              report_id,
+        ///              status_panelplanning,
+        ///              panelplanning_createby,
+        ///              panelplanning_dateby,
+        ///              panelplanning_modiby,
+        ///              panelplanning_datemodiby)
+        ///DataTable[12] = Info Marcas Planning (
+        ///              id_brandplanning,
+        ///              id_planning,
+        ///              id_brand,
+        ///              report_id,
+        ///              status,
+        ///              brandplan_createby,
+        ///              brandplan_dateby,
+        ///              brandplan_modiby,
+        ///              brandplan_datemodiby)
+        ///DataTable[13] = Info Familias Planning (
+        ///              id_brandplanning,
+        ///              id_planning,
+        ///              id_productcategory,
+        ///              id_brand,
+        ///              id_productfamily,
+        ///              report_id,
+        ///              status,
+        ///              familyplan_createby,
+        ///              familyplan_dateby,
+        ///              familyplan_modiby,
+        ///              familyplan_datemodiby)
+        ///DataTable[14] = Info Categorias Planning (
+        ///              id_categoryplanning,
+        ///              id_planning, 
+        ///              id_productcategory, 
+        ///              report_id, 
+        ///              status,
+        ///              categoryplan_createby, 
+        ///              categoryplan_dateby, 
+        ///              categoryplan_modiby, 
+        ///              categoryplan_datemodiby)
+        /// </summary>
+        /// </summary>
+        /// <param name="ds"></param>
+        private void createViewStateInfoPlanning(DataSet ds) {
+            try
+            {
+                // Guarda en un ViewState 'planning_creados' la información del Planning (14 DataTables)
+                this.ViewState["planning_creados"] = ds;
+            }
+            catch (Exception ex) {
+                messages = "Error al Crear el ViewState Info Planning: " +
+                    ex.Message.ToString();
+            }
+        } 
+
+        /// <summary>
+        /// Consultar PDVs por Campaña y setearlo en 
+        /// el ASPControl GridView : 'GvNewAsignaPDVOPE'
         /// </summary>
         private void ConsultaPDVCampañaRutas()
         {
-            DataSet ds = (DataSet)this.ViewState["planning_creados"];
-            if (ds.Tables[6].Rows.Count > 0 && ds.Tables[9].Rows.Count > 0)
+            DataSet ds = 
+                (DataSet)this.ViewState["planning_creados"];
+            if (ds.Tables[6].Rows.Count > 0 && 
+                ds.Tables[9].Rows.Count > 0)
             {
-                TxtPlanningAsigPDVOPE.Text = ds.Tables[9].Rows[0]["id_planning"].ToString().Trim();
-                LblTxtPresupuestoAsigPDVOPE.Text = ds.Tables[9].Rows[0]["Planning_Name"].ToString().Trim();
+                TxtPlanningAsigPDVOPE.Text = 
+                    ds.Tables[9].Rows[0]["id_planning"]
+                    .ToString().Trim();
 
-                DataTable dtCliente = Presupuesto.Get_ObtenerClientes(ds.Tables[9].Rows[0]["Planning_Budget"].ToString().Trim(), 1);
+                LblTxtPresupuestoAsigPDVOPE.Text = 
+                    ds.Tables[9].Rows[0]["Planning_Name"]
+                    .ToString().Trim();
 
-                this.Session["company_id"] = dtCliente.Rows[0]["Company_id"].ToString().Trim();
-                this.Session["Planning_CodChannel"] = ds.Tables[9].Rows[0]["Planning_CodChannel"].ToString().Trim();
+                this.Session["Planning_CodChannel"] =
+                    ds.Tables[9].Rows[0]["Planning_CodChannel"]
+                    .ToString().Trim();
+
                 
-                //llenaciudadesRutas();
-                //CmbSelTipoAgrupRutas.Items.Clear();
-                //CmbSelAgrupRutas.Items.Clear();
-                //CmbSelOficinaRutas.Items.Clear();
-                //CmbSelMallasRutas.Items.Clear();
-                //CmbSelSectorRutas.Items.Clear();
-                //ChkListPDV.Items.Clear();
+                DataTable dtCliente = new DataTable();
+                try
+                {
+                    dtCliente =
+                        oBLPlanning.cmbInterfaceEasyWin(
+                        ds.Tables[9].Rows[0]["Planning_Budget"]
+                        .ToString().Trim(),
+                        1);
 
-                DataTable dtAsigna_PDV_A_OPE_Temp = new DataTable();
-                dtAsigna_PDV_A_OPE_Temp.Columns.Add("Cod_", typeof(Int32));
-                dtAsigna_PDV_A_OPE_Temp.Columns.Add("Mercaderista", typeof(String));
-                dtAsigna_PDV_A_OPE_Temp.Columns.Add("Cod.", typeof(Int32));
-                dtAsigna_PDV_A_OPE_Temp.Columns.Add("Punto_de_Venta", typeof(String));
-                dtAsigna_PDV_A_OPE_Temp.Columns.Add("Desde", typeof(String));
-                dtAsigna_PDV_A_OPE_Temp.Columns.Add("Hasta", typeof(String));
-                
-                GvNewAsignaPDVOPE.DataSource = dtAsigna_PDV_A_OPE_Temp;
-                GvNewAsignaPDVOPE.DataBind();
+                    this.Session["company_id"] =
+                        dtCliente.Rows[0]["Company_id"]
+                        .ToString().Trim();
+                }
+                catch (Exception ex) {
+                    messages = "Error:" + ex.Message.ToString();
+                }
 
-                this.Session["dtAsigna_PDV_A_OPE_Temp"] = dtAsigna_PDV_A_OPE_Temp;
+                if (oBLPlanning.getMessages().Equals(""))
+                {
+                    //DataTable dtCliente =
+                    //    Presupuesto.Get_ObtenerClientes(
+                    //    ds.Tables[9].Rows[0]["Planning_Budget"]
+                    //    .ToString().Trim(), 1);
 
-                // Obtener la información del Planning (id_planning,status_id,status_name,planning_codchannel,name_country,channel_name,
-                // company_id,planning_startactivity,planning_endactivity)
-                DataTable dt = PPlanning.ObtenerIdPlanning(ds.Tables[9].Rows[0]["Planning_Budget"].ToString().Trim());
-                // Guardar en un AspControl Session 'Fechainicial' Fecha inicial del Planning
-                this.Session["Fechainicial"] = dt.Rows[0]["Planning_StartActivity"].ToString().Trim();
-                // Guardar en un AspControl Session 'Fechafinal' Fecha final del Planning
-                this.Session["Fechafinal"] = dt.Rows[0]["Planning_EndActivity"].ToString().Trim();
+                    //this.Session["company_id"] =
+                    //    dtCliente.Rows[0]["Company_id"]
+                    //    .ToString().Trim();
 
-                dtCliente = null;
-                dt = null;
-                ds = null;
-            }else {
-                this.Session["encabemensa"] = "Sr. Usuario";
-                this.Session["cssclass"] = "MensajesSupervisor";
-                this.Session["mensaje"] = "¡No tiene Puntos de Venta Asignados a la Campaña Seleccionada!, Por favor Verifique... ";
-                messages = "¡No tiene Puntos de Venta Asignados a la Campaña Seleccionada!, Por favor Verifique... ";
-                Mensajes_Seguimiento();
+                    //this.Session["Planning_CodChannel"] =
+                    //    ds.Tables[9].Rows[0]["Planning_CodChannel"]
+                    //    .ToString().Trim();
+
+                    idPlanning = TxtPlanningAsigPDVOPE.Text.Equals("") ? "0" :
+                        TxtPlanningAsigPDVOPE.Text;
+                    idCity = "0";
+                    idTypeNodeCommercial = 0;
+                    idNodeCommercial = "0";
+                    idOficina = 0;
+                    idMalla = 0;
+                    idSector = 0;
+
+                    llenaciudadesRutas(idPlanning, idCity, 
+                    idTypeNodeCommercial,
+                    idNodeCommercial, idOficina, idMalla);
+
+                    //CmbSelTipoAgrupRutas.Items.Clear();
+                    //CmbSelAgrupRutas.Items.Clear();
+                    //CmbSelOficinaRutas.Items.Clear();
+                    //CmbSelMallasRutas.Items.Clear();
+                    //CmbSelSectorRutas.Items.Clear();
+                    //ChkListPDV.Items.Clear();
+
+                    if (getMessage().Equals("")) {
+
+                        addColumnsToGridViewPdvOpeTemp();
+
+                        if (getMessage().Equals("")) {
+                            // Obtener la información del Planning (id_planning,status_id,status_name,planning_codchannel,name_country,channel_name,
+                            // company_id,planning_startactivity,planning_endactivity)
+                            
+                            //DataTable dt =
+                            //    PPlanning.ObtenerIdPlanning(
+                            //    ds.Tables[9].Rows[0]["Planning_Budget"]
+                            //    .ToString().Trim());
+
+                            DataTable dt =
+                                oBLPlanning.getByIdPlanning(
+                                ds.Tables[9].Rows[0]["Planning_Budget"]
+                                .ToString().Trim());
+
+                            // Guardar en un AspControl Session 'Fechainicial' Fecha inicial del Planning
+                            this.Session["Fechainicial"] =
+                                dt.Rows[0]["Planning_StartActivity"]
+                                .ToString().Trim();
+
+                            // Guardar en un AspControl Session 'Fechafinal' Fecha final del Planning
+                            this.Session["Fechafinal"] =
+                                dt.Rows[0]["Planning_EndActivity"]
+                                .ToString().Trim();
+                            //dtCliente = null;
+                            //dt = null;
+                            //ds = null;                    
+                        }
+                    }
+                }
+                else {
+                    messages = oBLPlanning.getMessages().ToString();
+                }
+
             }
+            else {
+            //    this.Session["encabemensa"] = "Sr. Usuario";
+            //    this.Session["cssclass"] = "MensajesSupervisor";
+            //    this.Session["mensaje"] = "¡No tiene Puntos de Venta Asignados a la Campaña Seleccionada!, Por favor Verifique... ";
+                messages = "¡No tiene Puntos de Venta Asignados " + 
+                    " a la Campaña Seleccionada!, Por favor " + 
+                    " Verifique... ";
+            //    Mensajes_Seguimiento();
+            }
+
+            if (!getMessage().Equals(""))
+            {
+                showMensajesSeguimiento(
+                    "MensajesSupervisor",
+                    "Sr. Usuario",
+                    getMessage());
+            }
+
             
         } //revisado
+        
         /// <summary>
         /// Consultar PDVs por Campaña y idPerson y setea el resultado en el ASPControl GridView 'GvAsignaPDVOPE'
         /// </summary>
-        private void ConsultaPDVXoperativo()
+        /// DataTable[0] Retornar listado de Puntos de Venta asignados a un Mercaderista por idPlanning
+        /// - No            .- Número de Orden del Punto de Venta
+        /// - Código        .- Identificador del Punto de Venta Asignado al Mercaderista.
+        /// - Nombre        .- Nombre del Punto de Venta Asignado al Mercadersita.
+        /// - Región        .- Nombre de la Región del Punto de Venta Asignado al Mercaderista.
+        /// - Zona          .- Nombre de la Zona del Punto de Venta asignado al Mercaderista.
+        /// - Fecha inicio  .- Fecha de Inicio para recolectar información del Punto de Venta asignado al Mercaderista.
+        /// - Fecha fin     .- Fecha de Fin para recolectar información del Punto de Venta asignado al Mercaderista.
+        private DataTable ConsultaPDVXoperativo(String idPlanning,
+        int idPerson)
         {
-            DataTable DTConsulta = PointOfSale_PlanningOper
-                .Consultar_PDVPlanningXoperativo(TxtPlanningAsigPDVOPE.Text,
-                Convert.ToInt32(CmbSelOpePlanning.Text));
-
-            // Verifica que no existan Errores en la invocación al Servicio
-            if (PointOfSale_PlanningOper.getMessage() == null){
-                // Llena la información correspondiente a la Grilla de Pdv asignados a Usuarios.
-                GvAsignaPDVOPE.DataSource = DTConsulta;
-                GvAsignaPDVOPE.DataBind();
-            }else{
-                this.Session["encabemensa"] = "Sr. Usuario";
-                this.Session["cssclass"] = "MensajesSupervisor";
-                this.Session["mensaje"] = "Ocurrio un Error: " + PointOfSale_PlanningOper.getMessage();
-                messages = PointOfSale_PlanningOper.getMessage();
-                Mensajes_Seguimiento();
+            //DataTable DTConsulta = PointOfSale_PlanningOper
+            //    .Consultar_PDVPlanningXoperativo(
+            //    TxtPlanningAsigPDVOPE.Text,
+            //    Convert.ToInt32(CmbSelOpePlanning.Text));
+            DataTable DTConsulta = new DataTable();
+            try {
+                DTConsulta = 
+                    PointOfSale_PlanningOper.Consultar_PDVPlanningXoperativo(
+                    idPlanning, idPerson);
+                if (!PointOfSale_PlanningOper.getMessage().Equals("")) {
+                    messages = PointOfSale_PlanningOper.getMessage();
+                }
+            }
+            catch (Exception ex) {
+                messages = ex.Message.ToString();
             }
 
+            return DTConsulta;
 
+
+            //DataTable DTConsulta = PointOfSale_PlanningOper
+            //    .Consultar_PDVPlanningXoperativo(
+            //    idPlanning, idPerson);
+
+            // Verifica que no existan Errores en la invocación al Servicio
+            //if (PointOfSale_PlanningOper.getMessage() == null){
+                // Llena la información correspondiente a la Grilla de Pdv asignados a Usuarios.
+                //GvAsignaPDVOPE.DataSource = DTConsulta;
+                //GvAsignaPDVOPE.DataBind();
+            //}else{
+            //    this.Session["encabemensa"] = "Sr. Usuario";
+            //    this.Session["cssclass"] = "MensajesSupervisor";
+            //    this.Session["mensaje"] = "Ocurrio un Error: " + PointOfSale_PlanningOper.getMessage();
+            //    messages = PointOfSale_PlanningOper.getMessage();
+            //    Mensajes_Seguimiento();
+            //}
 
         } //revisado
+        
         /// <summary>
         /// Obtener Mercaderistas por Campaña y asignarlos al ASPControl DropDownList : 'CmbSelOpePlanning'
         /// </summary>
         private void llenaOperativosAsignaPDVOPE()
         {
-            DataSet dsStaffPlanning = PPlanning.Get_Staff_Planning(TxtPlanningAsigPDVOPE.Text);
-            if (dsStaffPlanning != null){
-                if (dsStaffPlanning.Tables[1].Rows.Count > 0){
-                    CmbSelOpePlanning.DataSource = dsStaffPlanning.Tables[1];
-                    CmbSelOpePlanning.DataTextField = "name_user";
-                    CmbSelOpePlanning.DataValueField = "Person_id";
-                    CmbSelOpePlanning.DataBind();
-                    CmbSelOpePlanning.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
-                }else{
-                    this.Session["encabemensa"] = "Sr. Usuario";
-                    this.Session["cssclass"] = "MensajesSupervisor";
-                    this.Session["mensaje"] = "No se ha asignado personal a la campaña: " + LblTxtPresupuestoAsigPDVOPE.Text.ToUpper();
-                    messages = "No se ha asignado personal a la campaña: " + LblTxtPresupuestoAsigPDVOPE.Text.ToUpper();
-                    Mensajes_AsigPDVOPE();
-                }
+            //DataSet dsStaffPlanning = 
+            //    PPlanning.Get_Staff_Planning(
+            //    TxtPlanningAsigPDVOPE.Text);
+
+            DataSet dsStaffPlanning =
+                oBLPlanning.getStaffPlanning(
+                TxtPlanningAsigPDVOPE.Text);
+
+            if (oBLPlanning.getMessages().Equals(""))
+            {
+                //if (dsStaffPlanning != null){
+                //if (dsStaffPlanning.Tables[1].Rows.Count > 0){
+
+                fillDropDownList(CmbSelOpePlanning,
+                    dsStaffPlanning.Tables[1],
+                    "name_user", "Person_id");
+                
+                //CmbSelOpePlanning.DataSource = 
+                //    dsStaffPlanning.Tables[1];
+                //CmbSelOpePlanning.DataTextField = "name_user";
+                //CmbSelOpePlanning.DataValueField = "Person_id";
+                //CmbSelOpePlanning.DataBind();
+                //CmbSelOpePlanning.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
+                
+                //}else{
+                //    this.Session["encabemensa"] = "Sr. Usuario";
+                //    this.Session["cssclass"] = "MensajesSupervisor";
+                //    this.Session["mensaje"] = "No se ha asignado personal a la campaña: " + LblTxtPresupuestoAsigPDVOPE.Text.ToUpper();
+                //    messages = "No se ha asignado personal a la campaña: " + LblTxtPresupuestoAsigPDVOPE.Text.ToUpper();
+                //    Mensajes_AsigPDVOPE();
+                //}
             }
-            dsStaffPlanning = null;
+            else {
+                messages = "Error:" + 
+                    oBLPlanning.getMessages().ToString();
+            }
+
+            if (!getMessage().Equals(""))
+            {
+                showMensajesSeguimiento(
+                    "MensajesSupervisor",
+                    "Sr. Usuario",
+                    getMessage());
+            }
+
+
+            //dsStaffPlanning = null;
+            //}
         }
+        
         /// <summary>
         /// Obtener Ciudades y setearlo al ASPControl DropDownList 'CmbSelCityRutas' tambien   
         /// Limpiar los ASPControl DrowDownList: 'CmbSelTipoAgrupRutas', 'CmbSelAgrupRutas', 'CmbSelOficinaRutas', 'CmbSelMallasRutas' y el 
         /// CheckBoxList 'ChkListPDV'
         /// </summary>
-        private void llenaciudadesRutas()
+        private void llenaciudadesRutas(String idPlanning,
+        string idCity, int idNodeCommercialType,
+        string idNodeCommercial, int idOficina, 
+        int idMalla)
         {
-            DataSet ds = PPlanning.Get_cityPointofsalePlanning(TxtPlanningAsigPDVOPE.Text, "0", 0, "0", 0, 0);
+            //DataSet ds = 
+            //    PPlanning.Get_cityPointofsalePlanning(
+            //    TxtPlanningAsigPDVOPE.Text, "0", 0, "0", 0, 0);
+            DataSet ds = getAllInfoPtoVenta(
+                idPlanning, idCity, idNodeCommercialType,
+                idNodeCommercial, idOficina, idMalla);
 
-            if (ds.Tables[0].Rows.Count > 0){
-                CmbSelCityRutas.DataSource = ds.Tables[0];
-                CmbSelCityRutas.DataValueField = "cod_city";
-                CmbSelCityRutas.DataTextField = "name_city";
-                CmbSelCityRutas.DataBind();
-                CmbSelCityRutas.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
+            //try
+            //{
+            //    ds = oBLPlanning.getInfoPtoVentaDummy(
+            //    idPlanning, idCity, idNodeCommercialType,
+            //    idNodeCommercial, idOficina, idMalla);
+            //}
+            //catch (Exception ex) {
+            //    messages = "Error: " + ex.Message.ToString();
+            //}
+            
+            if(getMessage().Equals("")){
+            //if (ds.Tables[0].Rows.Count > 0){
+                fillDropDownList(CmbSelCityRutas,
+                    ds.Tables[0],"name_city","cod_city");
 
-                ds = null;
-
-                #region Limpiar los AspControl DropDownList Relacionados
-                CmbSelTipoAgrupRutas.Items.Clear();
-                CmbSelAgrupRutas.Items.Clear();
-                CmbSelOficinaRutas.Items.Clear();
-                CmbSelMallasRutas.Items.Clear();
-                ChkListPDV.Items.Clear();
-                #endregion
-
-            }else{
-                this.Session["encabemensa"] = "Sr. Usuario";
-                this.Session["cssclass"] = "MensajesSupervisor";
-                this.Session["mensaje"] = "No se han creado puntos de venta para la campaña: " + LblTxtPresupuestoPDV.Text.ToUpper();
-                messages = "No se han creado puntos de venta para la campaña: " + LblTxtPresupuestoPDV.Text.ToUpper();
+                //CmbSelCityRutas.DataSource = ds.Tables[0];
+                //CmbSelCityRutas.DataValueField = "cod_city";
+                //CmbSelCityRutas.DataTextField = "name_city";
+                //CmbSelCityRutas.DataBind();
+                //CmbSelCityRutas.Items.Insert(0, 
+                //    new ListItem("<Seleccione..>", "0"));
+                //ds = null;
+            //}else{
+                //this.Session["encabemensa"] = "Sr. Usuario";
+                //this.Session["cssclass"] = "MensajesSupervisor";
+                //this.Session["mensaje"] = "No se han creado puntos de venta para la campaña: " + LblTxtPresupuestoPDV.Text.ToUpper();
+                //messages = "No se han creado puntos de venta para la campaña: " + LblTxtPresupuestoPDV.Text.ToUpper();
                 // falta mensaje de usuario en pdv Mensajes_SeguimientoValidacionVistas();
             }
+            //else{
+            //    messages = oBLPlanning.getMessages();
+            //}
+            //}else{
+            //messages = oBLPlanning.getMessages();
+            //}
 
-
+            //#region Limpiar los AspControl DropDownList Relacionado
+            CmbSelTipoAgrupRutas.Items.Clear();
+            CmbSelAgrupRutas.Items.Clear();
+            CmbSelOficinaRutas.Items.Clear();
+            CmbSelMallasRutas.Items.Clear();
+            ChkListPDV.Items.Clear();                
+            //#endregion
+            if (!getMessage().Equals("")) {
+                showMensajesSeguimiento(
+                    "MensajesSupervisor",
+                    "Sr. Usuario",
+                    getMessage());
+            }
         }
+
+        /// <summary>
+        /// Retornar información para los filtros relacionados a los 
+        /// Puntos de Venta.
+        /// DataTable[0] = Info Ciudades (cod_city,name_city)
+        /// DataTable[1] = Info Tipos de Nodos Comerciales (
+        ///                idnodecomtype, nodecomtype_name)
+        /// DataTable[2] = Info de Nodos Comerciales (
+        ///                nodecommercial, commercialnodename)
+        /// DataTable[3] = Info de Oficinas (cod_oficina, 
+        ///                name_oficina) 
+        /// DataTable[4] = Info de Mallas (id_malla, malla) 
+        /// DataTable[5] = Info de Sectores (id_sector, sector) 
+        /// </summary>
+        /// <param name="idPlanning"></param>
+        /// <param name="idCity"></param>
+        /// <param name="idNodeCommercialType"></param>
+        /// <param name="idNodeCommercial"></param>
+        /// <param name="idOficina"></param>
+        /// <param name="idMalla"></param>
+        /// <returns></returns>
+        public DataSet getAllInfoPtoVenta(String idPlanning,
+        string idCity, int idNodeCommercialType,
+        string idNodeCommercial, int idOficina,
+        int idMalla)
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                ds = oBLPlanning.getInfoPtoVenta(
+                idPlanning, idCity, idNodeCommercialType,
+                idNodeCommercial, idOficina, idMalla);
+
+                if (!oBLPlanning.getMessages().Equals("")) {
+                    messages = oBLPlanning.getMessages();
+                }
+            }
+            catch (Exception ex)
+            {
+                messages = "Error: " + ex.Message.ToString();
+            }
+            return ds;
+        }
+
+
         /// <summary>
         /// Limpiar y Deshabilitar los controles correspondientes a la Asignación de Puntos de Venta por Mercaderista
         /// </summary>
@@ -4906,21 +6663,32 @@ namespace SIGE.Pages.Modulos.Planning
             BtnEditAsigPDVOPE.Visible = true;
             BtnUpdateAsigPDVOPE.Visible = false;
         }
+        
         /// <summary>
-        /// Llenar Agrupaciones de Puntos de Venta por Ciudades en el AspControl DropDownList 'CmbSelTipoAgrupRutas'
+        /// Llenar Agrupaciones de Puntos de Venta 
+        /// por Ciudades en el AspControl 
+        /// DropDownList 'CmbSelTipoAgrupRutas'
+        /// Para Asignación de Rutas.
         /// </summary>
-        private void llenaTipoAgrupRutas()
+        private void llenaTipoAgrupRutas(String idPlanning,
+        string idCity, int idNodeCommercialType,
+        string idNodeCommercial, int idOficina,
+        int idMalla)
         {
-            DataSet ds = PPlanning.Get_cityPointofsalePlanning(TxtPlanningAsigPDVOPE.Text, CmbSelCityRutas.Text, 0, "0", 0, 0);
+            //DataSet ds = PPlanning.Get_cityPointofsalePlanning(
+            //    TxtPlanningAsigPDVOPE.Text, 
+            //    CmbSelCityRutas.Text, 0, "0", 0, 0);
 
-            if (ds.Tables[1].Rows.Count > 0){
-                CmbSelTipoAgrupRutas.DataSource = ds.Tables[1];
-                CmbSelTipoAgrupRutas.DataValueField = "idNodeComType";
-                CmbSelTipoAgrupRutas.DataTextField = "NodeComType_name";
-                CmbSelTipoAgrupRutas.DataBind();
-                CmbSelTipoAgrupRutas.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
-                
-                ds = null;
+            DataSet ds = getAllInfoPtoVenta(idPlanning, 
+                idCity, idNodeCommercialType,
+                idNodeCommercial, idOficina, idMalla);
+
+            if (getMessage().Equals("")) {
+                fillDropDownList(
+                    CmbSelTipoAgrupRutas,
+                    ds.Tables[1],
+                    "NodeComType_name",
+                    "idNodeComType");
 
                 #region Limpiar los AspControl DropDownList Relacionados
                 CmbSelAgrupRutas.Items.Clear();
@@ -4930,13 +6698,25 @@ namespace SIGE.Pages.Modulos.Planning
                 ChkListPDV.Items.Clear();
                 #endregion
             }
-            else {
-                this.Session["encabemensa"] = "Sr. Usuario";
-                this.Session["cssclass"] = "MensajesSupervisor";
-                this.Session["mensaje"] = "No se han Asignado Agrupaciones para la Ciudad Seleccionada... ";
-                messages = "No se han Asignado Agrupaciones para la Ciudad Seleccionada... ";
-            }
+
+            //if (ds.Tables[1].Rows.Count > 0){
+            //    CmbSelTipoAgrupRutas.DataSource = ds.Tables[1];
+            //    CmbSelTipoAgrupRutas.DataValueField = "idNodeComType";
+            //    CmbSelTipoAgrupRutas.DataTextField = "NodeComType_name";
+            //    CmbSelTipoAgrupRutas.DataBind();
+            //    CmbSelTipoAgrupRutas.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
+                
+            //    ds = null;
+
+            //}
+            //else {
+            //    this.Session["encabemensa"] = "Sr. Usuario";
+            //    this.Session["cssclass"] = "MensajesSupervisor";
+            //    this.Session["mensaje"] = "No se han Asignado Agrupaciones para la Ciudad Seleccionada... ";
+            //    messages = "No se han Asignado Agrupaciones para la Ciudad Seleccionada... ";
+            //}
         }
+
         /// <summary>
         /// Llena el AspControl DropDownList 'CmbSelAgrupRutas' , correspondiente a Nodos Comerciales por idPlanning, idCiudad y idTipoDeNodoComercial
         /// Obtiene un Conjunto de DataTables con información Geográfica de los Puntos de Venta, como se detalla a continuación:
@@ -4947,39 +6727,62 @@ namespace SIGE.Pages.Modulos.Planning
         /// DataTable[4] Listado de Mallas (Agrupación Geografica Nivel 2 (Agrupación de Ciudades (Puede ser 1 o más) y se le asigna un nombre), Ejemplo Lima)
         /// DataTable[5] Listado de Sectores (Agrupación Geografica Nivel 3 (Agrupación de Distritos (más de 1) y se le asigna un nombre), Lima Este, Lima Norte, Lima Sur, Lima Oeste)
         /// </summary>
-        private void llenaAgrupRutas()
+        private void llenaAgrupRutas(String idPlanning,
+        string idCity, int idNodeCommercialType,
+        string idNodeCommercial, int idOficina,
+        int idMalla)
         {
-            DataSet ds = PPlanning.Get_cityPointofsalePlanning(
-                TxtPlanningAsigPDVOPE.Text, 
-                CmbSelCityRutas.Text, 
-                Convert.ToInt32(CmbSelTipoAgrupRutas.Text), 
-                "0", 
-                0, 
-                0);
-            if (ds.Tables[2].Rows.Count > 0){
-                CmbSelAgrupRutas.DataSource = ds.Tables[2];
-                CmbSelAgrupRutas.DataValueField = "NodeCommercial";
-                CmbSelAgrupRutas.DataTextField = "commercialNodeName";
-                CmbSelAgrupRutas.DataBind();
-                CmbSelAgrupRutas.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
+            //DataSet ds = PPlanning.Get_cityPointofsalePlanning(
+            //    TxtPlanningAsigPDVOPE.Text, 
+            //    CmbSelCityRutas.Text, 
+            //    Convert.ToInt32(CmbSelTipoAgrupRutas.Text), 
+            //    "0", 
+            //    0, 
+            //    0);
+            DataSet ds = getAllInfoPtoVenta(
+            idPlanning, idCity, idNodeCommercialType,
+            idNodeCommercial, idOficina, idMalla);
 
-                ds = null;
-                
-                #region Limpiar los AspControl DropDownList Relacionados
-                CmbSelOficinaRutas.Items.Clear();
-                CmbSelMallasRutas.Items.Clear();
-                CmbSelSectorRutas.Items.Clear();
-                ChkListPDV.Items.Clear();
-                #endregion
+            //DataSet ds = oBLPlanning.getInfoPtoVentaDummy(
+            //idPlanning, idCity, idNodeCommercialType,
+            //idNodeCommercial, idOficina, idMalla );
+
+            if (getMessage().Equals(""))
+            {
+                //if (ds.Tables[2].Rows.Count > 0)
+                //{
+
+                fillDropDownList(CmbSelAgrupRutas, ds.Tables[2],
+                "commercialNodeName", "NodeCommercial");
+                    //CmbSelAgrupRutas.DataSource = ds.Tables[2];
+                    //CmbSelAgrupRutas.DataValueField = "NodeCommercial";
+                    //CmbSelAgrupRutas.DataTextField = "commercialNodeName";
+                    //CmbSelAgrupRutas.DataBind();
+                    //CmbSelAgrupRutas.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
+
+                    //ds = null;
+                //}
+                //else
+                //{
+                //    this.Session["encabemensa"] = "Sr. Usuario";
+                //    this.Session["cssclass"] = "MensajesSupervisor";
+                //    this.Session["mensaje"] = "¡No se han asignado Nodos Comerciales! ... ¡por favor verificar!";
+                //    Mensajes_Seguimiento();
+                //}
             }
-            else {
-                this.Session["encabemensa"] = "Sr. Usuario";
-                this.Session["cssclass"] = "MensajesSupervisor";
-                this.Session["mensaje"] = "¡No se han asignado Nodos Comerciales! ... ¡por favor verificar!";
-                Mensajes_Seguimiento();
-            }
+            //else {
+            //    messages = oBLPlanning.getMessages();
+            //}
+
+            #region Limpiar los AspControl DropDownList Relacionados
+            CmbSelOficinaRutas.Items.Clear();
+            CmbSelMallasRutas.Items.Clear();
+            CmbSelSectorRutas.Items.Clear();
+            ChkListPDV.Items.Clear();
+            #endregion
 
         }
+        
         /// <summary>
         /// Llena el AspControl DropDownList 'CmbSelOficinaRutas' , correspondiente a Oficinas por idPlanning, idCiudad, idTipoDeNodoComercial, idNodoComercial
         /// Obtiene un Conjunto de DataTables con información Geográfica de los Puntos de Venta, como se detalla a continuación:
@@ -4990,39 +6793,57 @@ namespace SIGE.Pages.Modulos.Planning
         /// DataTable[4] Listado de Mallas (Agrupación Geografica Nivel 2 (Agrupación de Ciudades (Puede ser 1 o más) y se le asigna un nombre), Ejemplo Lima)
         /// DataTable[5] Listado de Sectores (Agrupación Geografica Nivel 3 (Agrupación de Distritos (más de 1) y se le asigna un nombre), Lima Este, Lima Norte, Lima Sur, Lima Oeste)
         /// </summary>
-        private void llenaOficinasRutas()
+        private void llenaOficinasRutas(String idPlanning,
+        string idCity, int idNodeCommercialType,
+        string idNodeCommercial, int idOficina,
+        int idMalla)
         {
-            DataSet ds = PPlanning.Get_cityPointofsalePlanning(
-                TxtPlanningAsigPDVOPE.Text, 
-                CmbSelCityRutas.Text, 
-                Convert.ToInt32(CmbSelTipoAgrupRutas.Text), 
-                CmbSelAgrupRutas.Text, 
-                0, 
-                0);
-            if (ds.Tables[3].Rows.Count > 0){
-                CmbSelOficinaRutas.DataSource = ds.Tables[3];
 
-                CmbSelOficinaRutas.DataValueField = "cod_Oficina";
-                CmbSelOficinaRutas.DataTextField = "Name_Oficina";
-                CmbSelOficinaRutas.DataBind();
-                CmbSelOficinaRutas.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
-                
-                ds = null;
+            DataSet ds = getAllInfoPtoVenta(
+            idPlanning, idCity, idNodeCommercialType,
+            idNodeCommercial, idOficina, idMalla);
+
+            if (getMessage().Equals(""))
+            {
+                fillDropDownList(CmbSelOficinaRutas, ds.Tables[3],
+                    "Name_Oficina", "cod_Oficina");
 
                 #region Limpiar los AspControl DropDownList Relacionados
                 CmbSelMallasRutas.Items.Clear();
                 CmbSelSectorRutas.Items.Clear();
                 ChkListPDV.Items.Clear();
                 #endregion
-
-            } else {
-                this.Session["encabemensa"] = "Sr. Usuario";
-                this.Session["cssclass"] = "MensajesSupervisor";
-                this.Session["mensaje"] = "¡No se han encontrado Oficinas disponibles!... ¡Por favor verifique!";
-                Mensajes_Seguimiento();
             }
 
+            //DataSet ds = PPlanning.Get_cityPointofsalePlanning(
+            //    TxtPlanningAsigPDVOPE.Text, 
+            //    CmbSelCityRutas.Text, 
+            //    Convert.ToInt32(CmbSelTipoAgrupRutas.Text), 
+            //    CmbSelAgrupRutas.Text, 
+            //    0, 
+            //    0);
+
+            //if (ds.Tables[3].Rows.Count > 0){
+                //CmbSelOficinaRutas.DataSource = ds.Tables[3];
+
+                //CmbSelOficinaRutas.DataValueField = "cod_Oficina";
+                //CmbSelOficinaRutas.DataTextField = "Name_Oficina";
+                //CmbSelOficinaRutas.DataBind();
+                //CmbSelOficinaRutas.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
+                
+                //ds = null;
+
+              
+
+            //} else {
+            //    this.Session["encabemensa"] = "Sr. Usuario";
+            //    this.Session["cssclass"] = "MensajesSupervisor";
+            //    this.Session["mensaje"] = "¡No se han encontrado Oficinas disponibles!... ¡Por favor verifique!";
+            //    Mensajes_Seguimiento();
+            //}
+
         }
+        
         /// <summary>
         /// Llena el AspControl DropDownList 'CmbSelMallasRutas' , correspondiente a Mallas por idPlanning, idCiudad, idTipoDeNodoComercial, idNodoComercial, idOficina
         /// Obtiene un Conjunto de DataTables con información Geográfica de los Puntos de Venta, como se detalla a continuación:
@@ -5033,36 +6854,65 @@ namespace SIGE.Pages.Modulos.Planning
         /// DataTable[4] Listado de Mallas (Agrupación Geografica Nivel 2 (Agrupación de Ciudades (Puede ser 1 o más) y se le asigna un nombre), Ejemplo Lima)
         /// DataTable[5] Listado de Sectores (Agrupación Geografica Nivel 3 (Agrupación de Distritos (más de 1) y se le asigna un nombre), Lima Este, Lima Norte, Lima Sur, Lima Oeste)
         /// </summary>
-        private void LlenamallasRutas(){
+        private void LlenamallasRutas(String idPlanning,
+        string idCity, int idNodeCommercialType,
+        string idNodeCommercial, int idOficina,
+        int idMalla)
+        {
             
-            DataSet ds = PPlanning.Get_cityPointofsalePlanning(
-                TxtPlanningAsigPDVOPE.Text, 
-                CmbSelCityRutas.Text, 
-                Convert.ToInt32(CmbSelTipoAgrupRutas.Text), 
-                CmbSelAgrupRutas.Text, 
-                Convert.ToInt64(CmbSelOficinaRutas.Text), 
-                0);
+            //DataSet ds = PPlanning.Get_cityPointofsalePlanning(
+            //    TxtPlanningAsigPDVOPE.Text, 
+            //    CmbSelCityRutas.Text, 
+            //    Convert.ToInt32(CmbSelTipoAgrupRutas.Text), 
+            //    CmbSelAgrupRutas.Text, 
+            //    Convert.ToInt64(CmbSelOficinaRutas.Text), 
+            //    0);
 
-            if (ds.Tables[4].Rows.Count > 0){
+            //DataSet ds = oBLPlanning.getInfoPtoVentaDummy(
+            //idPlanning, idCity, idNodeCommercialType,
+            //idNodeCommercial, idOficina, idMalla);
 
-                CmbSelMallasRutas.DataSource = ds.Tables[4];
-                CmbSelMallasRutas.DataValueField = "id_malla";
-                CmbSelMallasRutas.DataTextField = "malla";
-                CmbSelMallasRutas.DataBind();
-                CmbSelMallasRutas.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
+            DataSet ds = getAllInfoPtoVenta(
+            idPlanning, idCity, idNodeCommercialType,
+            idNodeCommercial, idOficina, idMalla);
+
+            if (getMessage().Equals(""))
+            {
+                fillDropDownList(CmbSelMallasRutas, ds.Tables[4],
+                "malla", "id_malla");
+            }
+            //else {
+            //    messages = oBLPlanning.getMessages();
+            //}
+
+            if (!getMessage().Equals("")) {
+                showMensajesSeguimiento(
+                "MensajesSupervisor",
+                "Sr. Usuario",
+                getMessage());
+            }
+            
+            //if (ds.Tables[4].Rows.Count > 0){
+
+            //    CmbSelMallasRutas.DataSource = ds.Tables[4];
+            //    CmbSelMallasRutas.DataValueField = "id_malla";
+            //    CmbSelMallasRutas.DataTextField = "malla";
+            //    CmbSelMallasRutas.DataBind();
+            //    CmbSelMallasRutas.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
                 
-                ds = null;
+            //    ds = null;
 
                 // Limpiar los AspControl DropDownList Relacionados
-                CmbSelSectorRutas.Items.Clear();
+                //CmbSelSectorRutas.Items.Clear();
 
-            }else {
-                this.Session["encabemensa"] = "Sr. Usuario";
-                this.Session["cssclass"] = "MensajesSupervisor";
-                this.Session["mensaje"] = "¡No Existen Mallas de Punto de Venta Asignados!, ¡Por favor Verificar!";
-                Mensajes_Seguimiento();
-            }
+            //}else {
+            //    this.Session["encabemensa"] = "Sr. Usuario";
+            //    this.Session["cssclass"] = "MensajesSupervisor";
+            //    this.Session["mensaje"] = "¡No Existen Mallas de Punto de Venta Asignados!, ¡Por favor Verificar!";
+            //    Mensajes_Seguimiento();
+            //}
         }
+        
         /// <summary>
         /// Llena el AspControl DropDownList 'CmbSelSectorRutas' , correspondiente a Sector por idPlanning, idCiudad, idTipoDeNodoComercial, idNodoComercial, idOficina, idSector
         /// Obtiene un Conjunto de DataTables con información Geográfica de los Puntos de Venta, como se detalla a continuación:
@@ -5073,77 +6923,244 @@ namespace SIGE.Pages.Modulos.Planning
         /// DataTable[4] Listado de Mallas (Agrupación Geografica Nivel 2 (Agrupación de Ciudades (Puede ser 1 o más) y se le asigna un nombre), Ejemplo Lima)
         /// DataTable[5] Listado de Sectores (Agrupación Geografica Nivel 3 (Agrupación de Distritos (más de 1) y se le asigna un nombre), Lima Este, Lima Norte, Lima Sur, Lima Oeste)
         /// </summary>
-        private void LlenasectorRutas(){
+        private void LlenasectorRutas(String idPlanning,
+        string idCity, int idNodeCommercialType,
+        string idNodeCommercial, int idOficina,
+        int idMalla)
+        {
 
-            DataSet ds = PPlanning.Get_cityPointofsalePlanning(
-                TxtPlanningAsigPDVOPE.Text, 
-                CmbSelCityRutas.Text, 
-                Convert.ToInt32(CmbSelTipoAgrupRutas.Text), 
-                CmbSelAgrupRutas.Text, 
-                Convert.ToInt64(CmbSelOficinaRutas.Text), 
-                Convert.ToInt32(CmbSelMallasRutas.Text));
+            //DataSet ds = PPlanning.Get_cityPointofsalePlanning(
+            //    TxtPlanningAsigPDVOPE.Text, 
+            //    CmbSelCityRutas.Text, 
+            //    Convert.ToInt32(CmbSelTipoAgrupRutas.Text), 
+            //    CmbSelAgrupRutas.Text, 
+            //    Convert.ToInt64(CmbSelOficinaRutas.Text), 
+            //    Convert.ToInt32(CmbSelMallasRutas.Text));
+            
+            //DataSet ds = oBLPlanning.getInfoPtoVentaDummy(
+            //idPlanning, idCity, idTypeNodeCommercial,
+            //idNodeCommercial, idOficina, idMalla);
 
-            if (ds.Tables[0].Rows.Count > 0){
-                CmbSelSectorRutas.DataSource = ds.Tables[5];
+            DataSet ds = getAllInfoPtoVenta(
+            idPlanning, idCity, idTypeNodeCommercial,
+            idNodeCommercial, idOficina, idMalla);
 
-                CmbSelSectorRutas.DataValueField = "id_sector";
-                CmbSelSectorRutas.DataTextField = "Sector";
-                CmbSelSectorRutas.DataBind();
-                CmbSelSectorRutas.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
-                ds = null;
-            }else {
-                this.Session["encabemensa"] = "Sr. Usuario";
-                this.Session["cssclass"] = "MensajesSupervisor";
-                this.Session["mensaje"] = "¡No Existen Sectores de Punto de Venta Asignados!, ¡Por favor Verificar!";
-                Mensajes_Seguimiento();
+            if (getMessage().Equals(""))
+            {
+                fillDropDownList(CmbSelSectorRutas, ds.Tables[5],
+                "Sector", "id_sector");
             }
+
+            if (!getMessage().Equals(""))
+            {
+                showMensajesSeguimiento(
+                "MensajesSupervisor",
+                "Sr. Usuario",
+                getMessage());
+            }
+
+            //if (ds.Tables[0].Rows.Count > 0){
+            //    CmbSelSectorRutas.DataSource = ds.Tables[5];
+
+            //    CmbSelSectorRutas.DataValueField = "id_sector";
+            //    CmbSelSectorRutas.DataTextField = "Sector";
+            //    CmbSelSectorRutas.DataBind();
+            //    CmbSelSectorRutas.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
+            //    ds = null;
+            //}else {
+            //    this.Session["encabemensa"] = "Sr. Usuario";
+            //    this.Session["cssclass"] = "MensajesSupervisor";
+            //    this.Session["mensaje"] = "¡No Existen Sectores de Punto de Venta Asignados!, ¡Por favor Verificar!";
+            //    Mensajes_Seguimiento();
+            //}
         }
+        
         /// <summary>
         /// Consulta Puntos de Venta por idPlanning, idCiudad, idTipoNodoCommercial, idNodoComercial, idOficina, idMalla, idRuta
         /// y lo llena en un AspControl CheckBoxList 'ChkListPDV'
         /// </summary>
-        private void LlenaPDVPlanning(){
+        private void LlenaPDVPlanning(String idPlanning,
+        string idCity, int idNodeCommercialType,
+        string idNodeCommercial, int idOficina,
+        int idMalla, int idSector)
+        {
             
             // se coloca provisionalemnte con esto para seguir en crear ing. mauricio ortiz
-            DataTable dt = PointOfSale_PlanningOper.Consultar_PDVPlanning(
-                TxtPlanningAsigPDVOPE.Text, 
-                CmbSelCityRutas.Text, 
-                Convert.ToInt32(CmbSelTipoAgrupRutas.Text), 
-                CmbSelAgrupRutas.Text, 
-                Convert.ToInt64(CmbSelOficinaRutas.Text), 
-                Convert.ToInt32(CmbSelMallasRutas.Text), 
-                Convert.ToInt32(CmbSelSectorRutas.Text));
-            if (dt != null){
-                if (dt.Rows.Count > 0){
-                    ChkListPDV.DataSource = dt;
-                    ChkListPDV.DataTextField = "Nombre";
-                    ChkListPDV.DataValueField = "id_MPOSPlanning";
-                    ChkListPDV.DataBind();
-                    
-                    // Botón Seleccionar todos los Puntos de Venta
-                    BtnAllPDV.Visible = true;
+            //DataTable dt = PointOfSale_PlanningOper.Consultar_PDVPlanning(
+            //    TxtPlanningAsigPDVOPE.Text,
+            //    CmbSelCityRutas.Text,
+            //    Convert.ToInt32(CmbSelTipoAgrupRutas.Text),
+            //    CmbSelAgrupRutas.Text,
+            //    Convert.ToInt64(CmbSelOficinaRutas.Text),
+            //    Convert.ToInt32(CmbSelMallasRutas.Text),
+            //    Convert.ToInt32(CmbSelSectorRutas.Text));
 
-                    // Botón Deseleccionar todos los Puntos de Venta
-                    BtnNonePDV.Visible = true;
+            idPlanning = TxtPlanningAsigPDVOPE.Text.Equals("") ? "0" :
+                TxtPlanningAsigPDVOPE.Text;
+            idCity = CmbSelCityRutas.Text.Equals("") ? "0" :
+                CmbSelCityRutas.Text;
+            idTypeNodeCommercial =
+                Convert.ToInt32(CmbSelTipoAgrupRutas.Text.Equals("")
+                ? "0" : CmbSelTipoAgrupRutas.Text);
+            idNodeCommercial = CmbSelAgrupRutas.Text.Equals("") ? "0"
+                : CmbSelAgrupRutas.Text;
+            idOficina = Convert.ToInt32(CmbSelOficinaRutas.Text.Equals("")
+                ? "0" : CmbSelOficinaRutas.Text);
+            idMalla = Convert.ToInt32(CmbSelMallasRutas.Text.Equals("")
+                ? "0" : CmbSelMallasRutas.Text);
+            idSector = Convert.ToInt32(CmbSelSectorRutas.Text.Equals("")
+                ? "0" : CmbSelSectorRutas.Text);   
 
-                }else{
-                    this.Session["encabemensa"] = "Señor Usuario";
-                    this.Session["cssclass"] = "MensajesSupervisor";
-                    this.Session["mensaje"] = "No existe información de puntos de venta con los filtros seleccionados. ";
-                    Mensajes_AsigPDVOPE();
-                    
-                    ChkListPDV.Items.Clear();
+            DataTable dt = 
+                PointOfSale_PlanningOper.Consultar_PDVPlanning(
+                idPlanning,idCity,idTypeNodeCommercial,
+                idNodeCommercial,
+                idOficina,idMalla,idSector);
 
-                    #region Ocultar AspControl Button Relacionados
-                    BtnAllPDV.Visible = false;
-                    BtnNonePDV.Visible = false;
-                    #endregion
-                    
-                    LlenamallasRutas();
-                    LlenasectorRutas();
+            if (PointOfSale_PlanningOper.getMessage().Equals(""))
+            {
+                //if (dt != null){
+                //if (dt.Rows.Count > 0){
+                ChkListPDV.DataSource = dt;
+                ChkListPDV.DataTextField = "Nombre";
+                ChkListPDV.DataValueField = "id_MPOSPlanning";
+                ChkListPDV.DataBind();
+
+                // Botón Seleccionar todos los Puntos de Venta
+                BtnAllPDV.Visible = true;
+
+                // Botón Deseleccionar todos los Puntos de Venta
+                BtnNonePDV.Visible = true;
+                //}
+                //dt = null;
+            }
+            else {
+                messages = PointOfSale_PlanningOper.getMessage();
+            }
+                //}else{
+                //this.Session["encabemensa"] = "Señor Usuario";
+                //this.Session["cssclass"] = "MensajesSupervisor";
+                //this.Session["mensaje"] = "No existe información de puntos de venta con los filtros seleccionados. ";
+                //Mensajes_AsigPDVOPE();
+
+            //LlenamallasRutas(idPlanning,idCity,idTypeNodeCommercial,
+            //idNodeCommercial, idOficina, idMalla);
+            //if (getMessage().Equals("")) {
+            //    LlenasectorRutas(idPlanning, idCity, 
+            //    idTypeNodeCommercial,
+            //    idNodeCommercial, idOficina, idMalla);
+            //}
+
+            if (!getMessage().Equals(""))
+            {
+                showMensajesSeguimiento(
+                "MensajesSupervisor",
+                "Sr. Usuario",
+                getMessage());
+
+                ChkListPDV.Items.Clear();
+
+                BtnAllPDV.Visible = false;
+                BtnNonePDV.Visible = false;
+
+            }
+
+            //}
+            
+        }
+
+        /// <summary>
+        /// Validar Campos Obligatorios para Asignación de Puntos de Venta
+        /// </summary>
+        private void validarCamposVaciosRutas(String idPlanning, String fecIni, String fecFin) {
+                        
+            if (TxtF_finPDVOPE.Text == ""){
+                //this.Session["mensaje"] = "Es indispensable ingresar la fecha final"; 
+                messages = "Es indispensable ingresar la fecha final";
+            }
+
+            if (TxtF_iniPDVOPE.Text == ""){
+                //this.Session["mensaje"] = "Es indispensable ingresar la fecha inicial";
+                messages = "Es indispensable ingresar la fecha inicial";
+            }
+
+            if (CmbSelOpePlanning.Text == "0"){
+                //this.Session["mensaje"] = "Es indispensable seleccionar un Operativo"; 
+                messages = "Es indispensable seleccionar un Operativo";
+            }
+            
+        }
+
+        /// <summary>
+        /// Validación de Fechas de Asignación de Rutas
+        /// </summary>
+        /// <param name="fecIni"></param>
+        /// <param name="fecFin"></param>
+        private void validarFechasRutas(String fecIni, String fecFin) {
+            try
+            {
+                // Fecha Inicial de Asignación de Punto de Venta a Mercaderista
+                DateTime FechaInicial = DateTime.Parse(fecIni);
+                // Fecha Fin de Asignación de Punto de Venta a Mercaderista
+                DateTime Fechafinal = DateTime.Parse(fecFin);
+
+                // Fecha Inicial del Planning que se obtiene de una Session
+                DateTime FechainicialPlanning = DateTime.Parse(this.Session["Fechainicial"].ToString().Trim());
+                // Fecha Fin del Planning que se obtiene de una Session
+                DateTime FechafinalPlanning = DateTime.Parse(this.Session["Fechafinal"].ToString().Trim());
+
+                // Validación 01 - La fecha Inicial debe ser Menor que la fecha Final
+                if (FechaInicial > Fechafinal)
+                {
+                    messages = "La fecha inicial no puede ser mayor a la fecha final";
+                }
+
+                // Validación 02 - La fecha Inicial debe ser Mayor que la Fecha Inicial del Planning
+                //                 La fecha Final debe ser Menor que la fecha Final del Planning
+                if (FechaInicial < FechainicialPlanning
+                    || Fechafinal > FechafinalPlanning)
+                {
+                    messages = "Las fechas deben estar dentro del rango : "
+                        + FechainicialPlanning.ToShortDateString()
+                        + " y "
+                        + FechafinalPlanning.ToShortDateString()
+                        + " que corresponden a las fechas de ejecución de la Campaña";
+                }
+
+                // Validación 03 - La fecha Inicial debe ser Mayor que Hoy
+                if (FechaInicial < DateTime.Today)
+                {
+                    messages = "La fecha inicial debe ser igual o superior a la fecha actual";
                 }
             }
-            dt = null;
+            catch (Exception ex)
+            {
+                messages = "Error: " + ex.Message.ToString();
+                //this.Session["encabemensa"] = "Sr. Usuario";
+                //this.Session["cssclass"] = "MensajesSupervisor";
+                //this.Session["mensaje"] = "Formato de fecha no valido. Por favor verifique (dd/mm/aaaa)";
+                //Mensajes_AsigPDVOPE();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private DataTable validarAsignacionPdvDuplicated(String idPointOfSalePlanningOper,
+        String idPerson, String idPlanning)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                dt = oBLPlanning.getDuplicateRutas(
+                     idPointOfSalePlanningOper,
+                     idPerson,
+                     idPlanning);
+            }
+            catch (Exception ex) {
+                messages = "Error: " + ex.Message.ToString();
+            }
+            return dt;
         }
         /// <summary>
         /// Mensaje para Asignación de PDV por Trabajador
@@ -5167,6 +7184,78 @@ namespace SIGE.Pages.Modulos.Planning
          * ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
          * ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
          */
+        /// <summary>
+        /// Evento Aceptar para el PopUp de Notificaciones de Usuario, la finalidad que no cierre completamente la vista 
+        /// del Panel correspondiente a la Asignación de Rutas.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void btnAceptaSeguimiento(object sender, EventArgs e)
+        {
+            ModalPanelAsignacionPDVaoper.Show();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="idMPosPlanning"></param>
+        /// <param name="idPlanning"></param>
+        /// <param name="idPerson"></param>
+        /// <param name="fechaInicio"></param>
+        /// <param name="fechaFin"></param>
+        /// <param name="frecuencia"></param>
+        /// <param name="status"></param>
+        /// <param name="createBy"></param>
+        /// <param name="dateBy"></param>
+        /// <param name="modiBy"></param>
+        /// <param name="dateModiBy"></param>
+        public void insAsignacionPdvOperativo(int idMPosPlanning,
+        String idPlanning, int idPerson, String fechaInicio,
+        String fechaFin, int frecuencia, bool status,
+        String createBy, DateTime dateBy, String modiBy,
+        DateTime dateModiBy) {
+            // Registra Ruta del Mercaderista (Por cada Punto de Venta)
+            try{
+                //EPointOfSale_PlanningOper RegistrarPointOfSale_PlanningOper =
+                PointOfSale_PlanningOper.RegistrarAsignPDVaOperativo(
+                    idMPosPlanning,
+                    idPlanning,
+                    idPerson,
+                    Convert.ToDateTime(fechaInicio + " 01:00:00.000"),
+                    Convert.ToDateTime(fechaFin + " 23:59:00.000"),
+                    frecuencia,
+                    status,
+                    createBy,
+                    dateBy,
+                    modiBy,
+                    dateModiBy);
+            }catch (Exception ex){
+                messages = ex.ToString();
+                //this.Session["encabemensa"] = "Sr. Usuario";
+                //this.Session["cssclass"] = "MensajesSupConfirm";
+                //this.Session["mensaje"] = "Ocurrio un Error al guardar el Punto de Venta :" + ex.ToString().Substring(0, 100) + "...";
+                //Mensajes_AsigPDVOPE();
+            }
+        }
+
+        public void insAsignacionPdvOperativoMobile(int idMPosPlanning,
+        String idPlanning, int idPerson, String fechaInicio,
+        String fechaFin) {
+            try {
+                PointOfSale_PlanningOper RegistrarTBL_EQUIPO_PTO_VENTA = new PointOfSale_PlanningOper();
+                RegistrarTBL_EQUIPO_PTO_VENTA.RegistrarTBL_EQUIPO_PTO_VENTA(
+                            idMPosPlanning,
+                            idPlanning,
+                            idPerson,
+                            Convert.ToDateTime(fechaInicio + " 01:00:00.000"),
+                            Convert.ToDateTime(fechaFin + " 23:59:00.000"));
+            }
+            catch (Exception ex) {
+                messages = "Error: " + ex.Message.ToString();
+            }
+        }
+        
+        
         #endregion
 
         #region Levantamiento de informacion
@@ -11017,9 +13106,6 @@ namespace SIGE.Pages.Modulos.Planning
             modalPObjetivoSODMAY.Show();
         }
 
-        
-
-
         #endregion
 
 
@@ -11133,12 +13219,216 @@ namespace SIGE.Pages.Modulos.Planning
         }
         #endregion
 
+        #region Dummy
+
+        /// <summary>
+        /// Retorna todas la variables de Session que devuelve un Login
+        /// </summary>
+        private void fncLoginDummy()
+        {
+            try
+            {
+                this.Session["sUser"] = "cmarin";
+                this.Session["sPassw"] = "1234567890";
+                this.Session["nameuser"] = "Carlos Marin";
+                this.Session["scountry"] = "550";
+                this.Session["companyid"] = "1562";
+                this.Session["Perfilid"] = "0090";
+            }
+            catch (Exception ex)
+            {
+                messages = "Ocurrio un Error en Dummy Login: " +
+                    ex.Message.ToString();
+            }
+        }
+
+        /// <summary>
+        /// Obtener el Mensaje de Error
+        /// </summary>
+        /// <returns></returns>
+        public String getMessage()
+        {
+            return messages;
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Mostrar los iconos Habilitado / Deshabilitado 
+        /// de Disponibilidad relacionados en el 
+        /// Menú Principal del Seguimiento del Planning.
+        /// </summary>
+        /// <param name="ds"></param>
+        private void updateIcons(DataSet ds) {
+
+            // Verifica si los DataTables tienes registros en:
+            // DataTable[1] - Obtiene información de los objetivos para la Campaña
+            // DataTable[2] - Obtiene información de los Productos con SKU Mandatorio
+            // DataTable[3] - Obtiene información de la Mecánica de las Actividades
+            if (ds.Tables[1].Rows.Count > 0
+                && ds.Tables[2].Rows.Count > 0
+                && ds.Tables[3].Rows.Count > 0)
+            {
+                ImgDescCamp.ImageUrl = 
+                    "~/Pages/images/Terminado.png";
+                ImgIrADesc.Visible = true;
+            }
+            else
+            {
+                ImgDescCamp.ImageUrl = 
+                    "~/Pages/images/Pendiente.png";
+                ImgIrADesc.Visible = false;
+            }
+
+            // Verifica si los DataTables tienes registros en:
+            /// DataTable[4] - Obtiene información del Personal Asignado a la Campaña
+            if (ds.Tables[4].Rows.Count > 0)
+            {
+                ImgResponsables.ImageUrl = "~/Pages/images/Terminado.png";
+                ImgIrAResponsables.Visible = true;
+            }
+            else
+            {
+                ImgResponsables.ImageUrl = "~/Pages/images/Pendiente.png";
+                ImgIrAResponsables.Visible = false;
+            }
+
+            // Verifica si los DataTables tienes registros en:
+            /// DataTable[5] - Obtiene información de la asginación de Mercaderista y Supervisores                
+            if (ds.Tables[5].Rows.Count > 0)
+            {
+                ImgAsigPersonal.ImageUrl = "~/Pages/images/Terminado.png";
+                ImgIrAASigPersonal.Visible = true;
+            }
+            else
+            {
+                ImgAsigPersonal.ImageUrl = "~/Pages/images/Pendiente.png";
+                ImgIrAASigPersonal.Visible = false;
+            }
+
+            // Verifica si los DataTables tienes registros en:
+            /// DataTable[6] - Obtiene información de los PDVs de la Campania
+            if (ds.Tables[6].Rows.Count > 0)
+            {
+                ImgPDV.ImageUrl = "~/Pages/images/Terminado.png";
+                ImgIrAPDV.Visible = true;
+            }
+            else
+            {
+                ImgPDV.ImageUrl = "~/Pages/images/Pendiente.png";
+                ImgIrAPDV.Visible = false;
+            }
+
+            // Verifica si los DataTables tienes registros en:
+            /// DataTable[7] - Obtiene información de los Productos Asignados por Campania 
+            /// DataTable[12]- Obtiene información de las Marcas Asignadas a la Campania
+            /// DataTable[13]- Obtiene información de las Familias Asignadas a la Campania
+            /// DataTable[14]- Obtiene información de las Categorias Asignadas a la Campania
+            if (ds.Tables[7].Rows.Count > 0
+                || ds.Tables[12].Rows.Count > 0
+                || ds.Tables[13].Rows.Count > 0
+                || ds.Tables[14].Rows.Count > 0)
+            {
+                ImgProductos.ImageUrl = "~/Pages/images/Terminado.png";
+                ImgIrAProductos.Visible = true;
+            }
+            else
+            {
+                ImgProductos.ImageUrl = "~/Pages/images/Pendiente.png";
+                ImgIrAProductos.Visible = false;
+            }
+
+            // Verifica si los DataTables tienes registros en:
+            /// DataTable[8] - Obtiene información de los Puntos de Venta Asignados a los Mercaderistas
+            if (ds.Tables[8].Rows.Count > 0)
+            {
+                ImgAsignaPDV.ImageUrl = "~/Pages/images/Terminado.png";
+                ImgIrAAsignapdv.Visible = true;
+            }
+            else
+            {
+                ImgAsignaPDV.ImageUrl = "~/Pages/images/Pendiente.png";
+                ImgIrAAsignapdv.Visible = false;
+            }
+
+            // Verifica si los DataTables tienes registros en:
+            /// DataTable[10]- Obtiene información de los Reportes asignados a la Campania
+            if (ds.Tables[10].Rows.Count > 0)
+            {
+                ImgReportes.ImageUrl = "~/Pages/images/Terminado.png";
+                ImgIrAReportesCampaña.Visible = true;
+            }
+            else
+            {
+                ImgReportes.ImageUrl = "~/Pages/images/Pendiente.png";
+                ImgIrAReportesCampaña.Visible = false;
+            }
+
+            // Verifica si los DataTables tienes registros en:
+            /// DataTable[11]- Obtiene información de los Paneles Asignados a la Campania
+            if (ds.Tables[11].Rows.Count > 0)
+            {
+                ImgPaneles.ImageUrl = "~/Pages/images/Terminado.png";
+                ImgIrAPaneles.Visible = true;
+            }
+            else
+            {
+                ImgPaneles.ImageUrl = "~/Pages/images/Pendiente.png";
+                ImgIrAPaneles.Visible = false;
+            }
+
+            if (ImgAsigBudget.ImageUrl.Equals("~/Pages/images/Terminado.png")
+                && ImgDescCamp.ImageUrl.Equals("~/Pages/images/Terminado.png")
+                && ImgResponsables.ImageUrl.Equals("~/Pages/images/Terminado.png")
+                && ImgAsigPersonal.ImageUrl.Equals("~/Pages/images/Terminado.png")
+                && ImgPDV.ImageUrl.Equals("~/Pages/images/Terminado.png")
+                && ImgProductos.ImageUrl.Equals("~/Pages/images/Terminado.png")
+                && ImgAsignaPDV.ImageUrl.Equals("~/Pages/images/Terminado.png")
+                && ImgReportes.ImageUrl.Equals("~/Pages/images/Terminado.png")
+                && ImgPaneles.ImageUrl.Equals("~/Pages/images/Terminado.png"))
+            {
+                ImgBreaf.ImageUrl = "~/Pages/images/Terminado.png";
+                ImgIrABreaf.Visible = true;
+            }
+            else
+            {
+                ImgBreaf.ImageUrl = "~/Pages/images/Pendiente.png";
+                ImgIrABreaf.Visible = false;
+            }
+
+            // Verifica si es Canal mayorista, para mostrar el menú de 'Objetivos SOD':
+            /// DataTable[9] - Obtiene información del Planning Seleccionado
+            if (ds.Tables[9].Rows[0]["Planning_CodChannel"].ToString() == "1000")
+            {
+                MenuObjetivoSODMay.Visible = true;
+            }
+            else
+            {
+                MenuObjetivoSODMay.Visible = false;
+            }
+
+
+            ImgProdAncla.Visible = true;
+
+            //metodo temporal para la visualizacion de Niveles en AA_VV
+
+            if (CmbSelCampaña.SelectedValue.Equals("101131122011"))//si la campaña es AA_VV
+            {
+                this.Session["id_planning"] = CmbSelCampaña.SelectedValue;
+                OpcionGestionNiveles.Style.Value = "display: block";
+                ImgGestionNiveles.ImageUrl = "../../images/Terminado.png";
+                ImgIrAGestionNiveles.Visible = true;
+
+                OpcionGestionFuerzaVenta.Style.Value = "display: block";
+                ImgGestionFuerzaVenta.ImageUrl = "../../images/Terminado.png";
+                ImgIrAGestionFuerzaVenta.Visible = true;
+            }
+            else
+            {
+                OpcionGestionNiveles.Style.Value = "display: none";
+                OpcionGestionFuerzaVenta.Style.Value = "display: none";
+            }
+        }
 
     }
 }
-
-
-
-
-
-

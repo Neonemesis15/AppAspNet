@@ -15,20 +15,24 @@ namespace SIGE.Pages.Modulos.Operativo.Reports.MasterPage
         {
             try
             {
-                string sidperdil = this.Session["Perfilid"].ToString();
-                if (!Page.IsPostBack)
-                {
+                //string sidperdil = this.Session["Perfilid"].ToString();
+
+                if (!Page.IsPostBack){
                    
-                    if (ConfigurationManager.AppSettings["PerfilAnalista"] == sidperdil || sidperdil == "1" )
-                    {
+                    if (ConfigurationManager.
+                        AppSettings["PerfilAnalista"].
+                        Equals(this.Session["Perfilid"].ToString())){
+
                         cargarMenuHeaderPlanning();
+
                     }
+
                     cargarXploramaps();
                     
-                    if (Session["companyid"].ToString() == "1562")
-                    {
+                    if (Session["companyid"].ToString().Equals("1562")){
                         cargarDataValidada();
                     }
+
                     cargarMenu();
                     
                 }
@@ -39,6 +43,9 @@ namespace SIGE.Pages.Modulos.Operativo.Reports.MasterPage
                 throw ex;
             }
         }
+        /// <summary>
+        /// Add Telerik RadMenu, Option for Close 
+        /// </summary>
         protected void cargarMenu()
         {
             RadMenuItem rmitem = new RadMenuItem();
@@ -48,6 +55,9 @@ namespace SIGE.Pages.Modulos.Operativo.Reports.MasterPage
 
             RadMenuDataMercaderista.Items.Add(rmitem);
         }
+        /// <summary>
+        /// Add Telerik RadMenu, Option for to back Menu Planning.
+        /// </summary>
         protected void cargarMenuHeaderPlanning()
         {
             RadMenuItem rmitem = new RadMenuItem();
@@ -57,7 +67,10 @@ namespace SIGE.Pages.Modulos.Operativo.Reports.MasterPage
 
             RadMenuDataMercaderista.Items.Add(rmitem);
         }
-
+        /// <summary>
+        /// Add in Telerik RadMenu 'RadMenuDataMercaderista' the item
+        /// relationated with Xplora Maps
+        /// </summary>
         protected void cargarXploramaps()
         {
             RadMenuItem rmitem = new RadMenuItem();
@@ -67,6 +80,9 @@ namespace SIGE.Pages.Modulos.Operativo.Reports.MasterPage
 
             RadMenuDataMercaderista.Items.Add(rmitem);
         }
+        /// <summary>
+        /// Add Item Telerik RadMenu for DataValidation
+        /// </summary>
         protected void cargarDataValidada()
         {
             RadMenuItem rmitem = new RadMenuItem();

@@ -66,6 +66,7 @@ namespace SIGE.Pages.Modulos.Cliente.Reportes
                 reporteHistorical.ServerReport.ReportServerCredentials = new CFG.Tools.ReportServerNetCredentials();
                 List<Microsoft.Reporting.WebForms.ReportParameter> parametros = new List<Microsoft.Reporting.WebForms.ReportParameter>();
 
+                /*
                 parametros.Add(new Microsoft.Reporting.WebForms.ReportParameter("CLIENTE", Convert.ToString(iidcompany)));
                 parametros.Add(new Microsoft.Reporting.WebForms.ReportParameter("SERVICIO", Convert.ToString(iservicio)));
                 parametros.Add(new Microsoft.Reporting.WebForms.ReportParameter("CANAL", canal));
@@ -75,7 +76,18 @@ namespace SIGE.Pages.Modulos.Cliente.Reportes
                 parametros.Add(new Microsoft.Reporting.WebForms.ReportParameter("MES", sidmes));
                 parametros.Add(new Microsoft.Reporting.WebForms.ReportParameter("COBERTURA", "0"));
                 parametros.Add(new Microsoft.Reporting.WebForms.ReportParameter("CIUDAD", "0"));
-
+                */
+                bool validacion = false;
+                parametros.Add(new Microsoft.Reporting.WebForms.ReportParameter("CLIENTE", Convert.ToString("1561")));
+                parametros.Add(new Microsoft.Reporting.WebForms.ReportParameter("SERVICIO", Convert.ToString("254")));
+                parametros.Add(new Microsoft.Reporting.WebForms.ReportParameter("CANAL", "1000"));
+                parametros.Add(new Microsoft.Reporting.WebForms.ReportParameter("CADENA", "0"));
+                parametros.Add(new Microsoft.Reporting.WebForms.ReportParameter("PERIODO", "3"));
+                parametros.Add(new Microsoft.Reporting.WebForms.ReportParameter("AÑO", "2011"));
+                parametros.Add(new Microsoft.Reporting.WebForms.ReportParameter("MES", "10"));
+                parametros.Add(new Microsoft.Reporting.WebForms.ReportParameter("COBERTURA", "0"));
+                parametros.Add(new Microsoft.Reporting.WebForms.ReportParameter("CIUDAD", "0"));
+                parametros.Add(new Microsoft.Reporting.WebForms.ReportParameter("VALIDANALYST", validacion.ToString()));
                 reporteHistorical.ServerReport.SetParameters(parametros);
             }
             catch (Exception ex)

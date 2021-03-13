@@ -213,7 +213,7 @@ namespace SIGE.Pages.Modulos.Cliente.Reportes.Informe_de_Presencia.Informe_Bodeg
             request = "{'i':'" + Session["id_menu"].ToString() + "'}";
             dataJson = client.ObtenerMenuDetalle(request);
             //MenuServiceResponse menuServiceResponse = HelperJson.Deserialize<MenuServiceResponse>(dataJson);
-
+            client.Close();
             MenuLoadUtil oLoadMenu = new MenuLoadUtil();
             //rad_menu = oLoadMenu.LoadRadMenu(rad_menu, menuServiceResponse);
 

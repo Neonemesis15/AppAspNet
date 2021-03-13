@@ -7,17 +7,20 @@
             <telerik:RadMenuItem runat="server" NavigateUrl="~/Pages/Modulos/Operativo/Reports/MasterPage/Default2.aspx"
                 Text="Inicio">
             </telerik:RadMenuItem>
+
             <%--<telerik:RadMenuItem runat="server" 
                 NavigateUrl="~/Pages/Modulos/Planning/Menu_Planning.aspx" Text="Menu Planning">
             </telerik:RadMenuItem>--%>
+
         </Items>
     </telerik:RadMenu>
 </div>
+
+
 <%--<ul class="art-menu">
     
-    
-   
-    <%-- <li><a href="#" class=" active"><span class="l"></span><span class="r"></span><span class="t"> <asp:LinkButton ID="lnkbtnInicio" runat="server" onclick="lnkbtnInicio_Click">Inicio</asp:LinkButton></span></a></li>
+    <%-- <li><a href="#" class=" active"><span class="l"></span><span class="r"></span><span class="t"> 
+        <asp:LinkButton ID="lnkbtnInicio" runat="server" onclick="lnkbtnInicio_Click">Inicio</asp:LinkButton></span></a></li>
     <li><a href="#"><span class="l"></span><span class="r"></span><span class="t">Menu Planning</span></a>
         <!--ul>
 		    <li><a href="#">Menu Subitem 1</a></li>

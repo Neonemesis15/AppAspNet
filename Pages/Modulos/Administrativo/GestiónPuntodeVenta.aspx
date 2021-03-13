@@ -34,7 +34,6 @@
     <!-- se agrego el parametro ScriptMode=release a ToolkitScriptManager soluciona problema de event handler exception - 25/05/2011 Angel Ortiz -->
     <asp:UpdatePanel ID="UpdatePanel1" runat="server" >
         <ContentTemplate>
-    
             <cc2:ModalUpdateProgress ID="ModalUpdateProgress1" runat="server"
                     AssociatedUpdatePanelID="UpdatePanel1" BackgroundCssClass="modalProgressGreyBackground">
                 <ProgressTemplate>
@@ -48,7 +47,7 @@
                         </div>
                     </div>
                 </ProgressTemplate>
-          </cc2:ModalUpdateProgress>
+            </cc2:ModalUpdateProgress>
             <div style="height: 526px" >
                 <cc1:TabContainer ID="TabAdministradorpdv" runat="server" ActiveTabIndex="7" Width="100%"
                     Height="460px" Font-Names="Verdana" allowtransparency="true" > <!---->

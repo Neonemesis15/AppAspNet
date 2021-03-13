@@ -5,7 +5,9 @@
 <%@ Register TagPrefix="art" TagName="DefaultVerticalMenu" Src="DefaultVerticalMenu.ascx" %>
 <%@ Register Assembly="Lucky.CFG" Namespace="Artisteer" TagPrefix="artisteer" %>
 <%@ Register Assembly="SIGE" Namespace="Artisteer" TagPrefix="artisteer" %>
+
 <art:DefaultVerticalMenu ID="DefaultVMenuContent" runat="server" />
+
 <artisteer:Block ID="HighlightsBlock" Caption="Novedades" runat="server">
     <ContentTemplate>
         <div>

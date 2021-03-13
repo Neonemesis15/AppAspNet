@@ -70,12 +70,19 @@
                                 
                                 <!-- CABECERA - INI -->
                                 <tr>
-                                    <td><img alt="sup1" height="6" src="../../images/tablas_genericas/bordegris_tablasgene_sup1.png" 
-                                            width="6"></img></td>
-                                    <td background="../../images/tablas_genericas/bg_gris_tablasgene.jpg"> <img height="6" 
-                                        src="../../images/tablas_genericas/bg_gris_tablasgene.jpg" width="1"> </img> </td>
-                                    <td> <img height="6" src="../../images/tablas_genericas/bordegris_tablasgene_sup3.png" 
-                                        width="6"></img> </td>
+                                    <td>
+                                        <img alt="sup1" height="6" 
+                                            src="../../images/tablas_genericas/bordegris_tablasgene_sup1.png" 
+                                            width="6"></img>
+                                    </td>
+                                    <td background="../../images/tablas_genericas/bg_gris_tablasgene.jpg"> 
+                                        <img height="6" src="../../images/tablas_genericas/bg_gris_tablasgene.jpg" 
+                                            width="1"> </img> 
+                                    </td>
+                                    <td> 
+                                        <img height="6" src="../../images/tablas_genericas/bordegris_tablasgene_sup3.png" 
+                                            width="6"></img> 
+                                    </td>
                                 </tr>
                                 <!-- CABECERA - FIN -->
 
@@ -110,30 +117,31 @@
                                                 <table align="center">
                                                     <tr>
                                                         <td><asp:ImageButton ID="ImgIrABudget" runat="server" 
-                                                            ImageUrl="~/Pages/ImgBooom/iconodescarga.png" ToolTip="Ver información..." 
-                                                            Visible="False" OnClick="ImgIrABudget_Click" /> </td>
+                                                                ImageUrl="~/Pages/ImgBooom/iconodescarga.png" ToolTip="Ver información..." 
+                                                                Visible="False" OnClick="ImgIrABudget_Click" /> </td>
                                                         <td><span class="labelsN">Asignación de Presupuesto</span> </td>
                                                         <td><asp:Image ID="ImgAsigBudget" runat="server" 
-                                                            ImageUrl="~/Pages/images/Esperando.png" Width="70%" /></td>
+                                                                ImageUrl="~/Pages/images/Esperando.png" Width="70%" /></td>
                                                         <td rowspan="10" style="display: none;"> 
                                                             <div><asp:ImageButton ID="ImgBtnInformeTotal" runat="server" 
-                                                                Visible="false" ImageUrl="~/Pages/images/Digitar.png"  
-                                                                Width="100px" Height="100px" 
-                                                                ToolTip="Ver Información completa de la campaña"  
-                                                                OnClick="ImgBtnInformeTotal_Click" />
+                                                                    Visible="false" ImageUrl="~/Pages/images/Digitar.png"  
+                                                                    Width="100px" Height="100px" 
+                                                                    ToolTip="Ver Información completa de la campaña"  
+                                                                    OnClick="ImgBtnInformeTotal_Click" />
                                                             </div> 
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td> <asp:ImageButton ID="ImgIrADesc" runat="server" 
-                                                            ImageUrl="~/Pages/ImgBooom/iconodescarga.png" 
-                                                            ToolTip="Ver información..." Visible="False" OnClick="ImgIrADesc_Click" /> </td>
+                                                                ImageUrl="~/Pages/ImgBooom/iconodescarga.png" 
+                                                                ToolTip="Ver información..." Visible="False" OnClick="ImgIrADesc_Click" /> </td>
                                                         <td> <span class="labelsN">Descripción de la Campaña</span> </td>
-                                                        <td> <asp:Image ID="ImgDescCamp" runat="server" ImageUrl="~/Pages/images/Esperando.png" Width="70%" /> </td>
+                                                        <td> <asp:Image ID="ImgDescCamp" runat="server" 
+                                                                ImageUrl="~/Pages/images/Esperando.png" Width="70%" /> </td>
                                                     </tr>
                                                     <tr>
                                                         <td> <asp:ImageButton ID="ImgIrAResponsables" runat="server" 
-                                                            ImageUrl="~/Pages/ImgBooom/iconodescarga.png"  
+                                                                ImageUrl="~/Pages/ImgBooom/iconodescarga.png"  
                                                             ToolTip="Ver información..." Visible="False" 
                                                             OnClick="ImgIrAResponsables_Click" /> </td>
                                                         <td> <span class="labelsN">Responsables</span> </td>
@@ -557,19 +565,19 @@
                                                                                 <asp:Label ID="lblobj" runat="server" CssClass="labelsN" Text="Objetivo de la Campaña"></asp:Label>
                                                                                 <asp:Label ID="lblolbli13" runat="server" ForeColor="#CC3300" Text="*"></asp:Label><br />
                                                                                 <asp:TextBox ID="txtobj" runat="server" BorderStyle="Solid" BorderWidth="1px" Height="150px"
-                                                                                    TextMode="MultiLine" Width="265px" Enabled="False"></asp:TextBox>
+                                                                                    TextMode="MultiLine" Width="265px" Enabled="False" Style="resize:none;"></asp:TextBox>
                                                                             </td>
                                                                             <td valign="top">
                                                                                 <asp:Label ID="lblmanda" runat="server" CssClass="labelsN" Text="Mandatorios de  Campaña"></asp:Label>
                                                                                 <asp:Label ID="lblolbli14" runat="server" ForeColor="#CC3300" Text="*"></asp:Label><br />
                                                                                 <asp:TextBox ID="txtmanda" runat="server" BorderStyle="Solid" BorderWidth="1px" Height="150px"
-                                                                                    TextMode="MultiLine" Width="265px" Enabled="False"></asp:TextBox>
+                                                                                    TextMode="MultiLine" Width="265px" Enabled="False" Style="resize:none;"></asp:TextBox>
                                                                             </td>
                                                                             <td valign="top">
                                                                                 <asp:Label ID="lblmeca" runat="server" CssClass="labelsN" Text="Mecanica"></asp:Label>
                                                                                 <asp:Label ID="lblolbli15" runat="server" ForeColor="#CC3300" Text="*"></asp:Label><br />
                                                                                 <asp:TextBox ID="Txtmeca" runat="server" BorderStyle="Solid" BorderWidth="1px" Height="150px"
-                                                                                    TextMode="MultiLine" Width="265px" Enabled="False"></asp:TextBox>
+                                                                                    TextMode="MultiLine" Width="265px" Enabled="False" Style="resize:none;"></asp:TextBox>
                                                                             </td>
                                                                             <td>
                                                                                 <table>
@@ -1157,7 +1165,8 @@
                                                                                     <asp:Label ID="LblOblSelCity" runat="server" ForeColor="#CC3300" Text="*"></asp:Label>
                                                                                 </td>
                                                                                 <td>
-                                                                                    <asp:DropDownList ID="CmbSelCity" runat="server" AutoPostBack="True" Width="180px"
+                                                                                    <asp:DropDownList ID="CmbSelCity" runat="server" 
+                                                                                        AutoPostBack="True" Width="180px"
                                                                                         OnSelectedIndexChanged="CmbSelCity_SelectedIndexChanged">
                                                                                     </asp:DropDownList>
                                                                                 </td>
@@ -1257,7 +1266,7 @@
                                                                     <asp:BoundField DataField="Dirección" HeaderText="Dirección" />
                                                                     <asp:BoundField DataField="Región" HeaderText="Región" />
                                                                     <asp:BoundField DataField="Zona" HeaderText="Zona" />
-                                                                    <asp:BoundField DataField="id_MPOSPlanning" HeaderText="id_MPOSPlanning" />
+                                                                    <%--<asp:BoundField DataField="id_MPOSPlanning" HeaderText="id_MPOSPlanning" />--%>
                                                                 </Columns>
                                                             </asp:GridView>
                                                         </div>
@@ -1576,8 +1585,16 @@
                                 Height="0px" Text="" Width="0" />
                         </ContentTemplate>
                     </asp:UpdatePanel>
-                        
+
+
+
+                    <!---------------------------------------------------------------------------->
+                    <!---------------------------------------------------------------------------->
+                    <!---------------------------------------------------------------------------->                        
                     <!-- PANEL ASIGNACION DE PDV Y TRABAJADORES - INI -->
+                    <!---------------------------------------------------------------------------->
+                    <!---------------------------------------------------------------------------->
+                    <!---------------------------------------------------------------------------->                        
                     <asp:UpdatePanel ID="UpPanelPanelAsignacionPDVaoper" runat="server">
                         <ContentTemplate> 
 
@@ -1588,12 +1605,9 @@
                                         
                                         <!-- CABECERA - INI -->
                                         <tr>
-                                            <td><img alt="sup1" height="6" src="../../images/tablas_genericas/bordegris_tablasgene_sup1.png"
-                                                    width="6"> </img></td>
-                                            <td background="../../images/tablas_genericas/bg_gris_tablasgene.jpg">
-                                                <img height="6" src="../../images/tablas_genericas/bg_gris_tablasgene.jpg" width="1"></img></td>
-                                            <td><img height="6" src="../../images/tablas_genericas/bordegris_tablasgene_sup3.png"
-                                                    width="6"> </img></td>
+                                            <td><img alt="sup1" height="6" src="../../images/tablas_genericas/bordegris_tablasgene_sup1.png" width="6"></img></td>
+                                            <td background="../../images/tablas_genericas/bg_gris_tablasgene.jpg"><img height="6" src="../../images/tablas_genericas/bg_gris_tablasgene.jpg" width="1"></img></td>
+                                            <td><img height="6" src="../../images/tablas_genericas/bordegris_tablasgene_sup3.png" width="6"></img></td>
                                         </tr>
                                         <!-- CABECERA - FIN -->
 
@@ -1602,14 +1616,12 @@
                                             
                                             <!-- HEADER - INI -->
                                             <td background="../../images/tablas_genericas/bg_gris_tablasgene.jpg">
-                                                <img height="1" src="../../images/tablas_genericas/bg_gris_tablasgene.jpg" width="6">
-                                                </img>
+                                                <img height="1" src="../../images/tablas_genericas/bg_gris_tablasgene.jpg" width="6"></img>
                                             </td>
                                             <!-- HEADER - FIN -->
 
                                             <!-- BODY - INI -->
                                             <td bgcolor="White">
-
                                                 <asp:Panel ID="PanelPDVOpe" runat="server" Style="vertical-align: middle;">
                                                     
                                                     <!-- DIV CERRAR - INI -->
@@ -1625,18 +1637,26 @@
                                                     <!-- INFO PLANNING - INI -->
                                                     <table align="center">
                                                         <tr>
-                                                            <td><asp:Label ID="LblPanningAsigPDVOPE" runat="server" CssClass="labelsN" 
-                                                                Text="Planning No"></asp:Label>
+                                                            <td>
+                                                                <asp:Label ID="LblPanningAsigPDVOPE" runat="server" CssClass="labelsN" 
+                                                                    Text="Planning No">
+                                                                </asp:Label>
                                                             </td>
-                                                            <td><asp:TextBox ID="TxtPlanningAsigPDVOPE" runat="server" 
-                                                                BackColor="#CCCCCC" Enabled="False"
-                                                                    ForeColor="White" AutoCompleteType="Disabled"></asp:TextBox>
+                                                            <td>
+                                                                <asp:TextBox ID="TxtPlanningAsigPDVOPE" runat="server" 
+                                                                    BackColor="#CCCCCC" Enabled="False"
+                                                                    ForeColor="White" AutoCompleteType="Disabled">
+                                                                </asp:TextBox>
                                                             </td>
-                                                            <td><asp:Label ID="LblSelPresupuestoAsigPDVOPE" runat="server" 
-                                                                CssClass="labelsN" Text="Presupuesto"></asp:Label></td>
-                                                            <td colspan="4"><asp:Label ID="LblTxtPresupuestoAsigPDVOPE" runat="server" 
-                                                                Text="Presupuesto" Width="500px"
-                                                                Enabled="False"></asp:Label>
+                                                            <td>
+                                                                <asp:Label ID="LblSelPresupuestoAsigPDVOPE" runat="server" 
+                                                                    CssClass="labelsN" Text="Presupuesto">
+                                                                </asp:Label>
+                                                            </td>
+                                                            <td colspan="4">
+                                                                <asp:Label ID="LblTxtPresupuestoAsigPDVOPE" runat="server" 
+                                                                    Text="Presupuesto" Width="500px" Enabled="False">
+                                                                </asp:Label>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -1662,24 +1682,20 @@
                                                     <!-- SECCION PDV ASIGNADOS - INI -->
                                                     <asp:UpdatePanel ID="asignacionesPDV" runat="server">
                                                         <ContentTemplate>
-
                                                             <table align="center">
                                                                 <tr>
                                                                     <td valign="top">
                                                                         <fieldset id="Fieldset3" runat="server">
                                                                             <legend style="">Asignaciones existentes</legend>
-                                                                            
                                                                             <table>
                                                                                 <tr>
                                                                                     <td valign="top" style="border-color: Black; height: 70px; border-style: solid; border-width: 1px; width: 1050px; min-width: 1050px;">
-                                                                                        
                                                                                         <div style="width: 1050px; height: 130px;" class="p">
-
                                                                                             <!-- SECCION GRILLA PDV ASIGNADOS - INI -->
                                                                                             <asp:GridView ID="GvAsignaPDVOPE" 
                                                                                                 runat="server" 
                                                                                                 EmptyDataText="No se ha realizado ninguna asignación"
-                                                                                                Font-Names="Verdana" Font-Size="8pt" GridLines="Horizontal" Width="1035px" AutoGenerateColumns="False" 
+                                                                                                Font-Names="Verdana" Font-Size="8pt" GridLines="Both" Width="1035px" AutoGenerateColumns="False" 
                                                                                                 EnableModelValidation="True" OnRowEditing="GvAsignaPDVOPE_RowEditing" OnRowCancelingEdit="GvAsignaPDVOPE_RowCancelingEdit"
                                                                                                 OnRowUpdating="GvAsignaPDVOPE_RowUpdating">
                                                                                                 <Columns>
@@ -1762,9 +1778,7 @@
                                                                                                 </Columns>
                                                                                             </asp:GridView>
                                                                                             <!-- SECCION GRILLA PDV ASIGNADOS - FIN -->
-
                                                                                         </div>
-
                                                                                         <!-- SECCION OPCIONES PDV ASIGNADOS - INI -->
                                                                                         <asp:Button ID="Button1" runat="server" CssClass="buttonPlan" OnClick="Button1_Click" Text="Eliminar" Visible="false" />
                                                                                         <asp:Button ID="BtnAllAsigPDV" runat="server" Visible="false" CssClass="buttonsinfondo" Text="Todos" 
@@ -1772,25 +1786,20 @@
                                                                                         <asp:Button ID="BtnNoneasigPDV" runat="server" Visible="false" CssClass="buttonsinfondo" Text="Ninguno" 
                                                                                             OnClick="BtnNoneasigPDV_Click" />
                                                                                         <!-- SECCION OPCIONES PDV ASIGNADOS - FIN -->
-
                                                                                     </td>
                                                                                 </tr>
                                                                             </table>
-
                                                                         </fieldset>
                                                                     </td>
                                                                 </tr>
                                                             </table>
-
                                                         </ContentTemplate>
                                                     </asp:UpdatePanel>
                                                     <!-- SECCION PDV ASIGNADOS - FIN -->
 
                                                     <!-- SECCION NUEVA ASIGNACION DE PDV - INI -->
                                                     <asp:UpdatePanel ID="UpdatePanel10" runat="server">
-
                                                         <ContentTemplate>
-
                                                             <table align="center">
                                                                 <tr>
                                                                     <td>
@@ -1961,7 +1970,6 @@
                                                                                 <tr>
                                                                                     <td valign="top" style="border-color: Black; height: 201px; border-style: solid; border-width: 1px; width: 570px; min-width: 570px;">
                                                                                         <div style="width: 570px; height: 190px;" class="p">
-
                                                                                             <!-- GRILLA PDV DISPONIBLES - INI -->
                                                                                             <asp:GridView ID="GvNewAsignaPDVOPE" runat="server" EmptyDataText="No se ha realizado ninguna asignación"
                                                                                                 Font-Names="Verdana" Font-Size="8pt" GridLines="Horizontal" Width="555px" 
@@ -1972,13 +1980,11 @@
                                                                                                 </Columns>
                                                                                             </asp:GridView>
                                                                                             <!-- GRILLA PDV DISPONIBLES - FIN -->
-
                                                                                         </div>
                                                                                     </td>
                                                                                 </tr>
                                                                             </table>
                                                                             <!-- TABLE PDV DISPONIBLES - FIN -->
-
                                                                             <!-- OPCIONES INI -->
                                                                             <table align="center">
                                                                                 <tr>
@@ -1999,7 +2005,6 @@
                                                                                 </tr>
                                                                             </table>
                                                                             <!-- OPCIONES FIN -->
-
                                                                         </fieldset>
                                                                     </td>
                                                                 </tr>
@@ -2128,7 +2133,15 @@
 
                         </ContentTemplate>
                     </asp:UpdatePanel>
+                    <!---------------------------------------------------------------------------->
+                    <!---------------------------------------------------------------------------->
+                    <!---------------------------------------------------------------------------->                        
                     <!-- PANEL ASIGNACION DE PDV Y TRABAJADORES - FIN -->
+                    <!---------------------------------------------------------------------------->
+                    <!---------------------------------------------------------------------------->
+                    <!---------------------------------------------------------------------------->
+
+
 
                     <asp:UpdatePanel ID="UpPanelProductos" runat="server">
                         <ContentTemplate>
@@ -3755,14 +3768,10 @@
                                 Width="332px">
                                 <table align="center">
                                     <tr>
-                                        <td align="center" style="height: 119px; width: 79px;" valign="top">
-                                            <br />
+                                        <td align="center" style="height: 119px; width: 79px;" valign="top"><br />
                                         </td>
-                                        <td style="width: 220px; height: 119px;" valign="top">
-                                            <br />
-                                            <asp:Label ID="lblencabezadoPDVOPE" runat="server" CssClass="labelsTit"></asp:Label>
-                                            <br />
-                                            <br />
+                                        <td style="width: 220px; height: 119px;" valign="top"><br />
+                                            <asp:Label ID="lblencabezadoPDVOPE" runat="server" CssClass="labelsTit"></asp:Label><br /><br />
                                             <asp:Label ID="lblmensajegeneralPDVOPE" runat="server" CssClass="labels"></asp:Label>
                                         </td>
                                     </tr>
@@ -4103,7 +4112,7 @@
                                     <tr>
                                         <td align="center">
                                             <asp:Button ID="BtnaceptaSeguimiento" runat="server" BorderStyle="Solid" CssClass="buttonPlan"
-                                                Text="Aceptar" />
+                                                Text="Aceptar" onclick="btnAceptaSeguimiento"/>
                                         </td>
                                     </tr>
                                 </table>
@@ -5271,52 +5280,52 @@
         </asp:UpdatePanel>
         <div>
             <asp:GridView ID="gv_stockToExcel" runat="server" BackColor="White"
-                        BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" Visible="False">
-                        <RowStyle ForeColor="#000066" />
-                        <FooterStyle BackColor="White" ForeColor="#000066" />
-                        <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
-                        <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
-                        <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
+                BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" Visible="False">
+                <RowStyle ForeColor="#000066" />
+                <FooterStyle BackColor="White" ForeColor="#000066" />
+                <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
+                <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
+                <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
             </asp:GridView>
             <asp:GridView ID="gv_stockToExcel2" runat="server" BackColor="White"
-                        BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" Visible="False">
-                        <RowStyle ForeColor="#000066" />
-                        <FooterStyle BackColor="White" ForeColor="#000066" />
-                        <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
-                        <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
-                        <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
+                BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" Visible="False">
+                <RowStyle ForeColor="#000066" />
+                <FooterStyle BackColor="White" ForeColor="#000066" />
+                <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
+                <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
+                <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
             </asp:GridView>
             <asp:GridView ID="gv_stockToExcel3" runat="server" BackColor="White"
-                        BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" Visible="False">
-                        <RowStyle ForeColor="#000066" />
-                        <FooterStyle BackColor="White" ForeColor="#000066" />
-                        <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
-                        <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
-                        <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
+                BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" Visible="False">
+                <RowStyle ForeColor="#000066" />
+                <FooterStyle BackColor="White" ForeColor="#000066" />
+                <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
+                <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
+                <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
             </asp:GridView>
             <asp:GridView ID="gv_stockToExcel4" runat="server" BackColor="White"
-                        BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" Visible="False">
-                        <RowStyle ForeColor="#000066" />
-                        <FooterStyle BackColor="White" ForeColor="#000066" />
-                        <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
-                        <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
-                        <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
+                BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" Visible="False">
+                <RowStyle ForeColor="#000066" />
+                <FooterStyle BackColor="White" ForeColor="#000066" />
+                <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
+                <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
+                <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
             </asp:GridView>
             <asp:GridView ID="gv_stockToExcel5" runat="server" BackColor="White"
-                        BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" Visible="False">
-                        <RowStyle ForeColor="#000066" />
-                        <FooterStyle BackColor="White" ForeColor="#000066" />
-                        <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
-                        <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
-                        <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
+                BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" Visible="False">
+                <RowStyle ForeColor="#000066" />
+                <FooterStyle BackColor="White" ForeColor="#000066" />
+                <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
+                <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
+                <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
             </asp:GridView>
             <asp:GridView ID="gv_stockToExcel6" runat="server" BackColor="White"
-                        BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" Visible="False">
-                        <RowStyle ForeColor="#000066" />
-                        <FooterStyle BackColor="White" ForeColor="#000066" />
-                        <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
-                        <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
-                        <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
+                BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" Visible="False">
+                <RowStyle ForeColor="#000066" />
+                <FooterStyle BackColor="White" ForeColor="#000066" />
+                <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
+                <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
+                <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
             </asp:GridView>
         </div>
         <cc2:ModalUpdateProgress ID="ModalUpdateProgress2" runat="server" DisplayAfter="0"

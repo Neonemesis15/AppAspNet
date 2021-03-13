@@ -7,24 +7,19 @@
 <div class="art-vmenublock">
     <div class="art-vmenublock-body">
         <div class="art-vmenublockheader">
-            <div class="l">
-            </div>
-            <div class="r">
-            </div>
-            <div class="t">
-                Navegación
-            </div>
+            <div class="l"></div>
+            <div class="r"></div>
+            <div class="t">Navegación</div>
         </div>
         <div class="art-vmenublockcontent">
             <div class="art-vmenublockcontent-body">
                 <!-- block-content -->
-                <telerik:RadPanelBar ID="RadPanelBar_menu" runat="server" Height="380px" ExpandMode="FullExpandedItem" Skin="Vista">
+                <telerik:RadPanelBar ID="RadPanelBar_menu" runat="server" Height="380px" 
+                    ExpandMode="FullExpandedItem" Skin="Vista">
                 </telerik:RadPanelBar>
-                <div class="cleared">
-                </div>
+                <div class="cleared"></div>
             </div>
         </div>
-        <div class="cleared">
-        </div>
+        <div class="cleared"></div>
     </div>
 </div>

@@ -64,37 +64,32 @@ namespace SIGE.Pages.Modulos.Cliente.Reportes.MasterPageV2
                 menuItem1.Text = ds.Tables[0].Rows[i]["Strategy_Name"].ToString();
                 menuItem1.NavigateUrl = "";//ds.Tables[0].Rows[i][""].ToString();
                 //menuItem.ImageUrl = "~/img/admin_16.png";
-
-
                 menuItem.Items.Add(menuItem1);
 
                 for (int j = 0; j < ds.Tables[1].Rows.Count; j++)
                 {
-                    if (ds.Tables[0].Rows[i]["cod_Strategy"].ToString().Trim() == ds.Tables[1].Rows[j]["cod_Strategy"].ToString().Trim())
+                    if (ds.Tables[0].Rows[i]["cod_Strategy"].ToString().Trim() == 
+                        ds.Tables[1].Rows[j]["cod_Strategy"].ToString().Trim())
                     {
                         RadMenuItem menuItem2 = new RadMenuItem();
-
-
                         menuItem2.Value = ds.Tables[1].Rows[j]["cod_Channel"].ToString();
                         menuItem2.Text = ds.Tables[1].Rows[j]["Channel_Name"].ToString();
                         menuItem2.NavigateUrl = ""; //ds.Tables[0].Rows[i][""].ToString();
                         //menuItem.ImageUrl = ds.Tables[1].Rows[j]["url_imagen"].ToString();
-
                         menuItem1.Items.Add(menuItem2);
 
 
                         for (int k = 0; k < ds.Tables[2].Rows.Count; k++)
                         {
-                            if (ds.Tables[1].Rows[j]["cod_Channel"].ToString().Trim() == ds.Tables[2].Rows[k]["cod_Channel"].ToString().Trim())
+                            if (ds.Tables[1].Rows[j]["cod_Channel"].ToString().Trim() == 
+                                ds.Tables[2].Rows[k]["cod_Channel"].ToString().Trim())
                             {
                                 RadMenuItem menuItem3 = new RadMenuItem();
 
                                 menuItem3.Value = ds.Tables[2].Rows[k]["id_Menu"].ToString();
                                 menuItem3.Text = ds.Tables[2].Rows[k]["Report_NameReport"].ToString();
                                 // menuItem3.NavigateUrl = ds.Tables[2].Rows[k]["url"].ToString();
-
                                 menuItem3.ImageUrl = ds.Tables[2].Rows[k]["url_imagen"].ToString();
-
                                 menuItem2.Items.Add(menuItem3);
 
                             }

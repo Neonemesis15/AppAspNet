@@ -2794,15 +2794,6 @@ namespace SIGE.Pages.Modulos.Administrativo {
         protected global::System.Web.UI.WebControls.GridView GVConsulProduct;
         
         /// <summary>
-        /// lblexportExcel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblexportExcel;
-        
-        /// <summary>
         /// iframe1 control.
         /// </summary>
         /// <remarks>
@@ -2810,6 +2801,15 @@ namespace SIGE.Pages.Modulos.Administrativo {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl iframe1;
+        
+        /// <summary>
+        /// lblexportExcel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblexportExcel;
         
         /// <summary>
         /// Button1 control.
@@ -2902,13 +2902,22 @@ namespace SIGE.Pages.Modulos.Administrativo {
         protected global::System.Web.UI.WebControls.Panel BuscarProducto;
         
         /// <summary>
-        /// LblBuscarProducto control.
+        /// LblBcompañia control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LblBuscarProducto;
+        protected global::System.Web.UI.WebControls.Label LblBcompañia;
+        
+        /// <summary>
+        /// cbmbcompañia control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList cbmbcompañia;
         
         /// <summary>
         /// LblBCategoriaProducto control.
@@ -3026,78 +3035,6 @@ namespace SIGE.Pages.Modulos.Administrativo {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblBuscarLote;
-        
-        /// <summary>
-        /// lblBuscarLote_FechaInicio control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblBuscarLote_FechaInicio;
-        
-        /// <summary>
-        /// txtBuscarLote_FechaInicio control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtBuscarLote_FechaInicio;
-        
-        /// <summary>
-        /// imgBuscarLote_FechaInicio control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imgBuscarLote_FechaInicio;
-        
-        /// <summary>
-        /// Calendar1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.CalendarExtender Calendar1;
-        
-        /// <summary>
-        /// lblBuscarLote_FechaFin control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblBuscarLote_FechaFin;
-        
-        /// <summary>
-        /// txtBuscarLote_FechaFin control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtBuscarLote_FechaFin;
-        
-        /// <summary>
-        /// imgBuscarLote_FechaFin control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imgBuscarLote_FechaFin;
-        
-        /// <summary>
-        /// Calendar2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.CalendarExtender Calendar2;
         
         /// <summary>
         /// btnPnBuscarLote control.

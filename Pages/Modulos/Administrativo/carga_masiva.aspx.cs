@@ -10,9 +10,8 @@ using Lucky.Business.Common.Application;
 
 namespace SIGE.Pages.Modulos.Administrativo
 {
-    public partial class carga_masiva : System.Web.UI.Page
+public partial class carga_masiva : System.Web.UI.Page
     {
-
 
         #region excel
         private void CreaExcel(DataSet ds,string nombre_Archivo)
@@ -206,7 +205,6 @@ namespace SIGE.Pages.Modulos.Administrativo
         {
             ModalPopupMensaje.Show();
         }
-
 
         protected void btnloadproduct_Click(object sender, EventArgs e)
         {
@@ -740,8 +738,6 @@ namespace SIGE.Pages.Modulos.Administrativo
                 //Mensajes_Usuario();
             }
         }
-    
-    
     
     }
 }

@@ -265,6 +265,15 @@ namespace SIGE.Pages.Modulos.Operativo.Reports {
         protected global::System.Web.UI.WebControls.GridView GridView1;
         
         /// <summary>
+        /// gvReportePrecio control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvReportePrecio;
+        
+        /// <summary>
         /// dgv_faltantes control.
         /// </summary>
         /// <remarks>

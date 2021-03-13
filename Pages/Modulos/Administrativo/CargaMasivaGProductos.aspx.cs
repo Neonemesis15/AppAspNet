@@ -52,9 +52,6 @@ namespace SIGE.Pages.Modulos.Administrativo
             dt = null;
         }
 
-
-
-
         private void MensajeAlerta()
         {
             ModalPopupAlertas.Show();
@@ -62,6 +59,7 @@ namespace SIGE.Pages.Modulos.Administrativo
             //ScriptManager.RegisterStartupScript(
             //    this, this.GetType(), "myscript", "alert('Debe ingresar todos los parametros con (*)');", true);
         }
+        
         #endregion
 
         protected void btnCargaArchivo_Click(object sender, EventArgs e)
@@ -69,15 +67,14 @@ namespace SIGE.Pages.Modulos.Administrativo
             #region Cargar Categorias
             if (this.Session["TipoCarga"].ToString().Trim() == "Carga Categoria")
             {
-                if ((FileUpCMasivaMArca.PostedFile != null) && (FileUpCMasivaMArca.PostedFile.ContentLength > 0))
-                {
+                if ((FileUpCMasivaMArca.PostedFile != null) && 
+                    (FileUpCMasivaMArca.PostedFile.ContentLength > 0)){
+
                     string fn = System.IO.Path.GetFileName(FileUpCMasivaMArca.PostedFile.FileName);
                     string SaveLocation = Server.MapPath("Busquedas") + "\\" + fn;
 
-                    if (SaveLocation != string.Empty)
-                    {
-                        if (FileUpCMasivaMArca.FileName.ToLower().EndsWith(".xls"))
-                        {
+                    if (SaveLocation != string.Empty){
+                        if (FileUpCMasivaMArca.FileName.ToLower().EndsWith(".xls")){
                             OleDbConnection oConn1 = new OleDbConnection();
                             OleDbCommand oCmd = new OleDbCommand();
                             OleDbDataAdapter oDa = new OleDbDataAdapter();
@@ -92,14 +89,11 @@ namespace SIGE.Pages.Modulos.Administrativo
                             oCmd.CommandText = ConfigurationManager.AppSettings["CargaMasiva_Categorias"];
                             oCmd.Connection = oConn1;
                             oDa.SelectCommand = oCmd;
-                            try
-                            {
-                                if (this.Session["scountry"].ToString() != null)
-                                {
+                            try{
+                                if (this.Session["scountry"].ToString() != null){
                                     oDa.Fill(oDs);
                                     dt = oDs.Tables[0];
-                                    if (dt.Columns.Count == 2)
-                                    {
+                                    if (dt.Columns.Count == 2){
 
                                         dt.Columns[0].ColumnName = "Categoria";
                                         dt.Columns[1].ColumnName = "Grupo Categoria";
@@ -108,10 +102,8 @@ namespace SIGE.Pages.Modulos.Administrativo
                                         GvCargaArchivo.DataSource = dt;
                                         GvCargaArchivo.DataBind();
 
-                                        foreach (GridViewRow gvr in GvCargaArchivo.Rows)
-                                        {
-                                            for (int i = 0; i < 2; i++)
-                                            {
+                                        foreach (GridViewRow gvr in GvCargaArchivo.Rows){
+                                            for (int i = 0; i < 2; i++){
                                                 gvr.Cells[i].Text = gvr.Cells[i].Text.Replace("&nbsp;", "");
                                                 gvr.Cells[i].Text = gvr.Cells[i].Text.Replace("  ", " ");
                                                 gvr.Cells[i].Text = gvr.Cells[i].Text.Replace("&#160;", "");
@@ -138,11 +130,18 @@ namespace SIGE.Pages.Modulos.Administrativo
                                         {
 
                                             DAplicacion odconsulProductCategory = new DAplicacion();
-                                            DataTable dtconsulta = odconsulProductCategory.ConsultaDuplicados(ConfigurationManager.AppSettings["ProductCategory"], GvCargaArchivo.Rows[i].Cells[0].Text, null, null);
+                                            DataTable dtconsulta = 
+                                                odconsulProductCategory.ConsultaDuplicados(
+                                                ConfigurationManager.AppSettings["ProductCategory"], 
+                                                GvCargaArchivo.Rows[i].Cells[0].Text, 
+                                                null, 
+                                                null);
+
                                             if (dtconsulta != null)
                                             {
                                                 Alertas.CssClass = "MensajesError";
-                                                LblFaltantes.Text = "La Categoría de Producto " + dt.Rows[i][0].ToString().Trim() + " ya existe";
+                                                LblFaltantes.Text = "La Categoría de Producto " + 
+                                                    dt.Rows[i][0].ToString().Trim() + " ya existe";
                                                 MensajeAlerta();
                                                 sigue = false;
                                                 i = dt.Rows.Count - 1;

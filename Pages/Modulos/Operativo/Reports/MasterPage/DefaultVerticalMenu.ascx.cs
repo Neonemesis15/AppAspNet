@@ -13,17 +13,23 @@ namespace SIGE.Pages.Modulos.Operativo.Reports.MasterPage
     public partial class DefaultVerticalMenu : System.Web.UI.UserControl
     {
 
-        SIGE.Facade_Proceso_Cliente.Facade_Proceso_Cliente Get_Cliente = new SIGE.Facade_Proceso_Cliente.Facade_Proceso_Cliente();
+        SIGE.Facade_Proceso_Cliente.Facade_Proceso_Cliente Get_Cliente = 
+            new SIGE.Facade_Proceso_Cliente.Facade_Proceso_Cliente();
+
         //onexion oConn = new Lucky.Data.Conexion();
         int compañia;
+
+        // Variable para los mensajes de Error
+        String messages = "";
+
         private Conexion oCoon = new Conexion();
 
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
+                string sCodUsuario = this.Session["personid"].ToString();
                 
-                string sCodUsuario = this.Session["codUsuario"].ToString();
                 if (sCodUsuario != null)
                 {
                     if (!Page.IsPostBack)
@@ -39,12 +45,18 @@ namespace SIGE.Pages.Modulos.Operativo.Reports.MasterPage
                 // Response.Redirect("~/err_mensaje_seccion.aspx", true);
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
         protected void CargarMenu()
         {
             RadPanelItem PItemN1 = new RadPanelItem();
+            
+            // Obtener Planning by IdUsuario
+            //DataTable dt = oCoon.ejecutarDataTable("PA_GET_PlanningByCodUsuario", 
+            //    this.Session["codUsuario"].ToString());
 
-            DataTable dt = oCoon.ejecutarDataTable("PA_GET_PlanningByCodUsuario", this.Session["codUsuario"].ToString());
+            #region Codigo Comentado
             /*if (dt != null)
             {
                 if (dt.Rows.Count > 0)
@@ -61,8 +73,11 @@ namespace SIGE.Pages.Modulos.Operativo.Reports.MasterPage
                     }
                 }
             }*/
+            #endregion
 
-            #region reportes
+            #region Reporte Items
+            
+            // Configuracion Inicial del RadControl RadPanelItem 'PItemN1' correspondiente al RadPanelBar 'RadPanelBar_menu'
             PItemN1.Text = "Reportes";
             PItemN1.ImageUrl = "~/Pages/Modulos/Operativo/Reports/Image/tasks.gif";
             PItemN1.Expanded = true;
@@ -353,150 +368,167 @@ namespace SIGE.Pages.Modulos.Operativo.Reports.MasterPage
 
             #endregion
 
-            //DataTable dt = null;
+            DataTable dt = null;
             compañia = Convert.ToInt32(this.Session["companyid"]);
-            dt = Get_Cliente.Get_ObtenerCanalesxCliente(compañia);
-            string sUser = this.Session["sUser"].ToString();
-            for (int i = 0; i < dt.Rows.Count; i++)
+            
+            try
             {
-                if (compañia == 1562 && Equals(dt.Rows[i]["codigo_canal"].ToString(), "1000"))
-                {
-                    //mayoristas
-                    PItemN1.Items.Add(PItemN2_reportCompetencia);
-                    PItemN1.Items.Add(PItemN2_reportExhibicion);
-                    PItemN1.Items.Add(PItemN2_reportFotografico);
-                    PItemN1.Items.Add(PItemN2_reportLayout);
-                    PItemN1.Items.Add(PItemN2_reportQuiebre);
-                    PItemN1.Items.Add(PItemN2_reportStock);
-                    PItemN1.Items.Add(PItemN2_reportSOD);
-                    PItemN1.Items.Add(PItemN2_reportPrecio);
-                    PItemN1.Items.Add(PItemN2_LevantamientoPublicacion);
-                    PItemN1.Items.Add(PItemN2_LevantamientoExhImpul);
-                    PItemN1.Items.Add(PItemN2_LevantamientoMaterialPOP);
-                    PItemN1.Items.Add(PItemN2_Rpt_SegIngre);
-                    PItemN1.Items.Add(PItemN2_OpeDigitacion);
-  
-                    break;
-                }
-                if (compañia == 1562 && Equals(dt.Rows[i]["codigo_canal"].ToString(), "1023"))
-                {
-                    //minoristas
-
-                    PItemN1.Items.Add(PItemN2_reportCompetencia);
-                    PItemN1.Items.Add(PItemN2_reportFotografico);
-                    PItemN1.Items.Add(PItemN2_reportExhibicion);
-                    PItemN1.Items.Add(PItemN2_reportLayout);
-                    PItemN1.Items.Add(PItemN2_reportStock);
-                    PItemN1.Items.Add(PItemN2_reportSOD);
-                    PItemN1.Items.Add(PItemN2_reportPrecio);
-                    PItemN1.Items.Add(PItemN2_Rpt_SegIngre);
-                    break;
-                }
-                if (compañia == 1562 && Equals(dt.Rows[i]["codigo_canal"].ToString(), "1241"))
-                {
-                    //autoservicios
-
-                    PItemN1.Items.Add(PItemN2_reportCompetencia);
-                    PItemN1.Items.Add(PItemN2_reportFotografico);
-                    PItemN1.Items.Add(PItemN2_reportQuiebre);
-                    PItemN1.Items.Add(PItemN2_reportLayout);
-                    PItemN1.Items.Add(PItemN2_reportExhibicion);
-
-                    PItemN1.Items.Add(PItemN2_reportPrecio);
-
-                    PItemN1.Items.Add(PItemN2_SegNov);
-                    PItemN1.Items.Add(PItemN2_LevantamientoPublicacion);
-                    PItemN1.Items.Add(PItemN2_LevantamientoExhImpul);
-                    PItemN1.Items.Add(PItemN2_LevantamientoMaterialPOP);
-                    PItemN1.Items.Add(PItemN2_Rpt_SegIngre);
-
-                    break;
-                }
-                if (compañia==1592 &&  Equals(dt.Rows[i]["codigo_canal"].ToString(), "1241"))
-                {
-                    //autoservicios
-                    PItemN1.Items.Add(PItemN2_reportQuiebres3M);
-                    PItemN1.Items.Add(PItemN2_reportFotografico);
-                    break;
-                }
-
-                //Se Agrega el link para Cliente Cementos Lima Canal Progresol
-                if (compañia == 1560 && Equals(dt.Rows[i]["codigo_canal"].ToString(), "1001"))
-                {
-                    //Progresol
-                    
-                   // PItemN1.Items.Add(PItemN2_reportFotografico);
-                    PItemN1.Items.Add(PItemN2_reporte_Precios_Cementos);// Carlos Marin 23/11/2011
-                    PItemN1.Items.Add(PItemN2_reporte_Ventas_Cementos);// Carlos Marin 23/11/2011
-                    PItemN1.Items.Add(PItemN2_reporte_Fachada_Cementos);// Carlos Marin 23/11/2011
-                    PItemN1.Items.Add(PItemN2_reporte_Inflable_Cementos);// Carlos Marin 23/11/2011
-                    PItemN1.Items.Add(PItemN2_reporte_Competencia_Cementos);// Carlos Marin 23/11/2011
-                    break;
-                }
-
-                if (compañia == 1561 && Equals(dt.Rows[i]["codigo_canal"].ToString(), "1000"))
-                {
-                    //autoservicios
-                    PItemN1.Items.Add(PItemN2_Rpt_SegIngreC);
-                    //PItemN1.Items.Add(PItemN2_reportFotografico);
-                    PItemN1.Items.Add(PItemN2_reporte_Fotografico_New);//Pablo Salas A. 21/07/2012
-                    PItemN1.Items.Add(PItemN2_reportePresencia);//pSalas . 05/10/2011 Reporte Presencia
-                    PItemN1.Items.Add(PItemN2_reportePresenciaConsolidado);//jGonzales . 03/11/2011 Reporte Presencia
-                    PItemN1.Items.Add(PItemN2_reporte_presencia_DT);//cmarin . 29/2/2012
-                    PItemN1.Items.Add(PItemN2_reporte_presencia_IT);//cmarin . 12/3/2012
-                    PItemN1.Items.Add(PItemN2_reporte_presencia_BODEGA); //cmarin . 17/4/2012
-                    PItemN1.Items.Add(PItemN2_reporte_presencia_DT_pop);//Destrada 27/04/2012
-                    PItemN1.Items.Add(PItemN2_reporte_promocion_DT);//Destrada 27/04/2012
-
-                    break;
-                }
-
-                if (compañia == 1572 && Equals(dt.Rows[i]["codigo_canal"].ToString(), "1002") )
-                {
-                    //TRADICIONAL SF
-
-                    PItemN1.Items.Add(PItemN2_reportFotografico);
-                    PItemN1.Items.Add(PItemN2_reportSegementacion);
-                    PItemN1.Items.Add(PItemN2_reportRptSegementacion);
-                    PItemN1.Items.Add(PItemN2_SegNov);
-                    PItemN1.Items.Add(PItemN2_Rpt_SegIngre);
-                    PItemN1.Items.Add(PItemN2_reportPrecioSF);
-                    PItemN1.Items.Add(PItemN2_reportVentas);
-                    PItemN1.Items.Add(PItemN2_reportIncidencias);
-                    PItemN1.Items.Add(PItemN2_reporteIncioFIn);
-                    PItemN1.Items.Add(PItemN2_reporte_Levantami);//Se Agrega Reporte de Status de Levantamiento Info AAVV
-                                                                 //Ing. CarlosH 24/11/2011   
-                }
-                if (compañia == 1572 && Equals(dt.Rows[i]["codigo_canal"].ToString(), "1003"))
-                {
-
-                    //PARA SAN FERNANDO CANAL MODERNO - Por: Pablo - Fecha:02/08/2011 - Resumen:modulos para sanfernando moderno
-                    PItemN1.Items.Add(PItemN2_reporteStockIngresoPorDia);
-                    PItemN1.Items.Add(PItemN2_reportePrecioSFM);
-                    //PItemN1.Items.Add(PItemN2_reporteCompetenciaFM);
-                    PItemN1.Items.Add(PItemN2_reporteCompetenciaV2_SFM);
-                    PItemN1.Items.Add(PItemN2_reporteImpulsoFM);
-                    PItemN1.Items.Add(PItemN2_reporte_Spor_SF_M);
-                    
-                    //PItemN1.Items.Add(PItemN2_reporteStock_Seguimiento_SFM);
-
-                    //////////*************SAN FERNANDO************//////////
-                    //////////**********CANAL TRADICIONAL************//////////
-
-                    PItemN1.Items.Add(PItemN2_reporte_SF_Tra_ActDatos); //Add 10/01/2012.  pSalas - Tradicional
-                    PItemN1.Items.Add(PItemN2_reporte_SF_Tra_Disponibilidad); //Add 10/01/2012.  pSalas - Tradicional
-                    PItemN1.Items.Add(PItemN2_reporte_SF_Tra_ExaTdaConsolidado);//Add 16/01/2012.  pSalas - Tradicional
-                }
-
-                if (compañia == 1609 && Equals(dt.Rows[i]["codigo_canal"].ToString(), "2005"))
-                {
-
-                    //PARA MASISA CANAL ESPECIALIZADO - Por: Joseph Gonzales - Fecha:04/10/2011 - Resumen:modulos masisa
-                    PItemN1.Items.Add(PItemN2_reporte_Venta_Masisa);
-                    PItemN1.Items.Add(PItemN2_reporte_Fotografico_Masisa);
-                }
+                // Obtener los Canales por Campañia
+                dt = Get_Cliente.Get_ObtenerCanalesxCliente(compañia);
             }
-            RadPanelBar_menu.Items.Add(PItemN1);
+            catch (Exception ex) {
+                messages = "Ocurrio un Error: " + ex.ToString();
+            }
+
+            // Verificar que no hayan Errores
+            if (messages.Equals("")) {
+                
+                string sUser = this.Session["sUser"].ToString();
+
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    if (compañia == 1562 && Equals(dt.Rows[i]["codigo_canal"].ToString(), "1000"))
+                    {
+
+                        //mayoristas
+                        PItemN1.Items.Add(PItemN2_reportCompetencia);
+                        PItemN1.Items.Add(PItemN2_reportExhibicion);
+                        PItemN1.Items.Add(PItemN2_reportFotografico);
+                        PItemN1.Items.Add(PItemN2_reportLayout);
+                        PItemN1.Items.Add(PItemN2_reportQuiebre);
+                        PItemN1.Items.Add(PItemN2_reportStock);
+                        PItemN1.Items.Add(PItemN2_reportSOD);
+                        PItemN1.Items.Add(PItemN2_reportPrecio);
+                        PItemN1.Items.Add(PItemN2_LevantamientoPublicacion);
+                        PItemN1.Items.Add(PItemN2_LevantamientoExhImpul);
+                        PItemN1.Items.Add(PItemN2_LevantamientoMaterialPOP);
+                        PItemN1.Items.Add(PItemN2_Rpt_SegIngre);
+                        PItemN1.Items.Add(PItemN2_OpeDigitacion);
+
+                        break;
+                    }
+                    if (compañia == 1562 && Equals(dt.Rows[i]["codigo_canal"].ToString(), "1023"))
+                    {
+                        //minoristas
+
+                        PItemN1.Items.Add(PItemN2_reportCompetencia);
+                        PItemN1.Items.Add(PItemN2_reportFotografico);
+                        PItemN1.Items.Add(PItemN2_reportExhibicion);
+                        PItemN1.Items.Add(PItemN2_reportLayout);
+                        PItemN1.Items.Add(PItemN2_reportStock);
+                        PItemN1.Items.Add(PItemN2_reportSOD);
+                        PItemN1.Items.Add(PItemN2_reportPrecio);
+                        PItemN1.Items.Add(PItemN2_Rpt_SegIngre);
+                        break;
+                    }
+                    if (compañia == 1562 && Equals(dt.Rows[i]["codigo_canal"].ToString(), "1241"))
+                    {
+                        //autoservicios
+
+                        PItemN1.Items.Add(PItemN2_reportCompetencia);
+                        PItemN1.Items.Add(PItemN2_reportFotografico);
+                        PItemN1.Items.Add(PItemN2_reportQuiebre);
+                        PItemN1.Items.Add(PItemN2_reportLayout);
+                        PItemN1.Items.Add(PItemN2_reportExhibicion);
+
+                        PItemN1.Items.Add(PItemN2_reportPrecio);
+
+                        PItemN1.Items.Add(PItemN2_SegNov);
+                        PItemN1.Items.Add(PItemN2_LevantamientoPublicacion);
+                        PItemN1.Items.Add(PItemN2_LevantamientoExhImpul);
+                        PItemN1.Items.Add(PItemN2_LevantamientoMaterialPOP);
+                        PItemN1.Items.Add(PItemN2_Rpt_SegIngre);
+
+                        break;
+                    }
+                    if (compañia == 1592 && Equals(dt.Rows[i]["codigo_canal"].ToString(), "1241"))
+                    {
+                        //autoservicios
+                        PItemN1.Items.Add(PItemN2_reportQuiebres3M);
+                        PItemN1.Items.Add(PItemN2_reportFotografico);
+                        break;
+                    }
+
+                    //Se Agrega el link para Cliente Cementos Lima Canal Progresol
+                    if (compañia == 1560 && Equals(dt.Rows[i]["codigo_canal"].ToString(), "1001"))
+                    {
+                        //Progresol
+
+                        // PItemN1.Items.Add(PItemN2_reportFotografico);
+                        PItemN1.Items.Add(PItemN2_reporte_Precios_Cementos);// Carlos Marin 23/11/2011
+                        PItemN1.Items.Add(PItemN2_reporte_Ventas_Cementos);// Carlos Marin 23/11/2011
+                        PItemN1.Items.Add(PItemN2_reporte_Fachada_Cementos);// Carlos Marin 23/11/2011
+                        PItemN1.Items.Add(PItemN2_reporte_Inflable_Cementos);// Carlos Marin 23/11/2011
+                        PItemN1.Items.Add(PItemN2_reporte_Competencia_Cementos);// Carlos Marin 23/11/2011
+                        break;
+                    }
+
+                    if (compañia == 1561 && Equals(dt.Rows[i]["codigo_canal"].ToString(), "1000"))
+                    {
+                        //autoservicios
+                        PItemN1.Items.Add(PItemN2_Rpt_SegIngreC);
+                        //PItemN1.Items.Add(PItemN2_reportFotografico);
+                        PItemN1.Items.Add(PItemN2_reporte_Fotografico_New);//Pablo Salas A. 21/07/2012
+                        PItemN1.Items.Add(PItemN2_reportePresencia);//pSalas . 05/10/2011 Reporte Presencia
+                        PItemN1.Items.Add(PItemN2_reportePresenciaConsolidado);//jGonzales . 03/11/2011 Reporte Presencia
+                        PItemN1.Items.Add(PItemN2_reporte_presencia_DT);//cmarin . 29/2/2012
+                        PItemN1.Items.Add(PItemN2_reporte_presencia_IT);//cmarin . 12/3/2012
+                        PItemN1.Items.Add(PItemN2_reporte_presencia_BODEGA); //cmarin . 17/4/2012
+                        PItemN1.Items.Add(PItemN2_reporte_presencia_DT_pop);//Destrada 27/04/2012
+                        PItemN1.Items.Add(PItemN2_reporte_promocion_DT);//Destrada 27/04/2012
+
+                        break;
+                    }
+
+                    if (compañia == 1572 && Equals(dt.Rows[i]["codigo_canal"].ToString(), "1002"))
+                    {
+                        //TRADICIONAL SF
+
+                        PItemN1.Items.Add(PItemN2_reportFotografico);
+                        PItemN1.Items.Add(PItemN2_reportSegementacion);
+                        PItemN1.Items.Add(PItemN2_reportRptSegementacion);
+                        PItemN1.Items.Add(PItemN2_SegNov);
+                        PItemN1.Items.Add(PItemN2_Rpt_SegIngre);
+                        PItemN1.Items.Add(PItemN2_reportPrecioSF);
+                        PItemN1.Items.Add(PItemN2_reportVentas);
+                        PItemN1.Items.Add(PItemN2_reportIncidencias);
+                        PItemN1.Items.Add(PItemN2_reporteIncioFIn);
+                        PItemN1.Items.Add(PItemN2_reporte_Levantami);//Se Agrega Reporte de Status de Levantamiento Info AAVV
+                        //Ing. CarlosH 24/11/2011   
+                    }
+                    if (compañia == 1572 && Equals(dt.Rows[i]["codigo_canal"].ToString(), "1003"))
+                    {
+
+                        //PARA SAN FERNANDO CANAL MODERNO - Por: Pablo - Fecha:02/08/2011 - Resumen:modulos para sanfernando moderno
+                        PItemN1.Items.Add(PItemN2_reporteStockIngresoPorDia);
+                        PItemN1.Items.Add(PItemN2_reportePrecioSFM);
+                        //PItemN1.Items.Add(PItemN2_reporteCompetenciaFM);
+                        PItemN1.Items.Add(PItemN2_reporteCompetenciaV2_SFM);
+                        PItemN1.Items.Add(PItemN2_reporteImpulsoFM);
+                        PItemN1.Items.Add(PItemN2_reporte_Spor_SF_M);
+
+                        //PItemN1.Items.Add(PItemN2_reporteStock_Seguimiento_SFM);
+
+                        //////////*************SAN FERNANDO************//////////
+                        //////////**********CANAL TRADICIONAL************//////////
+
+                        PItemN1.Items.Add(PItemN2_reporte_SF_Tra_ActDatos); //Add 10/01/2012.  pSalas - Tradicional
+                        PItemN1.Items.Add(PItemN2_reporte_SF_Tra_Disponibilidad); //Add 10/01/2012.  pSalas - Tradicional
+                        PItemN1.Items.Add(PItemN2_reporte_SF_Tra_ExaTdaConsolidado);//Add 16/01/2012.  pSalas - Tradicional
+                    }
+
+                    if (compañia == 1609 && Equals(dt.Rows[i]["codigo_canal"].ToString(), "2005"))
+                    {
+
+                        //PARA MASISA CANAL ESPECIALIZADO - Por: Joseph Gonzales - Fecha:04/10/2011 - Resumen:modulos masisa
+                        PItemN1.Items.Add(PItemN2_reporte_Venta_Masisa);
+                        PItemN1.Items.Add(PItemN2_reporte_Fotografico_Masisa);
+                    }
+                }
+                RadPanelBar_menu.Items.Add(PItemN1);
+            }
+
+
         }
     }
 }

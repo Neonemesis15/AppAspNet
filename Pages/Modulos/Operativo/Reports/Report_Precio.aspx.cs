@@ -15,9 +15,16 @@ using System.Collections.Generic;
 
 namespace SIGE.Pages.Modulos.Operativo.Reports
 {
+    /// <summary>
+    /// Report_Precio.aspx.cs
+    /// Developed by:
+    /// - Ditmar Estrada Bernuy (DEB)
+    /// Changes:
+    /// - 2018-12-17 Pablo Salas Alvarez (PSA) Refactoring Button 'Buscar'
+    /// </summary>
     public partial class Report_Precio : System.Web.UI.Page
     {
-        #region Declaracion de Campañas
+        #region Declaracion de Variables
         private int compañia;
         private string pais;
         private static string static_channel;
@@ -33,51 +40,121 @@ namespace SIGE.Pages.Modulos.Operativo.Reports
         string sidmarca;
         string scodproducto;
         string sidproductSubcategory;
+        // Variable String para guardar los Errores
+        String message = "";
         ////////////
-
         #endregion
+
+        #region Servicios Web
+        Facade_Proceso_Operativo.Facade_Proceso_Operativo obj_Facade_Proceso_Operativo = new SIGE.Facade_Proceso_Operativo.Facade_Proceso_Operativo();
+        Facade_Procesos_Administrativos.Facade_Procesos_Administrativos Facd_ProcAdmin = new Facade_Procesos_Administrativos.Facade_Procesos_Administrativos();
+        #endregion
+
+        #region Invocacion a la Capa Business del Framework
+        OPE_REPORTE_PRECIO oBLOpeReportePrecio = new OPE_REPORTE_PRECIO();
+        #endregion
+
+        /// <summary>
+        /// Obtener el Mensaje de Error
+        /// </summary>
+        /// <returns></returns>
+        public String getMessage() {
+            return message;
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack)
-            {
-                //CargarCombo_Channel();
-                //Cargarcanales();
-                GetCanalesByUsuario("1");
+            if (!Page.IsPostBack){
+                
+                fncLoginDummy();
+
+                String idCountry =
+                    this.Session["scountry"].ToString();
+                String idCompany =
+                    this.Session["companyid"].ToString();
+
+                orqLoadDropDownListCanal(idCountry, idCompany);
+
+                if (!message.Equals("")) {
+                    lblmensaje.ForeColor = System.Drawing.Color.Red;
+                    lblmensaje.Text = "Ocurrió un Error: " + getMessage();
+                }
+
+                /*CargarCombo_Channel();
+
+                if (message.Equals("")){
+                    Cargarcanales();
+                }
+                else {
+                    lblmensaje.ForeColor = System.Drawing.Color.Red;
+                    lblmensaje.Text = "Ocurrió un Error: " + getMessage();
+                }*/
+                
+
+                //GetCanalesByUsuario("1");
             }
             //ScriptManager.RegisterStartupScript(this, typeof(Page), "attachevent", "AttachHoverEvent();", true);
         }
 
-        #region Maestros
-        #region Canal
-        protected void Cargarcanales()
+        #region Filtros
+        /// <summary>
+        /// Cargar Combo de Canal para los Filtros del Reporte 
+        /// de Precios
+        /// </summary>
+        protected void CargarCombo_Channel()
         {
-            DataTable dt = null;
-            Conexion Ocoon = new Conexion();
+            DataTable dt = new DataTable();
+            //Conexion Ocoon = new Conexion();
 
-            compañia = Convert.ToInt32(this.Session["companyid"]);
-            pais = this.Session["scountry"].ToString();
+            //compañia = Convert.ToInt32(this.Session["companyid"]);
+            //pais = this.Session["scountry"].ToString();
 
+            Canales oDCanales = new Canales();
+            try{
+                //dt = Ocoon.ejecutarDataTable(
+                //    "UP_WEBXPLORA_OPE_COMBO_CHANNEL", 
+                //    this.Session["scountry"].ToString(), 
+                //    Convert.ToInt32(this.Session["companyid"]));
 
-            dt = Ocoon.ejecutarDataTable("UP_WEBXPLORA_OPE_COMBO_CHANNEL", pais, compañia);
-            if (dt.Rows.Count > 0)
+                dt = oDCanales.getCanalesByIdCountryAndIdCompany(
+                    this.Session["scountry"].ToString(),
+                    this.Session["companyid"].ToString()
+                    );
+
+            }catch (Exception ex){
+                message = ex.ToString();
+            }
+
+            // Verificar que no existan errores
+            if (message.Equals(""))
             {
-                ddlCanal.DataSource = dt;
-                ddlCanal.DataValueField = "cod_Channel";
-                ddlCanal.DataTextField = "Channel_Name";
-                ddlCanal.DataBind();
-                ddlCanal.Items.Insert(0, new ListItem("---Seleccione---", "0"));
-
-
-                ddlCanalCargaMasiva.DataSource = dt;
-                ddlCanalCargaMasiva.DataValueField = "cod_Channel";
-                ddlCanalCargaMasiva.DataTextField = "Channel_Name";
-                ddlCanalCargaMasiva.DataBind();
-                ddlCanalCargaMasiva.Items.Insert(0, new ListItem("---Seleccione---", "0"));
-
+                // Verificar que Existan Registros
+                if (dt.Rows.Count > 0)
+                {
+                    cmbcanal.DataSource = dt;
+                    cmbcanal.DataValueField = "cod_Channel";
+                    cmbcanal.DataTextField = "channel_name";
+                    cmbcanal.DataBind();
+                    cmbcanal.Items.Insert(0, new ListItem("---Seleccione---", "0"));
+                }
+                else
+                {
+                    lblmensaje.ForeColor = System.Drawing.Color.Red;
+                    lblmensaje.Text = "No se Encontraron Canales para el País y la Compañia indicada, ¡Por favor verifique...!";
+                }
+            }
+            else
+            {
+                lblmensaje.ForeColor = System.Drawing.Color.Red;
+                lblmensaje.Text = "Ocurrió un Error: " + getMessage();
             }
 
         }
+        /// <summary>
+        /// Obtener Equipos (Planning) por idCanal (Filtros)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void cmbcanal_SelectedIndexChanged(object sender, EventArgs e)
         {
             DataTable dt = null;
@@ -85,7 +162,16 @@ namespace SIGE.Pages.Modulos.Operativo.Reports
 
             static_channel = cmbcanal.SelectedValue;
             compañia = Convert.ToInt32(this.Session["companyid"]);
-            dt = Ocoon.ejecutarDataTable("UP_WEBXPLORA_OPE_COMBO_PLANNING", static_channel, compañia);
+            try
+            {
+                dt = Ocoon.ejecutarDataTable("UP_WEBXPLORA_OPE_COMBO_PLANNING", static_channel, compañia);
+            }
+            catch (Exception ex)
+            {
+                message = ex.ToString();
+            }
+
+            #region Limpiar Filtros
 
             cmbplanning.Items.Clear();
             cmbcategoria_producto.Items.Clear();
@@ -107,22 +193,679 @@ namespace SIGE.Pages.Modulos.Operativo.Reports
             cmbPuntoDeVenta.Items.Clear();
             cmbPuntoDeVenta.Enabled = false;
 
-            if (dt.Rows.Count > 0)
+            #endregion
+
+            // Verificar que no existan errores
+            if (message.Equals(""))
             {
-                cmbplanning.DataSource = dt;
-                cmbplanning.DataValueField = "id_planning";
-                cmbplanning.DataTextField = "Planning_Name";
-                cmbplanning.DataBind();
-                cmbplanning.Items.Insert(0, new ListItem("---Seleccione---", "0"));
-                cmbplanning.Enabled = true;
+                if (dt.Rows.Count > 0)
+                {
+                    cmbplanning.DataSource = dt;
+                    cmbplanning.DataValueField = "id_planning";
+                    cmbplanning.DataTextField = "Planning_Name";
+                    cmbplanning.DataBind();
+                    cmbplanning.Items.Insert(0, new ListItem("---Seleccione---", "0"));
+                    cmbplanning.Enabled = true;
+                }
+                else
+                {
+                    lblmensaje.ForeColor = System.Drawing.Color.Red;
+                    lblmensaje.Text = "No se Encontraron Planning para el Canal y la Compañia indicada (Filtros), ¡Por favor verifique...!";
+                }
+
+                #region Validación para el Canal 1593
+                if (cmbcanal.SelectedValue == "1593")
+                {
+                    lblmensaje.Visible = true;
+                    lblmensaje.Text = "No Hay registros asociados para el canal seleccionado.";
+                    lblmensaje.ForeColor = System.Drawing.Color.Red;
+                }
+                #endregion
             }
-            if (cmbcanal.SelectedValue == "1593")
+            else
             {
-                lblmensaje.Visible = true;
-                lblmensaje.Text = "No Hay registros asociados para el canal seleccionado.";
                 lblmensaje.ForeColor = System.Drawing.Color.Red;
+                lblmensaje.Text = "Ocurrió un Error: " + getMessage();
+            }
+        }       
+        /// <summary>
+        /// Llenar Personal por idPlanning (En Cadena también llena Oficina, NodoComercial y Categoría)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void cmbplanning_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            DataTable dt = null;
+
+            string sidplanning = cmbplanning.SelectedValue;
+
+            if (cmbplanning.SelectedIndex != 0)
+            {
+                try
+                {
+                    Conexion Ocoon = new Conexion();
+                    dt = Ocoon.ejecutarDataTable("UP_WEBXPLORA_OPE_COMBO_PERSON", sidplanning);
+                }
+                catch (Exception ex)
+                {
+                    message = ex.ToString();
+                }
+
+                #region Comentada
+                /*
+                // Verificar que no existan errores
+                if (message.Equals(""))
+                {
+                    // Verificar que Existan Registros
+                    if (dt.Rows.Count > 0){
+                        cmbcanal.DataSource = dt;
+                        cmbcanal.DataValueField = "cod_Channel";
+                        cmbcanal.DataTextField = "Channel_Name";
+                        cmbcanal.DataBind();
+                        cmbcanal.Items.Insert(0, new ListItem("---Seleccione---", "0"));
+                    }
+                    else {
+                        lblmensaje.ForeColor = System.Drawing.Color.Red;
+                        lblmensaje.Text = "No se Encontraron Canales para el País y la Compañia indicada, ¡Por favor verifique...!";   
+                    }
+                }
+                else
+                {
+                    lblmensaje.ForeColor = System.Drawing.Color.Red;
+                    lblmensaje.Text = "Ocurrió un Error: " + getMessage();
+                }
+                */
+                #endregion
+
+                #region Filtrar y Limpiar Combos
+                cmbcategoria_producto.Items.Clear();
+                cmbmarca.Items.Clear();
+                cmbmarca.Enabled = false;
+                cmbsku.Items.Clear();
+                cmbsku.Enabled = false;
+                cmbperson.Items.Clear();
+                cmbperson.Enabled = false;
+                #endregion
+
+                // Verificar que no existan errores
+                if (message.Equals(""))
+                {
+                    if (dt.Rows.Count > 0)
+                    {
+                        cmbperson.DataSource = dt;
+                        cmbperson.DataValueField = "Person_id";
+                        cmbperson.DataTextField = "Person_NameComplet";
+                        cmbperson.DataBind();
+                        cmbperson.Items.Insert(0, new ListItem("---Todos---", "0"));
+                        cmbperson.Enabled = true;
+
+                        //------llamado al metodo cargar categoria de producto
+
+                        cargarCombo_Oficina();
+
+                        if (message.Equals(""))
+                        {
+                            cargarCombo_NodeComercial(sidplanning);
+                        }
+                        else
+                        {
+                            lblmensaje.ForeColor = System.Drawing.Color.Red;
+                            lblmensaje.Text = "Ocurrio un Error:" + getMessage();
+                        }
+
+                        if (message.Equals(""))
+                        {
+                            cargarCombo_CategoriaDeproducto(sidplanning);
+                        }
+                        else
+                        {
+                            lblmensaje.ForeColor = System.Drawing.Color.Red;
+                            lblmensaje.Text = "Ocurrio un Error:" + getMessage();
+                        }
+                        //----------------------------------------------------
+
+                    }
+                    else
+                    {
+                        lblmensaje.ForeColor = System.Drawing.Color.Red;
+                        lblmensaje.Text = "No se Encontró Personal para el Planning indicada, ¡Por favor verifique...!";
+                    }
+                }
+                else
+                {
+                    lblmensaje.ForeColor = System.Drawing.Color.Red;
+                    lblmensaje.Text = "Ocurrió un Error: " + getMessage();
+                }
+            }
+            else
+            {
+                cmbcategoria_producto.Items.Clear();
+                cmbcategoria_producto.Enabled = false;
+                cmbmarca.Items.Clear();
+                cmbmarca.Enabled = false;
+                cmbsku.Items.Clear();
+                cmbsku.Enabled = false;
+                cmbperson.Items.Clear();
+                cmbperson.Enabled = false;
+                cmbOficina.Items.Clear();
+                cmbOficina.Enabled = false;
+                cmbNodeComercial.Items.Clear();
+                cmbNodeComercial.Enabled = false;
+                cmbPuntoDeVenta.Items.Clear();
+                cmbPuntoDeVenta.Enabled = false;
             }
         }
+        /// <summary>
+        /// Obtener Oficinas por idCompañia
+        /// </summary>
+        protected void cargarCombo_Oficina()
+        {
+
+            //if (this.Session["companyid"] != null)
+            //{
+
+            compañia = Convert.ToInt32(this.Session["companyid"]);
+
+            DataTable dtofi = new DataTable();
+            try
+            {
+                Conexion Ocoon = new Conexion();
+                dtofi = Ocoon.ejecutarDataTable("UP_WEBXPLORA_AD_OBTENEROFICINAS", compañia);
+            }
+            catch (Exception ex)
+            {
+                message = ex.ToString();
+            }
+
+            // Verificar que no existan errores
+            if (message.Equals(""))
+            {
+                if (dtofi.Rows.Count > 0)
+                {
+                    cmbOficina.Enabled = true;
+                    cmbOficina.DataSource = dtofi;
+                    cmbOficina.DataTextField = "Name_Oficina";
+                    cmbOficina.DataValueField = "cod_Oficina";
+                    cmbOficina.DataBind();
+
+                    cmbOficina.Items.Insert(0, new ListItem("---Todas---", "0"));
+                }
+                else
+                {
+                    lblmensaje.ForeColor = System.Drawing.Color.Red;
+                    lblmensaje.Text = "No se Encontraron Oficinas para la Compañia indicada, ¡Por favor verifique...!";
+                }
+            }
+            else
+            {
+                lblmensaje.ForeColor = System.Drawing.Color.Red;
+                lblmensaje.Text = "Ocurrió un Error: " + getMessage();
+            }
+
+            //}
+            //else
+            //{
+            //    Response.Redirect("~/err_mensaje_seccion.aspx", true);
+            //}
+
+        }
+        /// <summary>
+        /// Obtener Nodos Comerciales por idPlanning
+        /// </summary>
+        /// <param name="sid_planning"></param>
+        protected void cargarCombo_NodeComercial(string sid_planning)
+        {
+            cmbNodeComercial.Items.Clear();
+            Facade_Procesos_Administrativos.ENodeComercial[] oListNodeComercial = null;
+            try{
+                oListNodeComercial = Facd_ProcAdmin.Get_NodeComercialBy_idPlanning(cmbplanning.SelectedValue);
+            }
+            catch (Exception ex)
+            {
+                message = ex.ToString();
+            }
+
+            // Verificar que no existan errores
+            if (message.Equals(""))
+            {
+
+                if (oListNodeComercial.Length > 0)
+                {
+                    cmbNodeComercial.Enabled = true;
+                    cmbNodeComercial.DataSource = oListNodeComercial;
+                    cmbNodeComercial.DataTextField = "commercialNodeName";
+                    cmbNodeComercial.DataValueField = "NodeCommercial";
+                    cmbNodeComercial.DataBind();
+                    cmbNodeComercial.Items.Insert(0, new ListItem("---Todas---", "0"));
+                }
+                else
+                {
+                    lblmensaje.ForeColor = System.Drawing.Color.Red;
+                    lblmensaje.Text = "No se Encontraron Nodos Comerciales para el Planning Indicado, ¡Por favor verifique...!";
+                }
+            }
+            else
+            {
+                lblmensaje.ForeColor = System.Drawing.Color.Red;
+                lblmensaje.Text = "Ocurrió un Error: " + getMessage();
+            }
+        }
+        /// <summary>
+        /// Cargar Categorias por IdPlanning
+        /// </summary>
+        /// <param name="sidplanning"></param>
+        protected void cargarCombo_CategoriaDeproducto(string sidplanning)
+        {
+            DataTable dt = null;
+            
+            try{
+                Conexion Ocoon = new Conexion();
+                dt = Ocoon.ejecutarDataTable("UP_WEBXPLORA_OPE_COMBO_CATEGORIA_DE_PRODUCTO_REPORT_PRECIO", sidplanning);
+            }catch (Exception ex){
+                message = ex.ToString();
+            }
+
+            cmbcategoria_producto.Enabled = false;
+
+            // Verificar que no existan errores
+            if (message.Equals("")){
+                if (dt.Rows.Count > 0)
+                {
+
+                    cmbcategoria_producto.DataSource = dt;
+                    cmbcategoria_producto.DataValueField = "id_ProductCategory";
+                    cmbcategoria_producto.DataTextField = "Product_Category";
+                    cmbcategoria_producto.DataBind();
+                    cmbcategoria_producto.Items.Insert(0, new ListItem("---Todas---", "0"));
+                    cmbcategoria_producto.Enabled = true;
+
+                }
+                else
+                {
+                    lblmensaje.ForeColor = System.Drawing.Color.Red;
+                    lblmensaje.Text = "No se Encontraron Categorías para el Planning indicado, ¡Por favor verifique...!";  
+                }
+            }
+            else {
+                lblmensaje.ForeColor = System.Drawing.Color.Red;
+                lblmensaje.Text = "Ocurrió un Error: " + getMessage();
+            }
+        }
+        /// <summary>
+        /// Cargar Puntos de Venta por idPlanning y idOficina
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void cmbOficina_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Conexion Ocoon = new Conexion();
+
+            cmbPuntoDeVenta.Items.Clear();
+            cmbPuntoDeVenta.Enabled = false;
+            
+            // Si existen Planning y Oficina Seleccionados
+            if (cmbplanning.SelectedIndex > 0 && cmbOficina.SelectedIndex > 0)
+            {
+                DataTable dtPdv = new DataTable();
+                try
+                {
+                    dtPdv = Ocoon.ejecutarDataTable(
+                        "UP_WEBXPLORA_AD_OBTENER_PUNTODEVENTA_BY_idPlanning_AND_codOficina",
+                        cmbplanning.SelectedValue,
+                        Convert.ToInt32(cmbOficina.SelectedValue));
+                }
+                catch (Exception ex) {
+                    message = ex.ToString();
+                }
+
+                if (message.Equals(""))
+                {
+                    if (dtPdv.Rows.Count > 0)
+                    {
+                        cmbPuntoDeVenta.DataSource = dtPdv;
+                        cmbPuntoDeVenta.DataValueField = "ClientPDV_Code";
+                        cmbPuntoDeVenta.DataTextField = "pdv_Name";
+                        cmbPuntoDeVenta.DataBind();
+                        cmbPuntoDeVenta.Items.Insert(0, new ListItem("---Todos---", "0"));
+                        cmbPuntoDeVenta.Enabled = true;
+                    }
+                    else {
+                        lblmensaje.ForeColor = System.Drawing.Color.Red;
+                        lblmensaje.Text = "No se Encontraron Puntos de Venta para el Planning y la Oficina indicadas, ¡Por favor verifique...!";   
+                    }
+                }
+                else {
+                    lblmensaje.ForeColor = System.Drawing.Color.Red;
+                    lblmensaje.Text = "Ocurrió un Error: " + getMessage();
+                }
+
+                DataTable dtNodeCom = new DataTable();
+                try
+                {
+                    dtNodeCom = Ocoon.ejecutarDataTable(
+                        "UP_WEBXPLORA_AD_OBTENER_NODECOMERCIAL_BY_idPlanning_and_codOficina",
+                        cmbplanning.SelectedValue,
+                        Convert.ToInt32(cmbOficina.SelectedValue));
+                }
+                catch (Exception ex) {
+                    message = ex.ToString();
+                }
+
+                // Verificar que no existan errores
+                if (message.Equals("")){
+                    if (dtNodeCom.Rows.Count > 0)
+                    {
+                        cmbNodeComercial.Enabled = true;
+                        cmbNodeComercial.Items.Clear();
+                        cmbNodeComercial.DataSource = dtNodeCom;
+                        cmbNodeComercial.DataTextField = "commercialNodeName";
+                        cmbNodeComercial.DataValueField = "id_NodeCommercial";
+                        cmbNodeComercial.DataBind();
+                        cmbNodeComercial.Items.Insert(0, new ListItem("---Todas---", "0"));
+                    }
+                    else
+                    {
+                        cmbNodeComercial.Enabled = false;
+                        cmbNodeComercial.Items.Clear();
+                        lblmensaje.ForeColor = System.Drawing.Color.Red;
+                        lblmensaje.Text = "No se Encontraron Nodos Comerciales para el Planning y la Oficina indicadas, ¡Por favor verifique...!";  
+                    }
+                } 
+                else {
+                    lblmensaje.ForeColor = System.Drawing.Color.Red;
+                    lblmensaje.Text = "Ocurrió un Error: " + getMessage();
+                }
+            }
+
+            // Si solo Existen Planning Seleccionado
+            if (cmbOficina.SelectedIndex == 0 && cmbplanning.SelectedIndex > 0)
+            {
+                cargarCombo_NodeComercial(cmbplanning.SelectedValue);
+            }
+            
+        }
+        /// <summary>
+        /// Obtener Puntos de Venta por IdPlanning y IdNodoComercial
+        /// Obtener Puntos de Venta por IdPlanning y IdOficina
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void cmbNodeComercial_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            Conexion Ocoon = new Conexion();
+            // Si se ha seleccionado Planning y NodoComercial
+            if (cmbplanning.SelectedIndex > 0 && cmbNodeComercial.SelectedIndex > 0){
+                DataTable dtPdv = new DataTable();
+                try
+                {
+                    dtPdv = Ocoon.ejecutarDataTable(
+                         "UP_WEBXPLORA_AD_OBTENER_PUNTODEVENTA_BY_idPlanning_and_idNodeComercial",
+                         cmbplanning.SelectedValue,
+                         Convert.ToInt32(cmbNodeComercial.SelectedValue));
+                }
+                catch (Exception ex) {
+                    message = ex.ToString();
+                }
+
+                if (message.Equals("")){
+                    if (dtPdv.Rows.Count > 0)
+                    {
+                        cmbPuntoDeVenta.DataSource = dtPdv;
+                        cmbPuntoDeVenta.DataValueField = "ClientPDV_Code";
+                        cmbPuntoDeVenta.DataTextField = "pdv_Name";
+                        cmbPuntoDeVenta.DataBind();
+                        cmbPuntoDeVenta.Items.Insert(0, new ListItem("---Todos---", "0"));
+                        cmbPuntoDeVenta.Enabled = true;
+                    }
+                    else {
+                        lblmensaje.ForeColor = System.Drawing.Color.Red;
+                        lblmensaje.Text = "No se Encontraron Puntos de Venta para la Campaña, Nodo Comercial indicados, ¡Por favor verifique...!";  
+                    }
+                }else{
+                    lblmensaje.ForeColor = System.Drawing.Color.Red;
+                    lblmensaje.Text = "Ocurrió un Error: " + getMessage();
+                }
+                
+            }
+            
+            // Si no se ha Seleccionado NodoComercial
+            if (cmbNodeComercial.SelectedIndex == 0)
+            {
+
+                DataTable dtPdv = new DataTable();
+                try
+                {
+                    dtPdv = Ocoon.ejecutarDataTable(
+                         "UP_WEBXPLORA_AD_OBTENER_PUNTODEVENTA_BY_idPlanning_AND_codOficina",
+                         cmbplanning.SelectedValue,
+                         Convert.ToInt32(cmbOficina.SelectedValue));
+                }
+                catch (Exception ex) {
+                    message = ex.ToString();
+                }
+                // Verificar que no existan errores
+                if (message.Equals("")){
+                    if (dtPdv.Rows.Count > 0)
+                    {
+                        cmbPuntoDeVenta.DataSource = dtPdv;
+                        cmbPuntoDeVenta.DataValueField = "ClientPDV_Code";
+                        cmbPuntoDeVenta.DataTextField = "pdv_Name";
+                        cmbPuntoDeVenta.DataBind();
+                        cmbPuntoDeVenta.Items.Insert(0, new ListItem("---Todos---", "0"));
+                        cmbPuntoDeVenta.Enabled = true;
+                    }
+                    else {
+                        lblmensaje.ForeColor = System.Drawing.Color.Red;
+                        lblmensaje.Text = "No se Encontraron Puntos de Venta para el Planning y la Oficina indicadas, ¡Por favor verifique...!"; 
+                    }
+                }
+                else {
+                    lblmensaje.ForeColor = System.Drawing.Color.Red;
+                    lblmensaje.Text = "Ocurrió un Error: " + getMessage();
+                }
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void cmbcategoria_producto_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DataTable dt = null;
+            Conexion Ocoon = new Conexion();
+            cmbsubcategoria.Items.Clear();
+            cmbsubcategoria.Enabled = false;
+            //string iischannel = cmbcanal.SelectedValue;
+            //string sidplanning = cmbplanning.SelectedValue;
+            string siproductCategory = cmbcategoria_producto.SelectedValue;
+            
+            try
+            {
+                dt = Ocoon.ejecutarDataTable("UP_WEBXPLORA_OPE_COMBO_MARCA_REPORT_PRECIO", siproductCategory);
+            }
+            catch (Exception ex) {
+                message = ex.ToString();
+            }
+
+            // Verificar que no existan errores
+            if (message.Equals(""))
+            {
+
+                cmbmarca.Items.Clear();
+                cmbmarca.Enabled = false;
+                cmbsku.Items.Clear();
+                cmbsku.Enabled = false;
+
+                if (dt.Rows.Count > 0)
+                {
+                    cmbmarca.DataSource = dt;
+                    cmbmarca.DataValueField = "id_Brand";
+                    cmbmarca.DataTextField = "Name_Brand";
+                    cmbmarca.DataBind();
+                    cmbmarca.Items.Insert(0, new ListItem("---Todas---", "0"));
+                    cmbmarca.Enabled = true;
+
+                    cargarGrilla_Precio();
+                }
+                else {
+                    lblmensaje.ForeColor = System.Drawing.Color.Red;
+                    lblmensaje.Text = "No se Encontraron Marcas para Categoría indicada, ¡Por favor verifique...!";  
+                }
+            }
+            else {
+                lblmensaje.ForeColor = System.Drawing.Color.Red;
+                lblmensaje.Text = "Ocurrió un Error: " + getMessage();
+            }
+
+            
+
+            
+            //Pablo Salas
+            //22/08/2011
+            //se agrega el metodo cargarsubcategorias
+            //cargarsubcategorias(siproductCategory);
+        }
+        
+        #endregion
+
+        #region Crear Registro y Cargar Excel
+        /// <summary>
+        /// Cargar ComboBox para Registrar Reporte de Precios y Carga Masiva de Registro de Precios
+        /// </summary>
+        protected void Cargarcanales()
+        {
+            DataTable dt = null;
+            Conexion Ocoon = new Conexion();
+
+            compañia = Convert.ToInt32(this.Session["companyid"]);
+            pais = this.Session["scountry"].ToString();
+
+            try
+            {
+                dt = Ocoon.ejecutarDataTable(
+                    "UP_WEBXPLORA_OPE_COMBO_CHANNEL", 
+                    pais, 
+                    compañia);
+            }
+            catch (Exception ex)
+            {
+                message = ex.ToString();
+            }
+
+            if (message.Equals(""))
+            {
+                if (dt.Rows.Count > 0)
+                {
+                    // DropDownList para Registrar un nuevo Precio
+                    ddlCanal.DataSource = dt;
+                    ddlCanal.DataValueField = "cod_Channel";
+                    ddlCanal.DataTextField = "Channel_Name";
+                    ddlCanal.DataBind();
+                    ddlCanal.Items.Insert(0, new ListItem("---Seleccione---", "0"));
+
+                    // DropDownList para Realizar Carga Masiva
+                    // de Precios
+                    ddlCanalCargaMasiva.DataSource = dt;
+                    ddlCanalCargaMasiva.DataValueField = "cod_Channel";
+                    ddlCanalCargaMasiva.DataTextField = "Channel_Name";
+                    ddlCanalCargaMasiva.DataBind();
+                    ddlCanalCargaMasiva.Items.Insert(0, new ListItem("---Seleccione---", "0"));
+
+                }
+                else
+                {
+                    lblmensaje.ForeColor = System.Drawing.Color.Red;
+                    lblmensaje.Text = "No se Encontraron Canales para el País y la Compañia indicada (Insertar Registros de Precios), ¡Por favor verifique...!";
+                }
+            }
+            else
+            {
+                lblmensaje.ForeColor = System.Drawing.Color.Red;
+                lblmensaje.Text = "Ocurrió un Error: " + getMessage();
+            }
+
+        }
+
+        /// <summary>
+        /// Cargar todos los DropDownList relacionado a Canales
+        /// </summary>
+        public void orqLoadDropDownListCanal(String idCountry,
+        String idCompany) { 
+            Canales oDCanales = new Canales();
+            
+            DataTable dt =
+                oDCanales.getCanalesByIdCountryAndIdCompanyDummy(
+                    idCountry,
+                    idCompany
+                    );
+            
+            String dataValueField = "cod_channel";
+            String dataTextField = "channel_name";
+            
+            // Cargar DropDownList de Canales para Find
+            fncCargarDropDownListByDataTable(
+                cmbcanal,
+                dt,
+                dataValueField,
+                dataTextField);
+            if (getMessage().Equals("")){
+                // Cargar DropDownList de Canales para Insert
+                fncCargarDropDownListByDataTable(
+                    ddlCanal,
+                    dt,
+                    dataValueField,
+                    dataTextField);
+                if (getMessage().Equals("")){
+                    // Cargar DropDownList de Canales para Export Excel
+                    fncCargarDropDownListByDataTable(
+                        ddlCanalCargaMasiva,
+                        dt,
+                        dataValueField,
+                        dataTextField);
+                }
+            }
+            
+            if (!getMessage().Equals("")) {
+                lblmensaje.ForeColor = System.Drawing.Color.Red;
+                lblmensaje.Text = "Ocurrió un Error: " + getMessage();
+            }
+        }
+
+        
+
+        /// <summary>
+        /// Metodo para cargar DropDownList Pasando DataTable,
+        /// dataValueField y dataTextField
+        /// </summary>
+        /// <param name="ddl"></param>
+        /// <param name="dt"></param>
+        /// <param name="dataValueField"></param>
+        /// <param name="dataTextField"></param>
+        public void fncCargarDropDownListByDataTable(
+        DropDownList ddl, DataTable dt, String dataValueField,
+        String dataTextField) {
+            try
+            {
+                ddl.DataSource = dt;
+                ddl.DataValueField = dataValueField;
+                ddl.DataTextField = dataTextField;
+                ddl.DataBind();
+                ddl.Items.Insert(0, new ListItem("---Seleccione---", "0"));
+            }
+            catch (Exception ex) {
+                message = "Ocurrio un Error al Cargar DropDownList: " 
+                    + ex.Message.ToString();
+            }
+        }
+
+        #endregion
+
+        #region Maestros
+        #region Canal
+
         protected void ddlCanal_SelectedIndexChanged(object sender, EventArgs e)
         {
             DataTable dt = null;
@@ -194,24 +937,6 @@ namespace SIGE.Pages.Modulos.Operativo.Reports
             }
             MopoReporPrecio.Show();
         }
-        protected void CargarCombo_Channel()
-        {
-            DataTable dt = null;
-            Conexion Ocoon = new Conexion();
-
-            compañia = Convert.ToInt32(this.Session["companyid"]);
-            pais = this.Session["scountry"].ToString();
-
-            dt = Ocoon.ejecutarDataTable("UP_WEBXPLORA_OPE_COMBO_CHANNEL", pais, compañia);
-            if (dt.Rows.Count > 0)
-            {
-                cmbcanal.DataSource = dt;
-                cmbcanal.DataValueField = "cod_Channel";
-                cmbcanal.DataTextField = "Channel_Name";
-                cmbcanal.DataBind();
-                cmbcanal.Items.Insert(0, new ListItem("---Seleccione---", "0"));
-            }
-        }
         protected void ddlCanalCargaMasiva_SelectedIndexChanged(object sender, EventArgs e)
         {
             DataTable dt = null;
@@ -235,7 +960,11 @@ namespace SIGE.Pages.Modulos.Operativo.Reports
 
             MopoReporPrecioMasiva.Show();
         }
-        //Psalas 04Jul2016
+        
+        /// <summary>
+        /// Metodo Dummy para cargar Canales
+        /// </summary>
+        /// <param name="codUsuario"></param>
         protected void GetCanalesByUsuario(String codUsuario)
         {
             try
@@ -262,59 +991,6 @@ namespace SIGE.Pages.Modulos.Operativo.Reports
 
         #endregion
         #region Planning
-        protected void cmbplanning_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-            DataTable dt = null;
-            Conexion Ocoon = new Conexion();
-            string sidplanning = cmbplanning.SelectedValue;
-
-            if (cmbplanning.SelectedIndex != 0)
-            {
-                dt = Ocoon.ejecutarDataTable("UP_WEBXPLORA_OPE_COMBO_PERSON", sidplanning);
-
-                cmbcategoria_producto.Items.Clear();
-                cmbmarca.Items.Clear();
-                cmbmarca.Enabled = false;
-                cmbsku.Items.Clear();
-                cmbsku.Enabled = false;
-                cmbperson.Items.Clear();
-                cmbperson.Enabled = false;
-
-                if (dt.Rows.Count > 0)
-                {
-                    cmbperson.DataSource = dt;
-                    cmbperson.DataValueField = "Person_id";
-                    cmbperson.DataTextField = "Person_NameComplet";
-                    cmbperson.DataBind();
-                    cmbperson.Items.Insert(0, new ListItem("---Todos---", "0"));
-                    cmbperson.Enabled = true;
-                }
-
-                //------llamado al metodo cargar categoria de producto
-                cargarCombo_Oficina();
-                cargarCombo_NodeComercial(sidplanning);
-                cargarCombo_CategoriaDeproducto(sidplanning);
-                //----------------------------------------------------
-            }
-            else
-            {
-                cmbcategoria_producto.Items.Clear();
-                cmbcategoria_producto.Enabled = false;
-                cmbmarca.Items.Clear();
-                cmbmarca.Enabled = false;
-                cmbsku.Items.Clear();
-                cmbsku.Enabled = false;
-                cmbperson.Items.Clear();
-                cmbperson.Enabled = false;
-                cmbOficina.Items.Clear();
-                cmbOficina.Enabled = false;
-                cmbNodeComercial.Items.Clear();
-                cmbNodeComercial.Enabled = false;
-                cmbPuntoDeVenta.Items.Clear();
-                cmbPuntoDeVenta.Enabled = false;
-            }
-        }
         protected void ddlCampana_SelectedIndexChanged(object sender, EventArgs e)
         {
             DataTable dt = null;
@@ -365,90 +1041,7 @@ namespace SIGE.Pages.Modulos.Operativo.Reports
             MopoReporPrecioMasiva.Show();
         }
         #endregion
-        #region Oficina
-        protected void cargarCombo_Oficina()
-        {
-            try
-            {
-                Conexion Ocoon = new Conexion();
 
-                if (this.Session["companyid"] != null)
-                {
-                    compañia = Convert.ToInt32(this.Session["companyid"]);
-                    DataTable dtofi = Ocoon.ejecutarDataTable("UP_WEBXPLORA_AD_OBTENEROFICINAS", compañia);
-
-                    if (dtofi.Rows.Count > 0)
-                    {
-                        cmbOficina.Enabled = true;
-                        cmbOficina.DataSource = dtofi;
-                        cmbOficina.DataTextField = "Name_Oficina";
-                        cmbOficina.DataValueField = "cod_Oficina";
-                        cmbOficina.DataBind();
-
-                        cmbOficina.Items.Insert(0, new ListItem("---Todas---", "0"));
-                    }
-                }
-                else
-                {
-                    Response.Redirect("~/err_mensaje_seccion.aspx", true);
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-        }
-        protected void cmbOficina_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                Conexion Ocoon = new Conexion();
-
-                cmbPuntoDeVenta.Items.Clear();
-                cmbPuntoDeVenta.Enabled = false;
-                if (cmbplanning.SelectedIndex > 0 && cmbOficina.SelectedIndex > 0)
-                {
-                    DataTable dtPdv = Ocoon.ejecutarDataTable("UP_WEBXPLORA_AD_OBTENER_PUNTODEVENTA_BY_idPlanning_AND_codOficina", cmbplanning.SelectedValue, Convert.ToInt32(cmbOficina.SelectedValue));
-
-                    if (dtPdv.Rows.Count > 0)
-                    {
-                        cmbPuntoDeVenta.DataSource = dtPdv;
-                        cmbPuntoDeVenta.DataValueField = "ClientPDV_Code";
-                        cmbPuntoDeVenta.DataTextField = "pdv_Name";
-                        cmbPuntoDeVenta.DataBind();
-                        cmbPuntoDeVenta.Items.Insert(0, new ListItem("---Todos---", "0"));
-                        cmbPuntoDeVenta.Enabled = true;
-                    }
-
-                    DataTable dtNodeCom = Ocoon.ejecutarDataTable("UP_WEBXPLORA_AD_OBTENER_NODECOMERCIAL_BY_idPlanning_and_codOficina", cmbplanning.SelectedValue, Convert.ToInt32(cmbOficina.SelectedValue));
-
-                    if (dtNodeCom.Rows.Count > 0)
-                    {
-                        cmbNodeComercial.Enabled = true;
-                        cmbNodeComercial.Items.Clear();
-                        cmbNodeComercial.DataSource = dtNodeCom;
-                        cmbNodeComercial.DataTextField = "commercialNodeName";
-                        cmbNodeComercial.DataValueField = "id_NodeCommercial";
-                        cmbNodeComercial.DataBind();
-                        cmbNodeComercial.Items.Insert(0, new ListItem("---Todas---", "0"));
-                    }
-                    else
-                    {
-                        cmbNodeComercial.Enabled = false;
-                        cmbNodeComercial.Items.Clear();
-                    }
-                }
-                if (cmbOficina.SelectedIndex == 0 && cmbplanning.SelectedIndex > 0)
-                {
-                    cargarCombo_NodeComercial(cmbplanning.SelectedValue);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-        #endregion
         #region PtoVenta
         void llenarPuntoVenta1(string campaña, int NodeComercial)
         {
@@ -472,69 +1065,6 @@ namespace SIGE.Pages.Modulos.Operativo.Reports
 
         #endregion
         #region NodeComercial
-        protected void cargarCombo_NodeComercial(string sid_planning)
-        {
-            try
-            {
-                cmbNodeComercial.Items.Clear();
-                //Facade_Procesos_Administrativos.ENodeComercial[] oListNodeComercial = Facd_ProcAdmin.Get_NodeComercialBy_idPlanning(cmbplanning.SelectedValue);
-
-                //if (oListNodeComercial.Length > 0)
-                //{
-                //    cmbNodeComercial.Enabled = true;
-                //    cmbNodeComercial.DataSource = oListNodeComercial;
-                //    cmbNodeComercial.DataTextField = "commercialNodeName";
-                //    cmbNodeComercial.DataValueField = "NodeCommercial";
-                //    cmbNodeComercial.DataBind();
-                //    cmbNodeComercial.Items.Insert(0, new ListItem("---Todas---", "0"));
-                //}
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-        }
-        protected void cmbNodeComercial_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                Conexion Ocoon = new Conexion();
-
-                if (cmbplanning.SelectedIndex > 0 && cmbNodeComercial.SelectedIndex > 0)
-                {
-                    DataTable dtPdv = Ocoon.ejecutarDataTable("UP_WEBXPLORA_AD_OBTENER_PUNTODEVENTA_BY_idPlanning_and_idNodeComercial", cmbplanning.SelectedValue, Convert.ToInt32(cmbNodeComercial.SelectedValue));
-
-                    if (dtPdv.Rows.Count > 0)
-                    {
-                        cmbPuntoDeVenta.DataSource = dtPdv;
-                        cmbPuntoDeVenta.DataValueField = "ClientPDV_Code";
-                        cmbPuntoDeVenta.DataTextField = "pdv_Name";
-                        cmbPuntoDeVenta.DataBind();
-                        cmbPuntoDeVenta.Items.Insert(0, new ListItem("---Todos---", "0"));
-                        cmbPuntoDeVenta.Enabled = true;
-                    }
-                }
-
-                if (cmbNodeComercial.SelectedIndex == 0)
-                {
-                    DataTable dtPdv = Ocoon.ejecutarDataTable("UP_WEBXPLORA_AD_OBTENER_PUNTODEVENTA_BY_idPlanning_AND_codOficina", cmbplanning.SelectedValue, Convert.ToInt32(cmbOficina.SelectedValue));
-
-                    if (dtPdv.Rows.Count > 0)
-                    {
-                        cmbPuntoDeVenta.DataSource = dtPdv;
-                        cmbPuntoDeVenta.DataValueField = "ClientPDV_Code";
-                        cmbPuntoDeVenta.DataTextField = "pdv_Name";
-                        cmbPuntoDeVenta.DataBind();
-                        cmbPuntoDeVenta.Items.Insert(0, new ListItem("---Todos---", "0"));
-                        cmbPuntoDeVenta.Enabled = true;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
         protected void ddlNodeComercial_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -574,53 +1104,6 @@ namespace SIGE.Pages.Modulos.Operativo.Reports
         }
         #endregion
         #region Categorias
-        protected void cargarCombo_CategoriaDeproducto(string sidplanning)
-        {
-            DataTable dt = null;
-            Conexion Ocoon = new Conexion();
-
-            dt = Ocoon.ejecutarDataTable("UP_WEBXPLORA_OPE_COMBO_CATEGORIA_DE_PRODUCTO_REPORT_PRECIO", sidplanning);
-            cmbcategoria_producto.Enabled = false;
-            if (dt.Rows.Count > 0)
-            {
-                cmbcategoria_producto.DataSource = dt;
-                cmbcategoria_producto.DataValueField = "id_ProductCategory";
-                cmbcategoria_producto.DataTextField = "Product_Category";
-                cmbcategoria_producto.DataBind();
-                cmbcategoria_producto.Items.Insert(0, new ListItem("---Todas---", "0"));
-                cmbcategoria_producto.Enabled = true;
-            }
-        }
-        protected void cmbcategoria_producto_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            DataTable dt = null;
-            Conexion Ocoon = new Conexion();
-            cmbsubcategoria.Items.Clear();
-            cmbsubcategoria.Enabled = false;
-            //string iischannel = cmbcanal.SelectedValue;
-            //string sidplanning = cmbplanning.SelectedValue;
-            string siproductCategory = cmbcategoria_producto.SelectedValue;
-            dt = Ocoon.ejecutarDataTable("UP_WEBXPLORA_OPE_COMBO_MARCA_REPORT_PRECIO", siproductCategory);
-
-            cmbmarca.Items.Clear();
-            cmbmarca.Enabled = false;
-            cmbsku.Items.Clear();
-            cmbsku.Enabled = false;
-            if (dt.Rows.Count > 0)
-            {
-                cmbmarca.DataSource = dt;
-                cmbmarca.DataValueField = "id_Brand";
-                cmbmarca.DataTextField = "Name_Brand";
-                cmbmarca.DataBind();
-                cmbmarca.Items.Insert(0, new ListItem("---Todas---", "0"));
-                cmbmarca.Enabled = true;
-            }
-            // cargarGrilla_Precio();            
-            //Pablo Salas
-            //22/08/2011
-            //se agrega el metodo cargarsubcategorias
-            cargarsubcategorias(siproductCategory);
-        }
         protected void ddlCategoria_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -1033,9 +1516,18 @@ namespace SIGE.Pages.Modulos.Operativo.Reports
         #endregion
 
         #region BtnBuscar
+        /// <summary>
+        /// Mostrar información correspondiente al Reporte de Precios
+        /// en el AspControl GridView 'GridView1', la idea inicial era
+        /// utilizar un solo AspControl GridView para los diferentes 
+        /// Canales
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btn_buscar_Click(object sender, EventArgs e)
         {
-            cargarGrilla_Precio();
+            //cargarGrilla_Precio();
+            fillGridViewPrecioDummy();
         }
 
         #endregion
@@ -1420,90 +1912,203 @@ namespace SIGE.Pages.Modulos.Operativo.Reports
 
         #region Grilla
         #region CargarGrilla
+        /// <summary>
+        /// Carga la información correspondiente al registro de Precios, 
+        /// en el AspControl GridView 'GridView1', se utiliza este método
+        /// para mostrar u ocultar columnas dependiendo el id del canal 
+        /// y de la campaña.
+        /// </summary>
         protected void cargarGrilla_Precio()
         {
+            // Mostrar el AspControl GridView 'GridView1'
             GridView1.Visible = true;
+            // Ocultar el AspControl GridView 'dgv_faltantes', que se 
+            // utiliza como auxiliar para Exportar los registros a 
+            // Excel. 
             dgv_faltantes.Visible = false;
+            // Limpiar el AspControl Label 'lblmensaje', utilizado para
+            // mostrar mensajes de error, se podría utilizar un modal
+            // pop up, para mostrar los errores.
             lblmensaje.Text = "";
-            try
-            {
-                //------------------------volver a deshabilitgar las columnas--------------------------
-                GridView1.Columns[10].Visible = false;
-                GridView1.Columns[11].Visible = false;
-                GridView1.Columns[12].Visible = false;
-                GridView1.Columns[13].Visible = false;
-                GridView1.Columns[14].Visible = false;
-                //GridView1.Columns[15].Visible = false;
-                // ---------------------------------------------------
 
-                Facade_Proceso_Operativo.Facade_Proceso_Operativo obj_Facade_Proceso_Operativo = new SIGE.Facade_Proceso_Operativo.Facade_Proceso_Operativo();
+            //------------------------volver a deshabilitgar las columnas--------------------------
+            GridView1.Columns[10].Visible = false;
+            GridView1.Columns[11].Visible = false;
+            GridView1.Columns[12].Visible = false;
+            GridView1.Columns[13].Visible = false;
+            GridView1.Columns[14].Visible = false;
+            //GridView1.Columns[15].Visible = false;
+            // ---------------------------------------------------
 
-                DataTable dt = null;
+            //Facade_Proceso_Operativo.Facade_Proceso_Operativo obj_Facade_Proceso_Operativo = new SIGE.Facade_Proceso_Operativo.Facade_Proceso_Operativo();
+            // DataTable 'dt' para Obtener la Consulta Tradicional para el Reporte de Precio
+            DataTable dt = null;
+            // DataTable 'dt02' para Obtener la Nueva Consulta para el Reporte de Precio.
+            DataTable dt02 = null;
 
-                iidperson = 0;
-                if (cmbperson.SelectedIndex >= 0)
-                    iidperson = Convert.ToInt32(cmbperson.SelectedValue);
+            #region Validación idParametros
+            // Setear la variable idPersona a Cero(0), en caso no se haya
+            // seleccionado
+            iidperson = 0;
+            // Verificar que el aspControl DropDownList 'cmbperson' tenga
+            // un elemento seleccionado para setearlo a la variable 
+            // 'iidperson'
+            if (cmbperson.SelectedIndex >= 0){
+                iidperson = Convert.ToInt32(cmbperson.SelectedValue);
+            }
 
+            // La variable 'sidplanning' es obligatoria, pero igualmente
+            // se puede hacer la validación que el AspControl 
+            // DropDownList 'cmbplanning' tenga un valor seleccionado
+            if (cmbplanning.SelectedIndex >= 0){
                 sidplanning = cmbplanning.SelectedValue;
+            }
+
+            // La variable 'sidchannel' es obligatorio, pero igualmente
+            // se puede hacer la validación que el AspControl 
+            // DropDownList 'cmbcanal' tenga un valor seleccionado
+            if (cmbcanal.SelectedIndex >= 0){
                 sidchannel = cmbcanal.SelectedValue;
+            }
+
+            // Asignación de la variable 'icod_oficina', para la gestión
+            // el Id de la Oficina, previamente verificar que el 
+            // AspControl DropDownList 'cmbOficina' tenga un valor
+            // seleccionado.
+            if (!cmbOficina.SelectedValue.Equals("")){
                 icod_oficina = Convert.ToInt32(cmbOficina.SelectedValue);
+            }
+            
+            // Asignación de la variable NodoComercial que esta definida
+            // como 'iidNodeComercial', previamente se verifica que el 
+            // AspControl DropDownList 'cmbNodeComercial' tenga un valor
+            // seleccionado.
+            if (!cmbNodeComercial.SelectedValue.Equals("")) {
                 iidNodeComercial = Convert.ToInt32(cmbNodeComercial.SelectedValue);
+            }
+
+            // Setea el valor de la variable 'sidPDV' como el valor 
+            // seleccionado por el AspControl DropDownList 
+            // 'cmbPuntoDeVenta', se puede mejorar la implementación
+            sidPDV = "0";
+            if (!cmbPuntoDeVenta.SelectedValue.Equals("")){
                 sidPDV = cmbPuntoDeVenta.SelectedValue;
-                if (sidPDV == "")
-                    sidPDV = "0";
+            }
+            //if (sidPDV == ""){ sidPDV = "0"; }
+
+            // Setear el valor de la variable 'sidcategoriaProducto' a 0.
+            sidcategoriaProducto = "0";
+            // Verificar si el AspControl DropDownList 
+            // 'cmbcategoria_producto', tiene productos seleccionados
+            if (!cmbcategoria_producto.SelectedValue.Equals("")) {
                 sidcategoriaProducto = cmbcategoria_producto.SelectedValue;
+            }
+            //if (sidcategoriaProducto == ""){ sidcategoriaProducto = "0";}
+
+            // Setear el valor de la variable 'sidmarca' a 0.
+            sidmarca = "0";
+            // Verificar si el AspControl DropDownList 'cmbmarca'
+            // tiene valor seleccionado.
+            if (!cmbcategoria_producto.SelectedValue.Equals("")){
                 sidmarca = cmbmarca.SelectedValue;
-                if (sidcategoriaProducto == "")
-                    sidcategoriaProducto = "0";
-                //se agrega el filtro para la subcategoria
+            }
+            //if (sidmarca == ""){sidmarca = "0";}                
+                
+            // Setear el valor de la variable 'idSubCategoria' a 0.
+            sidproductSubcategory = "0";
+            // Verificar si el AspControl DropDownList 'cmbsubcategoria'
+            // tiene valor seleccionado.
+            if (!cmbsubcategoria.SelectedValue.Equals("")) {
                 sidproductSubcategory = cmbsubcategoria.SelectedValue;
-                if (sidproductSubcategory == "")
-                    sidproductSubcategory = "0";
+            }
+            //if (sidproductSubcategory == ""){
+            //    sidproductSubcategory = "0";
+            //}
 
+            // Setear el valor de la variable 'scodproducto' a 0.
+            scodproducto = "0";
+            // Verificar si el AspControl DropDownList 'cmbsku',
+            // tiene valor seleccionado.
+            if (!cmbsku.SelectedValue.Equals("")){
                 scodproducto = cmbsku.SelectedValue;
-                if (scodproducto == "")
-                    scodproducto = "0";
-                if (sidmarca == "")
-                    sidmarca = "0";
+            }
+            //if (scodproducto == ""){ scodproducto = "0";}
 
+            #endregion 
 
-                DateTime dfecha_inicio;
-                DateTime dfecha_fin;
+            // Variable para la fecha de Inicio
+            DateTime dfecha_inicio;
+            // Variable para la fecha de Fin
+            DateTime dfecha_fin;
 
-                if (txt_fecha_inicio.SelectedDate.ToString() == "" || txt_fecha_inicio.SelectedDate.ToString() == "0" || txt_fecha_inicio.SelectedDate == null)
-                    dfecha_inicio = txt_fecha_inicio.MinDate;
-                else dfecha_inicio = txt_fecha_inicio.SelectedDate.Value;
+            // Validación Fecha Inicio (Asigna la mínima fecha cuando la fecha es Vacia)
+            if (txt_fecha_inicio.SelectedDate.ToString() == ""
+                || txt_fecha_inicio.SelectedDate.ToString() == "0"
+                || txt_fecha_inicio.SelectedDate == null){
+                dfecha_inicio = txt_fecha_inicio.MinDate;
+            }
+            else{
+                dfecha_inicio = txt_fecha_inicio.SelectedDate.Value;
+            }
 
+            // Validación Fecha Fin (Asigna la máxima fecha permitida cuando la fecha es Vacia)
+            if (txt_fecha_fin.SelectedDate.ToString() == ""
+                || txt_fecha_fin.SelectedDate.ToString() == "0"
+                || txt_fecha_fin.SelectedDate == null){
+                dfecha_fin = txt_fecha_fin.MaxDate;
+            }
+            else{
+                dfecha_fin = txt_fecha_fin.SelectedDate.Value;
+            }
 
-                if (txt_fecha_fin.SelectedDate.ToString() == "" || txt_fecha_fin.SelectedDate.ToString() == "0" || txt_fecha_fin.SelectedDate == null)
-                    dfecha_fin = txt_fecha_fin.MaxDate;
-                else dfecha_fin = txt_fecha_fin.SelectedDate.Value;
+            // Validación de Fechas Iguales
+            if (DateTime.Compare(dfecha_inicio, dfecha_fin) == 1){
+                lblmensaje.Visible = true;
+                lblmensaje.Text = "La fecha de inicio debe ser menor o igual a la fecha fin";
+                lblmensaje.ForeColor = System.Drawing.Color.Red;
+            }
+            else{
+                //Ing Ditmar Estrada 20/01/2011
+                //dt = obj_Facade_Proceso_Operativo.Get_ReportePrecio(iidperson, sidplanning, sidchannel, sidcategoriaProducto, 
+                //sidmarca, scodproducto, dfecha_inicio, dfecha_fin);
+                //este metodo se suspendio temporalmente hasta corregir la data de caracteres especiales, por miestras 
+                //se usara el metodo ejecutarDataTable que se muestra acontinuacion.
+                Conexion Ocoon = new Conexion();
+                //dt = Ocoon.ejecutarDataTable("UP_WEBXPLORA_OPE_CONSULTA_PRECIO", iidperson, sidplanning, sidchannel,
+                //icod_oficina,iidNodeComercial,sidPDV, sidcategoriaProducto, sidmarca, scodproducto, dfecha_inicio, dfecha_fin);
+                // Validar que la consulta a la base de datos, no tenga problemas de conectividad
+                try{
+                    
+                    // Invocando a la Consulta de Precio Tradicional
+                    dt = Ocoon.ejecutarDataTable(
+                        "UP_WEBXPLORA_OPE_CONSULTA_PRECIO",
+                        iidperson, sidplanning, sidchannel, icod_oficina, iidNodeComercial, sidPDV, sidcategoriaProducto,
+                        sidproductSubcategory, sidmarca, scodproducto, dfecha_inicio, dfecha_fin);
 
-                if (DateTime.Compare(dfecha_inicio, dfecha_fin) == 1)
-                {
-                    lblmensaje.Visible = true;
-                    lblmensaje.Text = "La fecha de inicio debe ser menor o igual a la fecha fin";
-                    lblmensaje.ForeColor = System.Drawing.Color.Red;
+                    // Invocando a la Nueva Consulta para el Reporte de Precio (falta Asignarle un dt)
+                    dt02 = oBLOpeReportePrecio.find(sidplanning, 
+                        sidchannel, icod_oficina, iidNodeComercial, 
+                        sidPDV, sidcategoriaProducto, sidmarca,
+                        sidcategoriaProducto, sidproductSubcategory, 
+                        iidperson, dfecha_inicio, dfecha_fin);
+
+                }catch (Exception ex) {
+                    message = ex.ToString();
                 }
-                else
-                {
-                    //Ing Ditmar Estrada 20/01/2011
-                    //dt = obj_Facade_Proceso_Operativo.Get_ReportePrecio(iidperson, sidplanning, sidchannel, sidcategoriaProducto, sidmarca, scodproducto, dfecha_inicio, dfecha_fin);
-                    //este metodo se suspendio temporalmente hasta corregir la data de caracteres especiales, por miestras 
-                    //se usara el metodo ejecutarDataTable que se muestra acontinuacion.
 
-                    Conexion Ocoon = new Conexion();
-
-                    //dt = Ocoon.ejecutarDataTable("UP_WEBXPLORA_OPE_CONSULTA_PRECIO", iidperson, sidplanning, sidchannel,icod_oficina,iidNodeComercial,sidPDV, sidcategoriaProducto, sidmarca, scodproducto, dfecha_inicio, dfecha_fin);
-                    dt = Ocoon.ejecutarDataTable("UP_WEBXPLORA_OPE_CONSULTA_PRECIO", iidperson, sidplanning, sidchannel, icod_oficina, iidNodeComercial, sidPDV, sidcategoriaProducto, sidproductSubcategory, sidmarca, scodproducto, dfecha_inicio, dfecha_fin);
-                    //Angel Ortiz 04/10/2011
-                    // se guarda en variable de sesion para utilizarlo en validacon para controles de alertas.
-                    this.Session["dt_registros"] = dt;
-                    this.Session["codigocanal"] = sidchannel;
-                    ///////////////////
+                // Validar que no se haya presentando problemas en la consulta del precio.
+                if (message.Equals("")){
+                    // Validar que exista más de 1 registro en la consulta devuelta.
                     if (dt.Rows.Count > 0)
                     {
+                        //Angel Ortiz 04/10/2011
+                        // se guarda en variable de Session 'dt_registros' para utilizarlo en validacon para controles de alertas.
+                        this.Session["dt_registros"] = dt;
+                        this.Session["codigocanal"] = sidchannel;
+                        
+                        // Llenar el AspControl GridView 'GridView1' para el Reporte de Precios Tradicional.
                         llenagrilla();
+
                         lblmensaje.ForeColor = System.Drawing.Color.Green;
                         lblmensaje.Text = "Se encontró " + dt.Rows.Count + " resultados";
                         btn_verificar.Enabled = true;
@@ -1513,42 +2118,67 @@ namespace SIGE.Pages.Modulos.Operativo.Reports
                         lblmensaje.ForeColor = System.Drawing.Color.Blue;
                         lblmensaje.Text = "Se encontró " + dt.Rows.Count + " resultados";
                         GridView1.DataBind();
+                    }    
+                
+                    // Validar que exista más de 1 registro para la consulta de Precios (Nueva Versión)
+                    if (dt02.Rows.Count > 0){
+                        llenarGridViewPrice(dt02);
+                        if (!getMessage().Equals("")) {
+                            lblmensaje.ForeColor = System.Drawing.Color.Red;
+                            lblmensaje.Text = "Ocurrió un Error: " + getMessage();                        
+                        }
+                    }
+                    else {
+                        lblmensaje.ForeColor = System.Drawing.Color.Red;
+                        lblmensaje.Text = "Ocurrió un Error: " + "No se encontraron Registros, ¡Por favor Verifique!";
                     }
                 }
-
+                else {
+                    lblmensaje.ForeColor = System.Drawing.Color.Red;
+                    lblmensaje.Text = "Ocurrió un Error: " + getMessage();
+                }
             }
-            catch (Exception ex)
-            {
-                ex.Message.ToString();
-                lblmensaje.ForeColor = System.Drawing.Color.Red;
-                lblmensaje.Text = "Ocurrió un error inesperado, Por favor intentelo más tarde o comuníquese con el área de Tecnología de Información.";
-                GridView1.DataBind();
+
+            //}
+            //catch (Exception ex)
+            //{
+                //ex.Message.ToString();
+                //lblmensaje.ForeColor = System.Drawing.Color.Red;
+                //lblmensaje.Text = "Ocurrió un error inesperado, Por favor intentelo más tarde o comuníquese con el área de Tecnología de Información.";
+                //GridView1.DataBind();
 
                 //System.Threading.Thread.Sleep(8000);
                 //Response.Redirect("~/err_mensaje_seccion.aspx", true);
 
-            }
-
+            //}
         }
+
+
+        /// <summary>
+        /// Llenar AspControl GridView 'GridView1'. Como mejora, se puede considerar, recibir como parametro las variable 'idGridView' y un DataTable
+        /// que funcione como fuente de información.
+        /// </summary>
         private void llenagrilla()
         {
+            // Recuperar el valor de la consulta del Reporte de Precios almacenado en Session y guardarlo en la variable local 'dt'.
             DataTable dt = (DataTable)this.Session["dt_registros"];
+            // Recuperar el CodCanal y asignarlo a la variable local 'sidchannel'.
             string sidchannel = this.Session["codigocanal"].ToString();
 
-            if (String.Equals(sidchannel, "1000"))//mayorista
-            {
+            //mayorista
+            if (String.Equals(sidchannel, "1000")){
                 //GridView1.Columns[11].Visible = true;//Precio de Oferta
                 GridView1.Columns[12].Visible = true;//Precio de Lista
                 GridView1.Columns[13].Visible = true;//Precio de Reventa
             }
-            else if (String.Equals(sidchannel, "1023"))//minorista
-            {
-                GridView1.Columns[10].Visible = true; //precios PDV
-                GridView1.Columns[14].Visible = true;//Precio de Costo
+            //minorista
+            else if (String.Equals(sidchannel, "1023")){
+                GridView1.Columns[10].Visible = true;   //precios PDV
+                GridView1.Columns[14].Visible = true;   //Precio de Costo
                 //GridView1.Columns[12].Visible = true;
             }
-            else if (String.Equals(sidchannel, "1241"))//autoservicios
-            {
+            //autoservicios
+            else if (String.Equals(sidchannel, "1241")){
                 //GridView1.Columns[9].Visible = true;
                 //GridView1.Columns[13].Visible = true; //Precio Reventa                            
                 GridView1.Columns[10].Visible = true; //precios PDV
@@ -1556,18 +2186,73 @@ namespace SIGE.Pages.Modulos.Operativo.Reports
                 //GridView1.Columns[14].Visible = true; //precio costo
                 //GridView1.Columns[15].Visible = true; //observacion
             }
+
             //this.Session["dt_registros"] = dt;//asignamos la varia
-            GridView1.DataSource = dt;
-            GridView1.DataBind();
-            GridView1.PageIndex = 0;
-            GridView1.Visible = true;
-            dgv_faltantes.Visible = false;
-            gv_precioToExcel.DataSource = dt;
-            gv_precioToExcel.DataBind();
 
-            //lblmensaje.ForeColor = System.Drawing.Color.Green;
-            //lblmensaje.Text = "Se encontró " + dt.Rows.Count + " resultados";
+            // Validar que exista más de 1 registro en la consulta devuelta.
+            if (dt.Rows.Count > 0) {
 
+                GridView1.DataSource = dt;
+                GridView1.DataBind();
+                GridView1.PageIndex = 0;
+                GridView1.Visible = true;
+
+                // Ocultar AspControl GridView 'dgv_faltantes'
+                dgv_faltantes.Visible = false;
+
+                // Llenar el AspControl GridView 'gv_precioToExcel', para exportar a Excel
+                // (Considero que no debería llamarse, porque satura la consulta, se dehabilitará temporalmente)
+                //gv_precioToExcel.DataSource = dt;
+                //gv_precioToExcel.DataBind();
+
+                //lblmensaje.ForeColor = System.Drawing.Color.Green;
+                //lblmensaje.Text = "Se encontró " + dt.Rows.Count + " resultados";
+            }
+            
+        }
+
+        /// <summary>
+        /// Llenar el GridView Precio Dummy
+        /// </summary>
+        private void fillGridViewPrecioDummy() {
+            DateTime dfecha = new DateTime();
+            try{
+                
+                DataTable dt = oBLOpeReportePrecio.findDummy(
+                sidplanning, sidchannel, icod_oficina, 
+                iidNodeComercial, sidPDV, sidcategoriaProducto, 
+                sidmarca, sidcategoriaProducto, 
+                sidproductSubcategory, iidperson, dfecha, dfecha);
+
+                llenarGridViewPrice(dt);
+
+            }catch (Exception ex) {
+                message = "Ocurrio un Error Al intentar llenar "
+                    + "el GridView Dummy: " + ex.Message.ToString();
+            }
+
+        }
+
+        /// <summary>
+        /// Llenar Grilla de Precios (Cabeceras)
+        /// </summary>
+        /// <param name="dt"></param>
+        private void llenarGridViewPrice(DataTable dt){
+
+            // Validación de la cantidad de registros en DataTable 'dt'
+            if (dt.Rows.Count > 0){
+                
+                gvReportePrecio.DataSource = dt;
+                gvReportePrecio.DataBind();
+                gvReportePrecio.PageIndex = 0;
+                gvReportePrecio.Visible = true;
+
+            }else{
+
+                message = "No se han Encontrado registros para mostrar " +
+                "para el reporte de precios, ¡Por favor Verifique!";
+
+            }
         }
 
         #endregion
@@ -1783,6 +2468,42 @@ namespace SIGE.Pages.Modulos.Operativo.Reports
             GridView1.EditIndex = -1;
             llenagrilla();
         }
+        
+        /// <summary>
+        /// Ejecutar para cada fila del AspGridView 'gvReportePrecio'
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void OnRowDataBound(object sender, GridViewRowEventArgs e) {
+            if (e.Row.RowType == DataControlRowType.DataRow) {
+                DataTable dt = new DataTable();
+                String data = gvReportePrecio.DataKeys[e.Row.RowIndex].Value.ToString();
+                String[] keys = data.Split('|');
+                String day = keys[0];
+                String idPuntoDeVenta = keys[1];
+
+                GridView gvDetails = e.Row.FindControl("gvDetails") as GridView;
+                try{
+                    dt = oBLOpeReportePrecio.findDetailsDummy(
+                        idPuntoDeVenta,
+                        DateTime.Parse(day));
+                    if(oBLOpeReportePrecio.getMessages().Equals("")){
+                        if(dt.Rows.Count > 0){
+                            gvDetails.DataSource = dt;
+                            gvDetails.DataBind();
+                        }else{
+                            message = "Error: No se encontraron detalles " +
+                                " para la Cabecera indicada, " +
+                                "!por favor verifique!";
+                        }
+                    }
+
+                }catch(Exception ex){
+                    message = "Error: " + ex.Message.ToString();
+                }
+                
+            }
+        }
         #endregion
 
         #region PaginadoGrilla
@@ -1830,6 +2551,22 @@ namespace SIGE.Pages.Modulos.Operativo.Reports
         protected void Button1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        /// <summary>
+        /// Retorna todas la variables de Session que devuelve un Login
+        /// </summary>
+        private void fncLoginDummy() {
+            try
+            {
+                this.Session["scountry"] = "550";
+                this.Session["companyid"] = "1561";
+                this.Session["Perfilid"] = "0090";
+            }
+            catch (Exception ex) {
+                message = "Ocurrio un Error en Dummy Login: " + 
+                    ex.Message.ToString(); 
+            }
         }
         #endregion
     }

@@ -1436,6 +1436,13 @@
     <Compile Include="Pages\Modulos\Cliente\report_tipo.aspx.designer.cs">
       <DependentUpon>report_tipo.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Modulos\Laboratory\EditableGridViewBootStrap.aspx.cs">
+      <DependentUpon>EditableGridViewBootStrap.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Modulos\Laboratory\EditableGridViewBootStrap.aspx.designer.cs">
+      <DependentUpon>EditableGridViewBootStrap.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Modulos\Operativo\CargaFotosAct.aspx.cs">
       <DependentUpon>CargaFotosAct.aspx</DependentUpon>
     </Compile>
@@ -2240,6 +2247,8 @@
     <Content Include="Global.asax" />
     <Content Include="loginV2.aspx" />
     <Content Include="menesaje_usu.html" />
+    <Content Include="Pages\css\bootstrap-theme.min.css" />
+    <Content Include="Pages\css\bootstrap.min.css" />
     <Content Include="Pages\css\cssGridViewStyleVS2008\css\core.css" />
     <Content Include="Pages\css\cssGridViewStyleVS2008\css\grid.css" />
     <Content Include="Pages\css\cssGridViewStyleVS2008\css\round.css" />
@@ -2463,9 +2472,11 @@
     <Content Include="Pages\ImgBooom\Ventas_g.png" />
     <Content Include="Pages\img\qryguardar.png" />
     <Content Include="Pages\img\Qrys_File.png" />
+    <Content Include="Pages\js\bootstrap.min.js" />
     <Content Include="Pages\js\jquery-ui-1.8.11.min.js" />
     <Content Include="Pages\js\jquery.blockUI.js" />
     <Content Include="Pages\js\jquery.json-2.3.min.js" />
+    <Content Include="Pages\js\jquery.min.js" />
     <Content Include="Pages\js\jquery.overscroll.min.js" />
     <Content Include="Pages\js\jstorage.js" />
     <Content Include="Pages\Modulos\Administrativo\CargaMasivaGProductos.aspx" />
@@ -2962,6 +2973,8 @@
     <Content Include="Pages\Modulos\Cliente\Reportes\Report_V2_SF_Spot.aspx" />
     <Content Include="Pages\Modulos\Cliente\Reportes\Test.aspx" />
     <Content Include="Pages\Modulos\Cliente\Reporte_v1_Cliente.aspx" />
+    <Content Include="Pages\Modulos\Laboratory\EditableGridViewBootStrap.aspx" />
+    <Content Include="Pages\Modulos\Laboratory\ModalBootStrap.htm" />
     <Content Include="Pages\Modulos\Operativo\OPE_Digitacion.aspx" />
     <Content Include="Pages\Modulos\Operativo\Reports\CargaMasivaLevantamiento.aspx" />
     <Content Include="Pages\Modulos\Operativo\Reports\carpeta_imagen\yourfilename.jpg" />
@@ -3145,6 +3158,13 @@
     <Content Include="Pages\Modulos\Utilitario\DescargarAplicacionMovil.aspx" />
     <Content Include="Pages\Modulos\Utilitario\MasterPage\design\MasterPage.master" />
     <None Include="Properties\DataSources\System.Data.DataTable.datasource" />
+    <None Include="Service References\MenuService1\MenuService.wsdl" />
+    <None Include="Service References\MenuService1\MenuService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MenuService1\MenuService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\MenuService1\service.wsdl" />
     <None Include="Service References\MenuService1\service.xsd">
       <SubType>Designer</SubType>

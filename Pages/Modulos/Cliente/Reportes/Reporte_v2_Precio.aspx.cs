@@ -14,8 +14,12 @@ namespace SIGE.Pages.Modulos.Cliente.Reportes
     public partial class Reporte_v2_Precio : System.Web.UI.Page
     {
         private Conexion oCoon = new Conexion();
-        private Facade_Procesos_Administrativos.Facade_Procesos_Administrativos Get_Administrativo = new SIGE.Facade_Procesos_Administrativos.Facade_Procesos_Administrativos();
-        private Facade_Proceso_Cliente.Facade_Proceso_Cliente Get_DataClientes = new SIGE.Facade_Proceso_Cliente.Facade_Proceso_Cliente();
+        
+        private Facade_Procesos_Administrativos.Facade_Procesos_Administrativos Get_Administrativo = 
+            new SIGE.Facade_Procesos_Administrativos.Facade_Procesos_Administrativos();
+        
+        private Facade_Proceso_Cliente.Facade_Proceso_Cliente Get_DataClientes = 
+            new SIGE.Facade_Proceso_Cliente.Facade_Proceso_Cliente();
 
         private string sUser;
         private string sPassw;
@@ -89,16 +93,28 @@ namespace SIGE.Pages.Modulos.Cliente.Reportes
                 sidsku = "0";
 
             string sidperdil = this.Session["Perfilid"].ToString();
-            if (cmb_año.SelectedValue == "0" && cmb_mes.SelectedValue == "0" && cmb_periodo.SelectedValue == "0")
-            {
-                if (sidperdil == ConfigurationManager.AppSettings["PerfilAnalista"])
-                {
+
+            if (cmb_año.SelectedValue == "0" && 
+                cmb_mes.SelectedValue == "0" && 
+                cmb_periodo.SelectedValue == "0"){
+                
+                if (sidperdil == ConfigurationManager.AppSettings["PerfilAnalista"]){
                     //aca debe ir la carga inical para el analista
                     icompany = Convert.ToInt32(this.Session["companyid"]);
                     iservicio = Convert.ToInt32(this.Session["Service"]);
                     canal = this.Session["Canal"].ToString().Trim();
                     Report = Convert.ToInt32(this.Session["Reporte"]);
-                    Periodo p = new Periodo(Report, sidciudad, sidcategoria,sidsub_categoria, sidmarca,sidsub_marca,sidsku, canal, icompany, iservicio);
+                    
+                    Periodo p = new Periodo(Report, 
+                                            sidciudad, 
+                                            sidcategoria,
+                                            sidsub_categoria, 
+                                            sidmarca,
+                                            sidsub_marca,
+                                            sidsku, 
+                                            canal, 
+                                            icompany, 
+                                            iservicio);
 
                     p.Set_PeriodoConDataValidada();
 
@@ -108,17 +124,13 @@ namespace SIGE.Pages.Modulos.Cliente.Reportes
 
                     GetPeridForAnalist();
                 }
-                else if (sidperdil == ConfigurationManager.AppSettings["PerfilClienteDetallado"] || sidperdil == ConfigurationManager.AppSettings["PerfilClienteGeneral"] || sidperdil == ConfigurationManager.AppSettings["PerfilClienteDetallado1"])
+                else if (sidperdil == ConfigurationManager.AppSettings["PerfilClienteDetallado"] || 
+                         sidperdil == ConfigurationManager.AppSettings["PerfilClienteGeneral"] || 
+                         sidperdil == ConfigurationManager.AppSettings["PerfilClienteDetallado1"])
                 {
                     GetPeriodForClient();
                 }
-            }
-            else
-            {
-                if (sidperdil == ConfigurationManager.AppSettings["PerfilAnalista"])
-                {
-                    GetPeridForAnalist();
-                }
+            } else { if (sidperdil == ConfigurationManager.AppSettings["PerfilAnalista"]) { GetPeridForAnalist(); }
             }
         }
 
@@ -229,7 +241,8 @@ namespace SIGE.Pages.Modulos.Cliente.Reportes
 
                 repvquincenal.ServerReport.ReportServerCredentials = new CFG.Tools.ReportServerNetCredentials();
 
-                List<Microsoft.Reporting.WebForms.ReportParameter> parametros = new List<Microsoft.Reporting.WebForms.ReportParameter>();
+                List<Microsoft.Reporting.WebForms.ReportParameter> parametros = 
+                    new List<Microsoft.Reporting.WebForms.ReportParameter>();
 
                 parametros.Add(new Microsoft.Reporting.WebForms.ReportParameter("AÑO", sidaño));
                 parametros.Add(new Microsoft.Reporting.WebForms.ReportParameter("MES", sidmes));
@@ -258,7 +271,7 @@ namespace SIGE.Pages.Modulos.Cliente.Reportes
                 mesjerror.errorWebsite(ConfigurationManager.AppSettings["COUNTRY"]);
             }
         }
-        
+
         private void llenaGraficaMargenesBre()
         {
             icompany = Convert.ToInt32(this.Session["companyid"]);
@@ -551,7 +564,11 @@ namespace SIGE.Pages.Modulos.Cliente.Reportes
         {
             DataTable dtp = null;
             Report = Convert.ToInt32(this.Session["Reporte"]);
-            dtp = oCoon.ejecutarDataTable("UP_WEBXPLORA_CLIE_V2_OBTENERPERIODOS", canal, icompany, Report, cmb_mes.SelectedValue);
+            dtp = oCoon.ejecutarDataTable("UP_WEBXPLORA_CLIE_V2_OBTENERPERIODOS", 
+                                          canal, 
+                                          icompany, 
+                                          Report, 
+                                          cmb_mes.SelectedValue);
             if (dtp.Rows.Count > 0)
             {
                 cmb_periodo.DataSource = dtp;
@@ -569,7 +586,6 @@ namespace SIGE.Pages.Modulos.Cliente.Reportes
                 dtp = null;
             }
         }
-
 
         private void Cobertura()
         {
@@ -825,7 +841,6 @@ namespace SIGE.Pages.Modulos.Cliente.Reportes
         //    }
         //}
 
-
         private void UpdateProgressContext2()
         {
             const int total = 100;
@@ -853,7 +868,6 @@ namespace SIGE.Pages.Modulos.Cliente.Reportes
                 progress.Speed = i;
                 //Stall the current thread for 0.1 seconds
                 System.Threading.Thread.Sleep(100);
-
 
             }
         }
@@ -891,8 +905,6 @@ namespace SIGE.Pages.Modulos.Cliente.Reportes
             //llenarreporteCompaciuda();
         }
 
-
-
         protected void cmb_mes_SelectedIndexChanged(object o, RadComboBoxSelectedIndexChangedEventArgs e)
         {
             Llenar_Periodos();
@@ -905,8 +917,6 @@ namespace SIGE.Pages.Modulos.Cliente.Reportes
             //this.Session["Mes"] = cmb_mes.SelectedValue;
         }
 
-
-
         protected void cmb_skuProducto_SelectedIndexChanged(object o, RadComboBoxSelectedIndexChangedEventArgs e)
         {
             //llenarreporteInicial();
@@ -917,8 +927,6 @@ namespace SIGE.Pages.Modulos.Cliente.Reportes
             //llenarreporteCompaciuda();
             //this.Session["Mes"] = cmb_mes.SelectedValue;
         }
-
-
 
         protected void cmb_subCategoria_SelectedIndexChanged(object o, RadComboBoxSelectedIndexChangedEventArgs e)
         {
@@ -938,7 +946,6 @@ namespace SIGE.Pages.Modulos.Cliente.Reportes
             Submarcas();
             Productos();
         }
-
 
         protected void cmb_subMarca_SelectedIndexChanged(object o, RadComboBoxSelectedIndexChangedEventArgs e)
         {

@@ -122,23 +122,40 @@ namespace SIGE.Pages.Modulos.Administrativo
                     IframeCMSubmarca.Attributes["src"] = "CargaMasivaGProductos.aspx";
                     iframeCMFamilia.Attributes["src"] = "CargaMasivaGProductos.aspx";
                     
-                    if (this.planningADM == "SI"){
+                    // Verificar si el Usuario es Administrador de Planning
+                    if (this.planningADM == "SI")
+                    {
 
-                        LLenacomboCategoriaBuscarMarcaporplanning();
-                        llenar_comboBCategopresentPlanning();
-
+                        #region Gestión para llenar ComboBox de Compañias
+                        // Llenar ComboBox de Compañias por Cliente, para la Gestión de Productos
                         comboclienteBuscarproductoporplanning();
+                        // Llenar ComboBox de Compañias por Cliente, para la Gestión de Producto Ancla
                         comboclienteenBuscarPanclaporplanning();
+                        // Llenar ComboBox de Compañias por Cliente, para la Gestión de Familias
                         comboclienteBuscarenFamilyporplanning();
-
-                        //LLenacomboCategoriaBuscarMarcaporplanning();
-                        LLenacomboCategoriaBuscarSubMarcaporplanning();
+                        // Llenar ComboBox de Compañias para la Gestión de Productos Ancla
                         comboclienteenPanclaporplanning();
+                        #endregion
 
+                        #region Gestión para llenar ComboBox de Categorias
+                        // Llenar ComboBox de Categoría para la Gestión de SubMarca
+                        LLenacomboCategoriaBuscarSubMarcaporplanning();
+                        // Llenar ComboBox de Categorias, para la Gestión de Productos
                         LlenacomboCategProducto(cmbBCategoriaProduct);
-                        LlenacomboMarcaProduct(cmbBBrand);
+                        // Llenar ComboBox de Categorias por Cliente, para la Gestión de Marcas
+                        LLenacomboCategoriaBuscarMarcaporplanning();
+                        // Llenar ComboBox de Categorias por Cliente, para la Gestión de Presentaciones
+                        llenar_comboBCategopresentPlanning();
+                        #endregion 
 
-                        //Guardar en sesiones los maestros de: Categoria, SubCategoria, Familia, Marca, Tipo, Formato, 
+                        #region Gestión para llenar ComboBox de Marcas
+                        // Llenar ComboBox de Marcas por Categoría, para la Gestión de Productos
+                        LlenacomboMarcaProduct(cmbBBrand);
+                        #endregion
+
+                        #region Region Comentada para utilizar codigo Anterior
+                        /*
+                        // Instanciar a la Lógica del Negocio con el Objetivo de poder Obtener Información en Session.
                         BL_Categoria oBL_Categoria = new BL_Categoria();
                         BL_SubCategoria oBL_SubCategoria = new BL_SubCategoria();
                         BL_Familia oBL_Familia = new BL_Familia();
@@ -160,32 +177,56 @@ namespace SIGE.Pages.Modulos.Administrativo
                         oListMA_Formato = oBL_Formato.Get_Formatos();
                         oListMA_Tipo = oBL_Tipo.Get_Tipos();
 
+                        //Guardar en sesiones los maestros de: Categoria, SubCategoria, Familia, Marca, Tipo, Formato, 
                         this.Session["CCategoria"] = oListMA_Categoria;
                         this.Session["CSubCategoria"] = oListMA_SubCategoria;
                         this.Session["CFamilia"] = oListMA_Familia;
                         this.Session["CMarca"] = oListMA_Marca;
                         this.Session["CFormato"] = oListMA_Formato;
                         this.Session["CTipo"] = oListMA_Tipo;
+                        */
+                        #endregion 
 
                     }
                     else
-                    {                        
-                        llenar_comboBCategopresent();
-                        llenaComboCategoriaBuscarMarca();
-                        //comboBproducCompany();
+                    {
+                        #region Gestion para llenar ComboBox de Compañias
+                        // Llenar ComboBox de Compañias, para la Gestión de Productos
+                        comboBproducCompany();
+                        // Llenar ComboBox de Compañias, para la Gestión de Productos Ancla
                         LlenacomboBuscarClienteProductAncla();
-                        LlenacomboBuscarClienteProductFamily();                        
-                        LlenacomboBuscarCategSubMarca();
+                        // Llenar ComboBox de Compañias, para la Gestión de Familias
+                        LlenacomboBuscarClienteProductFamily();
+                        // Llenar ComboBox de Compañias, para la Gestión de Productos Ancla
                         LlenacomboClienteProductAncla();
+                        // Llenar ComboBox de Compañias, para la Gestión de SubFamilias
                         llenarcomboclienteencrearsubfam(ddl_bsf_cliente);
+                        #endregion
+
+                        #region Gestión para llenar ComboBox de Categorias
+                        // Llenar ComboBox de Categorias, para la Gestión de SubMarcas
+                        LlenacomboBuscarCategSubMarca();
+                        // Llenar ComboBox de Categorias, para la Gestión de Presentaciones
+                        llenar_comboBCategopresent();
+                        // Llenar ComboBox de Categorias, para la Gestión de Marcas
+                        llenaComboCategoriaBuscarMarca();
+                        #endregion 
                     }
+
+                    // Llena Categorias, para la Gestión de SubCategorias
                     LlenacomboCategoConsulta();
+
+                    // Llena Clientes, para la Gestión de Categorìas
                     llenarcombocliente();
+
+                    // Llena Clientes, para la Gestión de Productos Ancla
                     LlenaCategory_CompanyCatego();
+                    
+                    // Llena Categoría, para la Gestión de Productos Ancla
                     cargar_cbxl_cxu_cliente();
-               }
-                catch (Exception ex)
-                {
+
+               }catch (Exception ex){
+
                     string error = "";
                     string mensaje = "";
                     error = Convert.ToString(ex.Message);
@@ -341,18 +382,6 @@ namespace SIGE.Pages.Modulos.Administrativo
             cmbCategoryMarca.DataBind();
             categ = null;
         }
-        private void llenaComboCategoriaBuscarMarca()
-        {
-            DataTable dt = new DataTable();
-            dt = oConn.ejecutarDataTable("UP_WEBXPLORA_AD_CATEGORIA_WITH_PRODUCTS");
-            //Se llena categoria en consulta del maestro de Marca
-            cmbBuscarCategoryM.DataSource = dt;
-            cmbBuscarCategoryM.DataTextField = "Product_Category";
-            cmbBuscarCategoryM.DataValueField = "id_ProductCategory";
-            cmbBuscarCategoryM.DataBind();
-            cmbBuscarCategoryM.Items.Insert(0,new ListItem("<Seleccione...>","0"));
-            dt = null;
-        }
         private void LLenacomboCategoriaconsultarMarcaplanning()
         {
             DataSet ds = null;
@@ -364,57 +393,7 @@ namespace SIGE.Pages.Modulos.Administrativo
             cmbBuscarCategoryM.DataValueField = "id_ProductCategory";
             cmbBuscarCategoryM.DataBind();
         }  
-        /// <summary>
-        /// Llena el AspControl DropDownList 'cmbBuscarCategoryM' con las Categorias Disponibles por idCliente
-        /// </summary>
-        private void LLenacomboCategoriaBuscarMarcaporplanning()
-        {
-            DataSet ds = null;
-            Cliente = Convert.ToString(this.Session["companyid"]);
-            try{
-                // Obtener las Categorias por idCliente
-                ds = oConn.ejecutarDataSet("UP_WEBXPLORA_AD_LLENACOMBOBUSCARCATEGORIAPLANNING", Cliente);
-            }catch (Exception ex) {
-                messages = "Ocurrio un Error: " + ex.ToString();
-            }
 
-            // Verificar que no existan Errores
-            if (messages.Equals("")){
-
-                // Verificar que exista al menos un Elemento para poder llenar el AspControl DropDowList 'cmbBuscarCategoryM' con las Categorias correspondientes
-                
-                if (ds.Tables[0].Rows.Count > 0){
-                    //se llena cliente en Usuarios
-                    cmbBuscarCategoryM.DataSource = ds;
-                    cmbBuscarCategoryM.DataTextField = "Product_Category";
-                    cmbBuscarCategoryM.DataValueField = "id_ProductCategory";
-                    cmbBuscarCategoryM.DataBind();
-                }
-                else{
-
-                    // Mostrar PopUp Mensaje Usuario
-                    messages = "Error: No Existen Categorías Disponibles para el Cliente indicado, ¡por favor Verificar...!";
-                }
-            }else {
-
-                // Mostrar PopUp Mensaje Usuario
-            }
-            
-            #region Data Dummy
-            /*
-            ListItem listItem0 = new ListItem("Categoria00", "0");
-            ListItem listItem1 = new ListItem("Categoria01", "1");
-            ListItem listItem2 = new ListItem("Categoria02", "2");
-            ListItem listItem3 = new ListItem("Categoria03", "3");
-
-            cmbBuscarCategoryM.Items.Add(listItem0);
-            cmbBuscarCategoryM.Items.Add(listItem1);
-            cmbBuscarCategoryM.Items.Add(listItem2);
-            cmbBuscarCategoryM.Items.Add(listItem3);
-            */
-            #endregion
-
-        }  
         private void InicializarPaneles()
         {
             CargaMasiva.Style.Value = "Display:none;";
@@ -610,18 +589,9 @@ namespace SIGE.Pages.Modulos.Administrativo
             }
             ds = null;
         }
-       private void LlenacomboBuscarCategSubMarca()
-        {    
-            DataTable dt = new DataTable();
-            dt = oCoon.ejecutarDataTable("UP_WEBXPLORA_AD_LLENACOMBOBUSCARCATEGORIA");
-            //Se llena categoria en consulta del maestro de Marca
-            cmbCategorySubmarca.DataSource = dt;
-            cmbCategorySubmarca.DataTextField = "Product_Category";
-            cmbCategorySubmarca.DataValueField = "id_ProductCategory";
-            cmbCategorySubmarca.DataBind();
-            dt = null;
-        }
-       private void llenamarcaconsultaSubMarca()
+       
+
+        private void llenamarcaconsultaSubMarca()
        {
            DataTable dt = new DataTable();
            CmbBSelBrand.DataSource = null;
@@ -678,27 +648,7 @@ namespace SIGE.Pages.Modulos.Administrativo
            CmbSelBrand.DataBind();
            dt = null;
        }
-       private void LLenacomboCategoriaBuscarSubMarcaporplanning()
-       {
-           /*DataSet ds = null;
-           Cliente = Convert.ToString(this.Session["companyid"]);
-           ds = oConn.ejecutarDataSet("UP_WEBXPLORA_AD_LLENACOMBOBUSCARCATEGORIAPLANNING", Cliente);
-           //se llena cliente en Usuarios
-           cmbCategorySubmarca.DataSource = ds;
-           cmbCategorySubmarca.DataTextField = "Product_Category";
-           cmbCategorySubmarca.DataValueField = "id_ProductCategory";
-           cmbCategorySubmarca.DataBind();*/
 
-           ListItem listItem0 = new ListItem("Categoria00", "0");
-           ListItem listItem1 = new ListItem("Categoria01", "1");
-           ListItem listItem2 = new ListItem("Categoria02", "2");
-           ListItem listItem3 = new ListItem("Categoria03", "3");
-
-           cmbCategorySubmarca.Items.Add(listItem0);
-           cmbCategorySubmarca.Items.Add(listItem1);
-           cmbCategorySubmarca.Items.Add(listItem2);
-           cmbCategorySubmarca.Items.Add(listItem3);
-       }
        private void LLenacomboCategoriaSubMarcasplanning()
        {
            DataTable dt = null;
@@ -712,15 +662,6 @@ namespace SIGE.Pages.Modulos.Administrativo
            cmbCategoriaSubmarca.DataBind();
            dt = null;
        }
-        private void SavelimpiarControlesCategoria()
-        {
-            TxtCodProductType.Text = "";
-            TxtNomProductType.Text = "";
-            TxtgroupCategory.Text = "";
-            cmb_categorias_cliente.Text = "0";
-            TxtBCodTypeProduct.Text = "";
-            TxtBNomTypeProduct.Text = "";
-        }
         private void activarControlesCategoria()
         {
             TxtCodProductType.Enabled = false;
@@ -737,22 +678,6 @@ namespace SIGE.Pages.Modulos.Administrativo
             PanelSubFamilia.Enabled = false;
             TabProducAncla.Enabled = false;
         }
-        private void desactivarControlesCategoria()
-        {
-            TxtCodProductType.Enabled = false;
-            TxtNomProductType.Enabled = false;
-            TxtgroupCategory.Enabled = false;
-            cmb_categorias_cliente.Enabled = false;
-            Panel_Marcas.Enabled = true;
-            Panel_Submarcas.Enabled = true;
-            Panel_CategProduct.Enabled = true;
-            Panel_ProductFamily.Enabled = true;
-            Panel_SubCategoria.Enabled = true;
-            Panel_Presentación.Enabled = true;
-            PanelProducto.Enabled = true;
-            PanelSubFamilia.Enabled = true;
-            TabProducAncla.Enabled = true;
-        }
         private void crearActivarbotonesCategoria()
         {            
             BtnCrearProductType.Visible = false;
@@ -760,13 +685,7 @@ namespace SIGE.Pages.Modulos.Administrativo
             BtnConsultaProductType.Visible = false;  
             BtnCancelProductType.Visible = true;
         }
-        private void saveActivarbotonesCategoria()
-        {
-            BtnCrearProductType.Visible = true;
-            BtnSaveProductType.Visible = false;
-            BtnConsultaProductType.Visible = true;   
-            BtnCancelProductType.Visible = true;
-        }
+
         private void EditarActivarbotonesCategoria()
         {
             BtnCrearProductType.Visible = false;
@@ -790,14 +709,7 @@ namespace SIGE.Pages.Modulos.Administrativo
             PanelSubFamilia.Enabled = false;
             TabProducAncla.Enabled = false;
         }
-        private void BuscarActivarbotnesCategoria()
-        {
-            BtnCrearProductType.Visible = false;
-            BtnSaveProductType.Visible = false;
-            BtnConsultaProductType.Visible = true;
-            BtnCancelProductType.Visible = true;
-            btnCCategoria.Visible = true;
-        }
+        
         private void SavelimpiarControlesSubCategoria()
         {
             TxtCodSubCategoria.Text = "";
@@ -900,28 +812,7 @@ namespace SIGE.Pages.Modulos.Administrativo
             cmbCateSubCategoria.DataBind();
             ds = null;
         }
-        private void LlenacomboCategoConsulta()
-        {
-            /*DataSet ds1 = new DataSet();
-            ds1 = oConn.ejecutarDataSet("UP_WEB_LLENACOMBOS", 59);
-            //se llena Categorias producto en BuscarSubCategorias
-            cmbBCategoriaSC.DataSource = ds1;
-            cmbBCategoriaSC.DataTextField = "Product_Category";
-            cmbBCategoriaSC.DataValueField = "id_ProductCategory";
-            cmbBCategoriaSC.DataBind();
-            ds1 = null;*/
-
-            ListItem listItem0 = new ListItem("Categoria00", "0");
-            ListItem listItem1 = new ListItem("Categoria01", "1");
-            ListItem listItem2 = new ListItem("Categoria02", "2");
-            ListItem listItem3 = new ListItem("Categoria03", "3");
-
-            cmbBCategoriaSC.Items.Add(listItem0);
-            cmbBCategoriaSC.Items.Add(listItem1);
-            cmbBCategoriaSC.Items.Add(listItem2);
-            cmbBCategoriaSC.Items.Add(listItem3);
-
-        }
+                
         private void LlenacomboConsultaCategoriaSubcategoria()
         {
             DataSet ds = null;
@@ -1112,46 +1003,7 @@ namespace SIGE.Pages.Modulos.Administrativo
             cmbMarcaPresent.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
             ds = null;
         }
-        private void llenar_comboBCategopresent()
-        {
-            DataSet ds5 = new DataSet();
-            ds5 = oConn.ejecutarDataSet("UP_WEBXPLORA_AD_LLENACOMBOCATEGORIACONSULTARPRESENTACIÓN");
-
-            //se llena categira en busqueda de presentación
-            cmbBCategoriaPresent.DataSource = ds5;
-            cmbBCategoriaPresent.DataTextField = "Product_Category";
-            cmbBCategoriaPresent.DataValueField = "id_ProductCategory";
-            cmbBCategoriaPresent.DataBind();
-            ds5 = null;
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        private void llenar_comboBCategopresentPlanning()
-        {            
-            /*
-            DataSet ds = null;
-            Cliente = Convert.ToString(this.Session["companyid"]);
-            ds = oConn.ejecutarDataSet("UP_WEBXPLORA_AD_LLENACOMBOBUSCARCATEGORIAPLANNING", Cliente);
-            //se llena cliente en Usuarios
-            cmbBCategoriaPresent.DataSource = ds;
-            cmbBCategoriaPresent.DataTextField = "Product_Category";
-            cmbBCategoriaPresent.DataValueField = "id_ProductCategory";
-            cmbBCategoriaPresent.DataBind();
-            */
-
-
-            ListItem listItem0 = new ListItem("Categoria00", "0");
-            ListItem listItem1 = new ListItem("Categoria01", "1");
-            ListItem listItem2 = new ListItem("Categoria02", "2");
-            ListItem listItem3 = new ListItem("Categoria03", "3");
-
-            cmbBCategoriaPresent.Items.Add(listItem0);
-            cmbBCategoriaPresent.Items.Add(listItem1);
-            cmbBCategoriaPresent.Items.Add(listItem2);
-            cmbBCategoriaPresent.Items.Add(listItem3);
-
-        }
+        
         private void llenar_comboBCategoSubCategoPlanning()
         {
             DataSet ds = null;
@@ -1396,38 +1248,7 @@ namespace SIGE.Pages.Modulos.Administrativo
             CmbMarcaFamily.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
             ds = null;
         }
-        private void LlenacomboBuscarClienteProductFamily()
-        {
-            DataSet ds = null;
-            ds = oConn.ejecutarDataSet("UP_WEB_LLENACOMBOS", 4);
-            //se llena cliente en Usuarios
-            CmbBClientFamily.DataSource = ds;
-            CmbBClientFamily.DataTextField = "Company_Name";
-            CmbBClientFamily.DataValueField = "Company_id";
-            CmbBClientFamily.DataBind();         
-        }
-        private void comboclienteBuscarenFamilyporplanning()
-        {
-            /*DataSet ds = null;
-            Cliente = Convert.ToString(this.Session["companyid"]);
-            ds = oConn.ejecutarDataSet("UP_WEBXPLORA_AD_CONSULTACLIENTE_PROPIOYCOPETIDORES", Cliente);
-            //se llena cliente en Usuarios
-            CmbBClientFamily.DataSource = ds;
-            CmbBClientFamily.DataTextField = "Company_Name";
-            CmbBClientFamily.DataValueField = "Company_id";
-            CmbBClientFamily.DataBind();*/
 
-            ListItem listItem0 = new ListItem("Compania00", "0");
-            ListItem listItem1 = new ListItem("Compania01", "1");
-            ListItem listItem2 = new ListItem("Compania02", "2");
-            ListItem listItem3 = new ListItem("Compania03", "3");
-
-            CmbBClientFamily.Items.Add(listItem0);
-            CmbBClientFamily.Items.Add(listItem1);
-            CmbBClientFamily.Items.Add(listItem2);
-            CmbBClientFamily.Items.Add(listItem3);
-
-        }  
         private void comboSubmarcaFamily()
         {
             DataTable dt = new DataTable();
@@ -1853,50 +1674,7 @@ namespace SIGE.Pages.Modulos.Administrativo
                 ex.Message.ToString();
             }
         }
-        private void LlenacomboCategProducto(DropDownList oDropDownList)
-        {
-            /*
-             * Ver. 1.0     -   PSalas  -   Se obtiene las categorias utilizando el Framework
-             * Ver. 0.1     -   Anomino -   Obtiene las categorias usando el Procedimiento Almacenado (PA) UP_WEB_LLENACOMBOS
-             */
-            ////////////////////////////////////////////////////////////////////
-            // Ver. 1.0     -   PSalas  -   22 Oct. 2016  
-            ////////////////////////////////////////////////////////////////////
-            try
-            {
-                BL_Categoria oBL_Categoria = new BL_Categoria();
-                List<MA_Categoria> oListCategoria = new List<MA_Categoria>();
-                oListCategoria = oBL_Categoria.Get_Categorias();
-
-                oDropDownList.Items.Clear();
-                foreach (MA_Categoria oMA_Categoria in oListCategoria)
-                {
-                    ListItem listItem = new ListItem(oMA_Categoria.nombre, oMA_Categoria.codigo);
-                    oDropDownList.Items.Add(listItem);
-                }
-                oDropDownList.Items.Insert(0, new ListItem("---Seleccione---", "0"));
-            }
-            catch (Exception ex)
-            {
-                ex.Message.ToString();
-                //lblmensaje.ForeColor = System.Drawing.Color.Red;
-                //lblmensaje.Text = "Ocurrió un error inesperado..." + ex.Message;
-
-            }
-
-            //////////////////////////////////////////////////////////////
-            // Ver. 0.1     -   Anomino -   ??????
-            //////////////////////////////////////////////////////////////
-            //DataSet ds = null;
-            //ds = oConn.ejecutarDataSet("UP_WEB_LLENACOMBOS", 13);
-            ////se llena categorias en tipo de producto
-            //cmbTipoCateg.DataSource = ds;
-            //cmbTipoCateg.DataTextField = "Product_Category";
-            //cmbTipoCateg.DataValueField = "id_ProductCategory";
-            //cmbTipoCateg.DataBind();
-            //ds = null;
-
-        }
+        
         private void LlenaSubporCategoProduct(string codCategoria)
         {
 
@@ -1976,58 +1754,6 @@ namespace SIGE.Pages.Modulos.Administrativo
             }
 
         }
-        private void LlenacomboMarcaProduct(DropDownList oDropDownList)
-        {
-
-            /*
-             * Ver. 1.0     -   PSalas  -   Se obtiene las categorias utilizando el Framework
-             * Ver. 0.1     -   Anomino -   Obtiene las categorias usando el Procedimiento Almacenado (PA) UP_WEB_LLENACOMBOS
-             */
-
-            ////////////////////////////////////////////////////////////////////
-            // Ver. 1.0     -   PSalas  -   29 Oct. 2016 
-            ////////////////////////////////////////////////////////////////////
-            try
-            {
-                BL_Marca oBL_Marca = new BL_Marca();
-                List<MA_Marca> oListMarca = new List<MA_Marca>();
-                oListMarca = oBL_Marca.Get_Marcas();
-
-                oDropDownList.Items.Clear();
-                foreach (MA_Marca oMA_Marca in oListMarca)
-                {
-                    ListItem listItem = new ListItem(oMA_Marca.nombre, oMA_Marca.codigo);
-                    oDropDownList.Items.Add(listItem);
-                }
-                oDropDownList.Items.Insert(0, new ListItem("---Seleccione---", "0"));
-            }
-            catch (Exception ex)
-            {
-                ex.Message.ToString();
-                //lblmensaje.ForeColor = System.Drawing.Color.Red;
-                //lblmensaje.Text = "Ocurrió un error inesperado..." + ex.Message;
-
-            }
-
-            //////////////////////////////////////////////////////////////
-            // Ver. 0.1     -   Anomino -   ??????
-            //////////////////////////////////////////////////////////////
-            /*
-             Obtener las marcas de los todos los productos
-             */
-            /*
-            DataTable dt = new DataTable();
-            dt = oCoon.ejecutarDataTable("UP_WEBXPLORA_AD_LLENACOMBOMARCASEGUNCATEGORIA", cmbTipoCateg.SelectedValue);
-            //se llena Combo de marca en buscar de maestro familia de producto
-            cmbFabricante.DataSource = dt;
-            cmbFabricante.DataTextField = "Name_Brand";
-            cmbFabricante.DataValueField = "id_Brand";
-            cmbFabricante.DataBind();
-            cmbFabricante.Items.Insert(0, new ListItem("<Seleccione...>", "0"));
-            dt = null;
-            */
-
-        }
         private void comboSubmarcaProd()
         {
             DataSet ds = new DataSet();
@@ -2089,52 +1815,18 @@ namespace SIGE.Pages.Modulos.Administrativo
             //{
             //}
         }
-        //private void comboBproducCompany()
-        //{
-        //    DataSet ds1 = new DataSet();
-        //    ds1 = oConn.ejecutarDataSet("UP_WEB_LLENACOMBOS", 33);
-        //    //se llena compañia en buscar Productos
-        //    cbmbcompañia.DataSource = ds1;
-        //    cbmbcompañia.DataTextField = "Company_Name";
-        //    cbmbcompañia.DataValueField = "Company_id";
-        //    cbmbcompañia.DataBind();
-        //    ds1 = null;
-        //}
-        private void comboclienteBuscarproductoporplanning()
-        {
-            /*DataSet ds = null;
-            Cliente = Convert.ToString(this.Session["companyid"]);
-            ds = oConn.ejecutarDataSet("UP_WEBXPLORA_AD_CONSULTACLIENTE_PROPIOYCOPETIDORES", Cliente);
-            //se llena cliente en Usuarios
-            cbmbcompañia.DataSource = ds;
-            cbmbcompañia.DataTextField = "Company_Name";
-            cbmbcompañia.DataValueField = "Company_id";
-            cbmbcompañia.DataBind();*/
 
-            ListItem listItem0 = new ListItem("Compania00", "0");
-            ListItem listItem1 = new ListItem("Compania01", "1");
-            ListItem listItem2 = new ListItem("Compania02", "2");
-            ListItem listItem3 = new ListItem("Compania03", "3");
-
-            //cbmbcompañia.Items.Add(listItem0);
-            //cbmbcompañia.Items.Add(listItem1);
-            //cbmbcompañia.Items.Add(listItem2);
-            //cbmbcompañia.Items.Add(listItem3);
-
-
-        }  
         private void llenacomboCategoriaxClienteenBusProduct()
         {
-            //DataSet ds1 = new DataSet();
-            //ds1 = oConn.ejecutarDataSet("UP_WEBXPLORA_AD_LLENACOMBOMARCAENBPRODUC", cbmbcompañia.SelectedValue,"0");
-            ////se llena marca sefun cliente en buscar Productos
-            //cmbBCategoriaProduct.DataSource = ds1.Tables[0];
-            //cmbBCategoriaProduct.DataTextField = "Product_Category";
-            //cmbBCategoriaProduct.DataValueField = "id_ProductCategory";
-            //cmbBCategoriaProduct.DataBind();
-            //cmbBCategoriaProduct.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
-            //IbtnProductos_ModalPopupExtender.Show();
-            //ds1 = null;
+            DataSet ds1 = new DataSet();
+            ds1 = oConn.ejecutarDataSet("UP_WEBXPLORA_AD_LLENACOMBOMARCAENBPRODUC", cbmbcompañia.SelectedValue, "0");
+            //se llena marca sefun cliente en buscar Productos
+            cmbBCategoriaProduct.DataSource = ds1.Tables[0];
+            cmbBCategoriaProduct.DataTextField = "Product_Category";
+            cmbBCategoriaProduct.DataValueField = "id_ProductCategory";
+            cmbBCategoriaProduct.DataBind();
+            cmbBCategoriaProduct.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
+            IbtnProductos_ModalPopupExtender.Show();
         }
         //private void llenacomboMarcaaxCategoriaenBusProduct()
         //{
@@ -2355,19 +2047,7 @@ namespace SIGE.Pages.Modulos.Administrativo
             BtnCancelarAncla.Visible = true;
 
         }
-        private void LlenacomboClienteProductAncla()
-        {
-            DataSet ds = null;
-            ds = owsadministrativo.llenaCombosPAncla(0, "0", 0, 0,"0");
-           
-            //se llena cliente en producto Ancla
-            cmbClienteAncla.DataSource = ds.Tables[0];
-            cmbClienteAncla.DataTextField = "Company_Name";
-            cmbClienteAncla.DataValueField = "Company_id";
-            cmbClienteAncla.DataBind();
-            cmbClienteAncla.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
-            ds = null;
-        }
+
         private void LlenacomboGVClienteProductAncla(int i)
         {
             DataSet ds = null;
@@ -2388,28 +2068,8 @@ namespace SIGE.Pages.Modulos.Administrativo
             }
            ds = null;
         }
-        private void comboclienteenPanclaporplanning()
-        {
-            /*DataSet ds = null;
-            Cliente = Convert.ToString(this.Session["companyid"]);
-            ds = oConn.ejecutarDataSet("UP_WEBXPLORA_AD_CONSULTACLIENTE_PROPIOYCOPETIDORES", Cliente);
-            //se llena cliente en Usuarios
-            cmbClienteAncla.DataSource = ds;
-            cmbClienteAncla.DataTextField = "Company_Name";
-            cmbClienteAncla.DataValueField = "Company_id";
-            cmbClienteAncla.DataBind();*/
+        
 
-            ListItem listItem0 = new ListItem("Compania00", "0");
-            ListItem listItem1 = new ListItem("Compania01", "1");
-            ListItem listItem2 = new ListItem("Compania02", "2");
-            ListItem listItem3 = new ListItem("Compania03", "3");
-
-            cmbClienteAncla.Items.Add(listItem0);
-            cmbClienteAncla.Items.Add(listItem1);
-            cmbClienteAncla.Items.Add(listItem2);
-            cmbClienteAncla.Items.Add(listItem3);
-
-        }
         private void comboclienteenGVPanclaporplanning(int i)
         {
             DataSet ds = null;
@@ -2430,42 +2090,7 @@ namespace SIGE.Pages.Modulos.Administrativo
             }
             ds = null;
         }  
-        private void LlenacomboBuscarClienteProductAncla()
-        {
-            DataSet ds = null;
-            ds = owsadministrativo.llenaConsultaCombosPAncla(0);
-            //se llena cliente enconsulta en productos Ancla
-            CmbBClientePAncla.DataSource = ds.Tables[0];
-            CmbBClientePAncla.DataTextField = "Company_Name";
-            CmbBClientePAncla.DataValueField = "Company_id";
-            CmbBClientePAncla.DataBind();
-            CmbBClientePAncla.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
-            ds = null;
-        }
-        private void comboclienteenBuscarPanclaporplanning()
-        {
-            /*
-            DataSet ds = null;
-            Cliente = Convert.ToString(this.Session["companyid"]);
-            ds = oConn.ejecutarDataSet("UP_WEBXPLORA_AD_CONSULTACLIENTE_PROPIOYCOPETIDORES", Cliente);
-            //se llena cliente en Usuarios
-            CmbBClientePAncla.DataSource = ds;
-            CmbBClientePAncla.DataTextField = "Company_Name";
-            CmbBClientePAncla.DataValueField = "Company_id";
-            CmbBClientePAncla.DataBind();
-            */
 
-            ListItem listItem0 = new ListItem("CompaniaAncla00", "0");
-            ListItem listItem1 = new ListItem("CompaniaAncla01", "1");
-            ListItem listItem2 = new ListItem("CompaniaAncla02", "2");
-            ListItem listItem3 = new ListItem("CompaniaAncla03", "3");
-
-            CmbBClientePAncla.Items.Add(listItem0);
-            CmbBClientePAncla.Items.Add(listItem1);
-            CmbBClientePAncla.Items.Add(listItem2);
-            CmbBClientePAncla.Items.Add(listItem3);
-
-        }  
         private void LlenacomboBuscarCategoryProductAncla()
         {
             DataSet ds = null;
@@ -2885,28 +2510,53 @@ namespace SIGE.Pages.Modulos.Administrativo
             ddl_sf_submarca.Enabled = false;
             ddl_sf_cliente.Enabled = false;
         }
-        private void MensajeAlerta()
-        {            
-            ModalPopupAlertas.Show();
-            BtnAceptarAlert.Focus();
-            //ScriptManager.RegisterStartupScript(
-            //    this, this.GetType(), "myscript", "alert('Debe ingresar todos los parametros con (*)');", true);
-        }
+
+        /// <summary>
+        /// Llenar Compañias, en el AspControl DropDownList 'cmb_categorias_cliente' y 'cmb_Cliente', para la Gestión de Categorias
+        /// </summary>
         private void llenarcombocliente()
         {
-            /*DataTable dt = null;
-            dt = oConn.ejecutarDataTable("UP_WEBXPLORA_AD_OBTENER_CLIENTES_EXTERNOS");
-            //se llena cliente 
-            cmb_categorias_cliente.DataSource = dt;
-            cmb_categorias_cliente.DataTextField = "Company_Name";
-            cmb_categorias_cliente.DataValueField = "Company_id";
-            cmb_categorias_cliente.DataBind();
-            cmb_categorias_cliente.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
-            foreach (ListItem li in cmb_categorias_cliente.Items)
+            messages = "";
+            DataTable dt = null;
+            try
             {
-                cmb_Cliente.Items.Add(li);
-            }*/
+                dt = oConn.ejecutarDataTable("UP_WEBXPLORA_AD_OBTENER_CLIENTES_EXTERNOS");
+            }
+            catch (Exception ex)
+            {
+                messages = "Ocurrio un Error: " + ex.ToString();
+            }
+            
+            // Verificar que no existan Errores
+            if (messages.Equals(""))
+            {
+                if (dt.Rows.Count > 0)
+                {
+                    //se llena cliente 
+                    cmb_categorias_cliente.DataSource = dt;
+                    cmb_categorias_cliente.DataTextField = "Company_Name";
+                    cmb_categorias_cliente.DataValueField = "Company_id";
+                    cmb_categorias_cliente.DataBind();
+                    cmb_categorias_cliente.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
+                    foreach (ListItem li in cmb_categorias_cliente.Items)
+                    {
+                        cmb_Cliente.Items.Add(li);
+                    }
+                }
+                else
+                {
+                    // Mostrar PopUp Mensaje Usuario
+                    messages = "Error: No Existen Compañias Disponibles, ¡por favor Verificar...!";
+                }
+            }
+            else
+            {
+                // Mostrar PopUp Mensaje Usuario
+            }
 
+
+            #region Data Dummy
+            /*
             ListItem listItem0 = new ListItem("Compania00", "0");
             ListItem listItem1 = new ListItem("Compania01", "1");
             ListItem listItem2 = new ListItem("Compania02", "2");
@@ -2917,12 +2567,169 @@ namespace SIGE.Pages.Modulos.Administrativo
             cmb_categorias_cliente.Items.Add(listItem2);
             cmb_categorias_cliente.Items.Add(listItem3);
             cmb_categorias_cliente.Items.Insert(0, new ListItem("<Seleccione..>", "99"));
+            */
+            #endregion
+        }
+        #endregion
 
+        #region COMUNES
+        /// <summary>
+        /// Llena Compañias en el AspControl que pasan como parametro 'ddl', para la Gestión de Sub Familias
+        /// </summary>
+        /// <param name="ddl"></param>
+        private void llenarcomboclienteencrearsubfam(DropDownList ddl)
+        {
+            messages = "";
+            DataSet ds = null;
+            try
+            {
+                ds = oConn.ejecutarDataSet("UP_WEB_LLENACOMBOS", 4);
+            }
+            catch (Exception ex)
+            {
+                messages = "Ocurrio un Error: " + ex.ToString();
+            }
+
+            // Verificar que no existan Errores
+            if (messages.Equals(""))
+            {
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    //se llena cliente en Usuarios
+                    ddl.DataSource = ds;
+                    ddl.DataTextField = "Company_Name";
+                    ddl.DataValueField = "Company_id";
+                    ddl.DataBind();
+                }
+                else
+                {
+                    // Mostrar PopUp Mensaje Usuario
+                    messages = "Error: No Existen Categorías Disponibles para el Cliente indicado, ¡por favor Verificar...!";
+                }
+            }
+            else
+            {
+                // Mostrar PopUp Mensaje Usuario
+            }
+
+        }
+        /// <summary>
+        /// Mensaje de Alertas
+        /// </summary>
+        private void MensajeAlerta()
+        {
+            ModalPopupAlertas.Show();
+            BtnAceptarAlert.Focus();
+            //ScriptManager.RegisterStartupScript(
+            //    this, this.GetType(), "myscript", "alert('Debe ingresar todos los parametros con (*)');", true);
         }
         #endregion
 
         #region Marcas
+        /// <summary>
+        /// Llenar las Categorias, en el AspControl DropDownList 'cmbBuscarCategoryM' para la gestión de Marcas
+        /// </summary>
+        private void llenaComboCategoriaBuscarMarca()
+        {
+            messages = "";
+            DataTable dt = new DataTable();
+            try
+            {
+                dt = oConn.ejecutarDataTable("UP_WEBXPLORA_AD_CATEGORIA_WITH_PRODUCTS");
+            }
+            catch (Exception ex)
+            {
+                messages = "Ocurrio un Error: " + ex.ToString();
+            }
 
+            // Verificar que no existan Errores
+            if (messages.Equals(""))
+            {
+                if (dt.Rows.Count > 0)
+                {
+                    //Se llena categoria en consulta del maestro de Marca
+                    cmbBuscarCategoryM.DataSource = dt;
+                    cmbBuscarCategoryM.DataTextField = "Product_Category";
+                    cmbBuscarCategoryM.DataValueField = "id_ProductCategory";
+                    cmbBuscarCategoryM.DataBind();
+                    cmbBuscarCategoryM.Items.Insert(0, new ListItem("<Seleccione...>", "0"));
+
+                }
+                else
+                {
+
+                    // Mostrar PopUp Mensaje Usuario
+                    messages = "Error: No Existen Marcas Disponibles, ¡por favor Verificar...!";
+                }
+            }
+            else
+            {
+
+                // Mostrar PopUp Mensaje Usuario
+            }
+        }
+        
+        /// <summary>
+        /// Cargar las Categorias por Cliente, en el AspControl DropDownList 'cmbBuscarCategoryM' con las Categorias Disponibles por idCliente para la Gestión de Marcas
+        /// </summary>
+        private void LLenacomboCategoriaBuscarMarcaporplanning()
+        {
+            messages = "";
+            DataSet ds = null;
+            Cliente = Convert.ToString(this.Session["companyid"]);
+            try
+            {
+                // Obtener las Categorias por idCliente
+                ds = oConn.ejecutarDataSet("UP_WEBXPLORA_AD_LLENACOMBOBUSCARCATEGORIAPLANNING", Cliente);
+            }
+            catch (Exception ex)
+            {
+                messages = "Ocurrio un Error: " + ex.ToString();
+            }
+
+            // Verificar que no existan Errores
+            if (messages.Equals(""))
+            {
+
+                // Verificar que exista al menos un Elemento para poder llenar el AspControl DropDowList 'cmbBuscarCategoryM' con las Categorias correspondientes
+
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    //se llena cliente en Usuarios
+                    cmbBuscarCategoryM.DataSource = ds;
+                    cmbBuscarCategoryM.DataTextField = "Product_Category";
+                    cmbBuscarCategoryM.DataValueField = "id_ProductCategory";
+                    cmbBuscarCategoryM.DataBind();
+                }
+                else
+                {
+
+                    // Mostrar PopUp Mensaje Usuario
+                    messages = "Error: No Existen Categorías Disponibles para el Cliente indicado, ¡por favor Verificar...!";
+                }
+            }
+            else
+            {
+
+                // Mostrar PopUp Mensaje Usuario
+            }
+
+            #region Data Dummy
+            /*
+            ListItem listItem0 = new ListItem("Categoria00", "0");
+            ListItem listItem1 = new ListItem("Categoria01", "1");
+            ListItem listItem2 = new ListItem("Categoria02", "2");
+            ListItem listItem3 = new ListItem("Categoria03", "3");
+
+            cmbBuscarCategoryM.Items.Add(listItem0);
+            cmbBuscarCategoryM.Items.Add(listItem1);
+            cmbBuscarCategoryM.Items.Add(listItem2);
+            cmbBuscarCategoryM.Items.Add(listItem3);
+            */
+            #endregion
+
+        }  
+        
         protected void BtnCrearBrand_Click(object sender, EventArgs e)
         {
             try
@@ -3430,6 +3237,98 @@ namespace SIGE.Pages.Modulos.Administrativo
         #endregion
 
         #region SubMarcas
+        /// <summary>
+        /// Llenar Combo Categoria por Cliente, en el AspControl DropDownList 'cmbCategorySubmarca' para la Gestión de SubMarca
+        /// </summary>
+        private void LLenacomboCategoriaBuscarSubMarcaporplanning()
+        {
+            messages = "";
+            DataSet ds = null;
+            Cliente = Convert.ToString(this.Session["companyid"]);
+            try
+            {
+                ds = oConn.ejecutarDataSet("UP_WEBXPLORA_AD_LLENACOMBOBUSCARCATEGORIAPLANNING", Cliente);
+            }
+            catch (Exception ex)
+            {
+                messages = "Ocurrio un Error: " + ex.ToString();
+            }
+
+            if (messages.Equals(""))
+            {
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    //se llena cliente en Usuarios
+                    cmbCategorySubmarca.DataSource = ds;
+                    cmbCategorySubmarca.DataTextField = "Product_Category";
+                    cmbCategorySubmarca.DataValueField = "id_ProductCategory";
+                    cmbCategorySubmarca.DataBind();
+                }
+                else
+                {
+                    // Mostrar PopUp Mensaje Usuario
+                    messages = "Error: No Existen Categorías Disponibles para el Cliente indicado, ¡por favor Verificar...!";
+                }
+            }
+            else
+            {
+                // Mostrar PopUp Mensaje Usuario
+            }
+            #region Data Dummy
+            /*
+            ListItem listItem0 = new ListItem("Categoria00", "0");
+            ListItem listItem1 = new ListItem("Categoria01", "1");
+            ListItem listItem2 = new ListItem("Categoria02", "2");
+            ListItem listItem3 = new ListItem("Categoria03", "3");
+
+            cmbCategorySubmarca.Items.Add(listItem0);
+            cmbCategorySubmarca.Items.Add(listItem1);
+            cmbCategorySubmarca.Items.Add(listItem2);
+            cmbCategorySubmarca.Items.Add(listItem3);
+            */
+            #endregion
+        }
+        /// <summary>
+        /// Llenar Categorias, en el AspControl DropDownList 'cmbCategorySubmarca' para la Gestión de SubMarca
+        /// </summary>
+        private void LlenacomboBuscarCategSubMarca()
+        {
+            messages = "";
+            DataTable dt = new DataTable();
+            try
+            {
+                dt = oCoon.ejecutarDataTable("UP_WEBXPLORA_AD_LLENACOMBOBUSCARCATEGORIA");
+            }
+            catch (Exception ex)
+            {
+                messages = "Ocurrio un Error: " + ex.ToString();
+            }
+
+            // Verificar que no existan Errores
+            if (messages.Equals(""))
+            {
+                if (dt.Rows.Count > 0)
+                {
+                    //Se llena categoria en consulta del maestro de Marca
+                    cmbCategorySubmarca.DataSource = dt;
+                    cmbCategorySubmarca.DataTextField = "Product_Category";
+                    cmbCategorySubmarca.DataValueField = "id_ProductCategory";
+                    cmbCategorySubmarca.DataBind();
+                }
+                else
+                {
+
+                    // Mostrar PopUp Mensaje Usuario
+                    messages = "Error: No Existen Categorías Disponibles, ¡por favor Verificar...!";
+                }
+            }
+            else
+            {
+
+                // Mostrar PopUp Mensaje Usuario
+            }
+
+        }
         protected void BtnCrearSubBrand_Click(object sender, EventArgs e)
         {
             if (this.planningADM == "SI")
@@ -3894,6 +3793,59 @@ namespace SIGE.Pages.Modulos.Administrativo
         #endregion
 
         #region Categoria
+        /// <summary>
+        /// Deshabilitar Opciones de Crear y Guardar, para la Gestión de Categorias
+        /// </summary>
+        private void BuscarActivarbotnesCategoria()
+        {
+            BtnCrearProductType.Visible = false;
+            BtnSaveProductType.Visible = false;
+            BtnConsultaProductType.Visible = true;
+            BtnCancelProductType.Visible = true;
+            btnCCategoria.Visible = true;
+        }
+        /// <summary>
+        /// Desactivar la Opción de Save, para la Opción de Gestión de Categorías
+        /// </summary>
+        private void saveActivarbotonesCategoria()
+        {
+            BtnCrearProductType.Visible = true;
+            BtnSaveProductType.Visible = false;
+            BtnConsultaProductType.Visible = true;
+            BtnCancelProductType.Visible = true;
+        }
+        /// <summary>
+        /// Desactivar Controles, en la Gestión de Categorías
+        /// </summary>
+        private void desactivarControlesCategoria()
+        {
+            TxtCodProductType.Enabled = false;
+            TxtNomProductType.Enabled = false;
+            TxtgroupCategory.Enabled = false;
+            cmb_categorias_cliente.Enabled = false;
+            Panel_Marcas.Enabled = true;
+            Panel_Submarcas.Enabled = true;
+            Panel_CategProduct.Enabled = true;
+            Panel_ProductFamily.Enabled = true;
+            Panel_SubCategoria.Enabled = true;
+            Panel_Presentación.Enabled = true;
+            PanelProducto.Enabled = true;
+            PanelSubFamilia.Enabled = true;
+            TabProducAncla.Enabled = true;
+        }
+        /// <summary>
+        /// Limpiar los Input, para la Gestión de Categorías
+        /// </summary>
+        private void SavelimpiarControlesCategoria()
+        {
+            TxtCodProductType.Text = "";
+            TxtNomProductType.Text = "";
+            TxtgroupCategory.Text = "";
+            cmb_categorias_cliente.Text = "0";
+            TxtBCodTypeProduct.Text = "";
+            TxtBNomTypeProduct.Text = "";
+        }
+        
         protected void BtnCrearProductType_Click(object sender, EventArgs e)
         {
             SavelimpiarControlesCategoria();
@@ -3901,7 +3853,9 @@ namespace SIGE.Pages.Modulos.Administrativo
             activarControlesCategoria();
             BtnCargaMasivaCate.Visible = false;
         }
-
+        /// <summary>
+        /// Opcion de Cancelar, en la Gestión de Categorias
+        /// </summary>
         private void cancelarCat()
         {
             saveActivarbotonesCategoria();
@@ -3974,7 +3928,11 @@ namespace SIGE.Pages.Modulos.Administrativo
                 }
             }
         }
-
+        /// <summary>
+        /// Evento Click del Panel de Busqueda de Categorias, para filtrar la información de las Categorías, aplicando los filtros, para la Gestión de Categorías.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void BtnBTypeProduct_Click(object sender, EventArgs e)
         {
             desactivarControlesCategoria();
@@ -3983,16 +3941,21 @@ namespace SIGE.Pages.Modulos.Administrativo
             TxtBNomTypeProduct.Text = TxtBNomTypeProduct.Text.Trim();
             scompany_id = cmb_Cliente.SelectedValue.ToString().Trim();
             
-            if (TxtBCodTypeProduct.Text == "" && TxtBNomTypeProduct.Text == "" && cmb_Cliente.Text == "0")
-            {
+            // Validación que los Filtros o Criterios de Busqueda se encuentren especificados
+            if (TxtBCodTypeProduct.Text == "" 
+                && TxtBNomTypeProduct.Text == "" 
+                && cmb_Cliente.Text == "0") {
+
                 this.Session["mensajealert"] = "Código y/o nombre de Categoría de producto y/o Cliente";
                 Alertas.CssClass = "MensajesError";
                 LblFaltantes.Text = "Ingrese por lo menos un parámetro de consulta";
                 cancelarCat();
                 MensajeAlerta();
+                // Mostrar el AspControl ModalPopUpExtender 'IbtnProductType' relacionado al AspControl Panel 'BuscarProductCateg'
                 IbtnProductType.Show();
                 return;
             }
+
             BuscarActivarbotnesCategoria();
             scodProductType = TxtBCodTypeProduct.Text;
             sproductType = TxtBNomTypeProduct.Text;
@@ -4002,7 +3965,19 @@ namespace SIGE.Pages.Modulos.Administrativo
             this.Session["scodProductType"] = scodProductType;
             this.Session["sproductType"] = sproductType;
             this.Session["scompany_id"] = scompany_id;
-            DataTable oeProductType = oProductType.SearchProductCategory(scodProductType, sproductType, scompany_id);
+
+            DataTable oeProductType = new DataTable();
+            try
+            {
+                // Buscar las Categorias según los Filtros
+                oeProductType = oProductType.SearchProductCategory(scodProductType, sproductType, scompany_id);
+            }
+            catch (Exception ex)
+            {
+                messages = "Ocurrio un Error: " + ex.ToString();
+            }
+
+            
             this.Session["tProductType"] = oeProductType;
             if (oeProductType != null)
             {
@@ -4020,9 +3995,13 @@ namespace SIGE.Pages.Modulos.Administrativo
                     IbtnProductType.Show();
                 }               
             }
+
+            // Setea la Session para Exportar a Excel.
             this.Session["Exportar_Excel"] = "Exportar_Categorias";
 
+            // Crear un DataTable 'dtnameCaategoria'
             DataTable dtnameCaategoria = new DataTable();
+            // Agregar Columnas al DataTable 'dtnameCaategoria'
             dtnameCaategoria.Columns.Add("Código", typeof(String));
             dtnameCaategoria.Columns.Add("Categoria", typeof(String));
             dtnameCaategoria.Columns.Add("Grupo Categoria", typeof(String));
@@ -4044,7 +4023,10 @@ namespace SIGE.Pages.Modulos.Administrativo
 
             this.Session["CExporCategoria"] = dtnameCaategoria;
         }
-
+        /// <summary>
+        /// Llenar la información del AspControl GridView 'GVConsultaCategoria' y Hacer Visible el Panel 'CosultaGVCategoria'
+        /// </summary>
+        /// <param name="oeProductType"></param>
         private void gridbuscarCategoria(DataTable oeProductType)
         {
             GVConsultaCategoria.EditIndex = -1;
@@ -4061,7 +4043,9 @@ namespace SIGE.Pages.Modulos.Administrativo
             SavelimpiarControlesCategoria();
             BtnCargaMasivaCate.Visible = true;
         }
-
+        /// <summary>
+        /// Gestion las Opciones de Categoría para deshabilitarlos en caso encuentre un Error.
+        /// </summary>
         private void CancelarCat()
         {
             saveActivarbotonesCategoria();
@@ -4263,6 +4247,61 @@ namespace SIGE.Pages.Modulos.Administrativo
         #endregion
 
         #region SubCategoria
+        /// <summary>
+        /// Llenar las Categorias, en el AspControl DropDownList 'cmbBCategoriaSC' para la Gestión de SubCategorias
+        /// </summary>
+        private void LlenacomboCategoConsulta()
+        {
+            messages = "";
+            DataSet ds1 = new DataSet();
+            try
+            {
+                ds1 = oConn.ejecutarDataSet("UP_WEB_LLENACOMBOS", 59);
+            }
+            catch (Exception ex)
+            {
+                messages = "Ocurrio un Error: " + ex.ToString();
+            }
+
+            // Verificar que no existan Errores
+            if (messages.Equals(""))
+            {
+                if (ds1.Tables[0].Rows.Count > 0)
+                {
+                    //se llena Categorias producto en BuscarSubCategorias
+                    cmbBCategoriaSC.DataSource = ds1;
+                    cmbBCategoriaSC.DataTextField = "Product_Category";
+                    cmbBCategoriaSC.DataValueField = "id_ProductCategory";
+                    cmbBCategoriaSC.DataBind();
+                    ds1 = null;
+                }
+                else
+                {
+                    // Mostrar PopUp Mensaje Usuario
+                    messages = "Error: No Existen Categorías Disponibles para el Cliente indicado, ¡por favor Verificar...!";
+                }
+            }
+            else
+            {
+                // Mostrar PopUp Mensaje Usuario
+            }
+
+            #region Data Dummy
+            /*
+            ListItem listItem0 = new ListItem("Categoria00", "0");
+            ListItem listItem1 = new ListItem("Categoria01", "1");
+            ListItem listItem2 = new ListItem("Categoria02", "2");
+            ListItem listItem3 = new ListItem("Categoria03", "3");
+
+
+            cmbBCategoriaSC.Items.Add(listItem0);
+            cmbBCategoriaSC.Items.Add(listItem1);
+            cmbBCategoriaSC.Items.Add(listItem2);
+            cmbBCategoriaSC.Items.Add(listItem3);
+            */
+            #endregion
+
+        }
 
         protected void BtnCrearSubCategory_Click(object sender, EventArgs e)
         {
@@ -4612,7 +4651,105 @@ namespace SIGE.Pages.Modulos.Administrativo
 
         #endregion 
 
-        #region Presentación de Producto
+        #region Presentación
+        /// <summary>
+        /// Cargar las Categorías, para el AspControl DropDownList 'cmbBCategoriaPresent' para la gestión de Presentaciones
+        /// </summary>
+        private void llenar_comboBCategopresent()
+        {
+            messages = "";
+            DataSet ds5 = new DataSet();
+            try
+            {
+                ds5 = oConn.ejecutarDataSet("UP_WEBXPLORA_AD_LLENACOMBOCATEGORIACONSULTARPRESENTACIÓN");
+            }
+            catch (Exception ex)
+            {
+                messages = "Ocurrio un Error: " + ex.ToString();
+            }
+
+            if (messages.Equals(""))
+            {
+                if (ds5.Tables[0].Rows.Count > 0)
+                {
+                    //se llena categira en busqueda de presentación
+                    cmbBCategoriaPresent.DataSource = ds5;
+                    cmbBCategoriaPresent.DataTextField = "Product_Category";
+                    cmbBCategoriaPresent.DataValueField = "id_ProductCategory";
+                    cmbBCategoriaPresent.DataBind();
+                }
+                else
+                {
+                    // Mostrar PopUp Mensaje Usuario
+                    messages = "Error: No Existen Categorías Disponibles para el Cliente indicado, ¡por favor Verificar...!";
+                }
+            }
+            else
+            {
+                // Mostrar PopUp Mensaje Usuario
+            }
+
+        }
+        /// <summary>
+        /// Llena las Categorias por Cliente, en el AspControl DropDownList 'cmbBCategoriaPresent' para la Gestión de Presentación
+        /// </summary>
+        private void llenar_comboBCategopresentPlanning()
+        {
+            messages = "";
+            DataSet ds = null;
+            Cliente = Convert.ToString(this.Session["companyid"]);
+            try
+            {
+                // Obtener las Categorias por idCliente
+                ds = oConn.ejecutarDataSet("UP_WEBXPLORA_AD_LLENACOMBOBUSCARCATEGORIAPLANNING", Cliente);
+            }
+            catch (Exception ex)
+            {
+                messages = "Ocurrio un Error: " + ex.ToString();
+            }
+
+            // Verificar que no existan Errores
+            if (messages.Equals(""))
+            {
+
+                // Verificar que exista al menos un Elemento para poder llenar el AspControl DropDowList 'cmbBuscarCategoryM' con las Categorias correspondientes
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+
+                    //se llena cliente en Usuarios
+                    cmbBCategoriaPresent.DataSource = ds;
+                    cmbBCategoriaPresent.DataTextField = "Product_Category";
+                    cmbBCategoriaPresent.DataValueField = "id_ProductCategory";
+                    cmbBCategoriaPresent.DataBind();
+
+                }
+                else
+                {
+                    // Mostrar PopUp Mensaje Usuario
+                    messages = "Error: No Existen Categorías Disponibles para el Cliente indicado, ¡por favor Verificar...!";
+                }
+            }
+            else
+            {
+
+                // Mostrar PopUp Mensaje Usuario
+            }
+
+            #region Data Dummy
+            /*
+            ListItem listItem0 = new ListItem("Categoria00", "0");
+            ListItem listItem1 = new ListItem("Categoria01", "1");
+            ListItem listItem2 = new ListItem("Categoria02", "2");
+            ListItem listItem3 = new ListItem("Categoria03", "3");
+
+            cmbBCategoriaPresent.Items.Add(listItem0);
+            cmbBCategoriaPresent.Items.Add(listItem1);
+            cmbBCategoriaPresent.Items.Add(listItem2);
+            cmbBCategoriaPresent.Items.Add(listItem3);
+            */
+            #endregion
+
+        }
         protected void BtnCrearPresen_Click(object sender, EventArgs e)
         {
             try
@@ -5073,6 +5210,261 @@ namespace SIGE.Pages.Modulos.Administrativo
         #endregion
 
         #region Productos
+        /// <summary>
+        /// Llenar Compañias, en el AspControl DropDownList 'cbmbcompañia' para la Gestión de Productos
+        /// </summary>
+        private void comboBproducCompany()
+        {
+            messages = "";
+            DataSet ds1 = new DataSet();
+            try
+            {
+                ds1 = oConn.ejecutarDataSet("UP_WEB_LLENACOMBOS", 33);
+            }
+            catch (Exception ex) {
+                messages = "Ocurrio un Error: " + ex.ToString();
+            }
+
+            // Verificar que no existan Errores
+            if (messages.Equals(""))
+            {
+
+                // Verificar que exista al menos un Elemento para poder llenar el AspControl DropDowList 'cmbBuscarCategoryM' con las Categorias correspondientes
+                if (ds1.Tables[0].Rows.Count > 0)
+                {
+                    //se llena compañia en buscar Productos
+                    cbmbcompañia.DataSource = ds1;
+                    cbmbcompañia.DataTextField = "Company_Name";
+                    cbmbcompañia.DataValueField = "Company_id";
+                    cbmbcompañia.DataBind();
+                }
+                else
+                {
+
+                    // Mostrar PopUp Mensaje Usuario
+                    messages = "Error: No Existen Compañias Disponibles, ¡por favor Verificar...!";
+                }
+            }
+            else
+            {
+
+                // Mostrar PopUp Mensaje Usuario
+            }
+
+
+
+        }
+
+
+        /// <summary>
+        /// Llena las Marcas por idCategoria, en el AspControl DropDownList 'cmbFabricante' para la Gestión de Productos
+        /// </summary>
+        /// <param name="oDropDownList"></param>
+        private void LlenacomboMarcaProduct(DropDownList oDropDownList)
+        {
+
+            #region Codigo Comentado para pasar a una versión Anterior
+            //
+            // Ver. 1.0     -   PSalas  -   Se obtiene las categorias utilizando el Framework
+            // Ver. 0.1     -   Anomino -   Obtiene las categorias usando el Procedimiento Almacenado (PA) UP_WEB_LLENACOMBOS
+            //
+
+            ////////////////////////////////////////////////////////////////////
+            // Ver. 1.0     -   PSalas  -   29 Oct. 2016 
+            ////////////////////////////////////////////////////////////////////
+            /*
+            try
+            {
+                BL_Marca oBL_Marca = new BL_Marca();
+                List<MA_Marca> oListMarca = new List<MA_Marca>();
+                oListMarca = oBL_Marca.Get_Marcas();
+
+                oDropDownList.Items.Clear();
+                foreach (MA_Marca oMA_Marca in oListMarca)
+                {
+                    ListItem listItem = new ListItem(oMA_Marca.nombre, oMA_Marca.codigo);
+                    oDropDownList.Items.Add(listItem);
+                }
+                oDropDownList.Items.Insert(0, new ListItem("---Seleccione---", "0"));
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                //lblmensaje.ForeColor = System.Drawing.Color.Red;
+                //lblmensaje.Text = "Ocurrió un error inesperado..." + ex.Message;
+
+            }
+            */
+            #endregion
+
+            //////////////////////////////////////////////////////////////
+            // Ver. 0.1     -   Anomino -   ??????
+            //////////////////////////////////////////////////////////////
+            /*
+             Obtener las marcas de los todos los productos
+             */
+            messages = "";
+            DataTable dt = new DataTable();
+            try
+            {
+                dt = oCoon.ejecutarDataTable("UP_WEBXPLORA_AD_LLENACOMBOMARCASEGUNCATEGORIA", cmbTipoCateg.SelectedValue);
+            }
+            catch (Exception ex)
+            {
+                messages = "Ocurrio un Error: " + ex.ToString();
+            }
+
+            if (messages.Equals(""))
+            {
+                if (dt.Rows.Count > 0)
+                {
+                    //se llena Combo de marca en buscar de maestro familia de producto
+                    cmbFabricante.DataSource = dt;
+                    cmbFabricante.DataTextField = "Name_Brand";
+                    cmbFabricante.DataValueField = "id_Brand";
+                    cmbFabricante.DataBind();
+                    cmbFabricante.Items.Insert(0, new ListItem("<Seleccione...>", "0"));
+                }
+                else
+                {
+                    // Mostrar PopUp Mensaje Usuario
+                    messages = "Error: No Existen Marcas Disponibles para la Categoría seleccionada, ¡por favor Verificar...!";
+                }
+            }
+            else
+            {
+                // Mostrar PopUp Mensaje Usuario
+            }
+
+        }
+
+        /// <summary>
+        /// Llenar las Categorias en el AspControl DropDownList 'cmbTipoCateg' para la Gestión Productos
+        /// </summary>
+        /// <param name="oDropDownList"></param>
+        private void LlenacomboCategProducto(DropDownList oDropDownList)
+        {
+            #region Codigo Comentado para pasar a una versión más Antigua
+            /*
+            try
+            {
+                BL_Categoria oBL_Categoria = new BL_Categoria();
+                List<MA_Categoria> oListCategoria = new List<MA_Categoria>();
+                oListCategoria = oBL_Categoria.Get_Categorias();
+
+                oDropDownList.Items.Clear();
+                foreach (MA_Categoria oMA_Categoria in oListCategoria)
+                {
+                    ListItem listItem = new ListItem(oMA_Categoria.nombre, oMA_Categoria.codigo);
+                    oDropDownList.Items.Add(listItem);
+                }
+                oDropDownList.Items.Insert(0, new ListItem("---Seleccione---", "0"));
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                //lblmensaje.ForeColor = System.Drawing.Color.Red;
+                //lblmensaje.Text = "Ocurrió un error inesperado..." + ex.Message;
+
+            }
+            */
+            #endregion
+
+            //////////////////////////////////////////////////////////////
+            // Ver. 0.1     -   Anomino -   ??????
+            //////////////////////////////////////////////////////////////
+            messages = "";
+            DataSet ds = null;
+            try
+            {
+                // Obtiene la Información del Listado de Categorías
+                ds = oConn.ejecutarDataSet("UP_WEB_LLENACOMBOS", 13);
+            }
+            catch (Exception ex)
+            {
+                messages = "Ocurrio un Error: " + ex.ToString();
+            }
+            if (messages.Equals(""))
+            {
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+
+                    //se llena categorias en tipo de producto
+                    cmbTipoCateg.DataSource = ds;
+                    cmbTipoCateg.DataTextField = "Product_Category";
+                    cmbTipoCateg.DataValueField = "id_ProductCategory";
+                    cmbTipoCateg.DataBind();
+
+                }
+                else
+                {
+                    // Mostrar PopUp Mensaje Usuario
+                    messages = "Error: No Existen Categorías Disponibles para el Cliente indicado, ¡por favor Verificar...!";
+                }
+
+            }
+            else
+            {
+                // Mostrar PopUp Mensaje Usuario
+            }
+        }
+
+        /// <summary>
+        /// Llena las Compañias por Cliente, en el AspControl DropDownList 'cbmbcompañia' con las Compañias Disponibles para el Panel de Gestión de Productos
+        /// </summary>
+        private void comboclienteBuscarproductoporplanning()
+        {
+            messages = "";
+            DataSet ds = null;
+            Cliente = Convert.ToString(this.Session["companyid"]);
+            try
+            {
+                // Obtener las Categorias por idCliente
+                ds = oConn.ejecutarDataSet("UP_WEBXPLORA_AD_CONSULTACLIENTE_PROPIOYCOPETIDORES", Cliente);
+            }
+            catch (Exception ex)
+            {
+                messages = "Ocurrio un Error: " + ex.ToString();
+            }
+
+            // Verificar que no existan Errores
+            if (messages.Equals(""))
+            {
+
+                // Verificar que exista al menos un Elemento para poder llenar el AspControl DropDowList 'cbmbcompañia' con la información de las Compañias
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    //se llena cliente en Usuarios
+                    cbmbcompañia.DataSource = ds;
+                    cbmbcompañia.DataTextField = "Company_Name";
+                    cbmbcompañia.DataValueField = "Company_id";
+                    cbmbcompañia.DataBind();
+                }
+                else
+                {
+                    // Mostrar PopUp Mensaje Usuario
+                    messages = "Error: No Existen Compañias Disponibles, ¡por favor Verificar...!";
+                }
+            }
+            else
+            {
+                // Mostrar PopUp Mensaje Usuario
+            }
+
+            #region Data Dummy
+            /*
+            ListItem listItem0 = new ListItem("Compania00", "0");
+            ListItem listItem1 = new ListItem("Compania01", "1");
+            ListItem listItem2 = new ListItem("Compania02", "2");
+            ListItem listItem3 = new ListItem("Compania03", "3");
+
+            //cbmbcompañia.Items.Add(listItem0);
+            //cbmbcompañia.Items.Add(listItem1);
+            //cbmbcompañia.Items.Add(listItem2);
+            //cbmbcompañia.Items.Add(listItem3);
+            */
+            #endregion
+        }  
         protected void btnCrearProducto_Click(object sender, EventArgs e)
         {
             LlenacomboCategProducto(cmbTipoCateg);
@@ -5539,12 +5931,17 @@ namespace SIGE.Pages.Modulos.Administrativo
         }
         protected void BtnBProductos_Click(object sender, EventArgs e)
         {
+            BindGridProducts();
+        }
+
+        public void BindGridProducts() {
             IbtnProductos_ModalPopupExtender.Hide();
             desactivarControlesProducto();
             LblFaltantes.Text = "";
-            if ((cmbBCategoriaProduct.Text == "0" || cmbBCategoriaProduct.Text == "") && 
+            if ((cmbBCategoriaProduct.Text == "0" || cmbBCategoriaProduct.Text == "") &&
                 (cmbBBrand.Text == "0" || cmbBBrand.Text == "")
-                ){
+                )
+            {
                 this.Session["mensajealert"] = "Categoria y/o Marca";
                 Alertas.CssClass = "MensajesError";
                 LblFaltantes.Text = "Ingrese por lo menos un parametro de consulta";
@@ -5552,7 +5949,7 @@ namespace SIGE.Pages.Modulos.Administrativo
                 SavelimpiarControlesProducto();
                 IbtnProductos_ModalPopupExtender.Show();
                 return;
-                }
+            }
             BuscarActivarbotnesProducto();
 
             //Obtener de las sessiones los maestros de: Categoria, SubCategoria, Familia, Marca, Tipo, Formato, 
@@ -5562,13 +5959,47 @@ namespace SIGE.Pages.Modulos.Administrativo
             List<MA_Marca> oListMA_Marca = (List<MA_Marca>)this.Session["CMarca"];
             List<MA_Formato> oListMA_Formato = (List<MA_Formato>)this.Session["CFormato"];
             List<MA_Tipo> oListMA_Tipo = (List<MA_Tipo>)this.Session["CTipo"];*/
-            
+
             BL_Producto oBL_Producto = new BL_Producto();
             List<MA_Producto> oListSR_Producto = new List<MA_Producto>();
-            oListSR_Producto = oBL_Producto.Get_Productos(cmbBCategoriaProduct.SelectedValue, cmbBBrand.SelectedValue);
-            this.Session["CBPCategoria"] = cmbBCategoriaProduct.SelectedValue;
-            this.Session["CBPMarca"] = cmbBBrand.SelectedValue;
-            
+            oListSR_Producto =
+                oBL_Producto.Get_Productos(
+                cmbBCategoriaProduct.SelectedValue,
+                cmbBBrand.SelectedValue);
+
+            if (oBL_Producto.getMessages().Equals(""))
+            {
+                this.Session["CBPCategoria"] = cmbBCategoriaProduct.SelectedValue;
+                this.Session["CBPMarca"] = cmbBBrand.SelectedValue;
+                this.Session["CProducto"] = oListSR_Producto;
+
+                if (oListSR_Producto.Count > 0)
+                {
+                    GVConsulProduct.DataSource = oListSR_Producto;
+                    GVConsulProduct.DataBind();
+                    ModalPCProducto.Show();
+                    IbtnProductos_ModalPopupExtender.Hide();
+                }
+                else
+                {
+                    SavelimpiarControlesProducto();
+                    saveActivarbotonesProducto();
+                    Alertas.CssClass = "MensajesError";
+                    LblFaltantes.Text = " la consulta realizada no arrojo ninguna respuesta";
+                    MensajeAlerta();
+                    IbtnProductos_ModalPopupExtender.Show();
+                }
+            }
+            else
+            {
+                SavelimpiarControlesProducto();
+                saveActivarbotonesProducto();
+                Alertas.CssClass = "MensajesError";
+                LblFaltantes.Text = oBL_Producto.getMessages();
+                MensajeAlerta();
+                IbtnProductos_ModalPopupExtender.Show();
+            }
+
             //Reemplazar los codigos de Categoria, Marca, Etc, con sus valores
             /*foreach (MA_Producto oMA_Producto in oListSR_Producto) {
                 foreach (MA_Categoria oMA_Categoria in oListMA_Categoria) {
@@ -5612,26 +6043,15 @@ namespace SIGE.Pages.Modulos.Administrativo
                 }
             }
             */
-            this.Session["CProducto"] = oListSR_Producto;
-
-            if (oListSR_Producto.Count > 0)
-            {
-                GVConsulProduct.DataSource = oListSR_Producto;
-                GVConsulProduct.DataBind();
-                ModalPCProducto.Show();
-                IbtnProductos_ModalPopupExtender.Hide();
-            }
-            else
-            {
-                SavelimpiarControlesProducto();
-                saveActivarbotonesProducto();
-                Alertas.CssClass = "MensajesError";
-                LblFaltantes.Text = " la consulta realizada no arrojo ninguna respuesta";
-                MensajeAlerta();
-                IbtnProductos_ModalPopupExtender.Show();
-            }
-
         }
+
+
+        protected void OnPageIndexChangingProducts(object sender, GridViewPageEventArgs e)
+        {
+            GVConsulProduct.PageIndex = e.NewPageIndex;
+            this.BindGridProducts();
+        }
+
         protected void GVConsulProduct_RowUpdating(object sender, System.Web.UI.WebControls.GridViewUpdateEventArgs e)
         {
             Button1.Visible = true;
@@ -6282,6 +6702,294 @@ namespace SIGE.Pages.Modulos.Administrativo
         #endregion
 
         #region Producto Ancla
+        /// <summary>
+        /// Llenar las Categorías, en el AspControl DropDownList en 'ddlCategoryCompany_Categoria' y 'ddlPCategoryCompany_Categoria' para la Gestión de
+        /// Producto Ancla
+        /// </summary>
+        private void LlenaCategory_CompanyCatego()
+        {
+            messages = "";
+            DataSet ds1 = new DataSet();
+            try
+            {
+                ds1 = oConn.ejecutarDataSet("UP_WEB_LLENACOMBOS", 59);
+            }
+            catch (Exception ex)
+            {
+                messages = "Ocurrio un Error: " + ex.ToString();
+            }
+
+            // Verificar que no existan Errores
+            if (messages.Equals(""))
+            {
+                if (ds1.Tables[0].Rows.Count > 0)
+                {
+                    //se llena Categorias producto en BuscarSubCategorias
+                    ddlCategoryCompany_Categoria.DataSource = ds1;
+                    ddlCategoryCompany_Categoria.DataTextField = "Product_Category";
+                    ddlCategoryCompany_Categoria.DataValueField = "id_ProductCategory";
+                    ddlCategoryCompany_Categoria.DataBind();
+
+                    ddlCategoryCompany_Categoria.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
+
+                    //llenando el panel de consultar
+                    ddlPCategoryCompany_Categoria.DataSource = ds1;
+                    ddlPCategoryCompany_Categoria.DataTextField = "Product_Category";
+                    ddlPCategoryCompany_Categoria.DataValueField = "id_ProductCategory";
+                    ddlPCategoryCompany_Categoria.DataBind();
+
+                    ddlPCategoryCompany_Categoria.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
+
+
+                }
+                else
+                {
+                    // Mostrar PopUp Mensaje Usuario
+                    messages = "Error: No Existen Categorías Disponibles para el Cliente indicado, ¡por favor Verificar...!";
+                }
+            }
+            else
+            {
+                // Mostrar PopUp Mensaje Usuario
+            }
+
+
+            #region Data Dummy
+            /*
+            ListItem listItem0 = new ListItem("Categoria00", "0");
+            ListItem listItem1 = new ListItem("Categoria01", "1");
+            ListItem listItem2 = new ListItem("Categoria02", "2");
+            ListItem listItem3 = new ListItem("Categoria03", "3");
+
+            ddlCategoryCompany_Categoria.Items.Add(listItem0);
+            ddlCategoryCompany_Categoria.Items.Add(listItem1);
+            ddlCategoryCompany_Categoria.Items.Add(listItem2);
+            ddlCategoryCompany_Categoria.Items.Add(listItem3);
+            ddlCategoryCompany_Categoria.Items.Insert(0, new ListItem("<Seleccione..>", "99"));
+
+            ddlPCategoryCompany_Categoria.Items.Add(listItem0);
+            ddlPCategoryCompany_Categoria.Items.Add(listItem1);
+            ddlPCategoryCompany_Categoria.Items.Add(listItem2);
+            ddlPCategoryCompany_Categoria.Items.Add(listItem3);
+            ddlPCategoryCompany_Categoria.Items.Insert(0, new ListItem("<Seleccione..>", "99"));
+            */
+            #endregion
+
+        }
+        
+        /// <summary>
+        /// Llenar las Compañias, en el AspControl DropDownList 'cmbClienteAncla' para la Gestion de Productos Ancla
+        /// </summary>
+        private void LlenacomboClienteProductAncla()
+        {
+            messages = "";
+            DataSet ds = null;
+            try
+            {   // DataTable[0] - Listado de Compañias (***)
+                // DataTable[1] - Listado de Categorias por idCliente
+                // DataTable[2] - Listado de SubCategorias por idCliente y idCategoria
+                // DataTable[3] - Listado de Marcas por idCliente y idCategoria
+                // DataTable[4] - Listado de Marcas por idCliente, idSubCategoria y idCategoria
+                // DataTable[5] - Listado de Productos por idMarca
+                // DataTable[6] - Listado de Precio de Lista por idCliente y idProducto
+                // DataTable[7] - Listado de Peso por idCliente y idProducto
+                // Parametros - idCompany, id_ProductCategory, id_Subcategory, id_Brand, cod_Product
+                ds = owsadministrativo.llenaCombosPAncla(0, "0", 0, 0, "0");
+            }
+            catch (Exception ex)
+            {
+                messages = "Ocurrio un Error: " + ex.ToString();
+            }
+
+            // Verificar que no existan Errores
+            if (messages.Equals(""))
+            {
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    //se llena cliente en producto Ancla
+                    cmbClienteAncla.DataSource = ds.Tables[0];
+                    cmbClienteAncla.DataTextField = "Company_Name";
+                    cmbClienteAncla.DataValueField = "Company_id";
+                    cmbClienteAncla.DataBind();
+                    cmbClienteAncla.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
+
+                }
+                else
+                {
+                    // Mostrar PopUp Mensaje Usuario
+                    messages = "Error: No Existen Categorías Disponibles para el Cliente indicado, ¡por favor Verificar...!";
+                }
+            }
+            else
+            {
+                // Mostrar PopUp Mensaje Usuario
+            }
+
+        }
+        /// <summary>
+        /// Listar las Compañias en General y las Categoría de Productos por idCliente, en el AspControl DropDownList 'CmbBClientePAncla' para la Gestión de Productos Ancla.
+        /// </summary>
+        private void LlenacomboBuscarClienteProductAncla()
+        {
+            messages = "";
+            DataSet ds = null;
+            try
+            {
+                // Llena las Compañias, en el AspControl DropDownList 'CmbBClientePAncla', para retornar todos las compañias 
+                // DataTable[0] - Listar las Compañias asociadas a los Productos Ancla
+                // DataTable[1] - Listar las Categorias por idCompañia
+                ds = owsadministrativo.llenaConsultaCombosPAncla(0);
+            }
+            catch (Exception ex)
+            {
+                messages = "Ocurrio un Error: " + ex.ToString();
+            }
+
+            // Verificar que no existan Errores
+            if (messages.Equals(""))
+            {
+
+                // Verificar que exista al menos un Elemento para poder llenar el AspControl DropDowList 'cmbBuscarCategoryM' con las Categorias correspondientes
+
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    //se llena cliente enconsulta en productos Ancla
+                    CmbBClientePAncla.DataSource = ds.Tables[0];
+                    CmbBClientePAncla.DataTextField = "Company_Name";
+                    CmbBClientePAncla.DataValueField = "Company_id";
+                    CmbBClientePAncla.DataBind();
+                    CmbBClientePAncla.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
+
+
+                }
+                else
+                {
+
+                    // Mostrar PopUp Mensaje Usuario
+                    messages = "Error: No Existen Compañias Disponibles , ¡por favor Verificar...!";
+                }
+            }
+            else
+            {
+
+                // Mostrar PopUp Mensaje Usuario
+            }
+
+
+
+        }
+        /// <summary>
+        /// Llenar las Compañias por Cliente, en el AspControl DropDownList 'cmbClienteAncla' con las Compañias Disponibles para la Gestión de Producto Ancla
+        /// </summary>
+        private void comboclienteenPanclaporplanning()
+        {
+            messages = "";
+            DataSet ds = null;
+            Cliente = Convert.ToString(this.Session["companyid"]);
+            try
+            {
+                ds = oConn.ejecutarDataSet("UP_WEBXPLORA_AD_CONSULTACLIENTE_PROPIOYCOPETIDORES", Cliente);
+            }
+            catch (Exception ex)
+            {
+                messages = "Ocurrio un Error: " + ex.ToString();
+            }
+
+            if (messages.Equals(""))
+            {
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    //se llena cliente en Usuarios
+                    cmbClienteAncla.DataSource = ds;
+                    cmbClienteAncla.DataTextField = "Company_Name";
+                    cmbClienteAncla.DataValueField = "Company_id";
+                    cmbClienteAncla.DataBind();
+                }
+                else
+                {
+                    // Mostrar PopUp Mensaje Usuario
+                    messages = "Error: No Existen Clientes Disponibles, ¡por favor Verificar...!";
+                }
+            }
+            else
+            {
+                // Mostrar PopUp Mensaje Usuario
+            }
+
+
+            #region Data Dummy
+            /*
+            ListItem listItem0 = new ListItem("Compania00", "0");
+            ListItem listItem1 = new ListItem("Compania01", "1");
+            ListItem listItem2 = new ListItem("Compania02", "2");
+            ListItem listItem3 = new ListItem("Compania03", "3");
+
+            cmbClienteAncla.Items.Add(listItem0);
+            cmbClienteAncla.Items.Add(listItem1);
+            cmbClienteAncla.Items.Add(listItem2);
+            cmbClienteAncla.Items.Add(listItem3);
+            */
+            #endregion
+        }
+        /// <summary>
+        /// Llenar las Compañias por Cliente, en el AspControl DropDownList 'CmbBClientePAncla' con las Compañias para la Gestión de Productos Ancla
+        /// </summary>
+        private void comboclienteenBuscarPanclaporplanning()
+        {
+            messages = "";
+            DataSet ds = null;
+            Cliente = Convert.ToString(this.Session["companyid"]);
+
+            try
+            {
+                // Buscar Clientes Propio y Competidores
+                ds = oConn.ejecutarDataSet("UP_WEBXPLORA_AD_CONSULTACLIENTE_PROPIOYCOPETIDORES", Cliente);
+            }
+            catch (Exception ex)
+            {
+                messages = "Ocurrio un Error: " + ex.ToString();
+            }
+
+            // Verificar que no existan Errores
+            if (messages.Equals(""))
+            {
+
+                // Verificar que exista al menos un Elemento para poder llenar el AspControl DropDowList 'cmbBuscarCategoryM' con las Categorias correspondientes
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    //se llena cliente en Usuarios
+                    CmbBClientePAncla.DataSource = ds;
+                    CmbBClientePAncla.DataTextField = "Company_Name";
+                    CmbBClientePAncla.DataValueField = "Company_id";
+                    CmbBClientePAncla.DataBind();
+                }
+                else
+                {
+                    // Mostrar PopUp Mensaje Usuario
+                    messages = "Error: No Existen Clientes Disponibles para el Cliente indicado, ¡por favor Verificar...!";
+                }
+            }
+            else
+            {
+                // Mostrar PopUp Mensaje Usuario
+            }
+
+
+            #region Data Dummy
+            /*
+            ListItem listItem0 = new ListItem("CompaniaAncla00", "0");
+            ListItem listItem1 = new ListItem("CompaniaAncla01", "1");
+            ListItem listItem2 = new ListItem("CompaniaAncla02", "2");
+            ListItem listItem3 = new ListItem("CompaniaAncla03", "3");
+
+            CmbBClientePAncla.Items.Add(listItem0);
+            CmbBClientePAncla.Items.Add(listItem1);
+            CmbBClientePAncla.Items.Add(listItem2);
+            CmbBClientePAncla.Items.Add(listItem3);
+            */
+            #endregion
+        }  
+        
         protected void BtnCrearAncla_Click(object sender, EventArgs e)
         {
             try
@@ -7028,6 +7736,103 @@ namespace SIGE.Pages.Modulos.Administrativo
         #endregion
 
         #region Familias
+
+        /// <summary>
+        /// Llenar Compañias, en el AspControl DropDownList 'CmbBClientFamily' para la Gestión de Familias
+        /// </summary>
+        private void LlenacomboBuscarClienteProductFamily()
+        {
+            messages = "";
+            DataSet ds = null;
+            try
+            {
+                ds = oConn.ejecutarDataSet("UP_WEB_LLENACOMBOS", 4);
+            }
+            catch (Exception ex)
+            {
+                messages = "Ocurrio un Error: " + ex.ToString();
+            }
+
+            // Verificar que no existan Errores
+            if (messages.Equals(""))
+            {
+
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    //se llena cliente en Usuarios
+                    CmbBClientFamily.DataSource = ds;
+                    CmbBClientFamily.DataTextField = "Company_Name";
+                    CmbBClientFamily.DataValueField = "Company_id";
+                    CmbBClientFamily.DataBind();
+                }
+                else
+                {
+
+                    // Mostrar PopUp Mensaje Usuario
+                    messages = "Error: No Existen Compañias Disponibles, ¡por favor Verificar...!";
+                }
+            }
+            else
+            {
+
+                // Mostrar PopUp Mensaje Usuario
+            }
+
+        }
+        /// <summary>
+        /// Llenar las Compañias por Cliente, en el AspControl DropDownList 'CmbBClientFamily' para la Gestión de Familia
+        /// </summary>
+        private void comboclienteBuscarenFamilyporplanning()
+        {
+            messages = "";
+            DataSet ds = null;
+            Cliente = Convert.ToString(this.Session["companyid"]);
+
+            try
+            {
+                ds = oConn.ejecutarDataSet("UP_WEBXPLORA_AD_CONSULTACLIENTE_PROPIOYCOPETIDORES", Cliente);
+            }
+            catch (Exception ex)
+            {
+                messages = "Ocurrio un Error: " + ex.ToString();
+            }
+
+            // Verificar que no existan Errores
+            if (messages.Equals(""))
+            {
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    //se llena cliente en Usuarios
+                    CmbBClientFamily.DataSource = ds;
+                    CmbBClientFamily.DataTextField = "Company_Name";
+                    CmbBClientFamily.DataValueField = "Company_id";
+                    CmbBClientFamily.DataBind();
+                }
+                else
+                {
+                    // Mostrar PopUp Mensaje Usuario
+                    messages = "Error: No Existen Compañias Disponibles, ¡por favor Verificar...!";
+                }
+            }
+            else
+            {
+                // Mostrar PopUp Mensaje Usuario
+            }
+
+            #region Data Dummy
+            /*
+            ListItem listItem0 = new ListItem("Compania00", "0");
+            ListItem listItem1 = new ListItem("Compania01", "1");
+            ListItem listItem2 = new ListItem("Compania02", "2");
+            ListItem listItem3 = new ListItem("Compania03", "3");
+
+            CmbBClientFamily.Items.Add(listItem0);
+            CmbBClientFamily.Items.Add(listItem1);
+            CmbBClientFamily.Items.Add(listItem2);
+            CmbBClientFamily.Items.Add(listItem3);
+            */
+            #endregion
+        }
         protected void CmbMarcaFamily_SelectedIndexChanged(object sender, EventArgs e)
         {
             comboSubmarcaFamily();
@@ -7785,17 +8590,6 @@ namespace SIGE.Pages.Modulos.Administrativo
             llenarcomboclienteencrearsubfam(ddl_sf_cliente);
         }
 
-        private void llenarcomboclienteencrearsubfam(DropDownList ddl)
-        {
-            DataSet ds = null;
-            ds = oConn.ejecutarDataSet("UP_WEB_LLENACOMBOS", 4);
-            //se llena cliente en Usuarios
-            ddl.DataSource = ds;
-            ddl.DataTextField = "Company_Name";
-            ddl.DataValueField = "Company_id";
-            ddl.DataBind();
-        }
-
         private void llenarcombocategoriaencrearsubfam(DropDownList ddl, int cliente)
         {
             DataTable dt = null;
@@ -8215,6 +9009,8 @@ namespace SIGE.Pages.Modulos.Administrativo
         #endregion
 
         #region Category_Company
+        
+        AD_Category_Company oAD_Category_Company = new AD_Category_Company();
 
         private void activarControlesCategoryCompany()
         {
@@ -8246,14 +9042,23 @@ namespace SIGE.Pages.Modulos.Administrativo
             panel_Category_Copany.Enabled = true;
 
         }
-
-
-
+        /// <summary>
+        /// 
+        /// </summary>
         private void cargar_cbxl_cxu_cliente()
         {
-            /*DataTable dt = new DataTable();
-            dt = oConn.ejecutarDataTable("UP_WEBXPLORA_AD_OBTENER_CLIENTES");
-            if (dt != null)
+            messages = "";
+            DataTable dt = new DataTable();
+            try
+            {
+                dt = oConn.ejecutarDataTable("UP_WEBXPLORA_AD_OBTENER_CLIENTES");
+            }
+            catch (Exception ex) {
+                messages = "Ocurrio un Error: " + ex.ToString();
+            }
+            
+            // Verificar que no existan Errores
+            if (messages.Equals(""))
             {
                 if (dt.Rows.Count > 0)
                 {
@@ -8262,23 +9067,28 @@ namespace SIGE.Pages.Modulos.Administrativo
                     cbxl_cxu_cliente.DataValueField = "Company_id";
                     cbxl_cxu_cliente.DataBind();
 
-
                     ddlPCategoryCompany_Cliente.DataSource = dt;
                     ddlPCategoryCompany_Cliente.DataTextField = "Company_Name";
                     ddlPCategoryCompany_Cliente.DataValueField = "Company_id";
                     ddlPCategoryCompany_Cliente.DataBind();
-
                     ddlPCategoryCompany_Cliente.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
 
 
-                    dt = null;
                 }
                 else
                 {
-                    cbxl_cxu_cliente.Items.Clear();
+                    // Mostrar PopUp Mensaje Usuario
+                    messages = "Error: No Existen Compañias disponibles, ¡por favor Verificar...!";
                 }
-            }*/
-
+            }
+            else
+            {
+                // Mostrar PopUp Mensaje Usuario
+            }
+            
+            
+            #region Data Dummy
+            /*
             ListItem listItem0 = new ListItem("Compania00", "0");
             ListItem listItem1 = new ListItem("Compania01", "1");
             ListItem listItem2 = new ListItem("Compania02", "2");
@@ -8294,50 +9104,10 @@ namespace SIGE.Pages.Modulos.Administrativo
             ddlPCategoryCompany_Cliente.Items.Add(listItem2);
             ddlPCategoryCompany_Cliente.Items.Add(listItem3);
             ddlPCategoryCompany_Cliente.Items.Insert(0, new ListItem("<Seleccione..>", "99"));
+            */
+            #endregion
+
         }
-
-        private void LlenaCategory_CompanyCatego()
-        {
-            /*DataSet ds1 = new DataSet();
-            ds1 = oConn.ejecutarDataSet("UP_WEB_LLENACOMBOS", 59);
-            //se llena Categorias producto en BuscarSubCategorias
-            ddlCategoryCompany_Categoria.DataSource = ds1;
-            ddlCategoryCompany_Categoria.DataTextField = "Product_Category";
-            ddlCategoryCompany_Categoria.DataValueField = "id_ProductCategory";
-            ddlCategoryCompany_Categoria.DataBind();
-
-            ddlCategoryCompany_Categoria.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
-
-            //llenando el panel de consultar
-            ddlPCategoryCompany_Categoria.DataSource = ds1;
-            ddlPCategoryCompany_Categoria.DataTextField = "Product_Category";
-            ddlPCategoryCompany_Categoria.DataValueField = "id_ProductCategory";
-            ddlPCategoryCompany_Categoria.DataBind();
-
-            ddlPCategoryCompany_Categoria.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
-
-            ds1 = null;*/
-
-            ListItem listItem0 = new ListItem("Categoria00", "0");
-            ListItem listItem1 = new ListItem("Categoria01", "1");
-            ListItem listItem2 = new ListItem("Categoria02", "2");
-            ListItem listItem3 = new ListItem("Categoria03", "3");
-
-            ddlCategoryCompany_Categoria.Items.Add(listItem0);
-            ddlCategoryCompany_Categoria.Items.Add(listItem1);
-            ddlCategoryCompany_Categoria.Items.Add(listItem2);
-            ddlCategoryCompany_Categoria.Items.Add(listItem3);
-            ddlCategoryCompany_Categoria.Items.Insert(0, new ListItem("<Seleccione..>", "99"));
-
-            ddlPCategoryCompany_Categoria.Items.Add(listItem0);
-            ddlPCategoryCompany_Categoria.Items.Add(listItem1);
-            ddlPCategoryCompany_Categoria.Items.Add(listItem2);
-            ddlPCategoryCompany_Categoria.Items.Add(listItem3);
-            ddlPCategoryCompany_Categoria.Items.Insert(0, new ListItem("<Seleccione..>", "99"));
-        }
-
- 
- 
         protected void btnCategoryCompany_Crear_Click(object sender, EventArgs e)
         {
             ddlCategoryCompany_Categoria.Enabled = true;
@@ -8348,10 +9118,6 @@ namespace SIGE.Pages.Modulos.Administrativo
             btnCategoryCompany_Crear.Visible = false;
             btnCategoryCompany_Consultar.Visible = false;
         }
-
-
-
-        AD_Category_Company oAD_Category_Company = new AD_Category_Company();
         protected void btnCategoryCompany_Guardar_Click(object sender, EventArgs e)
         {
            
@@ -8419,7 +9185,6 @@ namespace SIGE.Pages.Modulos.Administrativo
                 MensajeAlerta();
             }
         }
-
         public void CargagrillaCategoryCompany()
         {
             DataTable dt = oAD_Category_Company.ConsultarAD_Category_Company(ddlPCategoryCompany_Categoria.SelectedValue, ddlPCategoryCompany_Cliente.SelectedValue);
@@ -8429,7 +9194,6 @@ namespace SIGE.Pages.Modulos.Administrativo
             activarControlesCategoryCompany();
 
         }
-
         protected void btnCategoryCompany_Buscar_Click(object sender, EventArgs e)
         {
             if (ddlPCategoryCompany_Cliente.SelectedValue == "0")
@@ -8450,7 +9214,6 @@ namespace SIGE.Pages.Modulos.Administrativo
             { 
             }
         }
-
         protected void gv_CategoryCompany_ItemDataBound(object sender, GridItemEventArgs e)
         {
             string tableName = e.Item.OwnerTableView.Name.ToString();
@@ -8486,7 +9249,6 @@ namespace SIGE.Pages.Modulos.Administrativo
 
             }
         }
-
         protected void gv_CategoryCompany_CancelCommand(object source, GridCommandEventArgs e)
         {
             try
@@ -8499,7 +9261,6 @@ namespace SIGE.Pages.Modulos.Administrativo
                 Response.Redirect("~/err_mensaje_seccion.aspx", true);
             }
         }
-
         protected void gv_CategoryCompany_EditCommand(object source, GridCommandEventArgs e)
         {
             try
@@ -8513,7 +9274,6 @@ namespace SIGE.Pages.Modulos.Administrativo
                 Response.Redirect("~/err_mensaje_seccion.aspx", true);
             }
         }
-
         protected void gv_CategoryCompany_PageIndexChanged(object source, GridPageChangedEventArgs e)
         {
             try
@@ -8527,7 +9287,6 @@ namespace SIGE.Pages.Modulos.Administrativo
                 Response.Redirect("~/err_mensaje_seccion.aspx", true);
             }
         }
-
         protected void gv_CategoryCompany_PageSizeChanged(object source, GridPageSizeChangedEventArgs e)
         {
             try
@@ -8545,8 +9304,6 @@ namespace SIGE.Pages.Modulos.Administrativo
             div.Visible = false;
             paneel.Visible = true;
         }
-
-
         protected void gv_CategoryCompany_UpdateCommand(object source, GridCommandEventArgs e)
         {
             try
@@ -8645,7 +9402,6 @@ namespace SIGE.Pages.Modulos.Administrativo
             }
 
         }
-
         protected void btnCategoryCompany_Cancelar_Click(object sender, EventArgs e)
         {
             btnCategoryCompany_Guardar.Visible = false;

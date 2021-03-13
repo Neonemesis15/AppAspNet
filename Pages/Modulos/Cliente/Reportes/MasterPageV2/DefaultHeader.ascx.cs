@@ -17,14 +17,13 @@ namespace SIGE.Pages.Modulos.Cliente.Reportes.MasterPageV2
 
         private void ObrenerDatosUsuario()
         {
-            if (this.Session["sUser"] == null || this.Session["sNombre"] == null || this.Session["nameuser"] == null)
-            {
-
-
+            if (this.Session["sUser"] == null || 
+                this.Session["sNombre"] == null || 
+                this.Session["nameuser"] == null){
+                
                 usersession.Text = "";
                 lblUsuario.Text = "";
                 lblcompany.Text = "";
-
             }
             else {
 
@@ -35,37 +34,20 @@ namespace SIGE.Pages.Modulos.Cliente.Reportes.MasterPageV2
                 lblUsuario.Text = sNameUser;
                 lblcompany.Text = company;
             
-            
-            
-            
             }
 
-
-
         }
-        protected void Page_Load(object sender, EventArgs e)
-        {
 
-
-           
-
-
-           
+        protected void Page_Load(object sender, EventArgs e){
             if (!IsPostBack)
             {
-                ObrenerDatosUsuario();
-            
+                ObrenerDatosUsuario();   
                 if (this.Session["fotocomany"] == null )
                     url_foto = "~/Pages/ImgBooom/logo_lucky.png";
-                    
-                     
-               
                 else
                     url_foto = this.Session["fotocomany"].ToString();
                 
-
-                img_cliente.ImageUrl = url_foto;
-                 
+                img_cliente.ImageUrl = url_foto; 
             }
         }
     }

@@ -20,16 +20,17 @@
     <%--mis estilos y referencias--%>
     <link href="../../../../../css/style.css" rel="stylesheet" type="text/css" />
     <link href="../../../../../css/backstilo.css" rel="stylesheet" type="text/css" />
-    <link href="../../../../../css/layout.css" rel="stylesheet" type="text/css" /> <!-- Agregado css para posicionamiento y demas funciones - Angel Ortiz - 30/09/2011 -->
+    <!-- Agregado css para posicionamiento y demas funciones - Angel Ortiz - 30/09/2011 -->
+    <link href="../../../../../css/layout.css" rel="stylesheet" type="text/css" />
     <%--referencias para el multiselectDropdown--%>
-    <link href="../../../../../css/multiSelectDropDown/CustomDDStyles.css" rel="stylesheet"
-        type="text/css" />
+    <link href="../../../../../css/multiSelectDropDown/CustomDDStyles.css" rel="stylesheet" type="text/css" />
     <link href="../../../../../css/multiSelectDropDown/Site.css" rel="stylesheet" type="text/css" />
     <%--fin mis estilos y referencias--%>
     <asp:ContentPlaceHolder ID="ScriptIncludePlaceHolder" runat="server">
-        <script type="text/javascript" src="<%= ResolveUrl("~/script.js") %>"></script>
+        <!--<script type="text/javascript" src="<%= ResolveUrl("~/script.js") %>"></script>!-->
     </asp:ContentPlaceHolder>
     <asp:ContentPlaceHolder ID="head" runat="server">
+        
     </asp:ContentPlaceHolder>
 </head>
 <body>

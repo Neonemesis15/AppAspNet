@@ -323,6 +323,13 @@ namespace SIGE.Pages.Modulos.Administrativo
             CmbSelPaisDept.DataValueField = "cod_Country";
             CmbSelPaisDept.DataBind();
             */
+            DataSet dscomboPais = new DataSet();
+            dscomboPais = get_Administrativo.Get_Llenar_Combos("37");
+
+            CmbSelPaisDept.DataSource = dscomboPais.Tables[0];
+            CmbSelPaisDept.DataTextField = "Name_Country";
+            CmbSelPaisDept.DataValueField = "cod_Country";
+            CmbSelPaisDept.DataBind();
         }
 
         private void activarControlesCdad()

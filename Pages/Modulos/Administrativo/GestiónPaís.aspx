@@ -45,7 +45,8 @@
                         </tr>
                     </table>--%>
 
-                <cc2:ModalUpdateProgress ID="ModalUpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel1" BackgroundCssClass="modalProgressGreyBackground">
+            <cc2:ModalUpdateProgress ID="ModalUpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel1" 
+                BackgroundCssClass="modalProgressGreyBackground">
                 <ProgressTemplate>
                     <div class="modalPopup">
                         <div>
@@ -57,7 +58,8 @@
                         </div>
                     </div>
                 </ProgressTemplate>
-          </cc2:ModalUpdateProgress>
+            </cc2:ModalUpdateProgress>
+
             <div>
                 <cc1:TabContainer ID="TabAdministradorPais" runat="server" ActiveTabIndex="0" 
                     Width="100%" Height="405px" allowtransparency="true" Enabled="true">   
@@ -67,8 +69,13 @@
                         </HeaderTemplate>
                         <ContentTemplate>
                             <table align="center">
-                                <tr><td><br /><asp:Label ID="LblTitAdminPaises" runat="server" 
-                                    Class="labelsTit2" Text="Gestión de Países"></asp:Label></td></tr>
+                                <tr>
+                                    <td>
+                                        <br />
+                                        <asp:Label ID="LblTitAdminPaises" runat="server" Class="labelsTit2" Text="Gestión de Países">
+                                        </asp:Label>
+                                    </td>
+                                </tr>
                             </table>
                             <table align="center">
                                 <tr>
@@ -77,13 +84,17 @@
                                             <legend style="">Información Básica</legend>
                                             <table width="500px">
                                                 <tr>
-                                                    <td><asp:Label ID="LblCodPais" runat="server" CssClass="labels" Text="Código de país*"></asp:Label></td>
+                                                    <td>
+                                                        <asp:Label ID="LblCodPais" runat="server" CssClass="labels" Text="Código de país*">
+                                                        </asp:Label></td>
                                                     <td>
                                                         <asp:TextBox ID="TxtCodPais" runat="server" BackColor="#DDDDDD" MaxLength="3" ReadOnly="True" 
-                                                            Width="80px" Enabled="False"></asp:TextBox>
+                                                            Width="80px" Enabled="False">
+                                                        </asp:TextBox>
                                                         <asp:RegularExpressionValidator ID="ReqCodPais" runat="server" ControlToValidate="TxtCodPais"
                                                             Display="None" ErrorMessage="Requiere que el código contenga mínimo 3 números"
-                                                            ValidationExpression="([0-9]{3,3})"></asp:RegularExpressionValidator>
+                                                            ValidationExpression="([0-9]{3,3})">
+                                                        </asp:RegularExpressionValidator>
                                                         <cc1:ValidatorCalloutExtender ID="ValidatorCalloutExtender32" runat="server" Enabled="True"
                                                             TargetControlID="ReqCodPais">
                                                         </cc1:ValidatorCalloutExtender>
@@ -131,20 +142,22 @@
                                     </td>
                                 </tr>
                             </table>
-                            <br />
-                            <br />
+                            <br /><br />
                             <table align="center">
                                 <tr>
-                                    <td><asp:Label ID="StatusPais" runat="server" CssClass="labels" Text="Estado"></asp:Label></td>
-                                    <td><asp:RadioButtonList ID="RBtnListStatusPais" runat="server" Font-Bold="True" Font-Names="Arial" 
-                                        Font-Size="10pt" ForeColor="Black" RepeatDirection="Horizontal" Enabled="False">
+                                    <td>
+                                        <asp:Label ID="StatusPais" runat="server" CssClass="labels" Text="Estado"></asp:Label>
+                                    </td>
+                                    <td>
+                                        <asp:RadioButtonList ID="RBtnListStatusPais" runat="server" Font-Bold="True" Font-Names="Arial" 
+                                            Font-Size="10pt" ForeColor="Black" RepeatDirection="Horizontal" Enabled="False">
                                             <asp:ListItem Selected="True">Habilitado</asp:ListItem>
                                             <asp:ListItem>Deshabilitado</asp:ListItem>
-                                        </asp:RadioButtonList></td>
+                                        </asp:RadioButtonList>
+                                    </td>
                                 </tr>
                             </table>
-                            <br />
-                            <br />
+                            <br /><br />
                             <table align="center">
                                 <tr><td>
                                         <asp:Button ID="btnCrearPais" runat="server" CssClass="buttonPlan" Text="Crear" Width="95px"

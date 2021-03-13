@@ -407,4 +407,147 @@
 .centrarcontenido
 {
     text-align:center
-    }
+}
+
+/*Estilos CSS para ModalPopUp de Products -->*/
+.modalBackgroundGVProducto
+{
+    background-color: Black;
+    filter: alpha(opacity=60);
+    opacity: 0.6;
+}
+ .modalPopupGVProducto
+{
+    background-color: #FFFFFF;
+    width: 800px;
+    border: 3px solid #0DA9D0;
+    border-radius: 12px;
+    padding:0          
+}
+.modalPopupGVProducto .headerGVProducto
+{
+    background-color: #2FBDF1;
+    height: 30px;
+    color: White;
+    line-height: 30px;
+    text-align: center;
+    font-weight: bold;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+.modalPopupGVProducto .bodyGVProducto
+{
+    min-height: 50px;
+    /*line-height: 30px;*/
+    text-align: center;
+    /*font-weight: bold;*/
+
+}
+.modalPopupGVProducto .footerGVProducto
+{
+    padding: 6px;
+}
+.modalPopupGVProducto .ok, .modalPopupGVProducto .cancel
+{
+    height: 23px;
+    color: White;
+    /*line-height: 23px;*/
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.modalPopupGVProducto .ok
+{
+    background-color: #2FBDF1;
+    border: 1px solid #0DA9D0;
+}
+.modalPopupGVProducto .cancel
+{
+    background-color: #9F9F9F;
+    border: 1px solid #5C5C5C;
+}
+
+/*Css for Panel Products Find*/
+.modalBackgroundFindProducts
+{
+    background-color: Black;
+    filter: alpha(opacity=60);
+    opacity: 0.6;
+}
+ .modalPopupFindProducts
+{
+    background-color: #FFFFFF;
+    width: 363px;
+    border: 3px solid #0DA9D0;
+    border-radius: 12px;
+    padding:0          
+}
+.modalPopupFindProducts .headerFindProducts
+{
+    background-color: #2FBDF1;
+    height: 30px;
+    color: White;
+    line-height: 30px;
+    text-align: center;
+    font-weight: bold;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+.modalPopupFindProducts .bodyFindProducts
+{
+    min-height: 50px;
+    /*line-height: 30px;*/
+    text-align: center;
+    /*font-weight: bold;*/
+
+}
+.modalPopupFindProducts .footerFindProducts
+{
+    padding: 6px;
+}
+.modalPopupFindProducts .ok, .modalPopupFindProducts .cancel
+{
+    height: 23px;
+    color: White;
+    /*line-height: 23px;*/
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.modalPopupFindProducts .ok
+{
+    background-color: #2FBDF1;
+    border: 1px solid #0DA9D0;
+}
+.modalPopupFindProducts .cancel
+{
+    background-color: #9F9F9F;
+    border: 1px solid #5C5C5C;
+}
+
+
+
+/*Estilos Generales*/
+.buttonOk, .buttonCancel{
+    height: 23px;
+    color: White;
+    /*line-height: 23px;*/
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.buttonOk
+{
+    background-color: #2FBDF1;
+    border: 1px solid #0DA9D0;
+}
+.buttonCancel
+{
+    background-color: #9F9F9F;
+    border: 1px solid #5C5C5C;
+}

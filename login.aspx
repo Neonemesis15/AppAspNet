@@ -54,38 +54,51 @@
                                 <table style="margin:auto">
                                     <tr>
                                         <td><asp:Label ID="UserNameLabel" runat="server" AssociatedControlID="txtuser" Font-Bold="True"
-                                            Font-Names="Verdana" Font-Size="8pt" ForeColor="White" Text="USUARIO"></asp:Label></td>
+                                                Font-Names="Verdana" Font-Size="8pt" ForeColor="White" Text="USUARIO">
+                                            </asp:Label>
+                                        </td>
                                         <td class="fondotextbox">
                                             <asp:TextBox ID="txtuser" runat="server" BorderStyle="None"
-                                            CssClass="textbox" Width="120px" oncopy="return false" onpaste="return false"  oncut="return false"  
-                                            TextMode="SingleLine"></asp:TextBox></td>     
+                                                CssClass="textbox" Width="120px" oncopy="return false" onpaste="return false" 
+                                                oncut="return false" TextMode="SingleLine">
+                                            </asp:TextBox>
+                                        </td>     
                                         <td><asp:RequiredFieldValidator ID="UserNameRequired" runat="server" ControlToValidate="txtuser"
-                                            ErrorMessage="El nombre de Usuario es requerido" ToolTip="El nombre de Usuario es requerido."
-                                            ValidationGroup="Login1">*</asp:RequiredFieldValidator></td>
+                                                ErrorMessage="El nombre de Usuario es requerido" ToolTip="El nombre de Usuario es requerido."
+                                                ValidationGroup="Login1">*
+                                            </asp:RequiredFieldValidator>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td style=" float:right">
                                             <asp:Label ID="Label1" runat="server" AssociatedControlID="txtpassw" Font-Bold="True"
-                                            Font-Names="Verdana" Font-Size="8pt" ForeColor="White" Text="CLAVE"></asp:Label></td>
+                                                Font-Names="Verdana" Font-Size="8pt" ForeColor="White" Text="CLAVE">
+                                            </asp:Label>
+                                        </td>
                                         <td class="fondotextbox">
                                             <asp:TextBox ID="txtpassw" runat="server" BorderStyle="None" CssClass="textbox" 
-                                            TextMode="Password" Width="120px" oncopy="return false" onpaste="return false"  oncut="return false"></asp:TextBox>
+                                                TextMode="Password" Width="120px" oncopy="return false" onpaste="return false" 
+                                                oncut="return false">
+                                            </asp:TextBox>
                                         </td>
                                         <td><asp:RequiredFieldValidator ID="PasswordRequired" runat="server" ControlToValidate="txtpassw"
                                             ErrorMessage="La Contraseña es requerida." ToolTip="La Contraseña es requerida."
-                                            ValidationGroup="Login1">*</asp:RequiredFieldValidator></td>
+                                            ValidationGroup="Login1">*
+                                            </asp:RequiredFieldValidator>
+                                        </td>
                                     </tr>
                                 </table>
                             </div>
                             <div style=" margin:auto; width:135px">
                                 <asp:Label ID="LblOlvido" runat="server" Font-Bold="True" Font-Names="Verdana" Font-Size="6pt"
-                                     ForeColor="#999999" Text="OLVIDO SU CONTRASEÑA"></asp:Label>
+                                     ForeColor="#999999" Text="OLVIDO SU CONTRASEÑA">
+                                </asp:Label>
                                 <asp:ImageButton ID="BtnOlvido" runat="server" AlternateText="Aquí le indicamos que hacer..."
                                      ImageUrl="~/Pages/ImgBooom/boton_olvido_contrasen¦âa.png" />
                             </div>
                             <div style=" margin:auto; width:100px">        
                                 <asp:Button ID="btningreso" runat="server" CommandName="Login" CssClass="btIngresar" 
-                                Height="55px" OnClick="btningreso_Click" Width="100px" ValidationGroup="Login1"/>
+                                    Height="55px" OnClick="btningreso_Click" Width="100px" ValidationGroup="Login1"/>
                             </div>
                         </asp:Panel>
                     </div>
@@ -124,7 +137,7 @@
                                         <td>
                                             <asp:TextBox ID="txtrecall" runat="server" Width="155px"></asp:TextBox>
                                         </td>
-                                    </tr>--%>
+                                        </tr>--%>
                                         <tr>
                                             <td>
                                                 <asp:Label ID="Label4" runat="server" Font-Bold="True" Font-Names="Arial" Font-Size="11px"
@@ -134,14 +147,16 @@
                                                 <asp:TextBox ID="txtfrom" runat="server" Width="155px"></asp:TextBox>
                                                 <asp:RegularExpressionValidator ID="UReqEmail" runat="server" ControlToValidate="txtfrom"
                                                     Display="none" ErrorMessage="Formato de email invalido: Este debe ser user@mail.xyz"
-                                                    ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
+                                                    ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*">
+                                                </asp:RegularExpressionValidator>
                                                 <asp:ValidatorCalloutExtender ID="UReqEmail_ValidatorCalloutExtender" runat="server"
                                                     Enabled="True" TargetControlID="UReqEmail">
                                                 </asp:ValidatorCalloutExtender>
                                             </td>
                                             <tr>
                                                 <td>
-                                                    <asp:Label ID="lblcoutry" runat="server" Text="Pais" ForeColor="#666666"></asp:Label>
+                                                    <asp:Label ID="lblcoutry" runat="server" Text="Pais" ForeColor="#666666">
+                                                    </asp:Label>
                                                 </td>
                                                 <td>
                                                     <asp:DropDownList ID="cmbpaisolv" runat="server" Width="150px">
@@ -180,7 +195,8 @@
                                         Font-Size="10pt" ForeColor="White"></asp:Label>
                                     <br /><br />
                                     <asp:Label ID="lblmensajegeneral" runat="server" Font-Names="Verdana" Font-Size="9pt"
-                                        ForeColor="White"></asp:Label>
+                                        ForeColor="White">
+                                    </asp:Label>
                                     <br /><br /><br />
                                     <asp:Button ID="btnaceptar" runat="server" CssClass="buttonPlan" Text="Aceptar" Font-Bold="True"
                                         Font-Names="Verdana" Font-Overline="False" Style="cursor: hand; margin:auto;" Font-Strikeout="False"
