@@ -118,6 +118,14 @@
                             <uc1:CategoryUserControl ID="CategoryUserControl1" runat="server" />
                         </div>
 
+                        <!-- HEADER - INI -->
+                        <br /><br />
+                        <div class="centrarcontenido">
+                            <span class="labelsTit2">Gestión de Categorías de Productos</span>&nbsp;
+                        </div>
+                        <br /><br />
+                        <!-- HEADER - FIN -->
+
                         <!-- BODY - INI -->
                         <div class = "centrar">
                             <div class = "tabla centrar">

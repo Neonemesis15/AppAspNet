@@ -3793,6 +3793,7 @@ namespace SIGE.Pages.Modulos.Administrativo
         #endregion
 
         #region Categoria
+        
         /// <summary>
         /// Deshabilitar Opciones de Crear y Guardar, para la Gestión de Categorias
         /// </summary>
@@ -3804,6 +3805,7 @@ namespace SIGE.Pages.Modulos.Administrativo
             BtnCancelProductType.Visible = true;
             btnCCategoria.Visible = true;
         }
+        
         /// <summary>
         /// Desactivar la Opción de Save, para la Opción de Gestión de Categorías
         /// </summary>
@@ -3814,6 +3816,7 @@ namespace SIGE.Pages.Modulos.Administrativo
             BtnConsultaProductType.Visible = true;
             BtnCancelProductType.Visible = true;
         }
+        
         /// <summary>
         /// Desactivar Controles, en la Gestión de Categorías
         /// </summary>
@@ -3833,6 +3836,7 @@ namespace SIGE.Pages.Modulos.Administrativo
             PanelSubFamilia.Enabled = true;
             TabProducAncla.Enabled = true;
         }
+        
         /// <summary>
         /// Limpiar los Input, para la Gestión de Categorías
         /// </summary>
@@ -3853,6 +3857,7 @@ namespace SIGE.Pages.Modulos.Administrativo
             activarControlesCategoria();
             BtnCargaMasivaCate.Visible = false;
         }
+        
         /// <summary>
         /// Opcion de Cancelar, en la Gestión de Categorias
         /// </summary>
@@ -3928,23 +3933,24 @@ namespace SIGE.Pages.Modulos.Administrativo
                 }
             }
         }
-        /// <summary>
-        /// Evento Click del Panel de Busqueda de Categorias, para filtrar la información de las Categorías, aplicando los filtros, para la Gestión de Categorías.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        protected void BtnBTypeProduct_Click(object sender, EventArgs e)
-        {
-            desactivarControlesCategoria();
-            LblFaltantes.Text = "";
-            TxtBCodTypeProduct.Text = TxtBCodTypeProduct.Text.Trim();
-            TxtBNomTypeProduct.Text = TxtBNomTypeProduct.Text.Trim();
-            scompany_id = cmb_Cliente.SelectedValue.ToString().Trim();
 
+        /// <summary>
+        /// Remover los Espacios en Blanco de la cadenas de texto.
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        private string trimText(String text) {
+            return text.Trim();
+        }
+
+        /// <summary>
+        /// Validar que los filtros aplicados devuelvan una consulta.
+        /// </summary>
+        /// <returns></returns>
+        private bool validateFilterInCategorySearch(string productId, string productName, string companyId) {
+            
             // Validación que los Filtros o Criterios de Busqueda se encuentren especificados
-            if (TxtBCodTypeProduct.Text == ""
-                && TxtBNomTypeProduct.Text == ""
-                && cmb_Cliente.Text == "0")
+            if (productId == "" && productName == "" && cmb_Cliente.Text == "0")
             {
 
                 this.Session["mensajealert"] = "Código y/o nombre de Categoría de producto y/o Cliente";
@@ -3954,37 +3960,73 @@ namespace SIGE.Pages.Modulos.Administrativo
                 MensajeAlerta();
                 // Mostrar el AspControl ModalPopUpExtender 'IbtnProductType' relacionado al AspControl Panel 'BuscarProductCateg'
                 IbtnProductType.Show();
-                return;
+                return false;
             }
+            return true;
+        }
 
-            buscarActivarbotnesCategoria();
-            scodProductType = TxtBCodTypeProduct.Text;
-            sproductType = TxtBNomTypeProduct.Text;
+        /// <summary>
+        /// Limpia los Filtros para próximas consultas
+        /// </summary>
+        private void cleanFilterInCategorySearch() {
             TxtBCodTypeProduct.Text = "";
             TxtBNomTypeProduct.Text = "";
             cmb_Cliente.Text = "0";
-            this.Session["scodProductType"] = scodProductType;
-            this.Session["sproductType"] = sproductType;
-            this.Session["scompany_id"] = scompany_id;
+        }
 
+        /// <summary>
+        /// Guarda en sessión las variables utilizadas en los filtros de Category Search
+        /// </summary>
+        private void saveSessionInCategorySearch(string productId, string productName, string companyId) {
+            this.Session["scodProductType"] = productId;
+            this.Session["sproductType"] = productName;
+            this.Session["scompany_id"] = scompany_id;
+        }
+
+        /// <summary>
+        /// Guarda en sessión el resultado de la busqueda aplicando los filtros de Category Search
+        /// </summary>
+        /// <param name="categoryDt"></param>
+        private void saveSessionResultCategorySearch(DataTable categoryDt) {
+            this.Session["tProductType"] = categoryDt;
+        }
+
+        /// <summary>
+        /// Retornar un DataTable con las Categorías que cumplen con los filtros indicados.
+        /// </summary>
+        /// <param name="productId"></param>
+        /// <param name="productName"></param>
+        /// <param name="companyId"></param>
+        /// <returns>DataTable con las Categorias que cumplen con los filtros aplicados</returns>
+        private DataTable getProductCategoryInCategorySearch(string productId, string productName, string companyId) {
             DataTable oeProductType = new DataTable();
             try
             {
                 // Buscar las Categorias según los Filtros
-                oeProductType = oProductType.SearchProductCategory(scodProductType, sproductType, scompany_id);
+                oeProductType = oProductType.SearchProductCategory(productId, productName, companyId);
             }
             catch (Exception ex)
             {
                 messages = "Ocurrio un Error: " + ex.ToString();
             }
+            return oeProductType;
+        }
 
+        /// <summary>
+        /// Poblar el Gridview en base al resultado de la busqueda de Category Search
+        /// </summary>
+        /// <param name="categorySearchResultDt"></param>
+        /// <returns></returns>
+        private bool populateGridViewForCategoryResultSearch(DataTable categorySearchResultDt) {
 
-            this.Session["tProductType"] = oeProductType;
-            if (oeProductType != null)
+            bool result = false;
+
+            if (categorySearchResultDt != null)
             {
-                if (oeProductType.Rows.Count > 0)
+                if (categorySearchResultDt.Rows.Count > 0)
                 {
-                    gridbuscarCategoria(oeProductType);
+                    gridbuscarCategoria(categorySearchResultDt);
+                    result = true;
                 }
 
                 else
@@ -3996,6 +4038,15 @@ namespace SIGE.Pages.Modulos.Administrativo
                     IbtnProductType.Show();
                 }
             }
+
+            return result;
+        }
+        
+
+        /// <summary>
+        /// Guardar en sessión el resultado de la busqueda de Category Search para exportarlo a Excel.
+        /// </summary>
+        private void saveSessionToExportExcelByCategorySearchResult() {
 
             // Setea la Session para Exportar a Excel.
             this.Session["Exportar_Excel"] = "Exportar_Categorias";
@@ -4010,6 +4061,7 @@ namespace SIGE.Pages.Modulos.Administrativo
             dtnameCaategoria.Columns.Add("Cliente", typeof(String));
             dtnameCaategoria.Columns.Add("Estado", typeof(String));
 
+
             for (int i = 0; i <= GVConsultaCategoria.Rows.Count - 1; i++)
             {
                 DataRow dr = dtnameCaategoria.NewRow();
@@ -4023,7 +4075,48 @@ namespace SIGE.Pages.Modulos.Administrativo
             }
 
             this.Session["CExporCategoria"] = dtnameCaategoria;
+        
         }
+
+        /// <summary>
+        /// Evento Click del Panel de Busqueda de Categorias, para filtrar la información de las Categorías, aplicando los filtros, para la Gestión de Categorías.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void BtnBTypeProduct_Click(object sender, EventArgs e)
+        {
+            desactivarControlesCategoria();
+            
+            LblFaltantes.Text = "";
+
+            string productId = trimText(TxtBCodTypeProduct.Text);
+            string productName = trimText(TxtBNomTypeProduct.Text);
+            string companyId = trimText(cmb_Cliente.SelectedValue.ToString());
+
+            bool continuar = validateFilterInCategorySearch(productId, productName, companyId);
+
+            if (continuar) {
+
+                buscarActivarbotnesCategoria();
+
+                cleanFilterInCategorySearch();
+
+                saveSessionInCategorySearch(productId, productName, companyId);
+
+                DataTable categoriesDt = getProductCategoryInCategorySearch(productId, productName, companyId);
+
+                continuar = populateGridViewForCategoryResultSearch(categoriesDt);
+
+                if (continuar) {
+
+                    saveSessionResultCategorySearch(categoriesDt);
+                    saveSessionToExportExcelByCategorySearchResult();
+
+                }
+            }
+
+        }
+        
         /// <summary>
         /// Llenar la información del AspControl GridView 'GVConsultaCategoria' y Hacer Visible el Panel 'CosultaGVCategoria'
         /// </summary>
@@ -4044,6 +4137,7 @@ namespace SIGE.Pages.Modulos.Administrativo
             SavelimpiarControlesCategoria();
             BtnCargaMasivaCate.Visible = true;
         }
+        
         /// <summary>
         /// Gestion las Opciones de Categoría para deshabilitarlos en caso encuentre un Error.
         /// </summary>
@@ -4065,23 +4159,32 @@ namespace SIGE.Pages.Modulos.Administrativo
         protected void GVConsultaCategoria_RowEditing(object sender, System.Web.UI.WebControls.GridViewEditEventArgs e)
         {
             btnCCategoria.Visible = false;
+            
             MopopConsulCate.Show();
+            
             GVConsultaCategoria.EditIndex = e.NewEditIndex;
+            
             string Codigo, Categoria, grupo, cliente;
             bool estado;
+            
             Codigo = ((Label)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("LblCodProductType")).Text;
             Categoria = ((Label)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("LblNomProductType")).Text;
             grupo = ((Label)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("Lblgroupcategory")).Text;
             cliente = ((Label)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("LblClienteID")).Text;
             estado = ((CheckBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("CheckECategoria")).Checked;
+            
             GVConsultaCategoria.DataSource = (DataTable)this.Session["tProductType"];
             GVConsultaCategoria.DataBind();
+            
             if (cliente.Equals(""))
                 cliente = "<Seleccione...>";
+            
             ((Label)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("LblCodProductType")).Text = Codigo;
             ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[1].FindControl("TxtNomProductType")).Text = Categoria;
             ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[2].FindControl("TxtgroupCategory")).Text = grupo;
+            
             LlenacomboConsultaCliente();
+
             ((DropDownList)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[3].FindControl("cmbCliente_Edit")).Items.FindByText(cliente).Selected = true;
             ((CheckBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[4].FindControl("CheckECategoria")).Checked = estado;
             this.Session["rept"] = ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[1].FindControl("TxtNomProductType")).Text;
@@ -4119,7 +4222,9 @@ namespace SIGE.Pages.Modulos.Administrativo
             {
                 estado = false;
                 DAplicacion oddeshabProductType = new DAplicacion();
-                DataTable dt = oddeshabProductType.PermitirDeshabilitar(ConfigurationManager.AppSettings["ProductCategoryProduct_Tipo"], ((Label)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("LblCodProductType")).Text);
+                DataTable dt = oddeshabProductType.PermitirDeshabilitar(
+                    ConfigurationManager.AppSettings["ProductCategoryProduct_Tipo"], 
+                    ((Label)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("LblCodProductType")).Text);
                 if (dt != null)
                 {
                     Alertas.CssClass = "MensajesError";
@@ -4129,7 +4234,8 @@ namespace SIGE.Pages.Modulos.Administrativo
                 }
             }
 
-            if (((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[1].FindControl("TxtNomProductType")).Text == "" || ((DropDownList)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[3].FindControl("cmbCliente_Edit")).Text == "0")
+            if (((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[1].FindControl("TxtNomProductType")).Text == "" || 
+                ((DropDownList)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[3].FindControl("cmbCliente_Edit")).Text == "0")
             {
                 LblFaltantes.Text = "Debe ingresar los campos: ";
                 if (((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("TxtNomProductType")).Text == "")
@@ -4150,16 +4256,33 @@ namespace SIGE.Pages.Modulos.Administrativo
                 repetido = Convert.ToString(this.Session["rept"]);
                 repetido1 = Convert.ToString(this.Session["rept1"]);
                 repetido2 = Convert.ToString(this.Session["rept2"]);
-                if (repetido != ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[1].FindControl("TxtNomProductType")).Text || repetido1 != ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[2].FindControl("TxtgroupCategory")).Text || repetido2 != ((DropDownList)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[3].FindControl("cmbCliente_Edit")).Text)
+                if (repetido != ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[1].FindControl("TxtNomProductType")).Text || 
+                    repetido1 != ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[2].FindControl("TxtgroupCategory")).Text || 
+                    repetido2 != ((DropDownList)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[3].FindControl("cmbCliente_Edit")).Text)
                 {
                     DAplicacion odconsulProductType = new DAplicacion();
-                    DataTable dtconsulta = odconsulProductType.ConsultaDuplicados(ConfigurationManager.AppSettings["ProductCategory"], ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("TxtNomProductType")).Text, ((DropDownList)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[3].FindControl("cmbCliente_Edit")).Text, ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[2].FindControl("TxtgroupCategory")).Text);
+                    DataTable dtconsulta = odconsulProductType.ConsultaDuplicados(ConfigurationManager.AppSettings["ProductCategory"], 
+                        ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("TxtNomProductType")).Text, 
+                        ((DropDownList)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[3].FindControl("cmbCliente_Edit")).Text, 
+                        ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[2].FindControl("TxtgroupCategory")).Text);
                     if (dtconsulta == null)
                     {
-                        EProduct_Type oeaProductType = oProductType.Actualizar_ProductCategory(((Label)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("LblCodProductType")).Text, ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("TxtNomProductType")).Text, ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("TxtgroupCategory")).Text, ((DropDownList)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("cmbCliente_Edit")).Text, estado, Convert.ToString(this.Session["sUser"]), DateTime.Now);
-                        EProduct_Type oeaProductTypetmp = oProductType.Actualizar_ProductCategorytmp(((Label)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("LblCodProductType")).Text, ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("TxtNomProductType")).Text, estado);
+                        EProduct_Type oeaProductType = 
+                            oProductType.Actualizar_ProductCategory(
+                            ((Label)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("LblCodProductType")).Text, 
+                            ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("TxtNomProductType")).Text, 
+                            ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("TxtgroupCategory")).Text, 
+                            ((DropDownList)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("cmbCliente_Edit")).Text, 
+                            estado, 
+                            Convert.ToString(this.Session["sUser"]), DateTime.Now);
+
+                        EProduct_Type oeaProductTypetmp = oProductType.Actualizar_ProductCategorytmp(
+                            ((Label)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("LblCodProductType")).Text, 
+                            ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("TxtNomProductType")).Text, 
+                            estado);
                         GVConsultaCategoria.EditIndex = -1;
-                        DataTable oeProductType = oProductType.SearchProductCategory(this.Session["scodProductType"].ToString().Trim(), this.Session["sproductType"].ToString().Trim(), this.Session["scompany_id"].ToString().Trim());
+                        DataTable oeProductType = oProductType.SearchProductCategory(this.Session["scodProductType"].ToString().Trim(), 
+                            this.Session["sproductType"].ToString().Trim(), this.Session["scompany_id"].ToString().Trim());
                         this.Session["tProductType"] = oeProductType;
                         if (oeProductType != null)
                         {
@@ -4187,11 +4310,24 @@ namespace SIGE.Pages.Modulos.Administrativo
                 }
                 else
                 {
-                    EProduct_Type oeaProductType = oProductType.Actualizar_ProductCategory(((Label)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("LblCodProductType")).Text, ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("TxtNomProductType")).Text, ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("TxtgroupCategory")).Text, ((DropDownList)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("cmbCliente_Edit")).Text, estado, Convert.ToString(this.Session["sUser"]), DateTime.Now);
-                    EProduct_Type oeaProductTypetmp = oProductType.Actualizar_ProductCategorytmp(((Label)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("LblCodProductType")).Text, ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("TxtNomProductType")).Text, estado);
+                    EProduct_Type oeaProductType = oProductType.Actualizar_ProductCategory(
+                        ((Label)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("LblCodProductType")).Text, 
+                        ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("TxtNomProductType")).Text, 
+                        ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("TxtgroupCategory")).Text, 
+                        ((DropDownList)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("cmbCliente_Edit")).Text, 
+                        estado, 
+                        Convert.ToString(this.Session["sUser"]), DateTime.Now);
+
+                    EProduct_Type oeaProductTypetmp = oProductType.Actualizar_ProductCategorytmp(
+                        ((Label)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("LblCodProductType")).Text, 
+                        ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("TxtNomProductType")).Text, 
+                        estado);
                     SavelimpiarControlesCategoria();
                     GVConsultaCategoria.EditIndex = -1;
-                    DataTable oeProductType = oProductType.SearchProductCategory(this.Session["scodProductType"].ToString().Trim(), this.Session["sproductType"].ToString().Trim(), this.Session["scompany_id"].ToString().Trim());
+                    DataTable oeProductType = oProductType.SearchProductCategory(
+                        this.Session["scodProductType"].ToString().Trim(), 
+                        this.Session["sproductType"].ToString().Trim(), 
+                        this.Session["scompany_id"].ToString().Trim());
                     this.Session["tProductType"] = oeProductType;
                     if (oeProductType != null)
                     {
