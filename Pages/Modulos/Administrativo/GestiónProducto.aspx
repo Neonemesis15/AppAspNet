@@ -4,6 +4,7 @@
 <%@ Register Assembly="AjaxControls" Namespace="AjaxControls" TagPrefix="cc2" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 
+<%@ Register src="ProductUserControls/CategoryUserControl.ascx" tagname="CategoryUserControl" tagprefix="uc1" %>
 <!--
 -- Author       : Magaly Jiminez (MJ)
 -- Create date  : 13/08/2010
@@ -113,25 +114,21 @@
                     <HeaderTemplate>Categorias</HeaderTemplate>
                     <ContentTemplate>
                         
-                        <!-- HEADER - INI -->
-                        <br /><br />
-                        <div class="centrarcontenido">
-                            <span class="labelsTit2">Gestión de Categorías de Productos</span>&nbsp;
+                        <div>
+                            <uc1:CategoryUserControl ID="CategoryUserControl1" runat="server" />
                         </div>
-                        <br /><br />
-                        <!-- HEADER - FIN -->
 
                         <!-- BODY - INI -->
-                        <div class="centrar">
-                            <div class="tabla centrar">
+                        <div class = "centrar">
+                            <div class = "tabla centrar">
                                 <fieldset>
-                                    <legend style="">Categoría de Producto</legend>
-                                    <div class="fila">
-                                        <div class="celda">
-                                            <span class="labels">Código*</span>&nbsp;
+                                    <legend style = ""> Categoría de Producto </legend>
+                                    <div class = "fila">
+                                        <div class = "celda">
+                                            <span class = "labels"> Código* </span>
                                         </div>
-                                        <div class="celda">
-                                            <asp:TextBox ID="TxtCodProductType" runat="server" BackColor="#DDDDDD" ReadOnly="True"
+                                        <div class = "celda">
+                                            <asp:TextBox ID = "TxtCodProductType" runat="server" BackColor="#DDDDDD" ReadOnly="True"
                                                 Width="190px" Enabled="False"></asp:TextBox>
                                         </div>
                                     </div>
@@ -164,7 +161,7 @@
                                                 Enabled="False">
                                             </asp:DropDownList>
                                         </div>
-                                    </div><br /><br />
+                                    </div>
                                 </fieldset>
                             </div>
                         </div>
@@ -3241,45 +3238,92 @@
                                 ShowFooter="True" OnPageSizeChanged="gv_CategoryCompany_PageSizeChanged" 
                                 onitemdatabound="gv_CategoryCompany_ItemDataBound" 
                                 onupdatecommand="gv_CategoryCompany_UpdateCommand">
+                                
                                 <MasterTableView NoMasterRecordsText="Sin Datos para mostrar." ForeColor="#00579E" Font-Size="Smaller">
+                                    
                                     <Columns>
+                                        
                                         <telerik:GridBoundColumn DataField="id_Cate_Comp" HeaderText="ID" UniqueName="id_Cate_Comp"
                                             ReadOnly="True">
+                                            
+
                                         </telerik:GridBoundColumn>
+                                        
                                         <telerik:GridBoundColumn DataField="Company_Name" HeaderText="Cliente" UniqueName="Company_Name"
                                             ReadOnly="True">
+                                            
+
                                         </telerik:GridBoundColumn>
+                                        
                                         <telerik:GridDropDownColumn Visible="False"   HeaderText="Cliente" UniqueName="gddlCliente">
+                                            
+
                                         </telerik:GridDropDownColumn>
+                                        
                                         <telerik:GridBoundColumn DataField="Product_Category" HeaderText="Categoria" UniqueName="Categoria"
                                             ReadOnly="True">
+                                            
+
                                         </telerik:GridBoundColumn>
+                                        
                                         <telerik:GridDropDownColumn  Visible="False"  HeaderText="Categoria" UniqueName="gddlCategoria">
+                                            
+
                                         </telerik:GridDropDownColumn>
+                                        
                                         <telerik:GridTemplateColumn HeaderText="Validado" UniqueName="TemplateColumn" ReadOnly="True">
+                                            
+
                                             <HeaderTemplate>Estado</HeaderTemplate>
+                                            
+
                                             <ItemTemplate>
+                                                
+
                                                 <asp:CheckBox ID="cb_validar" runat="server" Checked='<%# Eval("Status")%>' />
+                                                
+
                                                 <asp:Label ID="lbl_validar" runat="server"></asp:Label>
+                                                    
+
                                                     <asp:Label ID="lbl_Id" runat="server" Text='<%# Bind("id_Cate_Comp") %>' Visible="false">
                                                     </asp:Label>
+                                                
+
                                             </ItemTemplate>
+                                            
+
                                         </telerik:GridTemplateColumn>
+                                        
                                         <telerik:GridEditCommandColumn ButtonType="ImageButton" 
                                             CancelImageUrl="~/Pages/images/cancel_edit_icon.png"
                                             EditImageUrl="~/Pages/images/edit_icon.gif" UpdateImageUrl="~/Pages/images/save_icon.png"
                                             CancelText="Cancelar" UpdateText="Actualizar">
+                                            
+
                                         </telerik:GridEditCommandColumn>
+                                        
                                     </Columns>
+                                    
                                     <EditFormSettings>
+                                        
+
                                         <EditColumn UniqueName="EditCommandColumn1" ButtonType="ImageButton" 
                                             CancelImageUrl="~/Pages/images/cancel_edit_icon.png"
                                             EditImageUrl="~/Pages/images/edit_icon.gif" UpdateImageUrl="~/Pages/images/save_icon.png">
+                                            
+
                                         </EditColumn>
+                                        
+
                                     </EditFormSettings>
+                                    
                                     <AlternatingItemStyle BackColor="#F7F7F7" ForeColor="#333333" />
+                                    
                                 </MasterTableView>
+                                
                                 <PagerStyle PageSizeLabelText="Tamaño de pagina:" />
+                                
                             </telerik:RadGrid>
 
 

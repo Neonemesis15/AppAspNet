@@ -3796,7 +3796,7 @@ namespace SIGE.Pages.Modulos.Administrativo
         /// <summary>
         /// Deshabilitar Opciones de Crear y Guardar, para la Gestión de Categorias
         /// </summary>
-        private void BuscarActivarbotnesCategoria()
+        private void buscarActivarbotnesCategoria()
         {
             BtnCrearProductType.Visible = false;
             BtnSaveProductType.Visible = false;
@@ -3845,7 +3845,7 @@ namespace SIGE.Pages.Modulos.Administrativo
             TxtBCodTypeProduct.Text = "";
             TxtBNomTypeProduct.Text = "";
         }
-        
+
         protected void BtnCrearProductType_Click(object sender, EventArgs e)
         {
             SavelimpiarControlesCategoria();
@@ -3877,7 +3877,7 @@ namespace SIGE.Pages.Modulos.Administrativo
                 }
                 if (TxtNomProductType.Text == "")
                 {
-                    LblFaltantes.Text += ("Categoría de producto" + " . ");                    
+                    LblFaltantes.Text += ("Categoría de producto" + " . ");
                 }
                 Alertas.CssClass = "MensajesError";
                 MensajeAlerta();
@@ -3885,14 +3885,14 @@ namespace SIGE.Pages.Modulos.Administrativo
             }
 
             try
-            {               
+            {
                 DAplicacion odconsulProductCategory = new DAplicacion();
                 DataTable dtconsulta = odconsulProductCategory.ConsultaDuplicados(ConfigurationManager.AppSettings["ProductCategory"], TxtNomProductType.Text, cmb_categorias_cliente.SelectedValue.ToString(), null);
                 if (dtconsulta == null)
                 {
                     EProduct_Type oeProductType = oProductType.RegistrarProductcategory(TxtCodProductType.Text, TxtNomProductType.Text, TxtgroupCategory.Text, true, cmb_categorias_cliente.SelectedValue.ToString().Trim(), Convert.ToString(this.Session["sUser"]), DateTime.Now, Convert.ToString(this.Session["sUser"]), DateTime.Now);
                     EProduct_Type oeProductTypeTMP = oProductType.RegistrarProductcategoryTMP(oeProductType.id_Product_Category, oeProductType.Product_Category, oeProductType.Product_Category_Status);
-                    this.Session["sProductType"] = TxtNomProductType.Text;  
+                    this.Session["sProductType"] = TxtNomProductType.Text;
                     Alertas.CssClass = "MensajesCorrecto";
                     LblFaltantes.Text = "La Categoría de producto " + TxtNomProductType.Text + ", fue creada con éxito";
                     cancelarCat();
@@ -3940,11 +3940,12 @@ namespace SIGE.Pages.Modulos.Administrativo
             TxtBCodTypeProduct.Text = TxtBCodTypeProduct.Text.Trim();
             TxtBNomTypeProduct.Text = TxtBNomTypeProduct.Text.Trim();
             scompany_id = cmb_Cliente.SelectedValue.ToString().Trim();
-            
+
             // Validación que los Filtros o Criterios de Busqueda se encuentren especificados
-            if (TxtBCodTypeProduct.Text == "" 
-                && TxtBNomTypeProduct.Text == "" 
-                && cmb_Cliente.Text == "0") {
+            if (TxtBCodTypeProduct.Text == ""
+                && TxtBNomTypeProduct.Text == ""
+                && cmb_Cliente.Text == "0")
+            {
 
                 this.Session["mensajealert"] = "Código y/o nombre de Categoría de producto y/o Cliente";
                 Alertas.CssClass = "MensajesError";
@@ -3956,7 +3957,7 @@ namespace SIGE.Pages.Modulos.Administrativo
                 return;
             }
 
-            BuscarActivarbotnesCategoria();
+            buscarActivarbotnesCategoria();
             scodProductType = TxtBCodTypeProduct.Text;
             sproductType = TxtBNomTypeProduct.Text;
             TxtBCodTypeProduct.Text = "";
@@ -3977,7 +3978,7 @@ namespace SIGE.Pages.Modulos.Administrativo
                 messages = "Ocurrio un Error: " + ex.ToString();
             }
 
-            
+
             this.Session["tProductType"] = oeProductType;
             if (oeProductType != null)
             {
@@ -3985,7 +3986,7 @@ namespace SIGE.Pages.Modulos.Administrativo
                 {
                     gridbuscarCategoria(oeProductType);
                 }
-                       
+
                 else
                 {
                     CancelarCat();
@@ -3993,7 +3994,7 @@ namespace SIGE.Pages.Modulos.Administrativo
                     LblFaltantes.Text = "La consulta realizada no devolvió ninguna respuesta";
                     MensajeAlerta();
                     IbtnProductType.Show();
-                }               
+                }
             }
 
             // Setea la Session para Exportar a Excel.
@@ -4035,7 +4036,7 @@ namespace SIGE.Pages.Modulos.Administrativo
             GVConsultaCategoria.DataBind();
             MopopConsulCate.Show();
         }
-        
+
         protected void BtnCancelProductType_Click(object sender, EventArgs e)
         {
             saveActivarbotonesCategoria();
@@ -4052,7 +4053,7 @@ namespace SIGE.Pages.Modulos.Administrativo
             desactivarControlesCategoria();
             SavelimpiarControlesCategoria();
         }
-        
+
         protected void GVConsultaCategoria_PageIndexChanging(object sender, System.Web.UI.WebControls.GridViewPageEventArgs e)
         {
             GVConsultaCategoria.PageIndex = e.NewPageIndex;
@@ -4095,15 +4096,21 @@ namespace SIGE.Pages.Modulos.Administrativo
             btnCCategoria.Visible = true;
             MopopConsulCate.Show();
         }
-        
+
         protected void GVConsultaCategoria_RowUpdating(object sender, System.Web.UI.WebControls.GridViewUpdateEventArgs e)
         {
             LblFaltantes.Text = "";
 
-            ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[1].FindControl("TxtNomProductType")).Text = ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[1].FindControl("TxtNomProductType")).Text.Trim();
-            ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[2].FindControl("TxtgroupCategory")).Text = ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[2].FindControl("TxtgroupCategory")).Text.Trim();
+            ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[1].FindControl("TxtNomProductType")).Text =
+                ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[1].FindControl("TxtNomProductType")).Text.Trim();
+
+            ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[2].FindControl("TxtgroupCategory")).Text =
+                ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[2].FindControl("TxtgroupCategory")).Text.Trim();
+
             this.Session["sProductType"] = ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("TxtNomProductType")).Text;
+
             this.Session["scompany_id"] = ((DropDownList)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[3].FindControl("cmbCliente_Edit")).Text.Trim();
+
             if (((CheckBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[3].FindControl("CheckECategoria")).Checked != false)
             {
                 estado = true;
@@ -4127,13 +4134,13 @@ namespace SIGE.Pages.Modulos.Administrativo
                 LblFaltantes.Text = "Debe ingresar los campos: ";
                 if (((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("TxtNomProductType")).Text == "")
                 {
-                    LblFaltantes.Text += ("Nombre de producto" + " . " );
+                    LblFaltantes.Text += ("Nombre de producto" + " . ");
                 }
                 if (((DropDownList)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[3].FindControl("cmbCliente_Edit")).Text == "0")
                 {
-                    LblFaltantes.Text += ("Cliente" + " . " );
+                    LblFaltantes.Text += ("Cliente" + " . ");
                 }
-                Alertas.CssClass = "MensajesError";                
+                Alertas.CssClass = "MensajesError";
                 CancelarCat();
                 MensajeAlerta();
                 return;
@@ -4143,7 +4150,7 @@ namespace SIGE.Pages.Modulos.Administrativo
                 repetido = Convert.ToString(this.Session["rept"]);
                 repetido1 = Convert.ToString(this.Session["rept1"]);
                 repetido2 = Convert.ToString(this.Session["rept2"]);
-                if (repetido != ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[1].FindControl("TxtNomProductType")).Text || repetido1 != ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[2].FindControl("TxtgroupCategory")).Text || repetido2 != ((DropDownList)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[3].FindControl("cmbCliente_Edit")).Text )
+                if (repetido != ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[1].FindControl("TxtNomProductType")).Text || repetido1 != ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[2].FindControl("TxtgroupCategory")).Text || repetido2 != ((DropDownList)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[3].FindControl("cmbCliente_Edit")).Text)
                 {
                     DAplicacion odconsulProductType = new DAplicacion();
                     DataTable dtconsulta = odconsulProductType.ConsultaDuplicados(ConfigurationManager.AppSettings["ProductCategory"], ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("TxtNomProductType")).Text, ((DropDownList)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[3].FindControl("cmbCliente_Edit")).Text, ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[2].FindControl("TxtgroupCategory")).Text);
@@ -4152,14 +4159,14 @@ namespace SIGE.Pages.Modulos.Administrativo
                         EProduct_Type oeaProductType = oProductType.Actualizar_ProductCategory(((Label)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("LblCodProductType")).Text, ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("TxtNomProductType")).Text, ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("TxtgroupCategory")).Text, ((DropDownList)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("cmbCliente_Edit")).Text, estado, Convert.ToString(this.Session["sUser"]), DateTime.Now);
                         EProduct_Type oeaProductTypetmp = oProductType.Actualizar_ProductCategorytmp(((Label)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("LblCodProductType")).Text, ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("TxtNomProductType")).Text, estado);
                         GVConsultaCategoria.EditIndex = -1;
-                        DataTable oeProductType = oProductType.SearchProductCategory(this.Session["scodProductType"].ToString().Trim(), this.Session["sproductType"].ToString().Trim(), this.Session["scompany_id"].ToString().Trim());                     
+                        DataTable oeProductType = oProductType.SearchProductCategory(this.Session["scodProductType"].ToString().Trim(), this.Session["sproductType"].ToString().Trim(), this.Session["scompany_id"].ToString().Trim());
                         this.Session["tProductType"] = oeProductType;
                         if (oeProductType != null)
                         {
                             if (oeProductType.Rows.Count > 0)
                             {
                                 gridbuscarCategoria(oeProductType);
-                            }                          
+                            }
                         }
                         IbtnProductType.Hide();
                         btnCCategoria.Visible = true;
@@ -4198,7 +4205,7 @@ namespace SIGE.Pages.Modulos.Administrativo
                     }
 
                     try
-                    { 
+                    {
                         this.planningADM = this.Session["AdmProd"].ToString().Trim();
                     }
                     catch
@@ -4213,7 +4220,7 @@ namespace SIGE.Pages.Modulos.Administrativo
                     {
                         llenaComboCategoriaBuscarMarca();
                     }
-            
+
                     btnCCategoria.Visible = true;
                     MopopConsulCate.Show();
                     Alertas.CssClass = "MensajesCorrecto";
@@ -4243,7 +4250,7 @@ namespace SIGE.Pages.Modulos.Administrativo
                 }
             }
         }
-        
+
         #endregion
 
         #region SubCategoria

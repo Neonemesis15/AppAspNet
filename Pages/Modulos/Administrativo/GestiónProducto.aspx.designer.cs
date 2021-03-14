@@ -67,6 +67,15 @@ namespace SIGE.Pages.Modulos.Administrativo {
         protected global::AjaxControlToolkit.TabPanel Panel_CategProduct;
         
         /// <summary>
+        /// CategoryUserControl1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::SIGE.Pages.Modulos.Administrativo.ProductUserControls.CategoryUserControl CategoryUserControl1;
+        
+        /// <summary>
         /// TxtCodProductType control.
         /// </summary>
         /// <remarks>

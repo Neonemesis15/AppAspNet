@@ -341,7 +341,8 @@ namespace SIGE
                     fncSetSessionObjectByEUsuario(rLoginResponse.OEUsuario);
                     if (getMessages().Equals(""))
                     {
-                        Response.Redirect(rLoginResponse.UrlPage);
+                        //Response.Redirect(rLoginResponse.UrlPage);
+                        Response.Redirect("~/Pages/Modulos/Administrativo/MOD_Admin.aspx");
                     }
                     //else {
                     //    messages = getMessages();
