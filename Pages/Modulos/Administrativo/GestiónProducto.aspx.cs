@@ -346,8 +346,11 @@ namespace SIGE.Pages.Modulos.Administrativo
             BtnCargaMasivaCate.Visible = false;
         }
 
-        protected void BtnSaveProductType_Click(object sender, EventArgs e)
-        {
+
+        /// <summary>
+        /// Funcion para validar que no se registren categorias Duplicadas
+        /// </summary>
+        public bool validarPrerequisitosCategoriasInsertarActualizar() {
             LblFaltantes.Text = "";
             TxtNomProductType.Text = TxtNomProductType.Text.Trim();
             if (cmb_categorias_cliente.Text == "0" || TxtNomProductType.Text == "")
@@ -363,51 +366,139 @@ namespace SIGE.Pages.Modulos.Administrativo
                 }
                 Alertas.CssClass = "MensajesError";
                 MensajeAlerta();
-                return;
+                return false;
             }
+            else {
+                return true;
+            }
+        }
 
+        /// <summary>
+        /// Validar Categorías Duplicadas
+        /// </summary>
+        /// <returns></returns>
+        private DataTable validarCategoriasDuplicadas() {
+            DAplicacion odconsulProductCategory = new DAplicacion();
+            DataTable dtconsulta =
+                        odconsulProductCategory.ConsultaDuplicados(
+                        ConfigurationManager.AppSettings["ProductCategory"],
+                        TxtNomProductType.Text,
+                        cmb_categorias_cliente.SelectedValue.ToString(),
+                        null);
+            return dtconsulta;
+        }
+
+        /// <summary>
+        /// Registrar Categorias en la Base de Datos
+        /// </summary>
+        /// <returns></returns>
+        public EProduct_Type registrarCategorias() {
+            EProduct_Type oeProductType =
+                            oProductType.RegistrarProductcategory(
+                            TxtCodProductType.Text,
+                            TxtNomProductType.Text,
+                            TxtgroupCategory.Text,
+                            true,
+                            cmb_categorias_cliente.SelectedValue.ToString().Trim(),
+                            Convert.ToString(this.Session["sUser"]),
+                            DateTime.Now,
+                            Convert.ToString(this.Session["sUser"]),
+                            DateTime.Now);
+            return oeProductType;
+        }
+
+        /// <summary>
+        /// Registrar en base de datos Mobile
+        /// </summary>
+        /// <returns></returns>
+        public EProduct_Type registrarCategoriasMobile(EProduct_Type oeProductType)
+        {
+            EProduct_Type oeProductTypeTMP =
+                           oProductType.RegistrarProductcategoryTMP(
+                           oeProductType.id_Product_Category,
+                           oeProductType.Product_Category,
+                           oeProductType.Product_Category_Status);
+            return oeProductTypeTMP;
+        }
+
+        /// <summary>
+        /// Mensaje cuando la categoria fue creada con éxito
+        /// </summary>
+        private void messageCreateSucessCategory() {
+
+            this.Session["sProductType"] = TxtNomProductType.Text;
+            Alertas.CssClass = "MensajesCorrecto";
+            LblFaltantes.Text = "La Categoría de producto " + TxtNomProductType.Text + ", fue creada con éxito";
+            cancelarCat();
+            MensajeAlerta();
+        }
+
+        /// <summary>
+        /// Mensaje cuando la categoria Falló por algún motivo, al momento de crearla
+        /// </summary>
+        private void messageCreateFailedCategory() {
+            Alertas.CssClass = "MensajesError";
+            LblFaltantes.Text = "La Categoría  de producto " + TxtNomProductType.Text + ", ya existe";
+            cancelarCat();
+            MensajeAlerta();
+        }
+
+        /// <summary>
+        /// Funcionalidad para Guardar Cambios de Categoría
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void BtnSaveProductType_Click(object sender, EventArgs e)
+        {
             try
             {
-                DAplicacion odconsulProductCategory = new DAplicacion();
-                DataTable dtconsulta = odconsulProductCategory.ConsultaDuplicados(ConfigurationManager.AppSettings["ProductCategory"], TxtNomProductType.Text, cmb_categorias_cliente.SelectedValue.ToString(), null);
-                if (dtconsulta == null)
+                if (validarPrerequisitosCategoriasInsertarActualizar())
                 {
-                    EProduct_Type oeProductType = oProductType.RegistrarProductcategory(TxtCodProductType.Text, TxtNomProductType.Text, TxtgroupCategory.Text, true, cmb_categorias_cliente.SelectedValue.ToString().Trim(), Convert.ToString(this.Session["sUser"]), DateTime.Now, Convert.ToString(this.Session["sUser"]), DateTime.Now);
-                    EProduct_Type oeProductTypeTMP = oProductType.RegistrarProductcategoryTMP(oeProductType.id_Product_Category, oeProductType.Product_Category, oeProductType.Product_Category_Status);
-                    this.Session["sProductType"] = TxtNomProductType.Text;
-                    Alertas.CssClass = "MensajesCorrecto";
-                    LblFaltantes.Text = "La Categoría de producto " + TxtNomProductType.Text + ", fue creada con éxito";
-                    cancelarCat();
-                    MensajeAlerta();
+                    DataTable dtconsulta = validarCategoriasDuplicadas();
+
+                    if (dtconsulta == null)
+                    {
+
+                        EProduct_Type oeProductType = registrarCategorias();
+                        EProduct_Type oeProductTypeTMP = registrarCategoriasMobile(oeProductType);
+
+                        messageCreateSucessCategory();
+                    }
+                    else
+                    {
+                        messageCreateFailedCategory();
+                    }
                 }
-                else
-                {
-                    Alertas.CssClass = "MensajesError";
-                    LblFaltantes.Text = "La Categoría  de producto " + TxtNomProductType.Text + ", ya existe";
-                    cancelarCat();
-                    MensajeAlerta();
-                }
+                
             }
 
             catch (Exception ex)
             {
-                string error = "";
-                string mensaje = "";
-                error = Convert.ToString(ex.Message);
-                mensaje = ConfigurationManager.AppSettings["ErrorConection"];
-                if (error == mensaje)
-                {
-                    Lucky.CFG.Exceptions.Exceptions exs = new Lucky.CFG.Exceptions.Exceptions(ex);
-                    string errMessage = "";
-                    errMessage = mensaje;
-                    errMessage = new Lucky.CFG.Util.Functions().preparaMsgError(ex.Message);
-                    this.Response.Redirect("../../../err_mensaje.aspx?msg=" + errMessage, true);
-                }
-                else
-                {
-                    this.Session.Abandon();
-                    Response.Redirect("~/err_mensaje_seccion.aspx", true);
-                }
+                errorMessage(ex);
+            }
+        }
+
+        /// <summary>
+        /// Management Error Messages
+        /// </summary>
+        /// <param name="ex"></param>
+        private void errorMessage(Exception ex) {
+            string error = "";
+            string mensaje = "";
+            error = Convert.ToString(ex.Message);
+            mensaje = ConfigurationManager.AppSettings["ErrorConection"];
+            if (error == mensaje)
+            {
+                Lucky.CFG.Exceptions.Exceptions exs = new Lucky.CFG.Exceptions.Exceptions(ex);
+                string errMessage = "";
+                errMessage = mensaje;
+                errMessage = new Lucky.CFG.Util.Functions().preparaMsgError(ex.Message);
+                this.Response.Redirect("../../../err_mensaje.aspx?msg=" + errMessage, true);
+            }
+            else
+            {
+                this.Session.Abandon();
+                Response.Redirect("~/err_mensaje_seccion.aspx", true);
             }
         }
 
@@ -556,7 +647,8 @@ namespace SIGE.Pages.Modulos.Administrativo
         }
 
         /// <summary>
-        /// Evento Click del Panel de Busqueda de Categorias, para filtrar la información de las Categorías, aplicando los filtros, para la Gestión de Categorías.
+        /// Evento Click del Panel de Busqueda de Categorias, 
+        /// para filtrar la información de las Categorías, aplicando los filtros, para la Gestión de Categorías.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
