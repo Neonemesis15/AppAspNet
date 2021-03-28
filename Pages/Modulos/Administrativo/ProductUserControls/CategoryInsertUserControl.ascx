@@ -1,18 +1,18 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="CategoryInsertUserControl.ascx.cs" Inherits="SIGE.Pages.Modulos.Administrativo.ProductUserControls.CategoryInsertUserControl" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
-<style type="text/css">
-    .MensajeInsertError
-    {
-	    background-image: url('~/images/MensajeSup.jpg'); 
-    }
-</style>
 
 <!---------------------------------------------------------------------------->
 <!---------------------------------------------------------------------------->
 <!-- BUTTON INSERT - INI -->
 <!---------------------------------------------------------------------------->
 <!---------------------------------------------------------------------------->
-<asp:Button ID="BtnCrearProductType" runat="server" CssClass="buttonPlan" Text="Crear" Width="95px"/>
+<asp:Button 
+    ID = "BtnCrearProductType" 
+    runat = "server" 
+    CssClass = "buttonPlan" 
+    Text = "Crear" 
+    Width = "95px"/>
+
 <!---------------------------------------------------------------------------->
 <!---------------------------------------------------------------------------->
 <!-- BUTTON INSERT - FIN -->
@@ -108,7 +108,7 @@
                             Text = "Cliente*: ">
                         </asp:Label>
                     </div>
-                    <div class = "celdaLeft">
+                    <div>
                         <asp:DropDownList 
                             ID = "cmb_categorias_cliente" 
                             runat = "server" 

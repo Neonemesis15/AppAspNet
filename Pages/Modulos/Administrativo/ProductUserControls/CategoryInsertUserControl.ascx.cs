@@ -26,20 +26,23 @@ namespace SIGE.Pages.Modulos.Administrativo.ProductUserControls
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            llenarcombocliente();
-        }
-
-        protected void BtnCrearProductType_Click(object sender, EventArgs e)
-        {
-            //SavelimpiarControlesCategoria();
-            //crearActivarbotonesCategoria();
-            //activarControlesCategoria();
-            //BtnCargaMasivaCate.Visible = false;
+            if (!IsPostBack) {
+                llenarcombocliente();
+            }
         }
 
 
         private Conexion oConn = new Lucky.Data.Conexion();
         private String messages = "";
+
+
+        private void cleanControlsPinputDf()
+        {
+            TxtCodProductType.Text = "";
+            TxtNomProductType.Text = "";
+            TxtgroupCategory.Text = "";
+            cmb_categorias_cliente.Text = "0";
+        }
 
         /// <summary>
         /// Funcion para validar que no se registren categorias Duplicadas
@@ -48,6 +51,7 @@ namespace SIGE.Pages.Modulos.Administrativo.ProductUserControls
         {
             LblFaltantes.Text = "";
             TxtNomProductType.Text = TxtNomProductType.Text.Trim();
+            
             if (cmb_categorias_cliente.Text == "0" || TxtNomProductType.Text == "")
             {
                 LblFaltantes.Text = "Debe ingresar los campos con: ";
@@ -128,6 +132,8 @@ namespace SIGE.Pages.Modulos.Administrativo.ProductUserControls
                         //EProduct_Type oeProductTypeTMP = registrarCategoriasMobile(oeProductType);
 
                         messageCreateSucessCategory();
+                        cleanControlsPinputDf();
+
                     }
                     else
                     {
@@ -141,6 +147,16 @@ namespace SIGE.Pages.Modulos.Administrativo.ProductUserControls
             {
                 errorMessage(ex);
             }
+        }
+
+        /// <summary>
+        /// Función para limpiar los InputInsert
+        /// </summary>
+        private void limpiarInputInsert() {
+            TxtCodProductType.Text = "";
+            TxtNomProductType.Text = "";
+            TxtgroupCategory.Text = "";
+            cmb_categorias_cliente.Text = "0";
         }
 
         /// <summary>
