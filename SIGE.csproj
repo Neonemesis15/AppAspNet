@@ -282,6 +282,13 @@
     <Compile Include="Pages\Modulos\Administrativo\carga_masiva.aspx.designer.cs">
       <DependentUpon>carga_masiva.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Modulos\Administrativo\GestionProductoCategoriaInsert.aspx.cs">
+      <DependentUpon>GestionProductoCategoriaInsert.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Modulos\Administrativo\GestionProductoCategoriaInsert.aspx.designer.cs">
+      <DependentUpon>GestionProductoCategoriaInsert.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Modulos\Administrativo\GestiónProducto.aspx.cs">
       <DependentUpon>GestiónProducto.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -652,6 +659,7 @@
     <Content Include="Pages\js\jquery.overscroll.min.js" />
     <Content Include="Pages\js\jstorage.js" />
     <Content Include="Pages\Modulos\Administrativo\CargaMasivaGProductos.aspx" />
+    <Content Include="Pages\Modulos\Administrativo\GestionProductoCategoriaInsert.aspx" />
     <Content Include="Pages\Modulos\Administrativo\ProductUserControls\CategoryInsertUserControl.ascx" />
     <Content Include="Pages\Modulos\Administrativo\ProductUserControls\CategorySearchUserControl.ascx" />
     <Content Include="Pages\Modulos\Administrativo\pruebaexcel.aspx" />

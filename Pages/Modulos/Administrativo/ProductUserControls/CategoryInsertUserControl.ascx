@@ -1,11 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="CategoryInsertUserControl.ascx.cs" Inherits="SIGE.Pages.Modulos.Administrativo.ProductUserControls.CategoryInsertUserControl" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
-<style type="text/css">
-    .MensajeInsertError
-    {
-	    background-image: url('~/images/MensajeSup.jpg'); 
-    }
-</style>
+
 
 <!---------------------------------------------------------------------------->
 <!---------------------------------------------------------------------------->
