@@ -282,27 +282,6 @@
     <Compile Include="Pages\Modulos\Administrativo\carga_masiva.aspx.designer.cs">
       <DependentUpon>carga_masiva.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Modulos\Administrativo\GestiónGeneral.aspx.cs">
-      <DependentUpon>GestiónGeneral.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\Modulos\Administrativo\GestiónGeneral.aspx.designer.cs">
-      <DependentUpon>GestiónGeneral.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Modulos\Administrativo\GestiónInformes.aspx.cs">
-      <DependentUpon>GestiónInformes.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\Modulos\Administrativo\GestiónInformes.aspx.designer.cs">
-      <DependentUpon>GestiónInformes.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Modulos\Administrativo\GestiónPaís.aspx.cs">
-      <DependentUpon>GestiónPaís.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\Modulos\Administrativo\GestiónPaís.aspx.designer.cs">
-      <DependentUpon>GestiónPaís.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Pages\Modulos\Administrativo\GestiónProducto.aspx.cs">
       <DependentUpon>GestiónProducto.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -310,26 +289,12 @@
     <Compile Include="Pages\Modulos\Administrativo\GestiónProducto.aspx.designer.cs">
       <DependentUpon>GestiónProducto.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Modulos\Administrativo\GestiónPuntodeVenta.aspx.cs">
-      <DependentUpon>GestiónPuntodeVenta.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\Modulos\Administrativo\GestiónPuntodeVenta.aspx.designer.cs">
-      <DependentUpon>GestiónPuntodeVenta.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Pages\Modulos\Administrativo\GestiónServicio.aspx.cs">
       <DependentUpon>GestiónServicio.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Pages\Modulos\Administrativo\GestiónServicio.aspx.designer.cs">
       <DependentUpon>GestiónServicio.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Modulos\Administrativo\GestiónUsuario.aspx.cs">
-      <DependentUpon>GestiónUsuario.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\Modulos\Administrativo\GestiónUsuario.aspx.designer.cs">
-      <DependentUpon>GestiónUsuario.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Modulos\Administrativo\IframeTransparente.aspx.cs">
       <DependentUpon>IframeTransparente.aspx</DependentUpon>
@@ -1178,13 +1143,8 @@
     <Content Include="Pages\js\styleswitcher.js" />
     <Content Include="Pages\js\thumbnailviewer.js" />
     <Content Include="Pages\js\TreeViewAdapter.js" />
-    <Content Include="Pages\Modulos\Administrativo\GestiónGeneral.aspx" />
-    <Content Include="Pages\Modulos\Administrativo\GestiónInformes.aspx" />
-    <Content Include="Pages\Modulos\Administrativo\GestiónPaís.aspx" />
     <Content Include="Pages\Modulos\Administrativo\GestiónProducto.aspx" />
-    <Content Include="Pages\Modulos\Administrativo\GestiónPuntodeVenta.aspx" />
     <Content Include="Pages\Modulos\Administrativo\GestiónServicio.aspx" />
-    <Content Include="Pages\Modulos\Administrativo\GestiónUsuario.aspx" />
     <Content Include="Pages\Modulos\Administrativo\IframeTransparente.aspx" />
     <Content Include="Pages\Modulos\Administrativo\MOD_Admin.aspx" />
     <Content Include="Pages\img\Mercaderismo.png" />
