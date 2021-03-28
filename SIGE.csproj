@@ -282,27 +282,6 @@
     <Compile Include="Pages\Modulos\Administrativo\carga_masiva.aspx.designer.cs">
       <DependentUpon>carga_masiva.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Modulos\Administrativo\GestiónGeneral.aspx.cs">
-      <DependentUpon>GestiónGeneral.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\Modulos\Administrativo\GestiónGeneral.aspx.designer.cs">
-      <DependentUpon>GestiónGeneral.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Modulos\Administrativo\GestiónInformes.aspx.cs">
-      <DependentUpon>GestiónInformes.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\Modulos\Administrativo\GestiónInformes.aspx.designer.cs">
-      <DependentUpon>GestiónInformes.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Modulos\Administrativo\GestiónPaís.aspx.cs">
-      <DependentUpon>GestiónPaís.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\Modulos\Administrativo\GestiónPaís.aspx.designer.cs">
-      <DependentUpon>GestiónPaís.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Pages\Modulos\Administrativo\GestiónProducto.aspx.cs">
       <DependentUpon>GestiónProducto.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -310,26 +289,12 @@
     <Compile Include="Pages\Modulos\Administrativo\GestiónProducto.aspx.designer.cs">
       <DependentUpon>GestiónProducto.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Modulos\Administrativo\GestiónPuntodeVenta.aspx.cs">
-      <DependentUpon>GestiónPuntodeVenta.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\Modulos\Administrativo\GestiónPuntodeVenta.aspx.designer.cs">
-      <DependentUpon>GestiónPuntodeVenta.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Pages\Modulos\Administrativo\GestiónServicio.aspx.cs">
       <DependentUpon>GestiónServicio.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Pages\Modulos\Administrativo\GestiónServicio.aspx.designer.cs">
       <DependentUpon>GestiónServicio.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Modulos\Administrativo\GestiónUsuario.aspx.cs">
-      <DependentUpon>GestiónUsuario.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\Modulos\Administrativo\GestiónUsuario.aspx.designer.cs">
-      <DependentUpon>GestiónUsuario.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Modulos\Administrativo\IframeTransparente.aspx.cs">
       <DependentUpon>IframeTransparente.aspx</DependentUpon>
@@ -345,12 +310,19 @@
     <Compile Include="Pages\Modulos\Administrativo\MOD_Admin.aspx.designer.cs">
       <DependentUpon>MOD_Admin.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Modulos\Administrativo\ProductUserControls\CategoryUserControl.ascx.cs">
-      <DependentUpon>CategoryUserControl.ascx</DependentUpon>
+    <Compile Include="Pages\Modulos\Administrativo\ProductUserControls\CategoryInsertUserControl.ascx.cs">
+      <DependentUpon>CategoryInsertUserControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\Modulos\Administrativo\ProductUserControls\CategoryUserControl.ascx.designer.cs">
-      <DependentUpon>CategoryUserControl.ascx</DependentUpon>
+    <Compile Include="Pages\Modulos\Administrativo\ProductUserControls\CategoryInsertUserControl.ascx.designer.cs">
+      <DependentUpon>CategoryInsertUserControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Modulos\Administrativo\ProductUserControls\CategorySearchUserControl.ascx.cs">
+      <DependentUpon>CategorySearchUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Modulos\Administrativo\ProductUserControls\CategorySearchUserControl.ascx.designer.cs">
+      <DependentUpon>CategorySearchUserControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Modulos\Administrativo\pruebaexcel.aspx.cs">
       <DependentUpon>pruebaexcel.aspx</DependentUpon>
@@ -359,12 +331,12 @@
     <Compile Include="Pages\Modulos\Administrativo\pruebaexcel.aspx.designer.cs">
       <DependentUpon>pruebaexcel.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Modulos\Administrativo\WebFormTest1.aspx.cs">
-      <DependentUpon>WebFormTest1.aspx</DependentUpon>
+    <Compile Include="Pages\Modulos\Administrativo\TestUserControl.ascx.cs">
+      <DependentUpon>TestUserControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\Modulos\Administrativo\WebFormTest1.aspx.designer.cs">
-      <DependentUpon>WebFormTest1.aspx</DependentUpon>
+    <Compile Include="Pages\Modulos\Administrativo\TestUserControl.ascx.designer.cs">
+      <DependentUpon>TestUserControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -680,7 +652,8 @@
     <Content Include="Pages\js\jquery.overscroll.min.js" />
     <Content Include="Pages\js\jstorage.js" />
     <Content Include="Pages\Modulos\Administrativo\CargaMasivaGProductos.aspx" />
-    <Content Include="Pages\Modulos\Administrativo\ProductUserControls\CategoryUserControl.ascx" />
+    <Content Include="Pages\Modulos\Administrativo\ProductUserControls\CategoryInsertUserControl.ascx" />
+    <Content Include="Pages\Modulos\Administrativo\ProductUserControls\CategorySearchUserControl.ascx" />
     <Content Include="Pages\Modulos\Administrativo\pruebaexcel.aspx" />
     <None Include="Pages\formatos\FORMATO_CARGA_PTOVENTA.xls" />
     <None Include="Pages\images\Informe_de_Precios_201012_Periodo1.xls" />
@@ -807,7 +780,7 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <Content Include="Pages\Modulos\Administrativo\WebFormTest1.aspx" />
+    <Content Include="Pages\Modulos\Administrativo\TestUserControl.ascx" />
     <Content Include="Upload.html" />
     <Content Include="Xplora_v2TestPage.aspx" />
     <Content Include="Xplora_v2TestPage.html" />
@@ -1178,13 +1151,8 @@
     <Content Include="Pages\js\styleswitcher.js" />
     <Content Include="Pages\js\thumbnailviewer.js" />
     <Content Include="Pages\js\TreeViewAdapter.js" />
-    <Content Include="Pages\Modulos\Administrativo\GestiónGeneral.aspx" />
-    <Content Include="Pages\Modulos\Administrativo\GestiónInformes.aspx" />
-    <Content Include="Pages\Modulos\Administrativo\GestiónPaís.aspx" />
     <Content Include="Pages\Modulos\Administrativo\GestiónProducto.aspx" />
-    <Content Include="Pages\Modulos\Administrativo\GestiónPuntodeVenta.aspx" />
     <Content Include="Pages\Modulos\Administrativo\GestiónServicio.aspx" />
-    <Content Include="Pages\Modulos\Administrativo\GestiónUsuario.aspx" />
     <Content Include="Pages\Modulos\Administrativo\IframeTransparente.aspx" />
     <Content Include="Pages\Modulos\Administrativo\MOD_Admin.aspx" />
     <Content Include="Pages\img\Mercaderismo.png" />

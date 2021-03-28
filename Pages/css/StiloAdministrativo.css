@@ -369,6 +369,7 @@
 	margin:auto
 }
 
+
 #botonerabnode
 {
     width: 280px;
@@ -386,6 +387,8 @@
     .tabla{ display: table;}
     .fila{ display: table-row;}
     .celda{ display: table-cell;}
+    .celdaLeft {display: table-cell; border:none; text-align:left}
+
     
 #main_basic
 {

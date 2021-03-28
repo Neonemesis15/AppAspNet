@@ -4,7 +4,11 @@
 <%@ Register Assembly="AjaxControls" Namespace="AjaxControls" TagPrefix="cc2" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 
-<%@ Register src="ProductUserControls/CategoryUserControl.ascx" tagname="CategoryUserControl" tagprefix="uc1" %>
+
+<%@ Register src="ProductUserControls/CategorySearchUserControl.ascx" tagname="CategorySearchUserControl" tagprefix="uc2" %>
+
+<%@ Register src="ProductUserControls/CategoryInsertUserControl.ascx" tagname="CategoryInsertUserControl" tagprefix="uc1" %>
+
 <!--
 -- Author       : Magaly Jiminez (MJ)
 -- Create date  : 13/08/2010
@@ -114,68 +118,12 @@
                     <HeaderTemplate>Categorias</HeaderTemplate>
                     <ContentTemplate>
                         
-                        <div>
-                            <uc1:CategoryUserControl ID="CategoryUserControl1" runat="server" />
-                        </div>
-
-                        <!-- HEADER - INI -->
-                        <br /><br />
-                        <div class="centrarcontenido">
-                            <span class="labelsTit2">Gestión de Categorías de Productos</span>&nbsp;
-                        </div>
-                        <br /><br />
-                        <!-- HEADER - FIN -->
-
-                        <!-- BODY - INI -->
-                        <div class = "centrar">
-                            <div class = "tabla centrar">
-                                <fieldset>
-                                    <legend style = ""> Categoría de Producto </legend>
-                                    <div class = "fila">
-                                        <div class = "celda">
-                                            <span class = "labels"> Código* </span>
-                                        </div>
-                                        <div class = "celda">
-                                            <asp:TextBox ID = "TxtCodProductType" runat="server" BackColor="#DDDDDD" ReadOnly="True"
-                                                Width="190px" Enabled="False"></asp:TextBox>
-                                        </div>
-                                    </div>
-                                    <div class="fila">
-                                        <div class="celda">
-                                            <asp:Label ID="LblNomProductType" runat="server" CssClass="labels" Text="Nombre *"></asp:Label>
-                                        </div>
-                                        <div class="celda">
-                                            <asp:TextBox ID="TxtNomProductType" runat="server" MaxLength="50" Width="190px" Enabled="False">
-                                            </asp:TextBox>
-                                        </div>
-                                    </div>
-                                    <div class="fila">
-                                        <div class="celda">
-                                            <asp:Label ID="Lblgroupcategory" runat="server" CssClass="labels" Text="Grupo ">
-                                            </asp:Label>
-                                        </div>
-                                        <div class="celda">
-                                            <asp:TextBox ID="TxtgroupCategory" runat="server" MaxLength="50" Width="190px" Enabled="False">
-                                            </asp:TextBox>
-                                        </div>
-                                    </div>
-                                    <div class="fila">
-                                        <div class="celda">
-                                            <asp:Label ID="lbl_cliente" runat="server" CssClass="labels" Text="Cliente *">
-                                            </asp:Label>
-                                        </div>
-                                        <div class="celda">
-                                            <asp:DropDownList ID="cmb_categorias_cliente" runat="server" Width="180px" 
-                                                Enabled="False">
-                                            </asp:DropDownList>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                            </div>
-                        </div>
-                        <!-- BODY - FIN -->
-
+                                              
+                        <!---------------------------------------------------------------------------->
+                        <!---------------------------------------------------------------------------->
                         <!-- PANEL_RESULTADO_BUSQUEDA- INI -->
+                        <!---------------------------------------------------------------------------->
+                        <!---------------------------------------------------------------------------->
                         <asp:Panel ID="CosultaGVCategoria" runat="server" Style="display: block"  >                        
                             <div class="centrar centrarcontenido">                                
                                 
@@ -191,6 +139,7 @@
                                             onrowcancelingedit="GVConsultaCategoria_RowCancelingEdit" 
                                             onrowupdating="GVConsultaCategoria_RowUpdating">
                                         <Columns>
+
                                             <asp:TemplateField HeaderText="Cod.Categoria">
                                                 <EditItemTemplate>
                                                         <asp:Label ID="LblCodProductType" runat="server"  Text='<%# Bind("id_ProductCategory") %>'>
@@ -202,9 +151,10 @@
                                                 </ItemTemplate>
                                                 <ItemStyle Width="70px" />
                                             </asp:TemplateField>
+                                        
                                             <asp:TemplateField HeaderText="Categoria">
                                                 <EditItemTemplate>
-                                                <asp:TextBox ID="TxtNomProductType" runat="server" Width="150px" >       
+                                                    <asp:TextBox ID="TxtNomProductType" runat="server" Width="150px">
                                                     </asp:TextBox>
                                                 </EditItemTemplate>
                                                 <ItemTemplate>
@@ -212,6 +162,7 @@
                                                     </asp:Label>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
+                                        
                                             <asp:TemplateField HeaderText="Grupo Categoria">
                                             <EditItemTemplate>
                                                 <asp:TextBox ID="TxtgroupCategory" runat="server" Width="150px" >       
@@ -222,6 +173,7 @@
                                                 </asp:Label>                                                      
                                                 </ItemTemplate>
                                             </asp:TemplateField> 
+                                        
                                             <asp:TemplateField HeaderText="Cod.Cliente" Visible="False">
                                                 <EditItemTemplate>
                                                         <asp:Label ID="LblCodClie" runat="server"  Text='<%# Bind("Company_id") %>'></asp:Label>
@@ -231,6 +183,7 @@
                                                 </ItemTemplate>
                                                 <ItemStyle Width="70px" />
                                             </asp:TemplateField>
+                                        
                                             <asp:TemplateField HeaderText="Cliente">
                                                 <EditItemTemplate>
                                                     <asp:DropDownList ID="cmbCliente_Edit" runat="server" Width="150px" >       
@@ -240,6 +193,7 @@
                                                     <asp:Label ID="LblClienteID" runat="server" Width="150px" Text='<%# Bind("Company_name") %>'>></asp:Label>
                                                 </ItemTemplate>
                                             </asp:TemplateField>  
+                                        
                                             <asp:TemplateField HeaderText="Estado" >
                                                 <EditItemTemplate>
                                                     <asp:CheckBox ID="CheckECategoria" runat="server"  Enabled="true" ></asp:CheckBox> 
@@ -249,7 +203,9 @@
                                                     </asp:CheckBox> 
                                                 </ItemTemplate>
                                             </asp:TemplateField>
+
                                             <asp:CommandField ShowEditButton="True" />
+
                                         </Columns>                                                
                                     </asp:GridView><br /><br />
                                     <!-- GRILLA_DATOS - FIN -->
@@ -271,7 +227,11 @@
                                 </div>
                             </div> 
                         </asp:Panel>
+                        <!---------------------------------------------------------------------------->
+                        <!---------------------------------------------------------------------------->
                         <!-- PANEL_RESULTADO_BUSQUEDA- FIN -->
+                        <!---------------------------------------------------------------------------->
+                        <!---------------------------------------------------------------------------->
 
                         <cc1:ModalPopupExtender ID="MopopConsulCate" runat="server" BackgroundCssClass="modalBackground"
                             DropShadow="True" Enabled="True"  PopupControlID="CosultaGVCategoria"
@@ -280,95 +240,64 @@
 
                         <asp:Button ID="btnPopupGVcategoria" runat="server" CssClass="alertas" Width="0px" />
                         
+
+
+
+                        <!---------------------------------------------------------------------------->
+                        <!---------------------------------------------------------------------------->
                         <!-- SECCION_OPCIONES- INI -->
+                        <!---------------------------------------------------------------------------->
+                        <!---------------------------------------------------------------------------->
                         <br /><br />
                         <div class="tabla centrar">
                             <div class="fila">
                                 <div class="celda centrarcontenido">
-                                    <asp:Button ID="BtnCrearProductType" runat="server" CssClass="buttonPlan" Text="Crear"
-                                        Width="95px" OnClick="BtnCrearProductType_Click" />
-                                    <asp:Button ID="BtnSaveProductType"
-                                        runat="server" CssClass="buttonPlan" Text="Guardar" Visible="False" Width="95px"
-                                        OnClick="BtnSaveProductType_Click" />
-                                    <asp:Button ID="BtnConsultaProductType" runat="server"
-                                        CssClass="buttonPlan" Text="Consultar" Width="95px"/>
+
+                                    
+                                   
+                                    
+                                 <uc1:CategoryInsertUserControl ID="CategoryUserControl1" runat="server" />
+                                  
+                                    <!---------------------------------------------------------------------------->
+                                    <!---------------------------------------------------------------------------->
+                                    <!-- >>>>>>>>>>>>>>>>>>> H  U  E  C  O  <<<<<<<<<<<<<<<-->
+                                    <!-- BtnSaveProductType ->
+                                    <!---------------------------------------------------------------------------->
+                                    <!---------------------------------------------------------------------------->
+                                    
+                                    
+                                    <uc2:CategorySearchUserControl ID="CategorySearchUserControl1" runat="server" />
+                                    
+                                    
+                                   
+
                                     <asp:Button ID="BtnCancelProductType" runat="server" CssClass="buttonPlan" Text="Cancelar"
                                         Width="95px" OnClick="BtnCancelProductType_Click" />
+                                    
                                     <asp:Button ID="BtnCargaMasivaCate" runat="server" CssClass="buttonPlan"
                                         Text="Carga Masiva" Width="95px"/>
+
+
                                 </div>
                             </div>
                         </div>
+                        <!---------------------------------------------------------------------------->
+                        <!---------------------------------------------------------------------------->
                         <!-- SECCION_OPCIONES- FIN -->
-
-                        <!-- PANEL_BUSQUEDA - INI -->
-                        <asp:Panel ID="BuscarProductCateg" runat="server" CssClass="busqueda" DefaultButton="BtnBTypeProduct"
-                            Height="211px" Style="display: none" Width="343px" >
-
-                            <!-- HEADER_TITLE - INI -->
-                            <br /><br />
-                            <div class="tabla centrar">
-                                <div class="fila">
-                                    <div class="celda">
-                                        <asp:Label ID="LbltitBProductcat" runat="server" CssClass="labelsTit2" 
-                                            Text="Buscar Categoria de Producto" />
-                                    </div>
-                                </div>
-                            </div>
-                            <br /><br />
-                            <!-- HEADER_TITLE - FIN -->
+                        <!---------------------------------------------------------------------------->
+                        <!---------------------------------------------------------------------------->
 
 
-                            <!-- FILTROS - INI -->
-                            <div class="tabla centrar">
-                                <div class="fila">
-                                    <div class="celda">
-                                        <asp:Label ID="LblBcodProductcat" runat="server" CssClass="labels" Text="Código:" />
-                                    </div>
-                                    <div class="celda">
-                                        <asp:TextBox ID="TxtBCodTypeProduct" runat="server" MaxLength="4" Width="80px">
-                                        </asp:TextBox>
-                                    </div>
-                                </div>
-                                <div class="fila">
-                                    <div class="celda">
-                                        <asp:Label ID="LblBNomProductcat" runat="server" CssClass="labels" Text="Nombre:" />
-                                    </div>
-                                    <div class="celda">
-                                        <asp:TextBox ID="TxtBNomTypeProduct" runat="server" MaxLength="50" 
-                                            Width="180px">
-                                        </asp:TextBox>
-                                    </div>
-                                </div>
-                                <div class="fila">
-                                    <div class="celda">
-                                        <asp:Label ID="lblClieId" runat="server" CssClass="labels" Text="Cliente:" />
-                                    </div>
-                                    <div class="celda">
-                                        <asp:DropDownList ID="cmb_Cliente" runat="server" Width="180px"></asp:DropDownList>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- FILTROS - FIN -->
 
-                            <!-- OPCIONES_BUSQUEDA - INI -->
-                            <br /><br />
-                            <div class="centrar centrarcontenido">
-                                <asp:Button ID="BtnBTypeProduct" runat="server" CssClass="buttonPlan" Text="Buscar"
-                                    Width="80px" OnClick="BtnBTypeProduct_Click" />
-                                <asp:Button ID="BtnCancelBTypeProduct" runat="server" CssClass="buttonPlan" Text="Cancelar" 
-                                    Width="80px" />
-                            </div>
-                            <!-- OPCIONES_BUSQUEDA - FIN -->
-                        </asp:Panel>
-                        <!-- PANEL_BUSQUEDA - FIN -->
 
-                        <cc1:ModalPopupExtender ID="IbtnProductType" runat="server" BackgroundCssClass="modalBackground"
-                            DropShadow="True" Enabled="True" OkControlID="BtnCancelBTypeProduct" PopupControlID="BuscarProductCateg"
-                            TargetControlID="BtnConsultaProductType" DynamicServicePath="">
-                        </cc1:ModalPopupExtender>
 
+                        
+                        
+                        <!---------------------------------------------------------------------------->
+                        <!---------------------------------------------------------------------------->
                         <!-- PANEL_CARGA_MASIVA - INI -->
+                        <!---------------------------------------------------------------------------->
+                        <!---------------------------------------------------------------------------->
                         <asp:Panel ID="CarMasivaCategoria" runat="server" Style="vertical-align: middle;" 
                             BackColor="#7F99CC" BorderColor="#7F99CC"
                             BorderStyle="Solid" BorderWidth="6px" Font-Names="Verdana" Font-Size="10pt">    
@@ -382,7 +311,11 @@
                                 </iframe>                                       
                             </div>                                                           
                         </asp:Panel>
+                        <!---------------------------------------------------------------------------->
+                        <!---------------------------------------------------------------------------->
                         <!-- PANEL_CARGA_MASIVA - FIN -->
+                        <!---------------------------------------------------------------------------->
+                        <!---------------------------------------------------------------------------->
 
                         <cc1:ModalPopupExtender ID="ModalCMasivaCategoria" runat="server" BackgroundCssClass="modalBackground"
                             DropShadow="True" Enabled="True"  PopupControlID="CarMasivaCategoria"
@@ -391,6 +324,11 @@
 
                         <asp:Button ID="btnPopupCategoria" runat="server" CssClass="alertas" Width="0px" />
                         
+
+
+
+
+
                         <!-- PANEL_CATEGORIA_CLIENTE - INI -->
                         <asp:Panel ID="Asignar_categoria_x_cliente" runat="server" Display = "block">
                         </asp:Panel>
@@ -400,6 +338,7 @@
                             DropShadow="True" Enabled="True"  PopupControlID="CarMasivaCategoria"
                             TargetControlID="btnPopupCategoria" DynamicServicePath="">
                         </cc1:ModalPopupExtender>
+
                     </ContentTemplate>
                 </cc1:TabPanel>                     
                 <!---------------------------------------------------------------------------->
@@ -410,35 +349,27 @@
                 <!---------------------------------------------------------------------------->
                 <!---------------------------------------------------------------------------->
 
-
             </cc1:TabContainer>
 
+            
 
+            <asp:Panel ID="Alertas" runat="server" Style="display: none;" 
+                DefaultButton="BtnAceptarAlert" Height="215px" Width="375px">
 
-            <asp:Panel ID="Alertas" runat="server" Style="display: none;" DefaultButton="BtnAceptarAlert"
-                Height="215px" Width="375px">
                 <table align="center">
                     <tr>
-                        <td align="center" class="style50" valign="top">
-                            <br />
-                            &nbsp;
-                        </td>
-                        <td class="style49" valign="top">
-                            <br />
-                            <asp:Label ID="LblAlert" runat="server" Text="Señor Usuario" CssClass="labelsMensaje"></asp:Label>
-                            <br />
-                            <br />
+                        <td align="center" class="style50" valign="top"><br /></td>
+                        <td class="style49" valign="top"><br />
+                            <asp:Label ID="LblAlert" runat="server" Text="Señor Usuario" CssClass="labelsMensaje"></asp:Label><br /><br />
                             <asp:Label ID="LblFaltantes" runat="server" CssClass="labelsMensaje"></asp:Label>
                         </td>
                     </tr>
                 </table>
+
                 <table align="center">
-                    <tr>
-                        <td>
-                            <asp:Button ID="BtnAceptarAlert" runat="server" CssClass="buttonPlan" Text="Aceptar" />
-                        </td>
-                    </tr>
+                    <tr><td><asp:Button ID="BtnAceptarAlert" runat="server" CssClass="buttonPlan" Text="Aceptar" /></td></tr>
                 </table>
+
             </asp:Panel>
 
 

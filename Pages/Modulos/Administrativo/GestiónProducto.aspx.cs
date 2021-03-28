@@ -104,7 +104,7 @@ namespace SIGE.Pages.Modulos.Administrativo
                     }
 
 
-                       llenarcombocliente();
+                       //llenarcombocliente();
 
 
 
@@ -133,66 +133,7 @@ namespace SIGE.Pages.Modulos.Administrativo
         
         #region FUNCIONES
 
-        /// <summary>
-        /// Llenar Compañias, en el AspControl DropDownList 'cmb_categorias_cliente' y 'cmb_Cliente', para la Gestión de Categorias
-        /// </summary>
-        private void llenarcombocliente()
-        {
-            messages = "";
-            DataTable dt = null;
-            try
-            {
-                dt = oConn.ejecutarDataTable("UP_WEBXPLORA_AD_OBTENER_CLIENTES_EXTERNOS");
-            }
-            catch (Exception ex)
-            {
-                messages = "Ocurrio un Error: " + ex.ToString();
-            }
-            
-            // Verificar que no existan Errores
-            if (messages.Equals(""))
-            {
-                if (dt.Rows.Count > 0)
-                {
-                    //se llena cliente 
-                    cmb_categorias_cliente.DataSource = dt;
-                    cmb_categorias_cliente.DataTextField = "Company_Name";
-                    cmb_categorias_cliente.DataValueField = "Company_id";
-                    cmb_categorias_cliente.DataBind();
-                    cmb_categorias_cliente.Items.Insert(0, new ListItem("<Seleccione..>", "0"));
-                    foreach (ListItem li in cmb_categorias_cliente.Items)
-                    {
-                        cmb_Cliente.Items.Add(li);
-                    }
-                }
-                else
-                {
-                    // Mostrar PopUp Mensaje Usuario
-                    messages = "Error: No Existen Compañias Disponibles, ¡por favor Verificar...!";
-                }
-            }
-            else
-            {
-                // Mostrar PopUp Mensaje Usuario
-            }
 
-
-            #region Data Dummy
-            /*
-            ListItem listItem0 = new ListItem("Compania00", "0");
-            ListItem listItem1 = new ListItem("Compania01", "1");
-            ListItem listItem2 = new ListItem("Compania02", "2");
-            ListItem listItem3 = new ListItem("Compania03", "3");
-
-            cmb_categorias_cliente.Items.Add(listItem0);
-            cmb_categorias_cliente.Items.Add(listItem1);
-            cmb_categorias_cliente.Items.Add(listItem2);
-            cmb_categorias_cliente.Items.Add(listItem3);
-            cmb_categorias_cliente.Items.Insert(0, new ListItem("<Seleccione..>", "99"));
-            */
-            #endregion
-        }
- 
         /// <summary>
         /// Llena Compañias en el AspControl que pasan como parametro 'ddl', para la Gestión de Sub Familias
         /// </summary>
@@ -255,21 +196,12 @@ namespace SIGE.Pages.Modulos.Administrativo
         /// </summary>
         private void CancelarCat()
         {
-            saveActivarbotonesCategoria();
-            desactivarControlesCategoria();
-            SavelimpiarControlesCategoria();
+            //saveActivarbotonesCategoria();
+            //desactivarControlesCategoria();
+            //SavelimpiarControlesCategoria();
         }
 
-        /// <summary>
-        /// Opcion de Cancelar, en la Gestión de Categorias
-        /// </summary>
-        private void cancelarCat()
-        {
-            saveActivarbotonesCategoria();
-            desactivarControlesCategoria();
-            SavelimpiarControlesCategoria();
-            BtnCargaMasivaCate.Visible = true;
-        }
+      
 
 
         /// <summary>
@@ -277,60 +209,32 @@ namespace SIGE.Pages.Modulos.Administrativo
         /// </summary>
         private void buscarActivarbotnesCategoria()
         {
-            BtnCrearProductType.Visible = false;
-            BtnSaveProductType.Visible = false;
-            BtnConsultaProductType.Visible = true;
+            //BtnCrearProductType.Visible = false;
+            //BtnSaveProductType.Visible = false;
+            //BtnConsultaProductType.Visible = true;
             BtnCancelProductType.Visible = true;
             btnCCategoria.Visible = true;
         }
 
-        /// <summary>
-        /// Desactivar la Opción de Save, para la Opción de Gestión de Categorías
-        /// </summary>
-        private void saveActivarbotonesCategoria()
-        {
-            BtnCrearProductType.Visible = true;
-            BtnSaveProductType.Visible = false;
-            BtnConsultaProductType.Visible = true;
-            BtnCancelProductType.Visible = true;
-        }
 
-        /// <summary>
-        /// Desactivar Controles, en la Gestión de Categorías
-        /// </summary>
-        private void desactivarControlesCategoria()
-        {
 
-        }
-
-        /// <summary>
-        /// Limpiar los Input, para la Gestión de Categorías
-        /// </summary>
-        private void SavelimpiarControlesCategoria()
-        {
-            TxtCodProductType.Text = "";
-            TxtNomProductType.Text = "";
-            TxtgroupCategory.Text = "";
-            cmb_categorias_cliente.Text = "0";
-            TxtBCodTypeProduct.Text = "";
-            TxtBNomTypeProduct.Text = "";
-        }
 
         private void crearActivarbotonesCategoria()
         {
-            BtnCrearProductType.Visible = false;
-            BtnSaveProductType.Visible = true;
-            BtnConsultaProductType.Visible = false;
+            //BtnCrearProductType.Visible = false;
+            //BtnSaveProductType.Visible = true;
+            //BtnConsultaProductType.Visible = false;
             BtnCancelProductType.Visible = true;
         }
 
         private void activarControlesCategoria()
         {
+            /*
             TxtCodProductType.Enabled = false;
             TxtNomProductType.Enabled = true;
             TxtgroupCategory.Enabled = true;
             cmb_categorias_cliente.Enabled = true;
-
+            */
             Panel_CategProduct.Enabled = true;
 
         }
@@ -338,74 +242,17 @@ namespace SIGE.Pages.Modulos.Administrativo
 
         #region Categoria
 
-        protected void BtnCrearProductType_Click(object sender, EventArgs e)
+
+        protected void BtnCancelProductType_Click(object sender, EventArgs e)
         {
-            SavelimpiarControlesCategoria();
-            crearActivarbotonesCategoria();
-            activarControlesCategoria();
-            BtnCargaMasivaCate.Visible = false;
+            //saveActivarbotonesCategoria();
+            //desactivarControlesCategoria();
+            //SavelimpiarControlesCategoria();
+            //BtnCargaMasivaCate.Visible = true;
         }
 
 
-        /// <summary>
-        /// Funcion para validar que no se registren categorias Duplicadas
-        /// </summary>
-        public bool validarPrerequisitosCategoriasInsertarActualizar() {
-            LblFaltantes.Text = "";
-            TxtNomProductType.Text = TxtNomProductType.Text.Trim();
-            if (cmb_categorias_cliente.Text == "0" || TxtNomProductType.Text == "")
-            {
-                LblFaltantes.Text = "Debe ingresar los campos con: ";
-                if (cmb_categorias_cliente.Text == "0")
-                {
-                    LblFaltantes.Text += ("Cliente" + " . ");
-                }
-                if (TxtNomProductType.Text == "")
-                {
-                    LblFaltantes.Text += ("Categoría de producto" + " . ");
-                }
-                Alertas.CssClass = "MensajesError";
-                MensajeAlerta();
-                return false;
-            }
-            else {
-                return true;
-            }
-        }
 
-        /// <summary>
-        /// Validar Categorías Duplicadas
-        /// </summary>
-        /// <returns></returns>
-        private DataTable validarCategoriasDuplicadas() {
-            DAplicacion odconsulProductCategory = new DAplicacion();
-            DataTable dtconsulta =
-                        odconsulProductCategory.ConsultaDuplicados(
-                        ConfigurationManager.AppSettings["ProductCategory"],
-                        TxtNomProductType.Text,
-                        cmb_categorias_cliente.SelectedValue.ToString(),
-                        null);
-            return dtconsulta;
-        }
-
-        /// <summary>
-        /// Registrar Categorias en la Base de Datos
-        /// </summary>
-        /// <returns></returns>
-        public EProduct_Type registrarCategorias() {
-            EProduct_Type oeProductType =
-                            oProductType.RegistrarProductcategory(
-                            TxtCodProductType.Text,
-                            TxtNomProductType.Text,
-                            TxtgroupCategory.Text,
-                            true,
-                            cmb_categorias_cliente.SelectedValue.ToString().Trim(),
-                            Convert.ToString(this.Session["sUser"]),
-                            DateTime.Now,
-                            Convert.ToString(this.Session["sUser"]),
-                            DateTime.Now);
-            return oeProductType;
-        }
 
         /// <summary>
         /// Registrar en base de datos Mobile
@@ -421,86 +268,12 @@ namespace SIGE.Pages.Modulos.Administrativo
             return oeProductTypeTMP;
         }
 
-        /// <summary>
-        /// Mensaje cuando la categoria fue creada con éxito
-        /// </summary>
-        private void messageCreateSucessCategory() {
 
-            this.Session["sProductType"] = TxtNomProductType.Text;
-            Alertas.CssClass = "MensajesCorrecto";
-            LblFaltantes.Text = "La Categoría de producto " + TxtNomProductType.Text + ", fue creada con éxito";
-            cancelarCat();
-            MensajeAlerta();
-        }
 
-        /// <summary>
-        /// Mensaje cuando la categoria Falló por algún motivo, al momento de crearla
-        /// </summary>
-        private void messageCreateFailedCategory() {
-            Alertas.CssClass = "MensajesError";
-            LblFaltantes.Text = "La Categoría  de producto " + TxtNomProductType.Text + ", ya existe";
-            cancelarCat();
-            MensajeAlerta();
-        }
 
-        /// <summary>
-        /// Funcionalidad para Guardar Cambios de Categoría
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        protected void BtnSaveProductType_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (validarPrerequisitosCategoriasInsertarActualizar())
-                {
-                    DataTable dtconsulta = validarCategoriasDuplicadas();
 
-                    if (dtconsulta == null)
-                    {
 
-                        EProduct_Type oeProductType = registrarCategorias();
-                        EProduct_Type oeProductTypeTMP = registrarCategoriasMobile(oeProductType);
-
-                        messageCreateSucessCategory();
-                    }
-                    else
-                    {
-                        messageCreateFailedCategory();
-                    }
-                }
-                
-            }
-
-            catch (Exception ex)
-            {
-                errorMessage(ex);
-            }
-        }
-
-        /// <summary>
-        /// Management Error Messages
-        /// </summary>
-        /// <param name="ex"></param>
-        private void errorMessage(Exception ex) {
-            string error = "";
-            string mensaje = "";
-            error = Convert.ToString(ex.Message);
-            mensaje = ConfigurationManager.AppSettings["ErrorConection"];
-            if (error == mensaje)
-            {
-                Lucky.CFG.Exceptions.Exceptions exs = new Lucky.CFG.Exceptions.Exceptions(ex);
-                string errMessage = "";
-                errMessage = mensaje;
-                errMessage = new Lucky.CFG.Util.Functions().preparaMsgError(ex.Message);
-                this.Response.Redirect("../../../err_mensaje.aspx?msg=" + errMessage, true);
-            }
-            else
-            {
-                this.Session.Abandon();
-                Response.Redirect("~/err_mensaje_seccion.aspx", true);
-            }
-        }
+      
 
         /// <summary>
         /// Remover los Espacios en Blanco de la cadenas de texto.
@@ -511,36 +284,9 @@ namespace SIGE.Pages.Modulos.Administrativo
             return text.Trim();
         }
 
-        /// <summary>
-        /// Validar que los filtros aplicados devuelvan una consulta.
-        /// </summary>
-        /// <returns></returns>
-        private bool validateFilterInCategorySearch(string productId, string productName, string companyId) {
-            
-            // Validación que los Filtros o Criterios de Busqueda se encuentren especificados
-            if (productId == "" && productName == "" && cmb_Cliente.Text == "0")
-            {
+       
 
-                this.Session["mensajealert"] = "Código y/o nombre de Categoría de producto y/o Cliente";
-                Alertas.CssClass = "MensajesError";
-                LblFaltantes.Text = "Ingrese por lo menos un parámetro de consulta";
-                cancelarCat();
-                MensajeAlerta();
-                // Mostrar el AspControl ModalPopUpExtender 'IbtnProductType' relacionado al AspControl Panel 'BuscarProductCateg'
-                IbtnProductType.Show();
-                return false;
-            }
-            return true;
-        }
 
-        /// <summary>
-        /// Limpia los Filtros para próximas consultas
-        /// </summary>
-        private void cleanFilterInCategorySearch() {
-            TxtBCodTypeProduct.Text = "";
-            TxtBNomTypeProduct.Text = "";
-            cmb_Cliente.Text = "0";
-        }
 
         /// <summary>
         /// Guarda en sessión las variables utilizadas en los filtros de Category Search
@@ -603,7 +349,7 @@ namespace SIGE.Pages.Modulos.Administrativo
                     Alertas.CssClass = "MensajesError";
                     LblFaltantes.Text = "La consulta realizada no devolvió ninguna respuesta";
                     MensajeAlerta();
-                    IbtnProductType.Show();
+                    //IbtnProductType.Show();
                 }
             }
 
@@ -646,45 +392,7 @@ namespace SIGE.Pages.Modulos.Administrativo
         
         }
 
-        /// <summary>
-        /// Evento Click del Panel de Busqueda de Categorias, 
-        /// para filtrar la información de las Categorías, aplicando los filtros, para la Gestión de Categorías.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        protected void BtnBTypeProduct_Click(object sender, EventArgs e)
-        {
-            desactivarControlesCategoria();
-            
-            LblFaltantes.Text = "";
-
-            string productId = trimText(TxtBCodTypeProduct.Text);
-            string productName = trimText(TxtBNomTypeProduct.Text);
-            string companyId = trimText(cmb_Cliente.SelectedValue.ToString());
-
-            bool continuar = validateFilterInCategorySearch(productId, productName, companyId);
-
-            if (continuar) {
-
-                buscarActivarbotnesCategoria();
-
-                cleanFilterInCategorySearch();
-
-                saveSessionInCategorySearch(productId, productName, companyId);
-
-                DataTable categoriesDt = getProductCategoryInCategorySearch(productId, productName, companyId);
-
-                continuar = populateGridViewForCategoryResultSearch(categoriesDt);
-
-                if (continuar) {
-
-                    saveSessionResultCategorySearch(categoriesDt);
-                    saveSessionToExportExcelByCategorySearchResult();
-
-                }
-            }
-
-        }
+     
         
         /// <summary>
         /// Llenar la información del AspControl GridView 'GVConsultaCategoria' y Hacer Visible el Panel 'CosultaGVCategoria'
@@ -699,14 +407,7 @@ namespace SIGE.Pages.Modulos.Administrativo
             MopopConsulCate.Show();
         }
 
-        protected void BtnCancelProductType_Click(object sender, EventArgs e)
-        {
-            saveActivarbotonesCategoria();
-            desactivarControlesCategoria();
-            SavelimpiarControlesCategoria();
-            BtnCargaMasivaCate.Visible = true;
-        }
-        
+
 
 
         protected void GVConsultaCategoria_PageIndexChanging(object sender, System.Web.UI.WebControls.GridViewPageEventArgs e)
@@ -744,7 +445,7 @@ namespace SIGE.Pages.Modulos.Administrativo
             ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[1].FindControl("TxtNomProductType")).Text = Categoria;
             ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[2].FindControl("TxtgroupCategory")).Text = grupo;
             
-            //LlenacomboConsultaCliente();
+            LlenacomboConsultaCliente();
 
             ((DropDownList)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[3].FindControl("cmbCliente_Edit")).Items.FindByText(cliente).Selected = true;
             ((CheckBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[4].FindControl("CheckECategoria")).Checked = estado;
@@ -761,190 +462,252 @@ namespace SIGE.Pages.Modulos.Administrativo
             MopopConsulCate.Show();
         }
 
-        protected void GVConsultaCategoria_RowUpdating(object sender, System.Web.UI.WebControls.GridViewUpdateEventArgs e)
+        private void LlenacomboConsultaCliente()
         {
-            LblFaltantes.Text = "";
+            DataSet ds = null;
+            ds = oConn.ejecutarDataSet("UP_WEB_LLENACOMBOS", 65);
 
-            ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[1].FindControl("TxtNomProductType")).Text =
-                ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[1].FindControl("TxtNomProductType")).Text.Trim();
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                ((DropDownList)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[1].FindControl("cmbCliente_Edit")).DataSource = ds;
+                ((DropDownList)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[1].FindControl("cmbCliente_Edit")).DataTextField = "Company_Name";
+                ((DropDownList)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[1].FindControl("cmbCliente_Edit")).DataValueField = "Company_id";
+                ((DropDownList)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[1].FindControl("cmbCliente_Edit")).DataBind();
+            }
+        }
 
-            ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[2].FindControl("TxtgroupCategory")).Text =
-                ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[2].FindControl("TxtgroupCategory")).Text.Trim();
-
-            this.Session["sProductType"] = ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("TxtNomProductType")).Text;
-
-            this.Session["scompany_id"] = ((DropDownList)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[3].FindControl("cmbCliente_Edit")).Text.Trim();
-
+        /// <summary>
+        /// Preguntar si esta permitido deshabilitar Categoria
+        /// </summary>
+        /// <returns></returns>
+        private bool permitirDeshabilitarCategoria() {
+            bool continuar = false;
             if (((CheckBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[3].FindControl("CheckECategoria")).Checked != false)
             {
-                estado = true;
+                continuar = true;
             }
             else
             {
-                estado = false;
+                continuar = false;
                 DAplicacion oddeshabProductType = new DAplicacion();
                 DataTable dt = oddeshabProductType.PermitirDeshabilitar(
-                    ConfigurationManager.AppSettings["ProductCategoryProduct_Tipo"], 
+                    ConfigurationManager.AppSettings["ProductCategoryProduct_Tipo"],
                     ((Label)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("LblCodProductType")).Text);
                 if (dt != null)
                 {
                     Alertas.CssClass = "MensajesError";
                     LblFaltantes.Text = "No se puede deshabilitar este registro ya que existe relación en el maestro de Perfil, por favor verifique";
                     MensajeAlerta();
-                    return;
+                    //return;
                 }
             }
+            return continuar;
+        }
 
-            if (((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[1].FindControl("TxtNomProductType")).Text == "" || 
-                ((DropDownList)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[3].FindControl("cmbCliente_Edit")).Text == "0")
+
+        /// <summary>
+        /// Validar Campos en Editar Categorias
+        /// </summary>
+        /// <param name="txtNomProductyType"></param>
+        /// <param name="sCompanyId"></param>
+        /// <param name="sProductType"></param>
+        /// <returns></returns>
+        private bool validarCamposEditarCategoria(string txtNomProductyType, string sCompanyId, string sProductType)
+        {
+            bool continuar = true;
+            if (txtNomProductyType == "" || sCompanyId == "0")
             {
+
                 LblFaltantes.Text = "Debe ingresar los campos: ";
-                if (((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("TxtNomProductType")).Text == "")
+                if (sProductType == "")
                 {
                     LblFaltantes.Text += ("Nombre de producto" + " . ");
                 }
-                if (((DropDownList)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[3].FindControl("cmbCliente_Edit")).Text == "0")
+                if (sCompanyId == "0")
                 {
                     LblFaltantes.Text += ("Cliente" + " . ");
                 }
                 Alertas.CssClass = "MensajesError";
                 CancelarCat();
                 MensajeAlerta();
-                return;
+                continuar = false;
             }
-            try
-            {
-                repetido = Convert.ToString(this.Session["rept"]);
-                repetido1 = Convert.ToString(this.Session["rept1"]);
-                repetido2 = Convert.ToString(this.Session["rept2"]);
-                if (repetido != ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[1].FindControl("TxtNomProductType")).Text || 
-                    repetido1 != ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[2].FindControl("TxtgroupCategory")).Text || 
-                    repetido2 != ((DropDownList)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[3].FindControl("cmbCliente_Edit")).Text)
-                {
-                    DAplicacion odconsulProductType = new DAplicacion();
-                    DataTable dtconsulta = odconsulProductType.ConsultaDuplicados(ConfigurationManager.AppSettings["ProductCategory"], 
-                        ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("TxtNomProductType")).Text, 
-                        ((DropDownList)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[3].FindControl("cmbCliente_Edit")).Text, 
-                        ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[2].FindControl("TxtgroupCategory")).Text);
-                    if (dtconsulta == null)
-                    {
-                        EProduct_Type oeaProductType = 
-                            oProductType.Actualizar_ProductCategory(
-                            ((Label)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("LblCodProductType")).Text, 
-                            ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("TxtNomProductType")).Text, 
-                            ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("TxtgroupCategory")).Text, 
-                            ((DropDownList)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("cmbCliente_Edit")).Text, 
-                            estado, 
-                            Convert.ToString(this.Session["sUser"]), DateTime.Now);
+            return continuar;
+        }
 
-                        EProduct_Type oeaProductTypetmp = oProductType.Actualizar_ProductCategorytmp(
-                            ((Label)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("LblCodProductType")).Text, 
-                            ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("TxtNomProductType")).Text, 
-                            estado);
-                        GVConsultaCategoria.EditIndex = -1;
-                        DataTable oeProductType = oProductType.SearchProductCategory(this.Session["scodProductType"].ToString().Trim(), 
-                            this.Session["sproductType"].ToString().Trim(), this.Session["scompany_id"].ToString().Trim());
-                        this.Session["tProductType"] = oeProductType;
-                        if (oeProductType != null)
-                        {
-                            if (oeProductType.Rows.Count > 0)
-                            {
-                                gridbuscarCategoria(oeProductType);
-                            }
-                        }
-                        IbtnProductType.Hide();
-                        btnCCategoria.Visible = true;
-                        MopopConsulCate.Show();
-                        Alertas.CssClass = "MensajesCorrecto";
-                        LblFaltantes.Text = "La categoría de Producto : " + this.Session["sProductType"] + " fue actualizada con éxito";
-                        MensajeAlerta();
-                        saveActivarbotonesCategoria();
-                    }
-                    else
-                    {
-                        this.Session["tProductType"] = ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[1].FindControl("TxtNomProductType")).Text;
-                        Alertas.CssClass = "MensajesError";
-                        LblFaltantes.Text = "La categoria de Producto : " + this.Session["tProductType"] + " Ya Existe";
-                        cancelarCat();
-                        MensajeAlerta();
-                    }
-                }
-                else
-                {
-                    EProduct_Type oeaProductType = oProductType.Actualizar_ProductCategory(
-                        ((Label)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("LblCodProductType")).Text, 
-                        ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("TxtNomProductType")).Text, 
-                        ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("TxtgroupCategory")).Text, 
-                        ((DropDownList)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("cmbCliente_Edit")).Text, 
-                        estado, 
-                        Convert.ToString(this.Session["sUser"]), DateTime.Now);
+        /// <summary>
+        /// Consultar si existen duplicados al Editar Categorias
+        /// </summary>
+        /// <returns></returns>
+        private DataTable consultarDuplicadosEditarCategoria(string sProductType, string sCompanyId, string txtGroupCategory)
+        {
+            DAplicacion odconsulProductType = new DAplicacion();
+            DataTable dtconsulta =
+                odconsulProductType.ConsultaDuplicados(
+                ConfigurationManager.AppSettings["ProductCategory"],
+                sProductType,
+                sCompanyId,
+                txtGroupCategory);
+            return dtconsulta;
+        }
 
-                    EProduct_Type oeaProductTypetmp = oProductType.Actualizar_ProductCategorytmp(
-                        ((Label)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("LblCodProductType")).Text, 
-                        ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("TxtNomProductType")).Text, 
-                        estado);
-                    SavelimpiarControlesCategoria();
-                    GVConsultaCategoria.EditIndex = -1;
-                    DataTable oeProductType = oProductType.SearchProductCategory(
-                        this.Session["scodProductType"].ToString().Trim(), 
-                        this.Session["sproductType"].ToString().Trim(), 
-                        this.Session["scompany_id"].ToString().Trim());
-                    this.Session["tProductType"] = oeProductType;
-                    if (oeProductType != null)
-                    {
-                        if (oeProductType.Rows.Count > 0)
-                        {
-                            GVConsultaCategoria.DataSource = oeProductType;
-                            GVConsultaCategoria.DataBind();
-                            MopopConsulCate.Show();
+        /// <summary>
+        /// Actualizar Categoria en Base de Datos
+        /// </summary>
+        private EProduct_Type actualizarCategoria(string lblCodProductTypeInsert, string txtNomProductTypeInsert, string txtGroupCategoryInsert,
+            string cmbClienteEditInsert, bool estadoInsert)
+        {
+            EProduct_Type oeaProductType =
+                                oProductType.Actualizar_ProductCategory(
+                                lblCodProductTypeInsert,
+                                txtNomProductTypeInsert,
+                                txtGroupCategoryInsert,
+                                cmbClienteEditInsert,
+                                estadoInsert,
+                                Convert.ToString(this.Session["sUser"]), DateTime.Now);
 
-                        }
-                    }
+            return oeaProductType;
+        }
+
+        /// <summary>
+        /// Actualizar Categoria en Base de Datos Mobile
+        /// </summary>
+        private EProduct_Type actualizarCategoriaMobile(string lblCodProductTypeInsert, string txtNomProductTypeInsert, bool estadoInsert)
+        {
+            EProduct_Type oeaProductTypetmp = oProductType.Actualizar_ProductCategorytmp(
+                                lblCodProductTypeInsert,
+                                txtNomProductTypeInsert,
+                                estadoInsert);
+
+            return oeaProductTypetmp;
+        }
+
+        /// <summary>
+        /// mensaje indicando que el registro se encuentra duplicado
+        /// </summary>
+        private void messageRegistroDuplicado() {
+            this.Session["tProductType"] = ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[1].FindControl("TxtNomProductType")).Text;
+            Alertas.CssClass = "MensajesError";
+            LblFaltantes.Text = "La categoria de Producto : " + this.Session["tProductType"] + " Ya Existe";
+            //cancelarCat();
+            MensajeAlerta();
+        }
+
+        /// <summary>
+        /// mensaje de Actualización exitosa
+        /// </summary>
+        private void messageSucessfullActualizacionCategoria() {
+
+            btnCCategoria.Visible = true;
+            MopopConsulCate.Show();
+            Alertas.CssClass = "MensajesCorrecto";
+            LblFaltantes.Text = "La categoría de Producto : " + this.Session["sProductType"] + " fue actualizada con éxito";
+            MensajeAlerta();
+        }
+
+        protected void GVConsultaCategoria_RowUpdating(object sender, System.Web.UI.WebControls.GridViewUpdateEventArgs e)
+        {
+            LblFaltantes.Text = "";
+            string txtNomProductyType = ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[1].FindControl("TxtNomProductType")).Text.Trim();
+            string txtGroupCategory = ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[2].FindControl("TxtgroupCategory")).Text.Trim();
+            string sProductType = ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("TxtNomProductType")).Text;
+            string sCompanyId = ((DropDownList)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[3].FindControl("cmbCliente_Edit")).Text.Trim();
+            
+            this.Session["sProductType"] = sProductType;
+            this.Session["scompany_id"] = sCompanyId;
+
+            if ( permitirDeshabilitarCategoria() ){
+
+                if ( validarCamposEditarCategoria(txtNomProductyType, sCompanyId, sProductType) ) {
 
                     try
                     {
-                        this.planningADM = this.Session["AdmProd"].ToString().Trim();
-                    }
-                    catch
-                    {
-                    }
+                        DataTable dtconsulta = consultarDuplicadosEditarCategoria(sProductType, sCompanyId, txtGroupCategory);
 
-                    if (this.planningADM == "SI")
-                    {
-                        
-                    }
-                    else
-                    {
-                        
-                    }
+                        if (dtconsulta == null)
+                        {
+                            string lblCodProductTypeInsert = ((Label)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("LblCodProductType")).Text;
+                            string txtNomProductTypeInsert = ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("TxtNomProductType")).Text;
+                            string txtGroupCategoryInsert = ((TextBox)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("TxtgroupCategory")).Text;
+                            string cmbClienteEditInsert = ((DropDownList)GVConsultaCategoria.Rows[GVConsultaCategoria.EditIndex].Cells[0].FindControl("cmbCliente_Edit")).Text;
+                            bool estadoInsert = estado;
 
-                    btnCCategoria.Visible = true;
-                    MopopConsulCate.Show();
-                    Alertas.CssClass = "MensajesCorrecto";
-                    LblFaltantes.Text = "La categoría de Producto : " + this.Session["sProductType"] + " fue actualizada con éxito";
-                    MensajeAlerta();
-                    IbtnProductType.Hide();
+                            EProduct_Type oeaProductType =
+                                actualizarCategoria(
+                                lblCodProductTypeInsert,
+                                txtNomProductTypeInsert,
+                                txtGroupCategoryInsert,
+                                cmbClienteEditInsert,
+                                estadoInsert);
+
+                            EProduct_Type oeaProductTypetmp =
+                                actualizarCategoriaMobile(
+                                lblCodProductTypeInsert,
+                                txtNomProductTypeInsert,
+                                estadoInsert);
+
+                            GVConsultaCategoria.EditIndex = -1;
+
+                            DataTable oeProductType = oProductType.SearchProductCategory(
+                                this.Session["scodProductType"].ToString().Trim(),
+                                this.Session["sproductType"].ToString().Trim(),
+                                this.Session["scompany_id"].ToString().Trim());
+
+                            this.Session["tProductType"] = oeProductType;
+
+                            if (oeProductType != null)
+                            {
+                                if (oeProductType.Rows.Count > 0)
+                                {
+                                    gridbuscarCategoria(oeProductType);
+                                }
+                            }
+
+                            //IbtnProductType.Hide();
+
+                            messageSucessfullActualizacionCategoria();
+
+                            //saveActivarbotonesCategoria();
+                        }
+                        else
+                        {
+                            messageRegistroDuplicado();
+                        }
+                       
+                    }
+                    catch (Exception ex)
+                    {
+                        messageErrorActualizarCategoria(ex);
+                    }
                 }
+               
             }
-            catch (Exception ex)
+
+            
+        }
+
+        /// <summary>
+        /// Gestion de errores cuando la actualizacion de categoria falla
+        /// </summary>
+        /// <param name="ex"></param>
+        public void messageErrorActualizarCategoria(Exception ex)
+        {
+            string error = "";
+            string mensaje = "";
+            error = Convert.ToString(ex.Message);
+            mensaje = ConfigurationManager.AppSettings["ErrorConection"];
+            if (error == mensaje)
             {
-                string error = "";
-                string mensaje = "";
-                error = Convert.ToString(ex.Message);
-                mensaje = ConfigurationManager.AppSettings["ErrorConection"];
-                if (error == mensaje)
-                {
-                    Lucky.CFG.Exceptions.Exceptions exs = new Lucky.CFG.Exceptions.Exceptions(ex);
-                    string errMessage = "";
-                    errMessage = mensaje;
-                    errMessage = new Lucky.CFG.Util.Functions().preparaMsgError(ex.Message);
-                    this.Response.Redirect("../../../err_mensaje.aspx?msg=" + errMessage, true);
-                }
-                else
-                {
-                    this.Session.Abandon();
-                    Response.Redirect("~/err_mensaje_seccion.aspx", true);
-                }
+                Lucky.CFG.Exceptions.Exceptions exs = new Lucky.CFG.Exceptions.Exceptions(ex);
+                string errMessage = "";
+                errMessage = mensaje;
+                errMessage = new Lucky.CFG.Util.Functions().preparaMsgError(ex.Message);
+                this.Response.Redirect("../../../err_mensaje.aspx?msg=" + errMessage, true);
+            }
+            else
+            {
+                this.Session.Abandon();
+                Response.Redirect("~/err_mensaje_seccion.aspx", true);
             }
         }
 

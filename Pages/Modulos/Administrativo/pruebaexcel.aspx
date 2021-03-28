@@ -1,23 +1,19 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="pruebaexcel.aspx.cs" Inherits="SIGE.Pages.Modulos.Administrativo.pruebaexcel" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
 </head>
 <body>
     <form id="form1" runat="server">
-    
-                          <div >
-
-                               <table>
-                                  <tr>
-                                     <td >
-                                         <asp:GridView ID="GVExportaExcel" runat="server">
-                                         </asp:GridView>
-
-                                           <%--  <asp:GridView ID="GvCMarcatoExcel" runat="server"
+    <div>
+        <table>
+            <tr>
+                <td>
+                    <asp:GridView ID="GVExportaExcel" runat="server">
+                    </asp:GridView>
+                    <%--  <asp:GridView ID="GvCMarcatoExcel" runat="server"
                                                     Visible="False" AutoGenerateColumns="False" >      
                                                                                                    
                                                   <Columns>
@@ -122,19 +118,14 @@
                                                     </asp:TemplateField>                                                  
                                                 </Columns>                                                
                                             </asp:GridView>--%>
-                                            </td>
-                                  </tr>
-                                    
-                              </table>      
-                                                  
-                              <div align="center">                               
-                              <asp:ImageButton ID="btn_img_exporttoexcel" runat="server" Height="42px" ImageUrl="~/Pages/Modulos/Operativo/Reports/Image/icono_excel.jpg"
-                             Width="39px" onclick="btn_img_exporttoexcel_Click"  />
-                             </div>
+                </td>
+            </tr>
+        </table>
+        <div align="center">
+            <asp:ImageButton ID="btn_img_exporttoexcel" runat="server" Height="42px" ImageUrl="~/Pages/Modulos/Operativo/Reports/Image/icono_excel.jpg"
+                Width="39px" OnClick="btn_img_exporttoexcel_Click" />
+        </div>
     </div>
-
-
-                     
     </form>
 </body>
 </html>

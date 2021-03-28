@@ -41,6 +41,7 @@ div.autosize > div { display: table-cell; }
 .fila{ display: table-row; border:none}
 .celda{ display: table-cell; border:none}
 
+
 .clear { /* generic container (i.e. div) for floating buttons */
     overflow: hidden;
     width: 100%;

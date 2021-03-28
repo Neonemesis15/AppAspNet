@@ -186,7 +186,13 @@
                     <asp:ModalPopupExtender ID="ModalPopupCanal" runat="server" Enabled="True" TargetControlID="btndipararalerta"
                         PopupControlID="PMensajes" BackgroundCssClass="modalBackground">
                     </asp:ModalPopupExtender>
-                    <asp:Panel ID="PMensajes" runat="server" Width="355px" Height="197px" Style="display: none;">
+                    <asp:Panel 
+                        ID="PMensajes" 
+                        runat="server"
+                        Width="355px" 
+                        Height="197px" 
+                        Style="display: none;">
+                        
                         <table id="tmensaje" runat="server" align="center" width="95%">
                             <tr>
                                 <td style=" margin:auto; text-align:center" class="AnchoMensaje">
@@ -207,12 +213,32 @@
                             </tr>
                         </table>
                     </asp:Panel>
-                    <asp:Button ID="BtnAlerta" runat="server" Text="" Height="0px" CssClass="alertas"
-                        Width="0px" Enabled="False" />
-                    <asp:ModalPopupExtender ID="ModalPopupExtender2" runat="server" Enabled="True" TargetControlID="BtnAlerta"
-                        PopupControlID="Pmensaje2" BackgroundCssClass="modalBackground">
+                    
+                    <asp:Button 
+                        ID="BtnAlerta" 
+                        runat="server" 
+                        Text="" 
+                        Height="0px" 
+                        CssClass="alertas"
+                        Width="0px" 
+                        Enabled="False" />
+                    
+                    <asp:ModalPopupExtender 
+                        ID = "ModalPopupExtender2" 
+                        runat = "server" 
+                        TargetControlID = "BtnAlerta"
+                        PopupControlID = "Pmensaje2" 
+                        BackgroundCssClass = "modalBackground"
+                        Enabled = "True" >
                     </asp:ModalPopupExtender>
-                    <asp:Panel ID="Pmensaje2" runat="server" Width="355px" Height="197px" Style="display: none;">
+
+                    <asp:Panel 
+                        ID = "Pmensaje2" 
+                        runat = "server" 
+                        Width = "355px" 
+                        Height = "197px" 
+                        Style = "display: none;">
+                        
                         <table id="Table1" runat="server" align="center" width="95%">
                             <tr>
                                 <td style=" margin:auto" class="AnchoMensaje">
@@ -235,7 +261,13 @@
                     <asp:UpdatePanel ID="UpdatePanel14" runat="server">
                         <ContentTemplate>
                             <%--panel de mensaje de usuario paneles   --%>
-                            <asp:Panel ID="MensajeSeguimiento" runat="server" Height="169px" Style="display: none;" Width="332px">
+                            <asp:Panel 
+                                ID = "MensajeSeguimiento" 
+                                runat = "server" 
+                                Height = "169px" 
+                                Style = "display: none;" 
+                                Width = "332px">
+
                                 <table align="center">
                                     <tr>
                                         <td align="center" style="height: 119px; width: 79px;" valign="top"><br /></td>
@@ -250,11 +282,25 @@
                                             BorderStyle="Solid" CssClass="buttonPlan" Text="Aceptar" /></td></tr>
                                 </table>
                             </asp:Panel>
-                            <asp:ModalPopupExtender ID="MPMensajeSeguimiento" runat="server" BackgroundCssClass="modalBackground"
-                                Enabled="True" PopupControlID="MensajeSeguimiento" TargetControlID="btndipararseguimiento">
+
+                            <asp:ModalPopupExtender 
+                                ID = "MPMensajeSeguimiento" 
+                                runat = "server" 
+                                BackgroundCssClass = "modalBackground"
+                                Enabled = "True" 
+                                PopupControlID = "MensajeSeguimiento" 
+                                TargetControlID = "btndipararseguimiento">
                             </asp:ModalPopupExtender>
-                            <asp:Button ID="btndipararseguimiento" runat="server" CssClass="alertas" Enabled="False"
-                                Height="0px" Text="" Width="0" />
+
+                            <asp:Button 
+                                ID = "btndipararseguimiento" 
+                                runat = "server" 
+                                CssClass = "alertas" 
+                                Enabled = "False"
+                                Height = "0px" 
+                                Text = "" 
+                                Width = "0" />
+
                         </ContentTemplate>
                     </asp:UpdatePanel>	
                 </contenttemplate>

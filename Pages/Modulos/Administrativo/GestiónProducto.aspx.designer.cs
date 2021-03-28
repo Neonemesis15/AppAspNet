@@ -67,78 +67,6 @@ namespace SIGE.Pages.Modulos.Administrativo {
         protected global::AjaxControlToolkit.TabPanel Panel_CategProduct;
         
         /// <summary>
-        /// CategoryUserControl1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::SIGE.Pages.Modulos.Administrativo.ProductUserControls.CategoryUserControl CategoryUserControl1;
-        
-        /// <summary>
-        /// TxtCodProductType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtCodProductType;
-        
-        /// <summary>
-        /// LblNomProductType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LblNomProductType;
-        
-        /// <summary>
-        /// TxtNomProductType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtNomProductType;
-        
-        /// <summary>
-        /// Lblgroupcategory control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Lblgroupcategory;
-        
-        /// <summary>
-        /// TxtgroupCategory control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtgroupCategory;
-        
-        /// <summary>
-        /// lbl_cliente control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_cliente;
-        
-        /// <summary>
-        /// cmb_categorias_cliente control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList cmb_categorias_cliente;
-        
-        /// <summary>
         /// CosultaGVCategoria control.
         /// </summary>
         /// <remarks>
@@ -202,31 +130,22 @@ namespace SIGE.Pages.Modulos.Administrativo {
         protected global::System.Web.UI.WebControls.Button btnPopupGVcategoria;
         
         /// <summary>
-        /// BtnCrearProductType control.
+        /// CategoryUserControl1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnCrearProductType;
+        protected global::SIGE.Pages.Modulos.Administrativo.ProductUserControls.CategoryInsertUserControl CategoryUserControl1;
         
         /// <summary>
-        /// BtnSaveProductType control.
+        /// CategorySearchUserControl1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnSaveProductType;
-        
-        /// <summary>
-        /// BtnConsultaProductType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnConsultaProductType;
+        protected global::SIGE.Pages.Modulos.Administrativo.ProductUserControls.CategorySearchUserControl CategorySearchUserControl1;
         
         /// <summary>
         /// BtnCancelProductType control.
@@ -245,105 +164,6 @@ namespace SIGE.Pages.Modulos.Administrativo {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnCargaMasivaCate;
-        
-        /// <summary>
-        /// BuscarProductCateg control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel BuscarProductCateg;
-        
-        /// <summary>
-        /// LbltitBProductcat control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LbltitBProductcat;
-        
-        /// <summary>
-        /// LblBcodProductcat control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LblBcodProductcat;
-        
-        /// <summary>
-        /// TxtBCodTypeProduct control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtBCodTypeProduct;
-        
-        /// <summary>
-        /// LblBNomProductcat control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LblBNomProductcat;
-        
-        /// <summary>
-        /// TxtBNomTypeProduct control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtBNomTypeProduct;
-        
-        /// <summary>
-        /// lblClieId control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblClieId;
-        
-        /// <summary>
-        /// cmb_Cliente control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList cmb_Cliente;
-        
-        /// <summary>
-        /// BtnBTypeProduct control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnBTypeProduct;
-        
-        /// <summary>
-        /// BtnCancelBTypeProduct control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnCancelBTypeProduct;
-        
-        /// <summary>
-        /// IbtnProductType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.ModalPopupExtender IbtnProductType;
         
         /// <summary>
         /// CarMasivaCategoria control.

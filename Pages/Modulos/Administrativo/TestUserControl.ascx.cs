@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace SIGE.Pages.Modulos.Administrativo
 {
-    public partial class WebFormTest1 : System.Web.UI.Page
+    public partial class TestUserControl : System.Web.UI.UserControl
     {
         protected void Page_Load(object sender, EventArgs e)
         {

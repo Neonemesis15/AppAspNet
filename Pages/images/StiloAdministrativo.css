@@ -121,7 +121,7 @@
 .MensajesError
 {
 	background-image: url('../images/MensajeSup.jpg'); 
-   
+	   
 }
 
 .MensajesCorrecto
@@ -144,8 +144,7 @@
 
 .alertas {
 	 background-color:Transparent;
-	 display:none;
-	 
+	 display:none; 
 }
 
  .ScrollInforme
