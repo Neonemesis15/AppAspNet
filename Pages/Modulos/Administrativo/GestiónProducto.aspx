@@ -124,29 +124,42 @@
                         <!-- PANEL_RESULTADO_BUSQUEDA- INI -->
                         <!---------------------------------------------------------------------------->
                         <!---------------------------------------------------------------------------->
-                        <asp:Panel ID="CosultaGVCategoria" runat="server" Style="display: block"  >                        
+                        <asp:Panel ID="CosultaGVCategoria" 
+                        runat="server" 
+                        Style="display: block">                        
                             <div class="centrar centrarcontenido">                                
-                                
-                                <div class="p" style="width:780px; height: 315px; background-color: #FFFFFF; padding: 2px 2px; font-size: 10pt;
-	                                    font-family : arial, Helvetica, sans-serif;"> 
+                                <div class="p"
+                                style="width:780px; 
+                                height: 315px; 
+                                background-color: #FFFFFF; 
+                                padding: 2px 2px; 
+                                font-size: 10pt;
+	                            font-family : arial, Helvetica, sans-serif;"> 
 
                                     <!-- GRILLA_DATOS - INI -->
-                                    <asp:GridView ID="GVConsultaCategoria" runat="server" AutoGenerateColumns="False"  
-                                            Font-Names="Verdana" Font-Size="8pt" EnableModelValidation="True" 
-                                            Width="100%" 
-                                            onrowediting="GVConsultaCategoria_RowEditing" 
-                                            onpageindexchanging="GVConsultaCategoria_PageIndexChanging" 
-                                            onrowcancelingedit="GVConsultaCategoria_RowCancelingEdit" 
-                                            onrowupdating="GVConsultaCategoria_RowUpdating">
+                                    <asp:GridView ID="GVConsultaCategoria" 
+                                    runat="server" 
+                                    AutoGenerateColumns="False"  
+                                    Font-Names="Verdana" 
+                                    Font-Size="8pt" 
+                                    EnableModelValidation="True" 
+                                    Width="100%" 
+                                    onrowediting="GVConsultaCategoria_RowEditing" 
+                                    onpageindexchanging="GVConsultaCategoria_PageIndexChanging" 
+                                    onrowcancelingedit="GVConsultaCategoria_RowCancelingEdit" 
+                                    onrowupdating="GVConsultaCategoria_RowUpdating">
                                         <Columns>
-
                                             <asp:TemplateField HeaderText="Cod.Categoria">
                                                 <EditItemTemplate>
-                                                        <asp:Label ID="LblCodProductType" runat="server"  Text='<%# Bind("id_ProductCategory") %>'>
-                                                        </asp:Label>
+                                                    <asp:Label ID="LblCodProductType" 
+                                                    runat="server"  
+                                                    Text='<%# Bind("id_ProductCategory") %>'>
+                                                    </asp:Label>
                                                 </EditItemTemplate>
                                                 <ItemTemplate>
-                                                    <asp:Label ID="LblCodProductType" runat="server" Text='<%# Bind("id_ProductCategory") %>'>
+                                                    <asp:Label ID="LblCodProductType" 
+                                                    runat="server" 
+                                                    Text='<%# Bind("id_ProductCategory") %>'>
                                                     </asp:Label>
                                                 </ItemTemplate>
                                                 <ItemStyle Width="70px" />
@@ -154,11 +167,16 @@
                                         
                                             <asp:TemplateField HeaderText="Categoria">
                                                 <EditItemTemplate>
-                                                    <asp:TextBox ID="TxtNomProductType" runat="server" Width="150px">
+                                                    <asp:TextBox ID="TxtNomProductType" 
+                                                    runat="server" 
+                                                    Width="150px">
                                                     </asp:TextBox>
                                                 </EditItemTemplate>
                                                 <ItemTemplate>
-                                                    <asp:Label ID="LblNomProductType" runat="server"  Width="150px" Text='<%# Bind("Product_Category") %>'>
+                                                    <asp:Label ID="LblNomProductType" 
+                                                    runat="server"  
+                                                    Width="150px" 
+                                                    Text='<%# Bind("Product_Category") %>'>
                                                     </asp:Label>
                                                 </ItemTemplate>
                                             </asp:TemplateField>

@@ -27,7 +27,7 @@ namespace SIGE.Pages.Modulos.Administrativo.ProductUserControls
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack) {
-                llenarcombocliente();
+                llenarComboCliente();
             }
         }
 
@@ -73,6 +73,65 @@ namespace SIGE.Pages.Modulos.Administrativo.ProductUserControls
             }
         }
 
+        public bool validarPrerequisitosCategoriasInsertarActualizar_Lab01(
+            string nombreProducto,
+            string nombreTipoProducto) {
+
+            LblFaltantes.Text = "";
+            TxtNomProductType.Text = TxtNomProductType.Text.Trim();
+
+            if (cmb_categorias_cliente.Text == "0" || TxtNomProductType.Text == "")
+            {
+                LblFaltantes.Text = "Debe ingresar los campos con: ";
+                if (cmb_categorias_cliente.Text == "0")
+                {
+                    LblFaltantes.Text += ("Cliente" + " . ");
+                }
+                if (TxtNomProductType.Text == "")
+                {
+                    LblFaltantes.Text += ("Categoría de producto" + " . ");
+                }
+                AlertasInsertPanel.CssClass = "MensajesError";
+                MensajeAlerta();
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+
+        /// <summary>
+        /// Validate preconditions for Products Insert, using a boolean value as an answer.
+        /// </summary>
+        /// <param name="productName">string value of product name.</param>
+        /// <param name="categoryId">string value of category id.</param>
+        /// <returns>boolean value for determine if the record is duplicate or not.</returns>
+        public bool validatePreconditionsForProductInsert(string productName, string categoryId)
+        {
+            string message = "";
+
+            productName = productName.Trim();
+
+            if (categoryId == "0" || productName == "") {
+                
+                message = "Debe ingresar los campos con: ";
+
+                if (categoryId == "0") message += ("Cliente" + " . ");
+                if (productName == "") message += ("Categoría de producto" + " . ");
+                
+                AlertasInsertPanel.CssClass = "MensajesError";
+                MensajeAlerta();
+                
+                return false;
+
+            } else {
+                
+                return true;
+            }
+        }
+
 
         /// <summary>
         /// Validar Categorías Duplicadas
@@ -112,6 +171,31 @@ namespace SIGE.Pages.Modulos.Administrativo.ProductUserControls
             return oeProductType;
         }
 
+        public EProduct_Type registrarCategorias_Test(
+            string codigoProducto, 
+            string nombreProducto,
+            string codigoGrupoCategoriaProducto, 
+            string codigoCategoriaProducto,
+            string codigoUsuario,
+            bool estadoProducto,
+            DateTime fechaRegistro)
+        {
+            Product_Type oProductTypeBusinessLogic = new Product_Type();
+
+            EProduct_Type oeProductType =
+                            oProductTypeBusinessLogic.RegistrarProductcategory(
+                            TxtCodProductType.Text,
+                            TxtNomProductType.Text,
+                            TxtgroupCategory.Text,
+                            estadoProducto,
+                            cmb_categorias_cliente.SelectedValue.ToString().Trim(),
+                            Convert.ToString(this.Session["sUser"]),
+                            DateTime.Now,
+                            null,
+                            DateTime.MinValue);
+            return oeProductType;
+        }
+
         /// <summary>
         /// Funcionalidad para Guardar Cambios de Categoría
         /// </summary>
@@ -119,8 +203,17 @@ namespace SIGE.Pages.Modulos.Administrativo.ProductUserControls
         /// <param name="e"></param>
         protected void BtnSaveProductType_Click(object sender, EventArgs e)
         {
-            try
-            {
+            try {
+
+                // Lectura de Componentes en el formulario
+                string codigoProducto               = TxtCodProductType.Text;
+                string nombreProducto               = TxtNomProductType.Text;
+                string codigoGrupoCategoriaProducto = TxtgroupCategory.Text;
+                bool estadoProducto                 = true;
+                string codigoCategoriaProducto      = cmb_categorias_cliente.SelectedValue.ToString().Trim();
+                string nombreUsuario                = Convert.ToString(this.Session["sUser"]);
+                DateTime fechaRegistro              = DateTime.Now;
+
                 if (validarPrerequisitosCategoriasInsertarActualizar())
                 {
                     DataTable dtconsulta = validarCategoriasDuplicadas();
@@ -128,7 +221,15 @@ namespace SIGE.Pages.Modulos.Administrativo.ProductUserControls
                     if (dtconsulta == null)
                     {
 
-                        EProduct_Type oeProductType = registrarCategorias();
+                        EProduct_Type oeProductType = registrarCategorias_Test(
+                            codigoProducto,
+                            nombreProducto, 
+                            codigoGrupoCategoriaProducto,
+                            codigoCategoriaProducto,
+                            nombreUsuario,
+                            estadoProducto,
+                            fechaRegistro);
+                        //EProduct_Type oeProductType = registrarCategorias();
                         //EProduct_Type oeProductTypeTMP = registrarCategoriasMobile(oeProductType);
 
                         messageCreateSucessCategory();
@@ -223,7 +324,7 @@ namespace SIGE.Pages.Modulos.Administrativo.ProductUserControls
         /// <summary>
         /// Llenar Compañias, en el AspControl DropDownList 'cmb_categorias_cliente' y 'cmb_Cliente', para la Gestión de Categorias
         /// </summary>
-        private void llenarcombocliente()
+        private void llenarComboCliente()
         {
             
             messages = "";

@@ -104,7 +104,7 @@ namespace SIGE.Pages.Modulos.Administrativo
                     }
 
 
-                       //llenarcombocliente();
+                       //llenarComboCliente();
 
 
 
