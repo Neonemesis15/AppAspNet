@@ -10,7 +10,7 @@
 runat="server" 
 CssClass="buttonPlan" 
 Text="Crear"
-Width="95px" />
+Width="95px" onclick="BtnCrearProductType_Click" />
 <!---------------------------------------------------------------------------->
 <!---------------------------------------------------------------------------->
 <!-- BUTTON INSERT - FIN -->
@@ -25,7 +25,7 @@ Width="95px" />
 runat="server" 
 CssClass="busqueda" 
 Height="262px"
-Style="display: none" 
+
 Width="343px">
     <!-- HEADER - INI -->
     <br />

@@ -52,56 +52,18 @@ namespace SIGE.Pages.Modulos.Administrativo.ProductUserControls
             LblFaltantes.Text = "";
             TxtNomProductType.Text = TxtNomProductType.Text.Trim();
             
-            if (cmb_categorias_cliente.Text == "0" || TxtNomProductType.Text == "")
-            {
+            if (cmb_categorias_cliente.Text == "0" || TxtNomProductType.Text == ""){
                 LblFaltantes.Text = "Debe ingresar los campos con: ";
-                if (cmb_categorias_cliente.Text == "0")
-                {
-                    LblFaltantes.Text += ("Cliente" + " . ");
-                }
-                if (TxtNomProductType.Text == "")
-                {
-                    LblFaltantes.Text += ("Categoría de producto" + " . ");
-                }
+                if (cmb_categorias_cliente.Text == "0") LblFaltantes.Text += ("Cliente" + " . ");
+                if (TxtNomProductType.Text == "") LblFaltantes.Text += ("Categoría de producto" + " . ");
                 AlertasInsertPanel.CssClass = "MensajesError";
                 MensajeAlerta();
                 return false;
-            }
-            else
-            {
+            } else 
                 return true;
-            }
+            
         }
-
-        public bool validarPrerequisitosCategoriasInsertarActualizar_Lab01(
-            string nombreProducto,
-            string nombreTipoProducto) {
-
-            LblFaltantes.Text = "";
-            TxtNomProductType.Text = TxtNomProductType.Text.Trim();
-
-            if (cmb_categorias_cliente.Text == "0" || TxtNomProductType.Text == "")
-            {
-                LblFaltantes.Text = "Debe ingresar los campos con: ";
-                if (cmb_categorias_cliente.Text == "0")
-                {
-                    LblFaltantes.Text += ("Cliente" + " . ");
-                }
-                if (TxtNomProductType.Text == "")
-                {
-                    LblFaltantes.Text += ("Categoría de producto" + " . ");
-                }
-                AlertasInsertPanel.CssClass = "MensajesError";
-                MensajeAlerta();
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-
-
+        
         /// <summary>
         /// Validate preconditions for Products Insert, using a boolean value as an answer.
         /// </summary>
@@ -171,6 +133,17 @@ namespace SIGE.Pages.Modulos.Administrativo.ProductUserControls
             return oeProductType;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="codigoProducto"></param>
+        /// <param name="nombreProducto"></param>
+        /// <param name="codigoGrupoCategoriaProducto"></param>
+        /// <param name="codigoCategoriaProducto"></param>
+        /// <param name="codigoUsuario"></param>
+        /// <param name="estadoProducto"></param>
+        /// <param name="fechaRegistro"></param>
+        /// <returns></returns>
         public EProduct_Type registrarCategorias_Test(
             string codigoProducto, 
             string nombreProducto,
@@ -196,59 +169,7 @@ namespace SIGE.Pages.Modulos.Administrativo.ProductUserControls
             return oeProductType;
         }
 
-        /// <summary>
-        /// Funcionalidad para Guardar Cambios de Categoría
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        protected void BtnSaveProductType_Click(object sender, EventArgs e)
-        {
-            try {
-
-                // Lectura de Componentes en el formulario
-                string codigoProducto               = TxtCodProductType.Text;
-                string nombreProducto               = TxtNomProductType.Text;
-                string codigoGrupoCategoriaProducto = TxtgroupCategory.Text;
-                bool estadoProducto                 = true;
-                string codigoCategoriaProducto      = cmb_categorias_cliente.SelectedValue.ToString().Trim();
-                string nombreUsuario                = Convert.ToString(this.Session["sUser"]);
-                DateTime fechaRegistro              = DateTime.Now;
-
-                if (validarPrerequisitosCategoriasInsertarActualizar())
-                {
-                    DataTable dtconsulta = validarCategoriasDuplicadas();
-
-                    if (dtconsulta == null)
-                    {
-
-                        EProduct_Type oeProductType = registrarCategorias_Test(
-                            codigoProducto,
-                            nombreProducto, 
-                            codigoGrupoCategoriaProducto,
-                            codigoCategoriaProducto,
-                            nombreUsuario,
-                            estadoProducto,
-                            fechaRegistro);
-                        //EProduct_Type oeProductType = registrarCategorias();
-                        //EProduct_Type oeProductTypeTMP = registrarCategoriasMobile(oeProductType);
-
-                        messageCreateSucessCategory();
-                        cleanControlsPinputDf();
-
-                    }
-                    else
-                    {
-                        messageCreateFailedCategory();
-                    }
-                }
-
-            }
-
-            catch (Exception ex)
-            {
-                errorMessage(ex);
-            }
-        }
+        
 
         /// <summary>
         /// Función para limpiar los InputInsert
@@ -380,6 +301,65 @@ namespace SIGE.Pages.Modulos.Administrativo.ProductUserControls
             cmb_categorias_cliente.Items.Insert(0, new ListItem("<Seleccione..>", "99"));
             */
             #endregion
+        }
+
+        protected void BtnCrearProductType_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// Function to save the values of Product Category 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void BtnSaveProductType_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Lectura de Componentes en el formulario
+                string codigoProducto = TxtCodProductType.Text;
+                string nombreProducto = TxtNomProductType.Text;
+                string codigoGrupoCategoriaProducto = TxtgroupCategory.Text;
+                bool estadoProducto = true;
+                string codigoCategoriaProducto = cmb_categorias_cliente.SelectedValue.ToString().Trim();
+                string nombreUsuario = Convert.ToString(this.Session["sUser"]);
+                DateTime fechaRegistro = DateTime.Now;
+
+                if (validarPrerequisitosCategoriasInsertarActualizar())
+                {
+                    DataTable dtconsulta = validarCategoriasDuplicadas();
+
+                    if (dtconsulta == null)
+                    {
+
+                        EProduct_Type oeProductType = registrarCategorias_Test(
+                            codigoProducto,
+                            nombreProducto,
+                            codigoGrupoCategoriaProducto,
+                            codigoCategoriaProducto,
+                            nombreUsuario,
+                            estadoProducto,
+                            fechaRegistro);
+                        //EProduct_Type oeProductType = registrarCategorias();
+                        //EProduct_Type oeProductTypeTMP = registrarCategoriasMobile(oeProductType);
+
+                        messageCreateSucessCategory();
+                        cleanControlsPinputDf();
+
+                    }
+                    else
+                    {
+                        messageCreateFailedCategory();
+                    }
+                }
+
+            }
+
+            catch (Exception ex)
+            {
+                errorMessage(ex);
+            }
         }
  
     }
