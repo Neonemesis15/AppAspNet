@@ -7,30 +7,38 @@
 <!-- BUTTON SEARCH - INI -->
 <!---------------------------------------------------------------------------->
 <!---------------------------------------------------------------------------->
-<asp:Button ID="BtnConsultaProductType" runat="server" CssClass="buttonPlan" Text="Consultar" Width="95px"/>
+<asp:Button ID="BtnConsultaProductType" 
+    runat="server" 
+    CssClass="buttonPlan" 
+    Text="Consultar" 
+    Width="95px"/>
 <!---------------------------------------------------------------------------->
 <!---------------------------------------------------------------------------->
 <!-- BUTTON SEARCH - FIN -->
 <!---------------------------------------------------------------------------->
 <!---------------------------------------------------------------------------->
 
-
-
-
 <!---------------------------------------------------------------------------->
 <!---------------------------------------------------------------------------->
 <!-- PANEL_BUSQUEDA - INI -->
 <!---------------------------------------------------------------------------->
 <!---------------------------------------------------------------------------->
-<asp:Panel ID="BuscarProductCateg" runat="server" CssClass="busqueda" DefaultButton="BtnBTypeProduct"
-    Height="211px" Style="display: none" Width="343px" >
+<asp:Panel ID="BuscarProductCateg" 
+    runat="server" 
+    CssClass="busqueda" 
+    DefaultButton="BtnBTypeProduct"
+    Height="211px" 
+    Style="display: none"
+    Width="343px" >
 
     <!-- HEADER_TITLE - INI -->
     <br /><br />
     <div class="tabla centrar">
         <div class="fila">
             <div class="celda">
-                <asp:Label ID="LbltitBProductcat" runat="server" CssClass="labelsTit2" 
+                <asp:Label ID="LbltitBProductcat" 
+                    runat="server" 
+                    CssClass="labelsTit2" 
                     Text="Buscar Categoria de Producto" />
             </div>
         </div>
@@ -43,27 +51,48 @@
     <div class="tabla centrar">
         <div class="fila">
             <div class="celda">
-                <asp:Label ID="LblBcodProductcat" runat="server" CssClass="labels" Text="Código:" />
+                <asp:Label ID="LblBcodProductcat" 
+                    runat="server" 
+                    CssClass="labels" 
+                    Text="Código:" />
             </div>
             <div class="celda">
-                <asp:TextBox ID="TxtBCodTypeProduct" runat="server" MaxLength="4" Width="80px"></asp:TextBox>
-            </div>
-        </div>
-        <div class="fila">
-            <div class="celda">
-                <asp:Label ID="LblBNomProductcat" runat="server" CssClass="labels" Text="Nombre:" />
-            </div>
-            <div class="celda">
-                <asp:TextBox ID="TxtBNomTypeProduct" runat="server" MaxLength="50" 
-                    Width="180px"></asp:TextBox>
+                <asp:TextBox ID="TxtBCodTypeProduct" 
+                    runat="server" 
+                    MaxLength="4" 
+                    Width="80px">
+                </asp:TextBox>
             </div>
         </div>
+
         <div class="fila">
             <div class="celda">
-                <asp:Label ID="lblClieId" runat="server" CssClass="labels" Text="Cliente:" />
+                <asp:Label ID="LblBNomProductcat" 
+                    runat="server" 
+                    CssClass="labels" 
+                    Text="Nombre:" />
             </div>
             <div class="celda">
-                <asp:DropDownList ID="cmb_Cliente" runat="server" Width="180px"></asp:DropDownList>
+                <asp:TextBox ID="TxtBNomTypeProduct" 
+                    runat="server" 
+                    MaxLength="50" 
+                    Width="180px">
+                </asp:TextBox>
+            </div>
+        </div>
+        
+        <div class="fila">
+            <div class="celda">
+                <asp:Label ID="lblClieId" 
+                    runat="server" 
+                    CssClass="labels" 
+                    Text="Cliente:" />
+            </div>
+            <div class="celda">
+                <asp:DropDownList ID="cmb_Cliente" 
+                    runat="server" 
+                    Width="180px">
+                </asp:DropDownList>
             </div>
         </div>
     </div>
@@ -72,9 +101,18 @@
     <!-- OPCIONES_BUSQUEDA - INI -->
     <br /><br />
     <div class="centrar centrarcontenido">
-        <asp:Button ID="BtnBTypeProduct" runat="server" CssClass="buttonPlan" Text="Buscar"
-            Width="80px" OnClick="BtnBTypeProduct_Click" />
-        <asp:Button ID="BtnCancelBTypeProduct" runat="server" CssClass="buttonPlan" Text="Cancelar" 
+        
+        <asp:Button ID="BtnBTypeProduct" 
+            runat="server" 
+            CssClass="buttonPlan" 
+            Text="Buscar"
+            Width="80px" 
+            OnClick="BtnBTypeProduct_Click" />
+        
+        <asp:Button ID="BtnCancelBTypeProduct" 
+            runat="server" 
+            CssClass="buttonPlan" 
+            Text="Cancelar" 
             Width="80px" />
     </div>
     <!-- OPCIONES_BUSQUEDA - FIN -->

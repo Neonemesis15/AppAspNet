@@ -1,13 +1,35 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="GestiónProducto.aspx.cs" Inherits="SIGE.Pages.Modulos.Administrativo.GestiónProducto" Culture="Auto" UICulture="Auto" %>
+﻿<%@ Page Language = "C#" 
+    AutoEventWireup = "true" 
+    CodeBehind = "GestiónProducto.aspx.cs" 
+    Inherits = "SIGE.Pages.Modulos.Administrativo.GestiónProducto" 
+    Culture = "Auto" 
+    UICulture = "Auto" %>
 
-<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
-<%@ Register Assembly="AjaxControls" Namespace="AjaxControls" TagPrefix="cc2" %>
-<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+<%@ Register 
+    Assembly = "Telerik.Web.UI" 
+    Namespace = "Telerik.Web.UI" 
+    TagPrefix = "telerik" %>
+
+<%@ Register 
+    Assembly = "AjaxControls" 
+    Namespace = "AjaxControls" 
+    TagPrefix = "cc2" %>
+
+<%@ Register 
+    Assembly = "AjaxControlToolkit" 
+    Namespace = "AjaxControlToolkit" 
+    TagPrefix = "cc1" %>
 
 
-<%@ Register src="ProductUserControls/CategorySearchUserControl.ascx" tagname="CategorySearchUserControl" tagprefix="uc2" %>
+<%@ Register 
+    src = "ProductUserControls/CategorySearchUserControl.ascx" 
+    tagname = "CategorySearchUserControl" 
+    tagprefix = "uc2" %>
 
-<%@ Register src="ProductUserControls/CategoryInsertUserControl.ascx" tagname="CategoryInsertUserControl" tagprefix="uc1" %>
+<%@ Register 
+    src = "ProductUserControls/CategoryInsertUserControl.ascx" 
+    tagname = "CategoryInsertUserControl" 
+    tagprefix = "uc1" %>
 
 <!--
 -- Author       : Magaly Jiminez (MJ)
@@ -64,16 +86,29 @@
         }
 
     </style>
-    <link href="../../css/StiloAdministrativo.css" rel="stylesheet" type="text/css" />
+
+    <link 
+    href="../../css/StiloAdministrativo.css" 
+    rel="stylesheet" 
+    type="text/css" />
+
 </head>
 <body style="background: transparent;">
-    <form id="form1" runat="server">
+    <form 
+    id="form1" 
+    runat="server">
     
-    <cc1:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" ScriptMode="release" EnableScriptGlobalization="True" 
-        EnableScriptLocalization="True"> 
+    <cc1:ToolkitScriptManager 
+    ID="ToolkitScriptManager1" 
+    runat="server" 
+    ScriptMode="release" 
+    EnableScriptGlobalization="True" 
+    EnableScriptLocalization="True"> 
     </cc1:ToolkitScriptManager>
 
-    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+    <asp:UpdatePanel 
+    ID="UpdatePanel1" 
+    runat="server">
         <ContentTemplate>
             <%-- <table align="center">
                 <tr>
@@ -94,18 +129,35 @@
                     </td>
                 </tr>
             </table>--%>
-            <cc2:ModalUpdateProgress ID="ModalUpdateProgress1" runat="server"
-                    AssociatedUpdatePanelID="UpdatePanel1" BackgroundCssClass="modalProgressGreyBackground">
+            <cc2:ModalUpdateProgress 
+                ID = "ModalUpdateProgress1" 
+                runat = "server"
+                AssociatedUpdatePanelID = "UpdatePanel1" 
+                BackgroundCssClass = "modalProgressGreyBackground">
+                
                 <ProgressTemplate>
                     <div class="modalPopup">
                         <div>Cargando...</div><br />
-                        <div><img alt="Procesando" src="../../images/loading5.gif" style="vertical-align: middle" /></div>
+                        <div>
+                            <img 
+                                alt="Procesando" 
+                                src="../../images/loading5.gif" 
+                                style="vertical-align: middle" />
+                        </div>
                     </div>
                 </ProgressTemplate>
             </cc2:ModalUpdateProgress>
 
-            <cc1:TabContainer ID="TabAdministradorProductos" runat="server" ActiveTabIndex="0"
-                Width="100%" Height="460px" Font-Names="Verdana" allowtransparency="true" style="margin-top: 0px; Overflow:auto">
+            <cc1:TabContainer 
+                ID = "TabAdministradorProductos" 
+                runat = "server" 
+                ActiveTabIndex = "0"
+                Width = "100%" 
+                Height = "460px" 
+                Font-Names = "Verdana" 
+                allowtransparency = "true" 
+                style = "margin-top: 0px; 
+                Overflow:auto">
 
                 <!---------------------------------------------------------------------------->
                 <!---------------------------------------------------------------------------->
@@ -114,8 +166,11 @@
                 <!---------------------------------------------------------------------------->
                 <!---------------------------------------------------------------------------->
                 <!---------------------------------------------------------------------------->
-                <cc1:TabPanel runat="server" HeaderText="Gestión Productos" ID="Panel_CategProduct">
-                    <HeaderTemplate>Categorias</HeaderTemplate>
+                <cc1:TabPanel 
+                    ID = "Panel_CategProduct"
+                    runat = "server" 
+                    HeaderText = "Gestión Productos" >
+                    <HeaderTemplate> Categorias </HeaderTemplate>
                     <ContentTemplate>
                         
                                               
@@ -124,59 +179,69 @@
                         <!-- PANEL_RESULTADO_BUSQUEDA- INI -->
                         <!---------------------------------------------------------------------------->
                         <!---------------------------------------------------------------------------->
-                        <asp:Panel ID="CosultaGVCategoria" 
-                        runat="server" 
-                        Style="display: block">                        
-                            <div class="centrar centrarcontenido">                                
-                                <div class="p"
-                                style="width:780px; 
-                                height: 315px; 
-                                background-color: #FFFFFF; 
-                                padding: 2px 2px; 
-                                font-size: 10pt;
-	                            font-family : arial, Helvetica, sans-serif;"> 
+                        <asp:Panel 
+                            ID = "CosultaGVCategoria" 
+                            runat = "server" 
+                            Style = "display: block">                        
+                            
+                            <div class = "centrar centrarcontenido">                                
+                                <div 
+                                    class = "p"
+                                    style = "width:780px; 
+                                    height : 315px; 
+                                    background-color : #FFFFFF; 
+                                    padding : 2px 2px; 
+                                    font-size : 10pt;
+	                                font-family : arial, Helvetica, sans-serif;"> 
 
                                     <!-- GRILLA_DATOS - INI -->
-                                    <asp:GridView ID="GVConsultaCategoria" 
-                                    runat="server" 
-                                    AutoGenerateColumns="False"  
-                                    Font-Names="Verdana" 
-                                    Font-Size="8pt" 
-                                    EnableModelValidation="True" 
-                                    Width="100%" 
-                                    onrowediting="GVConsultaCategoria_RowEditing" 
-                                    onpageindexchanging="GVConsultaCategoria_PageIndexChanging" 
-                                    onrowcancelingedit="GVConsultaCategoria_RowCancelingEdit" 
-                                    onrowupdating="GVConsultaCategoria_RowUpdating">
+                                    <asp:GridView 
+                                        ID = "GVConsultaCategoria" 
+                                        runat = "server" 
+                                        AutoGenerateColumns = "False"  
+                                        Font-Names = "Verdana" 
+                                        Font-Size = "8pt" 
+                                        EnableModelValidation = "True" 
+                                        Width = "100%" 
+                                        onrowediting = "GVConsultaCategoria_RowEditing" 
+                                        onpageindexchanging = "GVConsultaCategoria_PageIndexChanging" 
+                                        onrowcancelingedit = "GVConsultaCategoria_RowCancelingEdit" 
+                                        onrowupdating = "GVConsultaCategoria_RowUpdating">
                                         <Columns>
-                                            <asp:TemplateField HeaderText="Cod.Categoria">
+                                            <asp:TemplateField 
+                                                HeaderText = "Cod.Categoria">
                                                 <EditItemTemplate>
-                                                    <asp:Label ID="LblCodProductType" 
-                                                    runat="server"  
-                                                    Text='<%# Bind("id_ProductCategory") %>'>
+                                                    <asp:Label 
+                                                        ID = "LblCodProductType" 
+                                                        runat = "server"  
+                                                        Text = '<%# Bind("id_ProductCategory") %>'>
                                                     </asp:Label>
                                                 </EditItemTemplate>
                                                 <ItemTemplate>
-                                                    <asp:Label ID="LblCodProductType" 
-                                                    runat="server" 
-                                                    Text='<%# Bind("id_ProductCategory") %>'>
+                                                    <asp:Label 
+                                                        ID = "LblCodProductType" 
+                                                        runat = "server" 
+                                                        Text = '<%# Bind("id_ProductCategory") %>'>
                                                     </asp:Label>
                                                 </ItemTemplate>
-                                                <ItemStyle Width="70px" />
+                                                <ItemStyle Width = "70px" />
                                             </asp:TemplateField>
                                         
-                                            <asp:TemplateField HeaderText="Categoria">
+                                            <asp:TemplateField 
+                                                HeaderText = "Categoria">
                                                 <EditItemTemplate>
-                                                    <asp:TextBox ID="TxtNomProductType" 
-                                                    runat="server" 
-                                                    Width="150px">
+                                                    <asp:TextBox 
+                                                        ID = "TxtNomProductType" 
+                                                        runat = "server" 
+                                                        Width = "150px">
                                                     </asp:TextBox>
                                                 </EditItemTemplate>
                                                 <ItemTemplate>
-                                                    <asp:Label ID="LblNomProductType" 
-                                                    runat="server"  
-                                                    Width="150px" 
-                                                    Text='<%# Bind("Product_Category") %>'>
+                                                    <asp:Label 
+                                                        ID = "LblNomProductType" 
+                                                        runat = "server"  
+                                                        Width = "150px" 
+                                                        Text = '<%# Bind("Product_Category") %>'>
                                                     </asp:Label>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
@@ -231,13 +296,29 @@
                                     <!-- EXPORTAR_EXCEL - INI -->
                                     <div class="centrar">
                                         <div class="centrar centrarcontenido">
-                                            <asp:Label ID="Lblcateeexc" runat="server" CssClass="labels" Text="Exportar a Excel "></asp:Label>
+                                            <asp:Label 
+                                                ID ="Lblcateeexc" 
+                                                runat="server" 
+                                                CssClass = "labels" 
+                                                Text = "Exportar a Excel ">
+                                            </asp:Label>
                                         </div>
-                                        <iframe id="iframeexcelCategoria" runat="server" src="pruebaexcel.aspx" frameborder="0"  width="64px" height="64px">
+                                        <iframe 
+                                            id = "iframeexcelCategoria" 
+                                            runat = "server" 
+                                            src = "pruebaexcel.aspx" 
+                                            frameborder = "0"  
+                                            width = "64px" 
+                                            height = "64px">
                                         </iframe>
                                         <div class="centrar centrarcontenido">                                       
-                                            <asp:Button ID="btnCCategoria" runat="server" CssClass="buttonPlan" Text="Cancelar" Width="80px" 
-                                                onclick="BtnCancelProductType_Click" />
+                                            <asp:Button 
+                                                ID = "btnCCategoria" 
+                                                runat = "server" 
+                                                CssClass = "buttonPlan" 
+                                                Text = "Cancelar" 
+                                                Width = "80px" 
+                                                onclick = "BtnCancelProductType_Click" />
                                         </div> 
                                     </div>
                                     <!-- EXPORTAR_EXCEL - FIN -->
